@@ -1,0 +1,32 @@
+
+
+{
+    "etapas": [
+        {
+            "titleInformation": "Etapa 1",
+            "description": "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor.",
+            "title": "Comece sua jornada!"
+        },
+        {
+            "titleInformation": "Etapa 2",
+            "description": "De onde você está falando? Deixe-nos saber seu local de trabalho",
+            "title": "Seu cantinho"
+        },
+        {
+            "titleInformation": "",
+            "description": "",
+            "title": ""
+        },
+        {
+            "titleInformation": "",
+            "description": "",
+            "title": ""
+        },
+        {
+            "titleInformation": "",
+            "description": "",
+            "title": ""
+        }
+    ]
+}
+

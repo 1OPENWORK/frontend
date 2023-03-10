@@ -1,0 +1,24 @@
+{
+  "depoiments": [
+    {
+      "img": "https://avatars.githubusercontent.com/u/2254731?v=4",
+      "description": "(1)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”'"
+    },
+    {
+      "img": "https://www.treinus.com.br/site_v3/wp-content/uploads/2015/08/hero15-1024x683.jpg",
+      "description": "(2)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+    },
+    {
+      "img": "https://rhtech.geekhunter.com.br/wp-content/uploads/2018/09/Guia-para-contratar-desenvolvedores-sem-ser-um-scaled.jpg",
+      "description": "'(3)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+    },
+    {
+      "img": "https://www.impacta.com.br/blog/wp-content/uploads/2021/09/desenvolvedor-de-software.png",
+      "description": "'(4)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+    },
+    {
+      "img": "https://blog.crowd.br.com/wp-content/uploads/2022/08/contratar-desenvolvedor-react-native-rapidamente-1024x536.jpg",
+      "description": "'(5)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+import styled from "@emotion/styled";
+import Colors from "../../constants/Colors";
+
+const AuthStyled = {
+  Container: styled.div`
+    display: flex;
+    justify-content: space-between;
+  `,
+
+  ContainerForm: styled.div`
+    display: flex;
+    justify-content: ${(props) => (props.position ? props.position : "start")};
+    width: 75%;
+  `,
+
+  Form: styled.div`
+    padding-top: 91px;
+  `,
+
+  TitleForm: styled.h2`
+    font-weight: 700;
+    font-size: 36px;
+    color: ${Colors.PRIMARY_COLOR};
+    text-align: center;
+    margin-bottom: 64px;
+  `,
+
+  Link: styled.a`
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 18px;
+    color: #20ac69;
+    cursor: pointer;
+  `,
+
+  Label: styled.label`
+    font-weight: 300;
+    font-size: 18px;
+    color: #545454;
+  `,
+
+  Row: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 1rem;
+  `,
+
+  CheckBox: styled.input`
+    width: 18px;
+    height: 19px;
+    background: rgba(32, 172, 105, 0.05);
+    border: 1px solid #20ac69;
+  `,
+};
+
+export default AuthStyled;

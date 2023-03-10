@@ -9,6 +9,7 @@ import React from "react";
 import Styled from "./Informations.styled";
 import Logo from "../../../../assets/imgs/logo.svg";
 import ArrowLeftWhite from "../../../../assets/icons/iconWhiteArrowLeft.svg";
+import { useNavigate } from "react-router-dom";
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -38,6 +39,7 @@ const InformationsAuth = ({
   // --------------------------------------------------------
 
   // --------------------------------------------------------
+  const navigate = useNavigate();
 
   // --------------------------------------------------------
   // REACT RETURN FUNCTION
@@ -55,7 +57,6 @@ const InformationsAuth = ({
           />
           <Styled.DivInformationCenter
             style={{
-              alignItems: "center",
               justifyContent: "center",
               height: 200,
             }}
@@ -71,7 +72,7 @@ const InformationsAuth = ({
               justifyContent: "flex-end",
             }}
           >
-            <Styled.BtnRetorno>
+            <Styled.BtnRetorno onClick={() => navigate("/")}>
               <img src={ArrowLeftWhite} alt="" />
               {textButton}
             </Styled.BtnRetorno>

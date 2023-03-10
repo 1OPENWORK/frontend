@@ -16,6 +16,10 @@ const StyledInputForm = {
     font-size: 28px;
     color: #495057;
     font-weight: normal;
+    margin-left: ${props => props.ml ? props.ml : "0px"};
+    margin-right: ${props => props.mr ? props.mr : "0px"};
+    margin-top: ${props => props.mt ? props.mt : "0px"};
+    margin-bottom: ${props => props.mb ? props.mb : "0px"};
 
     &:focus {
       outline: none;

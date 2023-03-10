@@ -18,7 +18,6 @@ import Styled from "./InputForm.styled";
 // InputForm INTERFACE
 // --------------------------------------------------------
 
-
 /**
 /**
  * A component that renders a Component description here.
@@ -26,7 +25,7 @@ import Styled from "./InputForm.styled";
  * @param props The component props.
  * @returns The component JSX.
  */
-const InputForm = ({ label, value, handle, space }) => {
+const InputForm = ({ label, value, handle, space, ml, mr, mt, mb }) => {
   // --------------------------------------------------------
   // InputForm PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -39,7 +38,14 @@ const InputForm = ({ label, value, handle, space }) => {
   return (
     <Styled.Container spaceBottom={space}>
       <Styled.Text>{label}</Styled.Text>
-      <Styled.Input value={value} onChange={(e) => handle(e.target.value)} />
+      <Styled.Input
+        value={value}
+        onChange={(e) => handle(e.target.value)}
+        ml={ml}
+        mr={mr}
+        mt={mt}
+        mb={mb}
+      />
     </Styled.Container>
   );
   // --------------------------------------------------------

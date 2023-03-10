@@ -12,6 +12,7 @@ import Styled from "./Auth.styled";
 import InputForm from "../../components/input/InputForm";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import Colors from "../../constants/Colors";
+import { useNavigate } from "react-router-dom";
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -27,6 +28,8 @@ function Auth() {
   // --------------------------------------------------------
   // Auth PRIVATE DECLARATIONS
   // --------------------------------------------------------
+
+
   return (
     <GeneralContainer>
       <Styled.Container>

@@ -1,32 +1,39 @@
-
-
 {
-    "etapas": [
-        {
-            "titleInformation": "Etapa 1",
-            "description": "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor.",
-            "title": "Comece sua jornada!"
-        },
-        {
-            "titleInformation": "Etapa 2",
-            "description": "De onde você está falando? Deixe-nos saber seu local de trabalho",
-            "title": "Seu cantinho"
-        },
-        {
-            "titleInformation": "",
-            "description": "",
-            "title": ""
-        },
-        {
-            "titleInformation": "",
-            "description": "",
-            "title": ""
-        },
-        {
-            "titleInformation": "",
-            "description": "",
-            "title": ""
-        }
-    ]
+  "etapas": [
+    {
+      "titleInformation": "Etapa 1",
+      "description": "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor.",
+      "title": "Comece sua jornada!"
+    },
+    {
+      "titleInformation": "Etapa 2",
+      "description": "De onde você está falando? Deixe-nos saber seu local de trabalho",
+      "title": "Seu cantinho"
+    },
+    {
+      "titleInformation": "",
+      "description": "",
+      "title": ""
+    },
+    {
+      "titleInformation": "Etapa 4",
+      "description": "Escolha uma ou mais especialidades de acordo com seu conhecimento. A partir daqui, teremos a base do seu perfil",
+      "title": "Selecione suas especialidades"
+    },
+    {
+      "titleInformation": "",
+      "description": "",
+      "title": ""
+    },
+    {
+      "titleInformation": "",
+      "description": "",
+      "title": ""
+    },
+    {
+      "titleInformation": "",
+      "description": "",
+      "title": ""
+    }
+  ]
 }
-

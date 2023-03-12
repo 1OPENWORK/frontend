@@ -66,6 +66,7 @@ const StyledRegister = {
     height: 19px;
     background: rgba(32, 172, 105, 0.05);
     border: 1px solid #20ac69;
+    
   `,
 };
 

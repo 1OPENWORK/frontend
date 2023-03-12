@@ -34,6 +34,7 @@ const StyledNavBar = {
     align-items: center;
     gap: 1.5rem;
     margin-right: 50px;
+  
   `,
 
   LogoImg: styled.img``,

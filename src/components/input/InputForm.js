@@ -25,7 +25,7 @@ import Styled from "./InputForm.styled";
  * @param props The component props.
  * @returns The component JSX.
  */
-const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, isInvalid }) => {
+const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, isInvalid, type }) => {
   // --------------------------------------------------------
   // InputForm PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -47,6 +47,7 @@ const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, isInval
         mt={mt}
         mb={mb}
         isInvalid={isInvalid}
+        type={type}
       />
     </Styled.Container>
   );

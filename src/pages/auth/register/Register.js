@@ -6,25 +6,28 @@ import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
-import {useForm} from "react-hook-form";
 import etapasRegister from "../../../constants/json/register.json";
 import RegisterEt1 from "./etapas/et1/RegisterEt1";
 import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
+import { selectRegister } from "../../../store/reducers/RegisterSlice";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const [initial, setInitial] = useState(0);
   const [etapas] = useState(...[etapasRegister.etapas]);
 
-  const { register, handleSubmit, watch, formState: { errors }, reset } =  useForm();
+  const { 
+    register
+   } = useSelector(selectRegister);
 
-  const  loginUser  =  data  =>  console.log(data);
+  useEffect(() => {
+    console.log(register);
+  }, [register])
 
   return (
     <Styled.Container>
-      
-      {initial !==
-        2 ? (
+        {initial !== 2 ? (
           <>
             <InformationsAuth
               title={etapas[initial].titleInformation}
@@ -37,7 +40,6 @@ const Register = () => {
               </Styled.Divisor>
 
               {/* ETAPAS */}
-
               {initial === 0 ? <RegisterEt1 /> : <RegisterEt2 />}
 
               <Styled.Divisor>
@@ -50,7 +52,9 @@ const Register = () => {
                 }}
               >
                 <FilledButton
-                  onClick={() => {setInitial(initial + 1); handleSubmit(loginUser)}}
+                  onClick={() => {
+                    setInitial(initial + 1);
+                  }}
                   color={Colors.black}
                   width={190}
                   heigth={60}
@@ -61,7 +65,7 @@ const Register = () => {
             </Styled.ContainerForm>
           </>
         ) : (
-          <RegisterEt3 next={() => setInitial(initial + 1)}/>
+          <RegisterEt3 next={() => setInitial(initial + 1)} />
         )}
     </Styled.Container>
   );

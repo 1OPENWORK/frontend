@@ -59,8 +59,9 @@ const AuthStyled = {
   CheckBox: styled.input`
     width: 18px;
     height: 19px;
-    background: rgba(32, 172, 105, 0.05);
+    background: #20ac69;
     border: 1px solid #20ac69;
+    color: #20ac69;
   `,
 };
 

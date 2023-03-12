@@ -12,61 +12,55 @@ import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 const Register = () => {
-  const [initial, setInitial] = useState(0);
   const [etapas] = useState(...[etapasRegister.etapas]);
 
-  const { 
-    register
-   } = useSelector(selectRegister);
 
-  useEffect(() => {
-    console.log(register);
-  }, [register])
+  const { register } = useSelector(selectRegister);
+
+
+   
+
+
 
   return (
     <Styled.Container>
-        {initial !== 2 ? (
-          <>
-            <InformationsAuth
-              title={etapas[initial].titleInformation}
-              descricao={etapas[initial].description}
-              textButton="Home"
-            />
-            <Styled.ContainerForm position="start">
-              <Styled.Divisor align={"center"}>
-                <Styled.TitleForm>{etapas[initial].title}</Styled.TitleForm>
-              </Styled.Divisor>
+      <ToastContainer />
+      {register.etapaAtual !== 2 ? (
+        <>
+          <InformationsAuth
+            title={etapas[register.etapaAtual].titleInformation}
+            descricao={etapas[register.etapaAtual].description}
+            textButton="Home"
+          />
+          <Styled.ContainerForm position="start">
+            <Styled.Divisor align={"center"}>
+              <Styled.TitleForm>{etapas[register.etapaAtual].title}</Styled.TitleForm>
+            </Styled.Divisor>
 
-              {/* ETAPAS */}
-              {initial === 0 ? <RegisterEt1 /> : <RegisterEt2 />}
+            {/* ETAPAS */}
+            {register.etapaAtual === 0 ? (
+              <RegisterEt1 />
+            ) : (
+              <RegisterEt2 />
+            )}
 
-              <Styled.Divisor>
-                <BarProgress qtdMax={7} atualEtapa={initial + 1} />
-              </Styled.Divisor>
-              <Styled.Divisor
-                align={"flex-end"}
-                style={{
-                  paddingRight: 20,
-                }}
-              >
-                <FilledButton
-                  onClick={() => {
-                    setInitial(initial + 1);
-                  }}
-                  color={Colors.black}
-                  width={190}
-                  heigth={60}
-                >
-                  {"Próximo"}
-                </FilledButton>
-              </Styled.Divisor>
-            </Styled.ContainerForm>
-          </>
-        ) : (
-          <RegisterEt3 next={() => setInitial(initial + 1)} />
-        )}
+            <Styled.Divisor>
+              <BarProgress qtdMax={7} atualEtapa={register.etapaAtual + 1} />
+            </Styled.Divisor>
+            <Styled.Divisor
+              align={"flex-end"}
+              style={{
+                paddingRight: 20,
+              }}
+            ></Styled.Divisor>
+          </Styled.ContainerForm>
+        </>
+      ) : (
+        <RegisterEt3  />
+      )}
     </Styled.Container>
   );
 };

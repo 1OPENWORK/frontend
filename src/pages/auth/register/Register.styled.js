@@ -27,9 +27,10 @@ const StyledRegister = {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
     border-radius: 30px;
     width: 100%;
-    height: 60%;
+    height: 90%;
   `,
 
   TitleForm: styled.h2`

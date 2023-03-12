@@ -24,8 +24,9 @@ export const slice = createSlice({
   },
 
   reducers: {
-    changeEtapa(state, { payload }) {
-      return { ...state, etapaAtual: payload.etapa };
+
+    changeEtapaAll(state, {payload}){
+      return {...state, etapaAtual: payload.etapa}
     },
 
     changeEtapa1(state, { payload }) {
@@ -41,9 +42,12 @@ export const slice = createSlice({
         },
       };
     },
+
+
+
   },
 });
 
-export const { changeEtapa, changeEtapa1 } = slice.actions;
+export const {changeEtapa1, changeEtapaAll } = slice.actions;
 export const selectRegister = (state) => state;
 export default slice.reducer;

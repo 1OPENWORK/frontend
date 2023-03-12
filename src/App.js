@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import Auth from "./pages/auth/Auth";
 import Register from "./pages/auth/register/Register";
 
+
 const socket = socketIO.connect("http://localhost:3333");
 
 function App() {
@@ -25,8 +26,6 @@ function App() {
 
   //       console.log(message);
   //     })
-
-
 
   //   });
   // }, []);

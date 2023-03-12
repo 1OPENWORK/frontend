@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
 
 
 const RegisterEt1 = () => {
+
+
+  
+
+
+
   return (
     <Styled.Form>
       <Styled.Row>
@@ -13,6 +19,7 @@ const RegisterEt1 = () => {
           handle={() => ""}
           space={"20px"}
           mr={"20px"}
+          isInvalid={true}
         />
         <InputForm label="Email" value="" handle={() => ""} space={"20px"} />
       </Styled.Row>

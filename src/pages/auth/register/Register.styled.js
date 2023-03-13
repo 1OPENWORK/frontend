@@ -1,37 +1,42 @@
-import styled from "@emotion/styled";
-import Colors from "../../constants/Colors";
-const AuthStyled = {
+import styled from "styled-components";
+import Colors from "../../../constants/Colors";
+const StyledRegister = {
   Container: styled.div`
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
   `,
 
   ContainerForm: styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: ${(props) => (props.position ? props.position : "start")};
-    align-items: center;
     width: 75%;
+  `,
+
+  Divisor: styled.div`
+    margin-top: 50px;
+    display: flex;
+    align-items: ${props => props.align ? props.align : "start"};
+    justify-content: ${props => props.align ? props.align : "start"};;
+    width: 100%;
   `,
 
   Form: styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    padding-top: 91px;
-    height: 700px;
-    width: 600px;
     border-radius: 30px;
-       -webkit-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
-    box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 60%;
   `,
 
   TitleForm: styled.h2`
+    display: flex;
     font-weight: 700;
     font-size: 36px;
     color: ${Colors.PRIMARY_COLOR};
-    text-align: center;
     margin-bottom: 64px;
   `,
 
@@ -51,7 +56,7 @@ const AuthStyled = {
 
   Row: styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     grid-gap: 1rem;
   `,
@@ -64,4 +69,4 @@ const AuthStyled = {
   `,
 };
 
-export default AuthStyled;
+export default StyledRegister;

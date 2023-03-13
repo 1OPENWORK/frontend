@@ -14,13 +14,14 @@ const StyledContainerInformarion = {
   `,
 
   DivInformation: styled.div`
-    height: 90%;
-    margin: 50px;
+    height: 100%;
+    padding: 50px;
   `,
 
   DivInformationCenter: styled.div`
     display: flex;
     flex-direction: column;
+    height: 100%;
   `,
 
   Imglogo: styled.img``,

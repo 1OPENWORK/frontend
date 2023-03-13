@@ -5,15 +5,10 @@
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Nunito" !important;
+  font-style: normal !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-
-
-  
 }
 
 /* width */
@@ -28,9 +23,8 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #20AC69;
+  background: #20ac69;
   border-radius: 3px;
-
 }
 
 code {

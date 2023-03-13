@@ -38,6 +38,7 @@ const RegisterEt1 = () => {
     fullname: string().required("Preencha o campo nome."),
   });
 
+
   async function handleForm() {
     const dados = {
       comfirmed_password: passwordConfirmed,
@@ -51,26 +52,16 @@ const RegisterEt1 = () => {
     try {
       await validRegister.validate(dados);
 
-      toast.success("Informações verificadas e salvas.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
-
       dispatch(
         changeEtapa1({
           ...dados,
-          etapa: 1,
         })
       );
+
       setVerified(true);
       setIsNext(true);
     } catch (err) {
+
       toast.error(err.errors[0], {
         position: "top-right",
         autoClose: 5000,

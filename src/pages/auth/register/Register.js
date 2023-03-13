@@ -21,9 +21,6 @@ const Register = () => {
   const { register } = useSelector(selectRegister);
 
 
-   
-
-
 
   return (
     <Styled.Container>
@@ -36,7 +33,9 @@ const Register = () => {
             textButton="Home"
           />
           <Styled.ContainerForm position="start">
-            <Styled.Divisor align={"center"}>
+            <Styled.Divisor align={"center"} style={{
+              marginTop: "30px"
+            }}>
               <Styled.TitleForm>{etapas[register.etapaAtual].title}</Styled.TitleForm>
             </Styled.Divisor>
 

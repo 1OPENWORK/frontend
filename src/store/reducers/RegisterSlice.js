@@ -21,6 +21,9 @@ export const slice = createSlice({
       numero: "",
       complemento: "",
     },
+    etapa3: {
+      isDesenvolvedor: false
+    }
   },
 
   reducers: {
@@ -43,11 +46,37 @@ export const slice = createSlice({
       };
     },
 
+    changeEtapa2(state, { payload }) {
+      return {
+        ...state,
+        etapa2: {
+          cep: payload.cep,
+          estado: payload.estado,
+          cidade: payload.cidade,
+          bairro: payload.bairro,
+          rua: payload.rua,
+          numero: payload.numero,
+          complemento: payload.complemento,
+        },
+      };
+    },
+
+    changeEtapa3(state, { payload }) {
+      return {
+        ...state,
+        etapaAtual: 3,
+        etapa3: {
+          isDesenvolvedor: payload.isDev,
+        },
+      };
+    },
+
+
 
 
   },
 });
 
-export const {changeEtapa1, changeEtapaAll } = slice.actions;
+export const {changeEtapa1, changeEtapa2, changeEtapa3, changeEtapaAll } = slice.actions;
 export const selectRegister = (state) => state;
 export default slice.reducer;

@@ -16,7 +16,6 @@ const StyledRegister = {
   `,
 
   Divisor: styled.div`
-    margin-top: 50px;
     display: flex;
     align-items: ${props => props.align ? props.align : "start"};
     justify-content: ${props => props.align ? props.align : "start"};;
@@ -30,7 +29,10 @@ const StyledRegister = {
     justify-content: center;
     border-radius: 30px;
     width: 100%;
-    height: 90%;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-y: auto;
+    height: 450px;
   `,
 
   TitleForm: styled.h2`

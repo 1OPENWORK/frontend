@@ -8,8 +8,12 @@ import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
 import { get } from "../../../../../services/Generected";
 import axios from "axios";
+import {
+  changeEtapa2,
+  changeEtapaAll,
+} from "../../../../../store/reducers/RegisterSlice";
 
-const RegisterEt2 = ({ nextForm }) => {
+const RegisterEt2 = () => {
   const dispatch = useDispatch();
 
   const [cep, setCep] = useState("");
@@ -59,16 +63,11 @@ const RegisterEt2 = ({ nextForm }) => {
     try {
       await validRegister.validate(dados);
 
-      toast.success("Informações verificadas e salvas.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      dispatch(
+        changeEtapa2({
+          ...dados,
+        })
+      );
 
       setVerified(true);
       setIsNext(true);
@@ -90,8 +89,20 @@ const RegisterEt2 = ({ nextForm }) => {
     searchCEP();
   }, [cep]);
 
+  function nextEtapa() {
+    dispatch(
+      changeEtapaAll({
+        etapa: 2,
+      })
+    );
+  }
+
   return (
-    <Styled.Form>
+    <Styled.Form
+      style={{
+        paddingTop: "150px",
+      }}
+    >
       <ToastContainer />
       <Styled.Row>
         <InputForm
@@ -131,7 +142,12 @@ const RegisterEt2 = ({ nextForm }) => {
           space={"20px"}
           mr={"20px"}
         />
-        <InputForm label="Número" value={numero} handle={setNumero} space={"20px"} />
+        <InputForm
+          label="Número"
+          value={numero}
+          handle={setNumero}
+          space={"20px"}
+        />
       </Styled.Row>
       <InputForm
         label="Complemento  ou outros"
@@ -155,7 +171,7 @@ const RegisterEt2 = ({ nextForm }) => {
           </FilledButton>
         ) : (
           <FilledButton
-            onClick={() => nextForm(2)}
+            onClick={() => nextEtapa()}
             color={Colors.black}
             width={190}
             heigth={60}

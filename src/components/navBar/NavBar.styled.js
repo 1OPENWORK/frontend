@@ -5,8 +5,8 @@ const StyledNavBar = {
   ContainerNavBar: styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding-left: 20px;
+    justify-content: space-between;
     height: 120px;
     width: 100%;
     position: fixed;
@@ -17,15 +17,21 @@ const StyledNavBar = {
 
   TitleNavBar: styled.h1`
     font-weight: 700;
-    font-size: ${props => (props.size > 0 ? props.size + "px" : "28px")};
+    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "28px")};
     line-height: 10px;
     color: ${Colors.PRIMARY_COLOR};
     cursor: pointer;
     transition: all 0.3s;
-
-    :hover{
+    :hover {
       color: ${Colors.SECONDARY_COLOR};
     }
+  `,
+
+  FlexList: styled.div`
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    gap: 1.5rem;
   `,
 
   NavigateNavBar: styled.div`

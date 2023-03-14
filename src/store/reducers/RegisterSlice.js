@@ -22,14 +22,13 @@ export const slice = createSlice({
       complemento: "",
     },
     etapa3: {
-      isDesenvolvedor: false
-    }
+      isDesenvolvedor: false,
+    },
   },
 
   reducers: {
-
-    changeEtapaAll(state, {payload}){
-      return {...state, etapaAtual: payload.etapa}
+    changeEtapaAll(state, { payload }) {
+      return { ...state, etapaAtual: payload.etapa };
     },
 
     changeEtapa1(state, { payload }) {
@@ -71,12 +70,22 @@ export const slice = createSlice({
       };
     },
 
-
-
-
+    changeEtapa4(state, { payload }) {
+      return {
+        ...state,
+        etapaAtual: 4,
+        etapa4: {},
+      };
+    },
   },
 });
 
-export const {changeEtapa1, changeEtapa2, changeEtapa3, changeEtapaAll } = slice.actions;
+export const {
+  changeEtapa1,
+  changeEtapa2,
+  changeEtapa3,
+  changeEtapa4,
+  changeEtapaAll,
+} = slice.actions;
 export const selectRegister = (state) => state;
 export default slice.reducer;

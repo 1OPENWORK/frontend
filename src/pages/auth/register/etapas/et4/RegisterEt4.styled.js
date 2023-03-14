@@ -17,7 +17,7 @@ export const Flex = styled.div`
 
 
 export const ColumCount = styled.div`
-  column-count: 4;
+  column-count:4;
   column-gap: 32px;
 `;
 

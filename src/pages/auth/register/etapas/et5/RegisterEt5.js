@@ -1,42 +1,31 @@
 import React from "react";
 import InputForm from "../../../../../components/input/InputForm";
-import { Container, Flex, ColumCount, Divider } from "./RegisterEt4.styled";
-import { ButtonRegisterEt4 } from "./components/buttons/ButtonRegisterEt4";
+import { Container, Flex, ColumCount, Divider } from "../et4/RegisterEt4.styled";
+import { ButtonRegisterEt4 } from "../et4/components/buttons/ButtonRegisterEt4"; 
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import listLoad from "../../../../../constants/json/selectProf.json";
-// import {
-//   changeEtapa4,
-//   changeEtapaAll,
-// } from "../../../../../../store/reducers/RegisterSlice";
 
-const RegisterEt4 = ({}) => {
+const RegisterEt5 = ({}) => {
   const [list] = React.useState(listLoad.proeficiency);
-  // const dispatch = useDispatch();
-
-  // function nextEtapa() {
-  //   dispatch(
-  //     changeEtapa4({
-  //       etapa: 4,
-  //     })
-  //   );
-  // }
 
   return (
     <>
       <Container>
         <Flex>
-          <ColumCount>
-            {list?.map((title) => (
-              <ButtonRegisterEt4 title={title.title} />
-            ))}
-          </ColumCount>
           <InputForm
-            label="outros"
+            label="Pesquisar"
             value=""
             handle={() => ""}
             space={"20px"}
             width={"750px"}
           />
+          <ColumCount>
+            <ButtonRegisterEt4 title={"React"} />
+            <ButtonRegisterEt4 title={"Angular"} />
+            <ButtonRegisterEt4 title={"HTML"} />
+            <ButtonRegisterEt4 title={"CSS"} />
+          </ColumCount>
+
           <Divider>
             <FilledButton
               // onClick={() => nextEtapa()}
@@ -44,7 +33,7 @@ const RegisterEt4 = ({}) => {
               color={"black"}
               width={190}
               heigth={60}
-              disabled={false}
+              disabled={true}
             >
               {"Próximo"}
             </FilledButton>
@@ -55,4 +44,4 @@ const RegisterEt4 = ({}) => {
   );
 };
 
-export default RegisterEt4;
+export default RegisterEt5;

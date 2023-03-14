@@ -15,13 +15,22 @@ import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
+import RegisterEt5 from "./etapas/et5/RegisterEt5";
 
-const Register = () => {
+import { Userlog } from "./etapas/et4/components/loged/UserLog";
+
+const Register = ({ name }) => {
   const [etapas] = useState(...[etapasRegister.etapas]);
 
   const { register } = useSelector(selectRegister);
 
   const loginUser = (data) => console.log(data);
+
+  // const [user] = () => {
+  //   if (register.etapaAtual === 4) {
+  //     <Userlog name={name} />;
+  //   }
+  // };
 
   return (
     <Styled.Container>
@@ -34,10 +43,16 @@ const Register = () => {
             textButton="Home"
           />
           <Styled.ContainerForm position="start">
+            {register.etapaAtual === 3 ? (
+              <Userlog name={"T"} desc={"Olá, Tarifa"} />
+            ) : (
+              <Userlog name={"T"} desc={"Olá, Tarifa"} />
+            )}
             <Styled.Divisor
-              align={"center"}
+              align={"start "}
               style={{
-                marginTop: "30px",
+                marginTop: "20px",
+                marginLeft: "148px",
               }}
             >
               <Styled.TitleForm>
@@ -52,7 +67,7 @@ const Register = () => {
             ) : register.etapaAtual === 1 ? (
               <RegisterEt2 />
             ) : (
-              <RegisterEt4 />
+              <RegisterEt5 />
             )}
 
             <Styled.Divisor>

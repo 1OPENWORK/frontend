@@ -33,6 +33,8 @@ const NavBar = ({}) => {
 
   // --------------------------------------------------------
 
+  const [type] = useState("logado");
+
   // --------------------------------------------------------
   // REACT RETURN FUNCTION
   // --------------------------------------------------------
@@ -42,7 +44,7 @@ const NavBar = ({}) => {
         <Styled.LogoImg src={Logo} />
         <Styled.TitleNavBar size={0}>{"Open Work"}</Styled.TitleNavBar>
       </Styled.Divisor>
-
+    
       <Styled.NavigateNavBar>
         <Styled.TitleNavBar size={24}>{"Como contratamos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
@@ -64,6 +66,8 @@ const NavBar = ({}) => {
           {"Junte-se a nós"}
         </FilledButton>
       </Styled.NavigateNavBar>
+
+
     </Styled.ContainerNavBar>
   );
   // --------------------------------------------------------

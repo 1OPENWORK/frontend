@@ -10,3 +10,15 @@ export async function get(uri) {
       console.log(err);
     });
 }
+
+
+export async function post(uri, body){
+  return await axios.post(uri, 
+    body
+  ).then((dados) => {
+      return dados;
+  }).catch((error) => {
+    console.log(error);
+  })
+
+}

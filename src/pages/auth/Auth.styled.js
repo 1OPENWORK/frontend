@@ -19,7 +19,6 @@ const AuthStyled = {
     justify-content: center;
     flex-direction: column;
     padding-top: 91px;
-    height: 700px;
     width: 600px;
     border-radius: 30px;
        -webkit-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);

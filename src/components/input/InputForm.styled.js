@@ -8,7 +8,7 @@ const StyledInputForm = {
 
   Input: styled.input`
     background: rgba(32, 172, 105, 0.05);
-    border: ${props => props.isInvalid ? "1px solid #e63946" : "1px solid #20ac69"};
+    border: 1px solid #20ac69;
     border-radius: 12px;
     width: ${props => props.w ? props.w : "358px"};
     height: 57px;
@@ -29,7 +29,7 @@ const StyledInputForm = {
   Text: styled.p`
     font-weight: 700;
     font-size: 18px;
-    color: ${props => props.isInvalid ? "#e63946" : "#20ac69"};
+    color: #20ac69;
   `,
 };
 

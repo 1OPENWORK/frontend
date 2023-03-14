@@ -3,10 +3,10 @@ import Colors from "../../../../../../../constants/Colors";
 
 export const Information = styled.div`
   position: relative;
-  top: 500px;
+  top: 100px;
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
+  padding-top: 10px;
   align-items: center;
   width: 100%;
   border-radius: 30px 30px 0px 0px;

@@ -44,34 +44,28 @@ const NavBar = ({}) => {
         <Styled.LogoImg src={Logo} />
         <Styled.TitleNavBar size={0}>{"Open Work"}</Styled.TitleNavBar>
       </Styled.Divisor>
-
-      {type === "logado" ? (
-        <Styled.NavigateNavBar>
-          <Styled.FlexList>
-            <Styled.TitleNavBar size={24}>{"Projetos"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Comunidade"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
-          </Styled.FlexList>
-
-          <FilledButton color={Colors.black} width={190} heigth={60}>
-            {"Sair"}
-          </FilledButton>
-        </Styled.NavigateNavBar>
-      ) : (
-        <Styled.NavigateNavBar>
+    
+      <Styled.NavigateNavBar>
         <Styled.TitleNavBar size={24}>{"Como contratamos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
-        <FilledButton onClick={() => nagivate("/auth")} color={Colors.black} width={190} heigth={60}>
+        <FilledButton
+          onClick={() => nagivate("/auth")}
+          color={Colors.black}
+          width={190}
+          heigth={60}
+        >
           {"Entrar"}
         </FilledButton>
-        <FilledButton onClick={() => nagivate("/register")} color={Colors.SECONDARY_COLOR} width={190} heigth={60}>
+        <FilledButton
+          onClick={() => nagivate("/register")}
+          color={Colors.SECONDARY_COLOR}
+          width={190}
+          heigth={60}
+        >
           {"Junte-se a nós"}
         </FilledButton>
       </Styled.NavigateNavBar>
-      )}
-    
-    
 
 
     </Styled.ContainerNavBar>

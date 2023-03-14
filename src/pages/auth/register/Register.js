@@ -11,71 +11,63 @@ import etapasRegister from "../../../constants/json/register.json";
 import RegisterEt1 from "./etapas/et1/RegisterEt1";
 import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
+import { selectRegister } from "../../../store/reducers/RegisterSlice";
+import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 
 const Register = () => {
-  const [initial, setInitial] = useState(0);
   const [etapas] = useState(...[etapasRegister.etapas]);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register } = useSelector(selectRegister);
 
   const loginUser = (data) => console.log(data);
 
   return (
     <Styled.Container>
-      {initial !== 2 ? (
+      <ToastContainer />
+      {register.etapaAtual !== 2 ? (
         <>
           <InformationsAuth
-            title={etapas[initial].titleInformation}
-            descricao={etapas[initial].description}
+            title={etapas[register.etapaAtual].titleInformation}
+            descricao={etapas[register.etapaAtual].description}
             textButton="Home"
           />
           <Styled.ContainerForm position="start">
-            <Styled.Divisor align={"center"}>
-              <Styled.TitleForm>{etapas[initial].title}</Styled.TitleForm>
+            <Styled.Divisor
+              align={"center"}
+              style={{
+                marginTop: "30px",
+              }}
+            >
+              <Styled.TitleForm>
+                {etapas[register.etapaAtual].title}
+              </Styled.TitleForm>
             </Styled.Divisor>
 
             {/* ETAPAS */}
 
-            {initial === 0 ? (
-              <>
-                <RegisterEt1 />
-              </>
+            {register.etapaAtual === 0 ? (
+              <RegisterEt1 />
+            ) : register.etapaAtual === 1 ? (
+              <RegisterEt2 />
             ) : (
               <RegisterEt4 />
             )}
 
             <Styled.Divisor>
-              <BarProgress qtdMax={7} atualEtapa={initial + 1} />
+              <BarProgress qtdMax={7} atualEtapa={register.etapaAtual + 1} />
             </Styled.Divisor>
             <Styled.Divisor
               align={"flex-end"}
               style={{
                 paddingRight: 20,
               }}
-            >
-              <FilledButton
-                onClick={() => {
-                  setInitial(initial + 1);
-                  handleSubmit(loginUser);
-                }}
-                color={Colors.black}
-                width={190}
-                heigth={60}
-              >
-                {"Próximo"}
-              </FilledButton>
-            </Styled.Divisor>
+            ></Styled.Divisor>
           </Styled.ContainerForm>
         </>
       ) : (
-        <RegisterEt3 next={() => setInitial(initial + 1)} />
+        <RegisterEt3 />
       )}
     </Styled.Container>
   );

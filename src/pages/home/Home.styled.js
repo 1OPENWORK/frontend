@@ -38,11 +38,14 @@ export const DivUpInformation = styled.div`
 `;
 
 export const ContainerAceptedAll = styled.div`
+display: flex;
+flex-direction: row;
 padding-top: 100px;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-right: 70px;
 `;
 
 export const TitleDivInformation = styled.p`

@@ -31,7 +31,7 @@ import {
  * @param props The component props.
  * @returns The component JSX.
  */
-const CardBePartToo = ({}) => {
+const CardBePartToo = ({benefit, index}) => {
   // --------------------------------------------------------
   // CardBePartToo PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -45,13 +45,13 @@ const CardBePartToo = ({}) => {
     <ContainerCardBePartToo>
       <ContainerBodyCardBePartToo>
         <TagCardBePartTo>
-            {"Etapa 1"}
+            {"Etapa "}{index+1}
         </TagCardBePartTo>
         <TitleCardBePartTo>
-            Vantagem 1
+            Vantagem {index+1}
         </TitleCardBePartTo>
         <DescriptionCardBePartTo>
-        {"Seja uma empresa parceira nossa, e publique algum Job para os nossos Devs"}
+        {benefit}
         </DescriptionCardBePartTo>
       </ContainerBodyCardBePartToo>
     </ContainerCardBePartToo>

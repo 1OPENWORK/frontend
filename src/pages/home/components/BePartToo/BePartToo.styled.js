@@ -8,6 +8,7 @@ padding-top: 100px;
   align-items: center;
   flex-direction: column;
   padding-top: 50px;
+  padding-bottom:50px;
 `;
 
 export const BePartTooParagrafo = styled.p`

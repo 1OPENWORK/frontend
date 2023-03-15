@@ -28,6 +28,8 @@ import mapaIcon from "../../assets/icons/mapaIcon.svg";
 import imgInitial from "../../assets/imgs/imageInitial2.svg";
 import Depoiments from "./components/Depoiments/Depoiments";
 import BePartToo from "./components/BePartToo/BePartToo";
+import Footer from "./components/Footer/Footer";
+import AceptedAll from "./components/AceptedAll/AceptedAll";
 
 // --------------------------------------------------------
 // Home INTERFACE
@@ -87,15 +89,10 @@ const Home = () => {
           <CardMetrica metrica={80} title={"Países"} icon={mapaIcon} />
         </DivUpInformation>
       </ContainerBodyMetricaHome>
-      <ContainerAceptedAll>
-        <DivHome w="50%" center={true}>
-          <ImgHome src={imgInitial} />
-        </DivHome>
-        <DivHome>
-        </DivHome>
-      </ContainerAceptedAll>
+      <AceptedAll />
       <Depoiments />
       <BePartToo />
+      <Footer />
     </GeneralContainer>
   );
 };

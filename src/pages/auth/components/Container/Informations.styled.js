@@ -3,7 +3,7 @@ import Colors from "../../../../constants/Colors";
 
 const StyledContainerInformarion = {
   Container: styled.div`
-    width: 35%;
+    width: 37%;
     height: 100vh;
     background-color: ${Colors.PRIMARY_COLOR};
     border-radius: 0px 30px 30px 0px;
@@ -22,6 +22,14 @@ const StyledContainerInformarion = {
     display: flex;
     flex-direction: column;
     height: 100%;
+    row-gap: 50px;
+  `,
+
+  DivHomeBack: styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    padding-right: 24px;
   `,
 
   Imglogo: styled.img``,
@@ -29,6 +37,7 @@ const StyledContainerInformarion = {
   Title: styled.h2`
     font-weight: 900;
     font-size: 32px;
+    align-self: center;
   `,
 
   SubTitle: styled.h3`
@@ -48,10 +57,9 @@ const StyledContainerInformarion = {
     color: ${Colors.white};
 
     &:hover {
-      color: ${Colors.black}
+      color: ${Colors.black};
     }
-
-  `,  
+  `,
 };
 
 export default StyledContainerInformarion;

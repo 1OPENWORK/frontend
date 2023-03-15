@@ -41,18 +41,19 @@ const Register = ({ name }) => {
             title={etapas[register.etapaAtual].titleInformation}
             descricao={etapas[register.etapaAtual].description}
             textButton="Home"
+            textButtonVoltar="voltar"
+
           />
           <Styled.ContainerForm position="start">
-            {register.etapaAtual === 3 ? (
-              <Userlog name={"T"} desc={"Olá, Tarifa"} />
-            ) : (
+            {register.etapaAtual === 3 && (
               <Userlog name={"T"} desc={"Olá, Tarifa"} />
             )}
             <Styled.Divisor
-              align={"start "}
+              align={"start"}
               style={{
                 marginTop: "20px",
                 marginLeft: "148px",
+                height: "80px",
               }}
             >
               <Styled.TitleForm>

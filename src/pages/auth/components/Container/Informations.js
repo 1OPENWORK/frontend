@@ -21,7 +21,6 @@ import { useNavigate } from "react-router-dom";
 // InformationsAuth INTERFACE
 // --------------------------------------------------------
 
-
 /**
 /**
  * A component that renders a Component description here.
@@ -33,6 +32,7 @@ const InformationsAuth = ({
   title,
   descricao,
   textButton,
+  textButtonVoltar,
 }) => {
   // --------------------------------------------------------
   // InformationsAuth PRIVATE DECLARATIONS
@@ -72,10 +72,16 @@ const InformationsAuth = ({
               justifyContent: "flex-end",
             }}
           >
-            <Styled.BtnRetorno onClick={() => navigate("/")}>
-              <img src={ArrowLeftWhite} alt="" />
-              {textButton}
-            </Styled.BtnRetorno>
+            <Styled.DivHomeBack>
+              <Styled.BtnRetorno onClick={() => navigate("/")}>
+                <img src={ArrowLeftWhite} alt="" />
+                {textButton}
+              </Styled.BtnRetorno>
+              <Styled.BtnRetorno onClick={() => navigate("/")}>
+                <img src={ArrowLeftWhite} alt="" />
+                {textButtonVoltar}
+              </Styled.BtnRetorno>
+            </Styled.DivHomeBack>
           </Styled.DivInformationCenter>
         </Styled.DivInformationCenter>
       </Styled.DivInformation>

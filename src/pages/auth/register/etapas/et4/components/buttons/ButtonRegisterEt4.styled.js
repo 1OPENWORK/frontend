@@ -20,4 +20,3 @@ export const TitleProf = styled.h3`
   font-size: 18px;
   font-weight: 900;
 `;
-

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import { Container, Flex, ColumCount, Divider } from "./RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "./components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import listLoad from "../../../../../constants/json/selectProf.json";
+import { handleProeficiency } from "../../../../../store/actions/Proeficiency";
 // import {
 //   changeEtapa4,
 //   changeEtapaAll,
@@ -11,6 +12,9 @@ import listLoad from "../../../../../constants/json/selectProf.json";
 
 const RegisterEt4 = ({}) => {
   const [list] = React.useState(listLoad.proeficiency);
+  const [proefiency, setProeficiency] = useState([]);
+
+
   // const dispatch = useDispatch();
 
   // function nextEtapa() {
@@ -21,13 +25,22 @@ const RegisterEt4 = ({}) => {
   //   );
   // }
 
+  const listar = async () => {
+      const dados = await handleProeficiency();
+      setProeficiency(dados.data);
+  }
+
+useEffect(() => {
+  listar();
+},[])
+
   return (
     <>
       <Container>
         <Flex>
           <ColumCount>
-            {list?.map((title) => (
-              <ButtonRegisterEt4 title={title.title} />
+            {proefiency?.map((dados) => (
+              <ButtonRegisterEt4 title={dados.name} />
             ))}
           </ColumCount>
           <InputForm

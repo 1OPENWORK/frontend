@@ -3,7 +3,7 @@ import Colors from "../../../../../../../constants/Colors";
 
 export const Information = styled.div`
   position: relative;
-  top: 100px;
+  top: 500px;
   display: flex;
   flex-direction: column;
   padding-top: 10px;

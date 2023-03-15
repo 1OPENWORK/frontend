@@ -33,6 +33,7 @@ const RegisterEt3 = () => {
       />
       <CardRegisterEt3
         index={2}
+        isDark={false}
         handleClick={handle}
         value={CargoEnum.COMPANY}
         img={

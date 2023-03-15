@@ -5,7 +5,7 @@ export const GenericSolidButton = styled.button`
   background-color: ${(props) =>
     props.color ? props.color : props.inverted ? "#E0F0F5" : Colors.lightBlue};
   display: flex;
-  color: ${(props) => (props.inverted ? Colors.PROJECT600 : "white")};
+  color: ${props => props.isDark ? Colors.black : Colors.white};
   width: ${(props) => (props.width !== null ? `${props.width}px` : "auto")};
   height: ${(props) => (props.heigth !== null ? `${props.heigth}px` : "auto")};
   flex-direction: row;

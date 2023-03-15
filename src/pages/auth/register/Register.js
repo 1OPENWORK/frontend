@@ -19,18 +19,10 @@ import RegisterEt5 from "./etapas/et5/RegisterEt5";
 
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
-const Register = ({ name }) => {
+const Register = () => {
   const [etapas] = useState(...[etapasRegister.etapas]);
 
   const { register } = useSelector(selectRegister);
-
-  const loginUser = (data) => console.log(data);
-
-  // const [user] = () => {
-  //   if (register.etapaAtual === 4) {
-  //     <Userlog name={name} />;
-  //   }
-  // };
 
   return (
     <Styled.Container>
@@ -43,9 +35,7 @@ const Register = ({ name }) => {
             textButton="Home"
           />
           <Styled.ContainerForm position="start">
-            {register.etapaAtual === 3 ? (
-              <Userlog name={"T"} desc={"Olá, Tarifa"} />
-            ) : (
+            {register.etapaAtual === 3 && (
               <Userlog name={"T"} desc={"Olá, Tarifa"} />
             )}
             <Styled.Divisor
@@ -66,6 +56,8 @@ const Register = ({ name }) => {
               <RegisterEt1 />
             ) : register.etapaAtual === 1 ? (
               <RegisterEt2 />
+            ) : register.etapaAtual === 3 ? (
+              <RegisterEt4 />
             ) : (
               <RegisterEt5 />
             )}

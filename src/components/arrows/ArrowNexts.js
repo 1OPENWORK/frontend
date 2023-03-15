@@ -59,16 +59,13 @@ const ArrowNexts = ({ length, selected, handleSelected }) => {
   return (
     <ContainerArrows>
       <DivisorArrow
-        onClick={() => handleSelected(selected > 0 ? selected - 1 : 2)}
+        onClick={() => handleSelected( selected - 1 )}
       >
         <IconImage src={ArrowLeft} />
       </DivisorArrow>
-      <DivisorArrow>
-        <NumberSelected>{selected + 1}</NumberSelected>
-      </DivisorArrow>
       <DivisorArrow
         onClick={() =>
-          handleSelected(selected >= length ? 3 : selected + 1)
+          handleSelected( selected + 1 )
         }
       >
         <IconImage src={ArrowRigth} />

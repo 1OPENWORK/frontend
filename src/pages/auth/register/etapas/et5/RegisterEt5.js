@@ -8,10 +8,8 @@ import {
 } from "../et4/RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "../et4/components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
-import listLoad from "../../../../../constants/json/selectProf.json";
 
-const RegisterEt5 = ({}) => {
-  const [list] = React.useState(listLoad.proeficiency);
+const RegisterEt5 = () => {
 
   return (
     <>

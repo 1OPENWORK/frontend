@@ -12,10 +12,8 @@ import Styled from "./Auth.styled";
 import InputForm from "../../components/input/InputForm";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import Colors from "../../constants/Colors";
-import { useNavigate } from "react-router-dom";
-import { post } from "../../services/Generected";
 import { useDispatch } from "react-redux";
-import UserAuth, { handleLogin } from "../../store/actions/UserAuth";
+import { handleLogin } from "../../store/actions/UserAuth";
 import { changeActiveToken } from "../../store/reducers/AuthSlice";
 import { ToastContainer, toast } from "react-toastify";
 // --------------------------------------------------------

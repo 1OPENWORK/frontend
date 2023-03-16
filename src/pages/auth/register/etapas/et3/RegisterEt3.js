@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import InputForm from "../../../../../components/input/InputForm";
 import CargoEnum from "../../../../../constants/CargoEnum";
 import { changeEtapa3 } from "../../../../../store/reducers/RegisterSlice";
 import CardRegisterEt3 from "./components/card/CardRegisterEt3";

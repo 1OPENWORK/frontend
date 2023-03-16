@@ -1,12 +1,10 @@
 import React from "react";
 import Styled from "../../RegisterEt3.styled";
-import ImgDev from "../../../../../../../assets/imgs/imagePerson.svg";
 import { Container, Information } from "./CardRegisterEt3.styled";
 import { FilledButton } from "../../../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../../../constants/Colors";
 
 const CardRegisterEt3 = ({
-  index,
   handleClick,
   value,
   img,

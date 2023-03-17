@@ -7,7 +7,7 @@ const StyledNavBar = {
     align-items: center;
     padding-left: 20px;
     justify-content: space-between;
-
+    padding-left: 20px;
     height: 120px;
     width: 100%;
     position: fixed;
@@ -24,7 +24,7 @@ const StyledNavBar = {
     cursor: pointer;
     transition: all 0.3s;
 
-    :hover {
+    :hover{
       color: ${Colors.SECONDARY_COLOR};
     }
   `,

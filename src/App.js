@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthPath, HomePagePath, RegisterPath, HomeDevPath } from "./constants/Path";
+import { AuthPath, HomePagePath, RegisterPath, JobsPath, HomeDevPath } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
 import Home from "./pages/home/Home";
 import Auth from "./pages/auth/Auth";
 import Register from "./pages/auth/register/Register";
+import Jobs from "./pages/jobs/Jobs";
 import HomeDev from "./pages/homeDev/HomeDev";
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path={HomePagePath} element={<Home />} />
         <Route path={AuthPath} element={<Auth />} />
         <Route path={RegisterPath} element={<Register />} />
+        <Route path={JobsPath} element={<Jobs />} /> */
         <Route path={HomeDevPath} element={<HomeDev />} />
 
       </Routes>

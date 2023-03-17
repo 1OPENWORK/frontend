@@ -23,10 +23,10 @@ const RegisterEt5 = () => {
             width={"734px"}
           />
           <ColumCount>
-            <ButtonRegisterEt4 title={"React"} />
-            <ButtonRegisterEt4 title={"Angular"} />
-            <ButtonRegisterEt4 title={"HTML"} />
-            <ButtonRegisterEt4 title={"CSS"} />
+            <ButtonRegisterEt4 title={"React"} handleClick={() => ("")}/>
+            <ButtonRegisterEt4 title={"Angular"} handleClick={() => ("")}/>
+            <ButtonRegisterEt4 title={"HTML"} handleClick={() => ("")}/>
+            <ButtonRegisterEt4 title={"CSS"} handleClick={() => ("")}/>
           </ColumCount>
 
           <Divider>

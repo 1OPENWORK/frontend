@@ -27,7 +27,7 @@ const List = ({}) => {
   const [onMenu, setOnMenu] = useState(0);
 
   return (
-        <Styled.ContainerList>
+        <><Styled.ContainerList>
         <Styled.titleList>
             <Styled.containerButtonTitleList>
             <Styled.Button1TitleList
@@ -43,9 +43,9 @@ const List = ({}) => {
             </Styled.containerButtonTitleList>
         </Styled.titleList>
         
-        {onMenu === 0 ? () : ()}
 
         </Styled.ContainerList>
+        </>
   );
 };
 

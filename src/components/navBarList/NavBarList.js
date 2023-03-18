@@ -8,8 +8,11 @@
 import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import NavBar from "../navBar/NavBar";
-import Styled, { BackgroundNavBar, BackgroundNavBarList, ContainerNavBarList } from "./NavBarList.styled";
-
+import Styled, {
+  BackgroundNavBar,
+  BackgroundNavBarList,
+  ContainerNavBarList,
+} from "./NavBarList.styled";
 
 // -----------------------------------------------------
 
@@ -37,14 +40,10 @@ const NavBarList = ({}) => {
   return (
     <BackgroundNavBarList>
       <BackgroundNavBar>
-        <NavBar/>
+        <NavBar />
       </BackgroundNavBar>
-      <ContainerNavBarList>Jobs Disponiveis
-      </ContainerNavBarList>
+      <ContainerNavBarList>Hover Me</ContainerNavBarList>
     </BackgroundNavBarList>
-
-    
-
   );
 };
 

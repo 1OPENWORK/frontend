@@ -4,25 +4,29 @@ import Colors from "../../constants/Colors";
 import NavBar from "../navBar/NavBar";
 
 export const BackgroundNavBar = styled.div`
-  margin-top: -10%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  height: 0px;
+  margin-top: -350px;
+  transition: margin-top 1350ms;
+  transition: margin-top 1s ease-in-out;
+  /* transition: opacity 0.6s ease-in-out;
+  transition: visibility 0.6s ease-in-out;*/
+
 `;
 
 export const BackgroundNavBarList = styled.div`
-  height: 20vh;
+  height: 120px;
   display: flex;
   align-items: center;
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
+
   background-color: ${Colors.PRIMARY_COLOR};
 
   &:hover {
-    ${BackgroundNavBar}:first-child {
-      display: flex;
-      opacity: 1;
+    ${BackgroundNavBar}:nth-child(1) {
+      
+      margin-top: -120px;
     }
   }
+  
 `;
 
 export const ContainerNavBarList = styled.div`
@@ -34,4 +38,3 @@ export const ContainerNavBarList = styled.div`
   text-align: center;
   color: ${Colors.white};
 `;
-

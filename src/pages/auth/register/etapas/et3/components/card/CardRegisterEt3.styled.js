@@ -37,8 +37,8 @@ export const Container = styled.div`
 
     ${Information}:first-child {
       display: flex;
-      background-color: ${props => props.isDark ? Colors.black : Colors.white};
-      color: ${props => props.isDark ? Colors.white : Colors.black};
+      background-color: ${props => props.isDark ? Colors.BLACK : Colors.WHITE};
+      color: ${props => props.isDark ? Colors.WHITE : Colors.BLACK};
       top: 0px;
     }
   }

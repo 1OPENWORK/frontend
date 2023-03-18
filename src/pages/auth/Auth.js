@@ -122,7 +122,7 @@ function Auth() {
             >
               <FilledButton
                 onClick={() => handle()}
-                color={Colors.black}
+                color={Colors.BLACK}
                 width={190}
                 heigth={60}
               >

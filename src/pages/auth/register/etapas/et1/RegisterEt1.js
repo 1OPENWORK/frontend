@@ -155,7 +155,7 @@ const RegisterEt1 = () => {
         ) : (
           <FilledButton
             onClick={nextEtapa}
-            color={Colors.black}
+            color={Colors.BLACK}
             width={190}
             heigth={60}
           >

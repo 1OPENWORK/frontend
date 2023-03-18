@@ -15,8 +15,8 @@ export const HomeButtonContainer = styled.button`
   transition: all 0.5s;
 
   :hover{
-    background-color: ${Colors.black};
-    color: ${Colors.white};
+    background-color: ${Colors.BLACK};
+    color: ${Colors.WHITE};
   }
 
 `;

@@ -12,7 +12,7 @@ const StyledNavBar = {
     width: 100%;
     position: fixed;
     border-bottom: 5px solid ${Colors.SECONDARY_COLOR};
-    background-color: ${Colors.white};
+    background-color: ${Colors.WHITE};
     z-index: 1000;
   `,
 

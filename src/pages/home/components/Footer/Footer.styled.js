@@ -27,7 +27,7 @@ export const TitleDivInformation = styled.p`
   font-size: 28px;
   width: 50%;
   line-height: 65px;
-  color: ${(props) => (props.color ? props.color : Colors.white)};
+  color: ${(props) => (props.color ? props.color : Colors.WHITE)};
 `;
 
 

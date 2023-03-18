@@ -51,7 +51,7 @@ const NavBar = ({}) => {
         <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
         <FilledButton
           onClick={() => nagivate("/auth")}
-          color={Colors.black}
+          color={Colors.BLACK}
           width={190}
           heigth={60}
         >

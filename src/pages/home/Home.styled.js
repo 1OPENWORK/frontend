@@ -54,7 +54,7 @@ export const TitleDivInformation = styled.p`
   font-size: 48px;
   width: 450px;
   line-height: 65px;
-  color: ${(props) => (props.color ? props.color : Colors.white)};
+  color: ${(props) => (props.color ? props.color : Colors.WHITE)};
 `;
 
 export const HomeText = styled.p`
@@ -74,7 +74,7 @@ export const HomeTextLink = styled.a`
   cursor: pointer;
 
   :hover {
-    color: ${Colors.black};
+    color: ${Colors.BLACK};
   }
 `;
 

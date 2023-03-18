@@ -19,7 +19,7 @@ const CardRegisterEt3 = ({
         <Styled.Description>{description}</Styled.Description>
         <FilledButton
           onClick={() => handleClick(value)}
-          color={isDark ? Colors.white : Colors.black}
+          color={isDark ? Colors.WHITE : Colors.BLACK}
           inverted={isDark ? true : false}
           width={194}
           isDark={isDark}

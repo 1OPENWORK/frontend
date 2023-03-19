@@ -5,6 +5,7 @@ const StyledNavBar = {
   ContainerNavBar: styled.div`
     display: flex;
     align-items: center;
+    padding-left: 20px;
     justify-content: space-between;
     height: 120px;
     width: 100%;
@@ -15,8 +16,13 @@ const StyledNavBar = {
   `,
 
   TitleNavBar: styled.h1`
+<<<<<<< HEAD
     font-weight: 900;
     font-size: ${(props) => (props.size > 0 ? props.size + "px" : "24px")};
+=======
+    font-weight: 700;
+    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "28px")};
+>>>>>>> 28a81ef5b30a61cc7358634a9c778ffa00f3184b
     line-height: 10px;
     color: ${Colors.PRIMARY_COLOR};
     cursor: pointer;
@@ -46,6 +52,13 @@ const StyledNavBar = {
     :hover {
       color: ${Colors.SECONDARY_COLOR};
     }
+  `,
+
+  FlexList: styled.div`
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    gap: 1.5rem;
   `,
 
   NavigateNavBar: styled.div`

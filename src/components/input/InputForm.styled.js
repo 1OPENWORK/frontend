@@ -10,7 +10,7 @@ const StyledInputForm = {
     background: rgba(32, 172, 105, 0.05);
     border: 1px solid #20ac69;
     border-radius: 12px;
-    width: 358px;
+    width: ${props => props.w ? props.w : "358px"};
     height: 57px;
     padding-left: 10px;
     font-size: 28px;

@@ -1,5 +1,5 @@
+import { GenericSolidButton } from "./Button.styled";
 
-import { GenericSolidButton } from './Button.styled';
 
 
 
@@ -11,5 +11,3 @@ export const FilledButton = ({color, width, onClick, disabled, children, heigth}
         </GenericSolidButton>
     )
 }
-
-FilledButton.displayName = 'FilledButton';

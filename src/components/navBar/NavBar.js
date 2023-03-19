@@ -10,7 +10,6 @@ import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
-import { useNavigate } from "react-router-dom";
 
 // -----------------------------------------------------
 
@@ -29,9 +28,10 @@ const NavBar = ({}) => {
   // --------------------------------------------------------
   // NavBar PRIVATE DECLARATIONS
   // --------------------------------------------------------
-  const nagivate = useNavigate();
 
   // --------------------------------------------------------
+
+  const [type] = useState("logado");
 
   // --------------------------------------------------------
   // REACT RETURN FUNCTION

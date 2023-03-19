@@ -129,3 +129,4 @@ export const OutlinedUpdateButton = styled.div`
   border: 1px solid ${Colors.PROJECT500};
   border-radius: 8px;
 `;
+

@@ -6,7 +6,6 @@ const StyledNavBar = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 20px;
     height: 120px;
     width: 100%;
     position: fixed;
@@ -16,14 +15,35 @@ const StyledNavBar = {
   `,
 
   TitleNavBar: styled.h1`
-    font-weight: 700;
-    font-size: ${props => (props.size > 0 ? props.size + "px" : "28px")};
+    font-weight: 900;
+    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "24px")};
     line-height: 10px;
     color: ${Colors.PRIMARY_COLOR};
     cursor: pointer;
     transition: all 0.3s;
+    font-family: nunito;
+    font-style: normal;
+    line-height: 33px;
+    margin: 40px;
 
-    :hover{
+    :hover {
+      color: ${Colors.SECONDARY_COLOR};
+    }
+  `,
+
+  TitleNavBarLogo: styled.h1`
+    font-weight: 900;
+    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "24px")};
+    line-height: 10px;
+    color: ${Colors.PRIMARY_COLOR};
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: nunito;
+    font-style: normal;
+    line-height: 33px;
+    margin-left: 0;
+
+    :hover {
       color: ${Colors.SECONDARY_COLOR};
     }
   `,
@@ -33,7 +53,7 @@ const StyledNavBar = {
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    margin-right: 50px;
+    margin-right: 48px;
   `,
 
   LogoImg: styled.img``,

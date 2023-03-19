@@ -5,6 +5,7 @@ import styled from "styled-components";
 export const Paragrafo = styled.p`
   text-align: left;
   color: black;
+  font-family: nunito;
   font-weight: ${props => (props.fw > 0 ? props.fw : 400)};
   font-size: 18px;
   width: 500px;

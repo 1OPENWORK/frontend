@@ -59,17 +59,14 @@ const Home = () => {
           center={true}
           padding={"50px"}
         >
-          <TitleDivInformation>
-            {
-              "Tenha a liberdade de trabalhar de qualquer lugar, com o seu próprio horário de serviço."
-            }
+          <TitleDivInformation> {"Tenha a liberdade de trabalhar de qualquer lugar, com o seu próprio horário de serviço."}
           </TitleDivInformation>
           <HomeButton title="Saiba mais" />
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              marginTop: 50,
+              marginTop: 88,
             }}
           >
             <HomeText>Você está querendo contratar? </HomeText>

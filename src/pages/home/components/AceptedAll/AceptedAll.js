@@ -22,15 +22,11 @@ const AceptedAll = ({ }) => {
 
     return (
         <ContainerAceptedAll>
-            <DivHome w="50%" center={true}>
+            <DivHome w="20%" center={true}>
                 <ImgHome src={imgInitial} />
             </DivHome>
             <DivHome>
-                <TitleDivInformation
-                    color={Colors.PRIMARY_COLOR}
-                >
-                    {"Aceitamos a Todos"}
-                </TitleDivInformation>
+                <TitleDivInformation color={Colors.PRIMARY_COLOR}> {"Aceitamos a Todos"} </TitleDivInformation>
                 {list?.map((d, index) => {
                     return (
                         <div>

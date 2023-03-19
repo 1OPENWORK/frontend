@@ -16,8 +16,8 @@ export const BePartTooParagrafo = styled.p`
   font-size: 18px;
   color: white;
   margin-bottom: 100px;
-  margin-top: 40px;
-  width: 500px;
+  margin-top: 16px;
+  width: 525px;
   text-align: center;
 `;
 

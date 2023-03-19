@@ -41,9 +41,7 @@ const BePartToo = ({ }) => {
 
   return (
     <ContainerBePartToo>
-      <TitleDivInformation
-        style={{ margin: 0, width: "100%", textAlign: "center" }}
-      >
+      <TitleDivInformation style={{ margin: 0, width: "100%", textAlign: "center", marginTop:"64px"}}>
         {"Faça parte Também"}
       </TitleDivInformation>
       <BePartTooParagrafo>

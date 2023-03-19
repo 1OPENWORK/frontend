@@ -56,7 +56,7 @@ const StyledSideBar = {
   `,
 
   ListPersons: styled.div`
-    height: 100%;
+    height: 100vh;
     padding-top: 90px;
   `,
 };

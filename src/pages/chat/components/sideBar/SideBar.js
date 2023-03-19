@@ -1,9 +1,41 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeConversationActive,
+  changeMessages,
+  selectedWebSocket,
+} from "../../../../store/reducers/WebSocketSlice";
 import CardPerson from "../cardPerson/CardPerson";
 import Styled from "./SideBar.styled";
 
-const SideBar = () => {
+const SideBar = ({ socket, handleLoading }) => {
+  const { websocket } = useSelector(selectedWebSocket);
+  const [friends, setFriends] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFriends(websocket.friends);
+  }, [websocket]);
+
+  const handle = (dados) => {
+    handleLoading(true);
+    dispatch(
+      changeConversationActive({
+        active: dados,
+      })
+    );
+
+    socket.emit("listMessagesPerson", { id: dados.id }, (dados) => {
+      dispatch(
+        changeMessages({
+          messages: dados,
+        })
+      );
+    });
+    handleLoading(false);
+  };
+
   return (
     <Styled.Container>
       <Styled.Header>
@@ -16,29 +48,9 @@ const SideBar = () => {
         />
       </Styled.Header>
       <Styled.ListPersons>
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
-        <CardPerson />
+        {friends.map((d, index) => (
+          <CardPerson dados={d} key={index} handleClick={handle} />
+        ))}
       </Styled.ListPersons>
     </Styled.Container>
   );

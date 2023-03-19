@@ -1,22 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = createSlice({
-    name: 'WebSocket',
-    initialState: {
-        id: ''
+  name: "WebSocket",
+  initialState: {
+    idSocket: "",
+    idUser: "",
+    friends: [],
+    conversationActive: {},
+    messages: [],
+  },
+  reducers: {
+    changeOn(state, { payload }) {
+      return { ...state, idSocket: payload.id };
     },
-    reducers: {
 
-        changeOn(state, {payload}){
-            return {...state, id: payload.id}
-        },
-
-        changeOff(state){
-            return {...state, id: ''}
-        }
+    changeOff(state) {
+      return { ...state, idSocket: "" };
     },
-})
 
-export const {changeOn, changeOff} = slice.actions;
-export const selectedWebSocket = state => state;
+    changeIdUser(state, { payload }) {
+      return { ...state, idUser: payload.id };
+    },
+
+    changeFriends(state, { payload }) {
+      return { ...state, friends: payload.friends };
+    },
+
+    changeConversationActive(state, { payload }) {
+      return { ...state, conversationActive: payload.active };
+    },
+
+    changeMessages(state, { payload }) {
+      return { ...state, messages: payload.messages };
+    },
+  },
+});
+
+export const {
+  changeOn,
+  changeOff,
+  changeIdUser,
+  changeFriends,
+  changeConversationActive,
+  changeMessages,
+} = slice.actions;
+export const selectedWebSocket = (state) => state;
 export default slice.reducer;

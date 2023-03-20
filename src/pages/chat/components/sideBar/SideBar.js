@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeConversationActive,
   changeMessages,
+  changeNewMessage,
   selectedWebSocket,
 } from "../../../../store/reducers/WebSocketSlice";
 import CardPerson from "../cardPerson/CardPerson";
@@ -12,6 +13,8 @@ import Styled from "./SideBar.styled";
 const SideBar = ({ socket, handleLoading }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
+  const [dados, setDados] = useState({});
+  const [on] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,6 +22,7 @@ const SideBar = ({ socket, handleLoading }) => {
   }, [websocket]);
 
   const handle = (dados) => {
+    setDados(dados);
     handleLoading(true);
     dispatch(
       changeConversationActive({
@@ -35,6 +39,18 @@ const SideBar = ({ socket, handleLoading }) => {
     });
     handleLoading(false);
   };
+
+  useEffect(() => {
+      socket.on("newMessage", (dados) => {
+        console.log(dados);
+        dispatch(
+          changeMessages({
+            messages: [dados],
+          })
+        );
+      });
+
+  }, [on]);
 
   return (
     <Styled.Container>

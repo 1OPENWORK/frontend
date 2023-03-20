@@ -32,6 +32,9 @@ const StyledSendMessage = {
   `,
 
   ButtonSend: styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: ${Colors.GREEN};
     border: none;
     width: 45px;

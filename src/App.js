@@ -28,7 +28,6 @@ function App() {
           id: socket.id,
         })
       );
-
     });
   }, []);
 

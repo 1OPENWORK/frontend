@@ -32,18 +32,10 @@ export const Chat = ({ socket }) => {
       });
     });
 
-   
+    socket.emit("updateSocketId", { idUser: id }, (user) => {
+      console.log(user);
+    });
   }, []);
-
-  useEffect(() => {
-    socket.emit(
-      "updateSocketId",
-      { idUser: id, idSocket: socket.id },
-      (user) => {
-        console.log(user);
-      }
-    );
-  }, [])
 
   return (
     <Styled.Container>

@@ -99,9 +99,9 @@ const Depoiments = ({}) => {
               <Paragrafo
                 style={{
                   position: "relative",
-                  width: "500px",
+                  width: "490px",
                   lineHeight: "25px",
-                  top: 50,
+                  top: 80,
                 }}
                 fw={500}
               >

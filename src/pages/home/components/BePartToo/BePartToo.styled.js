@@ -8,6 +8,7 @@ padding-top: 100px;
   align-items: center;
   flex-direction: column;
   padding-top: 50px;
+  padding-bottom:50px;
 `;
 
 export const BePartTooParagrafo = styled.p`
@@ -15,8 +16,8 @@ export const BePartTooParagrafo = styled.p`
   font-size: 18px;
   color: white;
   margin-bottom: 100px;
-  margin-top: 40px;
-  width: 500px;
+  margin-top: 16px;
+  width: 525px;
   text-align: center;
 `;
 

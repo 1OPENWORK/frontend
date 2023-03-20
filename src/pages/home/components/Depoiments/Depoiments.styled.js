@@ -6,17 +6,18 @@ export const ContainerDepoiments = styled.div`
   flex-direction: column;
   background-color: #161616;
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 100px;
+  height:960px;
+  padding-top: 40px;
 `;
 
 export const Paragrafo = styled.p`
   text-align: center;
   color: white;
+  font-family: nunito;
   font-weight: ${props => (props.fw > 0 ? props.fw : 400)};
   font-size: 18px;
-  width: 500px;
-  margin-bottom: 50px;
+  width: 490px;
+  margin-bottom: 48px;
 `;
 
 export const ContainerImags = styled.div`

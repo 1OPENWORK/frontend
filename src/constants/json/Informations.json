@@ -2,23 +2,51 @@
   "depoiments": [
     {
       "img": "https://avatars.githubusercontent.com/u/2254731?v=4",
-      "description": "(1)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”'"
+      "description": "“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”'"
     },
     {
       "img": "https://www.treinus.com.br/site_v3/wp-content/uploads/2015/08/hero15-1024x683.jpg",
-      "description": "(2)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+      "description": "“Eu adoro trabalhar na plataforma OpenWork porque me permite ter a liberdade de escolher os projetos que mais me interessam e trabalhar no meu próprio ritmo. Além disso, a comunicação com os clientes é fácil e eficiente, e eu sempre recebo pagamentos pontuais”"
     },
     {
       "img": "https://rhtech.geekhunter.com.br/wp-content/uploads/2018/09/Guia-para-contratar-desenvolvedores-sem-ser-um-scaled.jpg",
-      "description": "'(3)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+      "description": "“Gosto muito da plataforma OpenWork porque ela me conecta com clientes de todo o mundo, o que me permite trabalhar em projetos verdadeiramente desafiadores e interessantes. Além disso, a plataforma é fácil de usar e a equipe de suporte sempre está disponível para ajudar”"
     },
     {
       "img": "https://www.impacta.com.br/blog/wp-content/uploads/2021/09/desenvolvedor-de-software.png",
-      "description": "'(4)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+      "description": "“Desde que comecei a trabalhar na plataforma, minha carreira como desenvolvedor decolou. A plataforma me permitiu construir um portfólio impressionante de projetos bem-sucedidos e me conectar com clientes de alto nível. Além disso, a plataforma é fácil de usar e me permite gerenciar facilmente meus pagamentos e comunicações.”"
     },
     {
       "img": "https://blog.crowd.br.com/wp-content/uploads/2022/08/contratar-desenvolvedor-react-native-rapidamente-1024x536.jpg",
-      "description": "'(5)“Já se passaram mais de 9 anos desde que vim para TI e cerca de 2 anos desde que comecei a trabalhar com o Proxify e, para ser sincero, não era essa a esfera em que me imaginava no início.”"
+      "description": "“Eu amo a flexibilidade que a OpenWork me oferece. Posso trabalhar em projetos desafiadores e interessantes, e ainda ter tempo para minha família e meus hobbies. Além disso, a plataforma é fácil de usar e me permite gerenciar todos os aspectos do projeto, desde a comunicação até o pagamento, em um só lugar.”"
+    }
+  ],
+  "aceptedAll":[
+    {
+      "description": "Realmente não importa de onde você vem ou onde mora, somos 100% remotos. A geografia nunca deve ser um fator limitante sobre se você é capaz de produzir um ótimo trabalho. Nosso objetivo é encontrar a melhor combinação para cada projeto com o qual trabalhamos. Temos uma variedade de projetos, então a diversidade em nossa rede é altamente valorizada."
+    },
+    {
+      "description": "É só nos dizer suas experiências, seus dados de identificação, e outras informações, e em poucos passos já estará usando nossa plataforma, e disfrutará de todas nossas vantagens que foram pensadas e idealizadas especialmente para você profissional de técnologia."
+    }
+  ],
+  "benefits":[
+    {
+      "benefit": "Seja uma empresa parceira nossa, e publique algum Job para os nossos Devs"
+    },
+    {
+      "benefit": "Encontre profissionais com qualiade que sua empresa precisa"
+    },
+    {
+      "benefit": "Tenha uma comunicação em tempo real com nossos profissionais de tecnologia"
+    },
+    {
+      "benefit": "Squads formadas pela nossa comunidade, para você ter aquele projeto realizado por vários devs"
+    },
+    {
+      "benefit": "Aqui você encontrará uma parte para gerir seu financeiro, e deixar tudo mais fácil"
+    },
+    {
+      "benefit": "Tenha a certeza de que terá uma plataforma segura para utilizar"
     }
   ]
 }

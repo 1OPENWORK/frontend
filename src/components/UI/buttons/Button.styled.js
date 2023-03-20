@@ -9,19 +9,21 @@ export const GenericSolidButton = styled.button`
   width: ${(props) => (props.width !== null ? `${props.width}px` : "auto")};
   height: ${(props) => (props.heigth !== null ? `${props.heigth}px` : "auto")};
   flex-direction: row;
-  font-weight: bold;
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
+  font-family: nunito;
+  font-weight: 900;
+  line-height: 25px;
   font-size: 18px;
   gap: 12px;
   border: ${(props) =>
     props.inverted ? "0px solid #4D638D" : "0px solid #4D638D"};
   border-radius: 8px;
-  font-family: "Inter", sans-serif;
   letter-spacing: 0.5px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  
+  margin-left: 24px;
+
   &:disabled {
     opacity: 0.5;
   }
@@ -31,7 +33,8 @@ export const GenericSolidButton = styled.button`
   }
 
   &:active {
-    background-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
+    background-color: ${(props) =>
+      props.disabled ? "" : Colors.PRIMARY_COLOR};
     color: ${(props) => (props.disabled ? "" : Colors.white)};
     border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }

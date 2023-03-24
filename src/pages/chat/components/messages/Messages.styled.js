@@ -6,11 +6,9 @@ const StyledMessage = {
     display: flex;
     flex-direction: column-reverse;
     padding-top: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
     padding-bottom: 100px;
     height: 100%;
-    background-color: ${Colors.BLACK_GREY04};
+    background-color: #101318;
     color: ${Colors.WHITE01};
     overflow: scroll;
     overflow-x: hidden;
@@ -43,13 +41,21 @@ const StyledMessage = {
     }
   `,
 
-  Reverce: styled.div`
+  Reverce: styled.div``,
 
+  Header: styled.div`
+    position: fixed;
+    height: 80px;
+    width: 70%;
+    top: 0;
+    background-color: ${Colors.GREEN};
   `,
 
   Divisor: styled.div`
     display: flex;
-    justify-content: ${props => props.receiver ? 'start' : 'flex-end'};
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: ${(props) => (props.receiver ? "start" : "flex-end")};
   `,
 };
 

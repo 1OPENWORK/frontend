@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import {
+  changeConversationRecentes,
   changeFriends,
   changeIdUser,
 } from "../../store/reducers/WebSocketSlice";
@@ -11,7 +12,7 @@ import SideBar from "./components/sideBar/SideBar";
 
 export const Chat = ({ socket }) => {
   const [loading, setLoading] = useState(false);
-
+  const [messageActive, setMessageActive] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -23,27 +24,37 @@ export const Chat = ({ socket }) => {
     );
 
     socket.on("connect", () => {
-      socket.emit("allFriends", { idUser: id }, (friends) => {
+      socket.emit("allFriends", { idUser: id }, (friends, listConversationsRecentes) => {
+        console.log("🚀 ~ file: Chat.js:28 ~ socket.emit ~ friends:", friends)
+        
         dispatch(
           changeFriends({
             friends,
           })
         );
+
+        dispatch(
+          changeConversationRecentes({
+            conversations: listConversationsRecentes
+          })
+        )
       });
     });
+  
 
     socket.emit("updateSocketId", { idUser: id }, (user) => {
       console.log(user);
     });
+
   }, []);
 
   return (
     <Styled.Container>
       <Styled.Div width={"30%"}>
-        <SideBar socket={socket} handleLoading={setLoading} />
+        <SideBar socket={socket} handleLoading={setLoading} handleMessageActive={setMessageActive}/>
       </Styled.Div>
       <Styled.Div width={"70%"} style={{ height: "100vh" }}>
-        <Messages socket={socket} isLoading={loading} />
+        <Messages socket={socket} isLoading={loading} messageSeleted={messageActive} />
       </Styled.Div>
     </Styled.Container>
   );

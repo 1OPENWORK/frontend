@@ -3,26 +3,39 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeConversationActive,
+  changeConversationRecentes,
   changeMessages,
   changeNewMessage,
   selectedWebSocket,
 } from "../../../../store/reducers/WebSocketSlice";
 import CardPerson from "../cardPerson/CardPerson";
-import Styled from "./SideBar.styled";
+import Styled, {
+  DivOpcaoLateral,
+  MenuLateral,
+  OpcaoMenuLateral,
+  TitleOpcaoMenuLateral,
+} from "./SideBar.styled";
+import Logo from "../../../../assets/imgs/logo.svg";
+import Colors from "../../../../constants/Colors";
 
-const SideBar = ({ socket, handleLoading }) => {
+const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
+  const [conversationsRecentes, setConversationsRecentes] = useState([]);
+  const [indexActive, setIndexActive] = useState(-1);
   const [dados, setDados] = useState({});
   const [on, setOn] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setFriends(websocket.friends);
+    setConversationsRecentes(websocket.conversationRecents);
   }, [websocket]);
 
-  const handle = dados => {
+  const handle = (dados, index) => {
     handleLoading(true);
+    handleMessageActive(true);
+    setIndexActive(index);
 
     dispatch(
       changeConversationActive({
@@ -30,10 +43,13 @@ const SideBar = ({ socket, handleLoading }) => {
       })
     );
 
+    const idOtherPerson =
+      websocket.idUser === dados.idEnviou ? dados.idRecebeu : dados.idEnviou;
+
     socket.emit(
       "listMessagesPerson",
-      { otherPeploe: dados.id, myId: websocket.idUser },
-      dados => {
+      { otherPeploe: idOtherPerson, myId: websocket.idUser },
+      (dados) => {
         dispatch(
           changeMessages({
             messages: dados,
@@ -41,27 +57,32 @@ const SideBar = ({ socket, handleLoading }) => {
         );
       }
     );
+
     setDados(dados);
     handleLoading(false);
   };
 
   useEffect(() => {
-    const idConversationActive = dados.id;
+    const MessageActive = dados.idEnviou;
 
-    socket.on("newMessage", dados => {
-      const idSender = dados.idSender;
+    socket.on("newMessage", (dados) => {
+      const response = dados;
 
-      console.log("conversation", idConversationActive);
-      console.log("sender", idSender);
+      const idSender = response.dados.idSender;
 
-      console.log(idConversationActive === idSender);
-      if (idConversationActive === idSender) {
+      if (MessageActive === idSender) {
         dispatch(
           changeNewMessage({
-            messages: dados,
+            messages: response.dados,
           })
         );
       }
+
+      dispatch(
+        changeConversationRecentes({
+          conversations: response.listRecentes,
+        })
+      );
     });
 
     return () => socket.off("newMessage");
@@ -69,20 +90,78 @@ const SideBar = ({ socket, handleLoading }) => {
 
   return (
     <Styled.Container>
-      <Styled.Header>
-        <Avatar
-          src="https://www.tu-ilmenau.de/unionline/fileadmin/_processed_/0/0/csm_Person_Yury_Prof_Foto_AnLI_Footgrafie__2_.JPG_94f12fbf25.jpg"
-          sx={{ width: 60, height: 60 }}
-          style={{
-            cursor: "pointer",
-          }}
-        />
-      </Styled.Header>
-      <Styled.ListPersons>
-        {friends.map((d, index) => (
-          <CardPerson dados={d} key={index} handleClick={handle} />
-        ))}
-      </Styled.ListPersons>
+      <MenuLateral>
+        <Styled.Img src={Logo} />
+        <OpcaoMenuLateral>
+          <ion-icon
+            name="person-add-outline"
+            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
+          ></ion-icon>
+          <DivOpcaoLateral>
+            <TitleOpcaoMenuLateral>Adicionar</TitleOpcaoMenuLateral>
+          </DivOpcaoLateral>
+        </OpcaoMenuLateral>
+        <OpcaoMenuLateral>
+          <ion-icon
+            name="people-outline"
+            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
+          ></ion-icon>
+          <DivOpcaoLateral>
+            <TitleOpcaoMenuLateral>Novo grupo</TitleOpcaoMenuLateral>
+          </DivOpcaoLateral>
+        </OpcaoMenuLateral>
+        <OpcaoMenuLateral>
+          <ion-icon
+            name="list-outline"
+            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
+          ></ion-icon>
+          <DivOpcaoLateral>
+            <TitleOpcaoMenuLateral>Atividades</TitleOpcaoMenuLateral>
+          </DivOpcaoLateral>
+        </OpcaoMenuLateral>
+        <OpcaoMenuLateral>
+          <ion-icon
+            name="chatbox-ellipses-outline"
+            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
+          ></ion-icon>
+          <DivOpcaoLateral>
+            <TitleOpcaoMenuLateral>Conversas</TitleOpcaoMenuLateral>
+          </DivOpcaoLateral>
+        </OpcaoMenuLateral>
+        <TitleOpcaoMenuLateral style={{ color: Colors.WHITE01, margin: 20 }}>
+          Conexões
+        </TitleOpcaoMenuLateral>
+        <Styled.ConexoesMenuLateral>
+          {friends.map((d, index) => (
+            <OpcaoMenuLateral onClick={() => handle(d, index)}>
+              <Avatar src={d.img} />
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>{d.nome}</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+          ))}
+        </Styled.ConexoesMenuLateral>
+      </MenuLateral>
+      <Styled.DivColumn>
+        <Styled.Header>
+          <Styled.TitleHeader>Conversas Recentes</Styled.TitleHeader>
+          <ion-icon
+            name="chatbox-ellipses-outline"
+            style={{ color: Colors.WHITE01, fontSize: 30 }}
+          ></ion-icon>
+        </Styled.Header>
+        <Styled.ListPersons>
+          {conversationsRecentes.map((d, index) => (
+            <CardPerson
+              dados={d}
+              key={index}
+              handleClick={handle}
+              index={index}
+              active={indexActive === index}
+            />
+          ))}
+        </Styled.ListPersons>
+      </Styled.DivColumn>
     </Styled.Container>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Styled from "./SendMessage.styled";
 import SvgIcon from "@mui/material/SvgIcon";
 import Colors from "../../../../../../constants/Colors";
-import { changeMessages } from "../../../../../../store/reducers/WebSocketSlice";
+import { changeMessages, changeConversationActive, changeConversationActiveParcial } from "../../../../../../store/reducers/WebSocketSlice";
 import { useDispatch } from "react-redux";
 const SendMessage = ({ socket, idSender, idReceiver }) => {
   const dispatch = useDispatch();
@@ -13,14 +13,26 @@ const SendMessage = ({ socket, idSender, idReceiver }) => {
     socket.emit(
       "sendMessage",
       { idSender: idSender, idReceiver: idReceiver, message },
-      dados => {
+      (dados, listRecentes) => {
         setUpdateMessage(dados);
+    
+        console.log("🚀 ~ file: SendMessage.js:25 ~ handMessage ~ dados:", dados)
+        dispatch(
+          changeConversationActiveParcial({
+            message: dados.message, createdAt: dados.createdAt
+          })
+        )
       }
     );
+
+
+    
     setMessage("");
   };
 
   useEffect(() => {
+
+
     socket.emit(
       "listMessagesPerson",
       { otherPeploe: idReceiver, myId: idSender },
@@ -33,6 +45,8 @@ const SendMessage = ({ socket, idSender, idReceiver }) => {
       }
     );
   }, [updateMessage]);
+
+
 
   return (
     <Styled.Container>

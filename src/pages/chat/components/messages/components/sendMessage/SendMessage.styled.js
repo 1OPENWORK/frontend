@@ -11,7 +11,7 @@ const StyledSendMessage = {
     border-top: 1px solid ${Colors.WHITE02};
     width: 70%;
     height: 8%;
-    background-color: ${Colors.BLACK_GREY04};
+    background-color: #101318;
     z-index: 2;
     color: ${Colors.WHITE01};
   `,
@@ -21,7 +21,7 @@ const StyledSendMessage = {
     width: 50%;
     border-radius: 5px 0px 0px 5px;
     padding-left: 5px;
-    background-color: ${Colors.BLACK_GREY05};
+    background-color: #1f1f25;
     border: none;
     font-size: 14px;
     color: ${Colors.WHITE01};

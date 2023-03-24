@@ -4,16 +4,18 @@ import Colors from "../../../../constants/Colors";
 const StyledMessage = {
   Container: styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding-top: 100px;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 100px;
     height: 100%;
     background-color: ${Colors.BLACK_GREY04};
     color: ${Colors.WHITE01};
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: auto;
+    transition: all 0.2s;
 
     ::-webkit-scrollbar {
       width: 5px;
@@ -39,6 +41,10 @@ const StyledMessage = {
       background: #555;
       position: absolute;
     }
+  `,
+
+  Reverce: styled.div`
+
   `,
 
   Divisor: styled.div`

@@ -14,43 +14,58 @@ const SideBar = ({ socket, handleLoading }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
   const [dados, setDados] = useState({});
-  const [on] = useState([]);
+  const [on, setOn] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setFriends(websocket.friends);
   }, [websocket]);
 
-  const handle = (dados) => {
-    setDados(dados);
+  const handle = dados => {
     handleLoading(true);
+
     dispatch(
       changeConversationActive({
         active: dados,
       })
     );
 
-    socket.emit("listMessagesPerson", { id: dados.id }, (dados) => {
-      dispatch(
-        changeMessages({
-          messages: dados,
-        })
-      );
-    });
+    socket.emit(
+      "listMessagesPerson",
+      { otherPeploe: dados.id, myId: websocket.idUser },
+      dados => {
+        dispatch(
+          changeMessages({
+            messages: dados,
+          })
+        );
+      }
+    );
+    setDados(dados);
     handleLoading(false);
   };
 
   useEffect(() => {
-      socket.on("newMessage", (dados) => {
-        console.log(dados);
+    const idConversationActive = dados.id;
+
+    socket.on("newMessage", dados => {
+      const idSender = dados.idSender;
+
+      console.log("conversation", idConversationActive);
+      console.log("sender", idSender);
+
+      console.log(idConversationActive === idSender);
+      if (idConversationActive === idSender) {
         dispatch(
-          changeMessages({
-            messages: [dados],
+          changeNewMessage({
+            messages: dados,
           })
         );
-      });
+      }
+    });
 
-  }, [on]);
+    return () => socket.off("newMessage");
+  }, [on, dados]);
 
   return (
     <Styled.Container>

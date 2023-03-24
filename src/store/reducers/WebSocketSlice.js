@@ -35,7 +35,7 @@ export const slice = createSlice({
     },
 
      changeNewMessage(state, { payload }) {
-      return { ...state, messages: [...this.messages, payload.messages]  };
+      return { ...state, messages:  [...state.messages, payload.messages]};
     },
   },
 });

@@ -24,7 +24,7 @@ const Messages = ({ socket, isLoading }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <React.Fragment>
+          <Styled.Reverce>
             {messages?.map((dados, index) => (
               <React.Fragment>
                 {dados.idSender === idSender ? (
@@ -38,7 +38,7 @@ const Messages = ({ socket, isLoading }) => {
                 )}
               </React.Fragment>
             ))}
-          </React.Fragment>
+          </Styled.Reverce>
         )}
       </Styled.Container>
 

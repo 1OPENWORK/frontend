@@ -47,7 +47,7 @@ const NavBar = ({}) => {
         <Styled.TitleNavBar size={24}> {"Como contratamos"} </Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
-        <FilledButton onClick={() => navigate("/auth")} color={Colors.black} width={190} heigth={60}> {"Entrar"} </FilledButton>
+        <FilledButton onClick={() => navigate("/auth")} color={Colors.BLACK} width={190} heigth={60}> {"Entrar"} </FilledButton>
         <FilledButton onClick={() => navigate("/register")} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Junte-se a nós"} </FilledButton>
       </Styled.NavigateNavBar>
     </Styled.ContainerNavBar>

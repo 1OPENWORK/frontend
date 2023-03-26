@@ -37,8 +37,8 @@ const ArrowNexts = ({ length, selected, handleSelected }) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 120px;
-    height: 50px;
+    width: 80px;
+    height: 34px;
   `;
 
   const NumberSelected = styled.h2`

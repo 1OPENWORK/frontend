@@ -45,5 +45,4 @@ display: flex;
 justify-content: left;
 flex-direction: row;
 margin-inline:0;
-
 `;

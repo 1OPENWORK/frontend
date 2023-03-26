@@ -7,11 +7,7 @@
 // --------------------------------------------------------
 import React, { useState } from "react";
 import { TitleDivInformation } from "../../Home.styled";
-import {
-  BePartTooCards,
-  BePartTooParagrafo,
-  ContainerBePartToo,
-} from "./BePartToo.styled";
+import {BePartTooCards, BePartTooParagrafo, ContainerBePartToo,} from "./BePartToo.styled";
 import CardBePartToo from "./Card/CardBePartToo";
 import DadosDep from "../../../../constants/json/Informations.json";
 // --------------------------------------------------------
@@ -41,7 +37,7 @@ const BePartToo = ({ }) => {
 
   return (
     <ContainerBePartToo>
-      <TitleDivInformation style={{ margin: 0, width: "100%", textAlign: "center", marginTop:"64px"}}>
+      <TitleDivInformation style={{ margin: 0, width: "100%", textAlign: "center", marginTop:"64px", height: "60px"}}>
         {"Faça parte Também"}
       </TitleDivInformation>
       <BePartTooParagrafo>

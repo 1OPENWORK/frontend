@@ -40,7 +40,7 @@ export const BePartTooCards = styled.div`
                     
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: ${Colors.black};
+    background: ${Colors.BLACK};
 }
   
 `;

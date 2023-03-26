@@ -64,7 +64,7 @@ export const ChatBot = styled.div`
 export const TitleCard = styled.h2`
   font-weight: 600;
   font-size: 28px;
-  color: ${Colors.black};
+  color: ${Colors.BLACK};
   letter-spacing: 3px;
   text-align: left;
 `;
@@ -127,7 +127,7 @@ export const GenericSolidButton = styled.button`
   &:active {
     background-color: ${(props) =>
       props.disabled ? "" : Colors.PRIMARY_COLOR};
-    color: ${(props) => (props.disabled ? "" : Colors.white)};
+    color: ${(props) => (props.disabled ? "" : Colors.WHITE)};
     border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }
 

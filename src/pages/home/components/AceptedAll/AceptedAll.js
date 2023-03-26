@@ -8,13 +8,12 @@ import {
 } from '../../Home.styled'
 import {
     Paragrafo,
-    DivSocialMedia
 } from "./AceptedAll.styled";
 import Colors from "../../../../constants/Colors";
 import DadosDep from "../../../../constants/json/Informations.json";
 import ArrowNexts from "../../../../components/arrows/ArrowNexts";
 
-const AceptedAll = ({ }) => {
+const AceptedAll = () => {
 
     const [list] = useState(DadosDep.aceptedAll);
 

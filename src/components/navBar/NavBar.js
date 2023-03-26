@@ -10,7 +10,7 @@ import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
-
+import { useNavigate } from "react-router-dom";
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -30,7 +30,7 @@ const NavBar = ({}) => {
   // --------------------------------------------------------
 
   // --------------------------------------------------------
-
+  const navigate = useNavigate();
   const [type] = useState("logado");
 
   // --------------------------------------------------------
@@ -47,8 +47,21 @@ const NavBar = ({}) => {
         <Styled.TitleNavBar size={24}> {"Como contratamos"} </Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
-        <FilledButton onClick={() => nagivate("/auth")} color={Colors.black} width={190} heigth={60}> {"Entrar"} </FilledButton>
-        <FilledButton onClick={() => nagivate("/register")} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Junte-se a nós"}
+        <FilledButton
+          onClick={() => navigate("/auth")}
+          color={Colors.BLACK}
+          width={190}
+          heigth={60}
+        >
+          {"Entrar"}
+        </FilledButton>
+        <FilledButton
+          onClick={() => navigate("/register")}
+          color={Colors.SECONDARY_COLOR}
+          width={190}
+          heigth={60}
+        >
+          {"Junte-se a nós"}
         </FilledButton>
       </Styled.NavigateNavBar>
     </Styled.ContainerNavBar>

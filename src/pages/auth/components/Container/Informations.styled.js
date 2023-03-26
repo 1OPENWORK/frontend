@@ -54,10 +54,10 @@ const StyledContainerInformarion = {
     font-weight: 900;
     font-size: 18px;
     cursor: pointer;
-    color: ${Colors.white};
+    color: ${Colors.WHITE};
 
     &:hover {
-      color: ${Colors.black};
+      color: ${Colors.BLACK};
     }
   `,
 };

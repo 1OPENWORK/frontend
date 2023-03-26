@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import InputForm from "../../../../../components/input/InputForm";
 import CargoEnum from "../../../../../constants/CargoEnum";
 import { changeEtapa3 } from "../../../../../store/reducers/RegisterSlice";
 import CardRegisterEt3 from "./components/card/CardRegisterEt3";
@@ -33,6 +32,7 @@ const RegisterEt3 = () => {
       />
       <CardRegisterEt3
         index={2}
+        isDark={false}
         handleClick={handle}
         value={CargoEnum.COMPANY}
         img={

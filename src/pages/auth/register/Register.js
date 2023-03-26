@@ -29,10 +29,9 @@ const Register = () => {
             descricao={etapas[register.etapaAtual].description}
             textButton="Home"
             textButtonVoltar="voltar"
-
           />
           <Styled.ContainerForm position="start">
-            {register.etapaAtual === 3 && (
+            {register.etapaAtual >= 3 && (
               <Userlog name={"T"} desc={"Olá, Tarifa"} />
             )}
             <Styled.Divisor
@@ -54,10 +53,12 @@ const Register = () => {
               <RegisterEt1 />
             ) : register.etapaAtual === 1 ? (
               <RegisterEt2 />
+            ) : register.etapaAutal === 2 ? (
+              <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
               <RegisterEt4 />
             ) : (
-              <RegisterEt5 />
+              register.etapaAtual === 4 && <RegisterEt4 />
             )}
 
             <Styled.Divisor>

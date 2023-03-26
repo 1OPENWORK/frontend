@@ -3,11 +3,13 @@ const AuthPath = "/auth";
 const ChatPath = "/chat/:id";
 const HomeDevPath = '/home-dev';
 const RegisterPath = "/register";
+const JobsPath = "/jobs";
 
 module.exports = {
   HomePagePath,
   AuthPath,
   ChatPath,
-  HomeDevPath,
-  RegisterPath
+  RegisterPath,
+  JobsPath,
+  HomeDevPath
 };

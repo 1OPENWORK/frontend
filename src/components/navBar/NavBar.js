@@ -10,7 +10,6 @@ import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
-import { useNavigate } from "react-router-dom";
 
 // -----------------------------------------------------
 
@@ -29,7 +28,6 @@ const NavBar = ({}) => {
   // --------------------------------------------------------
   // NavBar PRIVATE DECLARATIONS
   // --------------------------------------------------------
-  const nagivate = useNavigate();
 
   // --------------------------------------------------------
 
@@ -42,11 +40,11 @@ const NavBar = ({}) => {
     <Styled.ContainerNavBar>
       <Styled.Divisor>
         <Styled.LogoImg src={Logo} />
-        <Styled.TitleNavBar size={0}>{"Open Work"}</Styled.TitleNavBar>
+        <Styled.TitleNavBarLogo size={32}> {"Open Work"} </Styled.TitleNavBarLogo>
       </Styled.Divisor>
-    
+
       <Styled.NavigateNavBar>
-        <Styled.TitleNavBar size={24}>{"Como contratamos"}</Styled.TitleNavBar>
+        <Styled.TitleNavBar size={24}> {"Como contratamos"} </Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
         <FilledButton
@@ -66,8 +64,6 @@ const NavBar = ({}) => {
           {"Junte-se a nós"}
         </FilledButton>
       </Styled.NavigateNavBar>
-
-
     </Styled.ContainerNavBar>
   );
   // --------------------------------------------------------

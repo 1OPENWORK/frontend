@@ -12,6 +12,7 @@ import socketIO from "socket.io-client";
 import Home from "./pages/home/Home";
 import Auth from "./pages/auth/Auth";
 import Register from "./pages/auth/register/Register";
+import Jobs from "./pages/jobs/Jobs";
 import HomeDev from "./pages/homeDev/HomeDev";
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
@@ -37,6 +38,7 @@ function App() {
         <Route path={HomePagePath} element={<Home />} />
         <Route path={AuthPath} element={<Auth />} />
         <Route path={RegisterPath} element={<Register />} />
+        <Route path={JobsPath} element={<Jobs />} /> */
         <Route path={HomeDevPath} element={<HomeDev />} />
         <Route path={ChatPath} element={<Chat socket={socket} />} />
       </Routes>

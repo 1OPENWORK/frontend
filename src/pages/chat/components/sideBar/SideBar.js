@@ -18,7 +18,13 @@ import Styled, {
 import Logo from "../../../../assets/imgs/logo.svg";
 import Colors from "../../../../constants/Colors";
 
-const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
+const SideBar = ({
+  socket,
+  handleLoading,
+  handleMessageActive,
+  atualizarUltimaMessage,
+  setDadosConversa,
+}) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
@@ -29,8 +35,10 @@ const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
 
   useEffect(() => {
     setFriends(websocket.friends);
-    setConversationsRecentes(websocket.conversationRecents);
-  }, [websocket]);
+    const prevList = [...websocket.conversationRecents];
+    const descendingList = prevList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    setConversationsRecentes(descendingList);
+  }, [websocket, dados]);
 
   const handle = (dados, index) => {
     handleLoading(true);
@@ -43,13 +51,11 @@ const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
       })
     );
 
-    const idOtherPerson =
-      websocket.idUser === dados.idEnviou ? dados.idRecebeu : dados.idEnviou;
-
     socket.emit(
       "listMessagesPerson",
-      { otherPeploe: idOtherPerson, myId: websocket.idUser },
+      { otherPeploe: dados.id, myId: websocket.idUser },
       (dados) => {
+
         dispatch(
           changeMessages({
             messages: dados,
@@ -57,20 +63,19 @@ const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
         );
       }
     );
-
     setDados(dados);
     handleLoading(false);
   };
 
   useEffect(() => {
-    const MessageActive = dados.idEnviou;
+    const idConversationActive = dados.id;
 
     socket.on("newMessage", (dados) => {
       const response = dados;
 
       const idSender = response.dados.idSender;
 
-      if (MessageActive === idSender) {
+      if (idConversationActive === idSender) {
         dispatch(
           changeNewMessage({
             messages: response.dados,
@@ -83,10 +88,15 @@ const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
           conversations: response.listRecentes,
         })
       );
+
     });
 
     return () => socket.off("newMessage");
   }, [on, dados]);
+
+  useEffect(() => {
+    setDadosConversa(dados);
+  }, [dados]);
 
   return (
     <Styled.Container>
@@ -151,15 +161,17 @@ const SideBar = ({ socket, handleLoading, handleMessageActive }) => {
           ></ion-icon>
         </Styled.Header>
         <Styled.ListPersons>
-          {conversationsRecentes.map((d, index) => (
-            <CardPerson
-              dados={d}
-              key={index}
-              handleClick={handle}
-              index={index}
-              active={indexActive === index}
-            />
-          ))}
+          {conversationsRecentes
+            .map((d, index) => (
+              <CardPerson
+                dados={d}
+                key={index}
+                handleClick={handle}
+                index={index}
+                active={indexActive === index}
+                atualizarUltimaMessage={atualizarUltimaMessage}
+              />
+            ))}
         </Styled.ListPersons>
       </Styled.DivColumn>
     </Styled.Container>

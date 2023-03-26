@@ -45,7 +45,6 @@ const StyledSideBar = {
     justify-content: space-between;
     padding: 10px;
     padding-left: 30px;
-    border-bottom: 1px solid ${Colors.WHITE02};
     width: 100%;
     height: 80px;
     background-color: #171a1f;
@@ -53,7 +52,7 @@ const StyledSideBar = {
   `,
 
   ListPersons: styled.div`
-  width: 100%;
+    width: 100%;
     height: 100vh;
   `,
 
@@ -112,7 +111,7 @@ export const OpcaoMenuLateral = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: ${Colors.BLACK_GREY05};
+    background-color: #2b2e34;
   }
 `;
 

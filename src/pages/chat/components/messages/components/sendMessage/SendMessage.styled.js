@@ -43,4 +43,11 @@ const StyledSendMessage = {
   `,
 };
 
+
+
+
+
+
+
+
 export default StyledSendMessage;

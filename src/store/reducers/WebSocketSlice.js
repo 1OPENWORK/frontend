@@ -43,9 +43,6 @@ export const slice = createSlice({
       return { ...state, conversationRecents: payload.conversations};
     },
 
-    changeConversationActiveParcial(state, { payload }) {
-      return { ...state, conversationActive:[...state.conversationActive, {message: payload.message, createdAt: payload.createdAt}] };
-    },
 
   },
 });
@@ -58,8 +55,7 @@ export const {
   changeConversationActive,
   changeMessages,
   changeNewMessage,
-  changeConversationRecentes,
-  changeConversationActiveParcial
+  changeConversationRecentes
 } = slice.actions;
 export const selectedWebSocket = (state) => state;
 export default slice.reducer;

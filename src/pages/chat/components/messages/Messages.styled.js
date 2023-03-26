@@ -44,11 +44,15 @@ const StyledMessage = {
   Reverce: styled.div``,
 
   Header: styled.div`
+    display: flex;
+    align-items: center;
     position: fixed;
     height: 80px;
     width: 70%;
+    padding-left: 20px;
     top: 0;
-    background-color: ${Colors.GREEN};
+    background-color: #171a1f;
+    z-index: 10;
   `,
 
   Divisor: styled.div`

@@ -6,6 +6,7 @@ import {
   RegisterPath,
   HomeDevPath,
   ChatPath,
+  JobsPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";

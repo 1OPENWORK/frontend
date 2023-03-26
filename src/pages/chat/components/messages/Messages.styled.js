@@ -7,7 +7,7 @@ const StyledMessage = {
     flex-direction: column-reverse;
     padding-top: 100px;
     padding-bottom: 100px;
-    height: 100%;
+    height: 100vh;
     background-color: #101318;
     color: ${Colors.WHITE01};
     overflow: scroll;
@@ -41,7 +41,10 @@ const StyledMessage = {
     }
   `,
 
-  Reverce: styled.div``,
+  Reverce: styled.div`
+  
+  
+  `,
 
   Header: styled.div`
     display: flex;

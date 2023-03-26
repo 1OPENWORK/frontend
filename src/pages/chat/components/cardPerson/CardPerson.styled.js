@@ -42,6 +42,7 @@ const StyledCardPerson = {
 
   MessageInfo: styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
   `,
 
@@ -61,6 +62,18 @@ const StyledCardPerson = {
     margin-right: 5px;
     color: #4fc3f7;
     font-size: 16px;
+  `,
+
+  MessagesPendente: styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
+    border-radius: 100%;
+    background-color: #0077b6;
   `,
 };
 

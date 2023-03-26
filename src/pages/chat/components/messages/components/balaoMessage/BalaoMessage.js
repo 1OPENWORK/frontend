@@ -5,13 +5,10 @@ import "moment/locale/pt-br";
 import { Avatar } from "@mui/material";
 const BalaoMessage = ({ receiver, dados }) => {
   const [time, setTime] = useState("");
-  const [isVisualized, setVisualized] = useState(true);
 
   useEffect(() => {
     setTime(moment(dados.createdAt).calendar());
   }, [dados]);
-
-
 
   return (
     <Styled.Container className={!receiver ? "mine" : ""} receiver={receiver}>
@@ -20,7 +17,8 @@ const BalaoMessage = ({ receiver, dados }) => {
         <Styled.Time>{time}</Styled.Time>
         {!receiver && (
           <ion-icon
-            name={isVisualized ? "checkmark-done-outline" : "checkmark-outline"}
+            name={dados.visualizado === 1 ? "checkmark-done-outline" : "checkmark-outline"}
+            
           ></ion-icon>
         )}
       </Styled.Divisor>

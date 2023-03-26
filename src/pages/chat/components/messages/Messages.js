@@ -13,6 +13,7 @@ const Messages = ({
   messageSeleted,
   setAtualizarUltimaMessage,
   dadosConversa,
+  visualized
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [idSender, setIdSender] = useState("");
@@ -23,7 +24,7 @@ const Messages = ({
     setIdSender(websocket.idUser);
     setIdReceiver(websocket.conversationActive.id);
     setMessages(websocket.messages);
-  }, [websocket]);
+  }, [websocket, websocket.messages]);
 
   return (
     <React.Fragment>
@@ -64,6 +65,7 @@ const Messages = ({
         idSender={idSender}
         idReceiver={idReceiver}
         setAtualizarUltimaMessage={setAtualizarUltimaMessage}
+        visualized={visualized}
       />
     </React.Fragment>
   );

@@ -11,6 +11,7 @@ export const ImgCardPerson = styled.div`
   filter: grayscale(${(props) => (!props.disabled ? 0 : "100%")});
   margin-left: 40px;
   margin-right: 40px;
+  margin-top: 64px;
   cursor: pointer;
   transition: all 0.5s;
 `;

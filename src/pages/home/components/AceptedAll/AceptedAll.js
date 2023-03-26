@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import imgInitial from "../../../../assets/imgs/imageInitial2.svg";
-import {
-    DivHome,
-    ImgHome,
-    ContainerAceptedAll,
-    TitleDivInformation
-} from '../../Home.styled'
-import {
-    Paragrafo,
-} from "./AceptedAll.styled";
+import {DivHome,ImgHome,ContainerAceptedAll} from '../../Home.styled'
+import {Paragrafo,DivSocialMedia, TitleDivInformationAceptedAll} from "./AceptedAll.styled";
 import Colors from "../../../../constants/Colors";
 import DadosDep from "../../../../constants/json/Informations.json";
 import ArrowNexts from "../../../../components/arrows/ArrowNexts";
@@ -25,7 +18,7 @@ const AceptedAll = () => {
                 <ImgHome src={imgInitial} />
             </DivHome>
             <DivHome>
-                <TitleDivInformation color={Colors.PRIMARY_COLOR}> {"Aceitamos a Todos"} </TitleDivInformation>
+                <TitleDivInformationAceptedAll color={Colors.PRIMARY_COLOR}> {"Aceitamos a Todos"} </TitleDivInformationAceptedAll>
                 {list?.map((d, index) => {
                     return (
                         <div>

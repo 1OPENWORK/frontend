@@ -6,7 +6,7 @@ export const ContainerCardBePartToo = styled.div`
   height: 235px;
   background: #ffffff;
   border-radius: 18px;
-  margin: 80px 32px 80px 80px;
+  margin: 32px 32px 80px 80px;
   display: flex;
   flex-direction: column;
   font-family: nunito;

@@ -17,10 +17,12 @@ import {
   BootImg,
   FlexCard,
   GenericSolidButton,
+  BarSearchImg,
 } from "./HomeDev.styled";
 
 import imgCard from "../../assets/imgs/card-img.svg";
 import imgBot from "../../assets/imgs/chat-bot-img.svg";
+import imgBarSearch from "../../assets/icons/searchIcon.svg";
 
 const HomeDev = () => {
   return (
@@ -28,8 +30,11 @@ const HomeDev = () => {
       <GeneralContainer>
         <NavBar />
         <Container>
-          <Aside>
-            <Input></Input>
+          <Input>
+            <BarSearchImg src={imgBarSearch} />
+          </Input>
+
+            <Aside>
             <Card>
               <CardImg src={imgCard} />
 
@@ -42,6 +47,7 @@ const HomeDev = () => {
                 </DescPara>
               </FlexCard>
             </Card>
+
             <Card>
               <CardImg src={imgCard} />
 
@@ -57,7 +63,6 @@ const HomeDev = () => {
 
             <Card>
               <CardImg src={imgCard} />
-
               <FlexCard>
                 <TitleCard>{"Jobs"}</TitleCard>
                 <DescPara>
@@ -70,7 +75,6 @@ const HomeDev = () => {
 
             <Card>
               <CardImg src={imgCard} />
-
               <FlexCard>
                 <TitleCard>{"Cursos"}</TitleCard>
                 <DescPara>
@@ -91,10 +95,7 @@ const HomeDev = () => {
                   "Como podemos te ajudar, tire suas dúvidas com o nosso bot Yuca"
                 }
               </DescParaBot>
-              <GenericSolidButton
-              
-              >
-                {"Iniciar"}
+              <GenericSolidButton>{"Iniciar"}
               </GenericSolidButton>
             </ChatBot>
           </Article>

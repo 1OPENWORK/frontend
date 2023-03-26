@@ -13,7 +13,7 @@ import Instagram from "../../../../assets/imgs/insta.svg";
 import linkedin from "../../../../assets/imgs/linkedin.svg";
 import Styled from "../../../../components/navBar/NavBar.styled";
 
-const Footer = ({ }) => {
+const Footer = () => {
     return (
         <ContainerFooter>
             <ContainerBodyFooter>

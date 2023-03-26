@@ -41,10 +41,6 @@ const ArrowNexts = ({ length, selected, handleSelected }) => {
     height: 34px;
   `;
 
-  const NumberSelected = styled.h2`
-    color: #6c757d;
-  `;
-
   const DivisorArrow = styled.div``;
 
   const IconImage = styled.img`

@@ -89,7 +89,7 @@ const HomeDev = () => {
           <Article>
             <ChatBot>
               <BootImg src={imgBot} />
-              <TitleCard color={Colors.white}>{"ChatBot"}</TitleCard>
+              <TitleCard color={Colors.WHITE}>{"ChatBot"}</TitleCard>
               <DescParaBot>
                 {
                   "Como podemos te ajudar, tire suas dúvidas com o nosso bot Yuca"

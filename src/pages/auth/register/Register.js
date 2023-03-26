@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState } from "react";
 import BarProgress from "../../../components/barProgress/BarProgress";
-import InputForm from "../../../components/input/InputForm";
-import { FilledButton } from "../../../components/UI/buttons/Button";
-import Colors from "../../../constants/Colors";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
-import { useForm } from "react-hook-form";
 import etapasRegister from "../../../constants/json/register.json";
 import RegisterEt1 from "./etapas/et1/RegisterEt1";
 import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 import RegisterEt5 from "./etapas/et5/RegisterEt5";
 
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
-const Register = ({ name }) => {
+const Register = () => {
   const [etapas] = useState(...[etapasRegister.etapas]);
 
   const { register } = useSelector(selectRegister);
-
-  const loginUser = (data) => console.log(data);
-
-  // const [user] = () => {
-  //   if (register.etapaAtual === 4) {
-  //     <Userlog name={name} />;
-  //   }
-  // };
 
   return (
     <Styled.Container>

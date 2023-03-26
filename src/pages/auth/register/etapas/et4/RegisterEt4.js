@@ -1,33 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import { Container, Flex, ColumCount, Divider } from "./RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "./components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
-import listLoad from "../../../../../constants/json/selectProf.json";
-// import {
-//   changeEtapa4,
-//   changeEtapaAll,
-// } from "../../../../../../store/reducers/RegisterSlice";
+import { handleProeficiency } from "../../../../../store/actions/Proeficiency";
+import { useDispatch } from "react-redux";
+import { changeEtapa4 } from "../../../../../store/reducers/RegisterSlice";
 
-const RegisterEt4 = ({}) => {
-  const [list] = React.useState(listLoad.proeficiency);
-  // const dispatch = useDispatch();
+const RegisterEt4 = () => {
+  const [proefiency, setProeficiency] = useState([]);
+  const dispatch = useDispatch();
+  const [lista, setList] = useState([]);
+  let array = [];
 
-  // function nextEtapa() {
-  //   dispatch(
-  //     changeEtapa4({
-  //       etapa: 4,
-  //     })
-  //   );
-  // }
+  const handleRemoveItemList = React.useCallback(proefiency => {
+    const newProefiency = [...lista];
+    newProefiency.splice(lista.indexOf(proefiency), 1);
+    setList(newProefiency);
+  });
+
+
+  const Tools = title => {
+    proefiency
+      .filter(list => list.name === title)
+      .map(d => {
+        const tools = d.tools;
+
+        array.push(...tools);
+      });
+
+
+  };
+
+  const handleAdicionarLista = (title, checked) => {
+    if (!checked) {
+      handleRemoveItemList(title);
+    } else {
+      Tools(title);
+    }
+  };
+
+  const listar = async () => {
+    const dados = await handleProeficiency();
+    setProeficiency(dados.data);
+  };
+
+  const handleSubmitReducer = () => {
+
+
+    dispatch(
+      changeEtapa4({
+        lista: array,
+      })
+    );
+  };
+
+  useEffect(() => {
+    listar();
+  }, []);
 
   return (
     <>
       <Container>
         <Flex>
           <ColumCount>
-            {list?.map((title) => (
-              <ButtonRegisterEt4 title={title.title} />
+            {proefiency?.map(dados => (
+              <ButtonRegisterEt4
+                title={dados.name}
+                handleClick={handleAdicionarLista}
+              />
             ))}
           </ColumCount>
           <InputForm
@@ -39,8 +80,7 @@ const RegisterEt4 = ({}) => {
           />
           <Divider>
             <FilledButton
-              // onClick={() => nextEtapa()}
-
+              onClick={handleSubmitReducer}
               color={"black"}
               width={190}
               heigth={60}

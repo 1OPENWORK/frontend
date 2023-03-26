@@ -29,11 +29,10 @@ import DadosDep from "../../../../constants/json/Informations.json";
  * @param props The component props.
  * @returns The component JSX.
  */
-const BePartToo = ({ }) => {
+const BePartToo = () => {
 
   const [list] = useState(DadosDep.benefits);
 
-  const [selected, benefit] = useState(0);
 
   return (
     <ContainerBePartToo>

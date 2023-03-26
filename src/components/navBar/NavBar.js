@@ -11,7 +11,6 @@ import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
 import { useNavigate } from "react-router-dom";
-
 // -----------------------------------------------------
 
 // --------------------------------------------------------

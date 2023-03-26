@@ -6,7 +6,7 @@ import Colors from "../../../../constants/Colors";
 import DadosDep from "../../../../constants/json/Informations.json";
 import ArrowNexts from "../../../../components/arrows/ArrowNexts";
 
-const AceptedAll = ({ }) => {
+const AceptedAll = () => {
 
     const [list] = useState(DadosDep.aceptedAll);
 

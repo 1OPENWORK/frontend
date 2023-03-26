@@ -142,7 +142,7 @@ export const GenericSolidButton = styled.button`
   &:active {
     background-color: ${(props) =>
       props.disabled ? "" : Colors.PRIMARY_COLOR};
-    color: ${(props) => (props.disabled ? "" : Colors.white)};
+    color: ${(props) => (props.disabled ? "" : Colors.WHITE)};
     border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }
 

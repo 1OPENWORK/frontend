@@ -5,7 +5,7 @@
 // --------------------------------------------------------
 // IMPORTS
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavBar from "../../components/navBar/NavBar";
 import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
 import { ContainerAceptedAll, ContainerBodyMetricaHome, DivHome, DivUpInformation, HomeText, HomeTextLink, ImgHome, TitleDivInformation,} from "./Home.styled";
@@ -16,7 +16,6 @@ import CardMetrica from "./components/CardMetrica/CardMetrica";
 import bolsaIcon from "../../assets/icons/bolsaIcon.svg";
 import computadorIcon from "../../assets/icons/computadorIcon.svg";
 import mapaIcon from "../../assets/icons/mapaIcon.svg";
-import imgInitial from "../../assets/imgs/imageInitial2.svg";
 import Depoiments from "./components/Depoiments/Depoiments";
 import BePartToo from "./components/BePartToo/BePartToo";
 import Footer from "./components/Footer/Footer";

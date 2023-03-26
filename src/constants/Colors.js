@@ -1,16 +1,30 @@
 const PRIMARY_COLOR = "#20AC69";
 const SECONDARY_COLOR = "#4DFF7E";
-const white = "#fff";
-const white2 = "#f5f5f5";
-const black = "#161616";
+const WHITE = "#fff";
+const WHITE01 = "#e8e8e8";
+const WHITE02 = "#495057";
+const BLACK = "#161616";
 const AZUL_LINK = "#1a9fff"
+const BLACK_GREY01 = "#141414"
+const BLACK_GREY02 = "#1f1f1f"
+const BLACK_GREY03 = "#242424";
+const BLACK_GREY04 = "#1f1f1f";
+const BLACK_GREY05 = "#292929";
+const GREEN = "#1b4332";
 
 
 export default {
-    PRIMARY_COLOR: PRIMARY_COLOR,
-    SECONDARY_COLOR: SECONDARY_COLOR,
-    white: white,
-    white2: white2,
-    black: black,
-    AZUL_LINK: AZUL_LINK
+    PRIMARY_COLOR,
+    SECONDARY_COLOR,
+    WHITE,
+    WHITE01,
+    WHITE02,
+    BLACK,
+    AZUL_LINK,
+    BLACK_GREY01,
+    BLACK_GREY02,
+    BLACK_GREY03,
+    BLACK_GREY04,
+    BLACK_GREY05,
+    GREEN
 }

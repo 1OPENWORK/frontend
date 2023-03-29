@@ -12,13 +12,11 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
   const [message, setMessage] = useState("");
-  const [visualizado, setVisualizado] = useState(false);
   const [create, setCreated] = useState("");
 
   function listarUltimaMessage() {
     const message = websocket.conversationRecents[0].message;
     setMessage(message);
-    setVisualizado(dados.isVisualizado === 0 ? false : true);
     setCreated(moment(dados.createdAt).calendar());
 
     const qtdMessagePendente = [...websocket.messagesPendentes];
@@ -95,17 +93,7 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
             )}
           </Styled.MessageInfo>
         </Styled.Header>
-        <Styled.MessageText>
-          {visualizado && dados.idEnviou === websocket.idUser ? (
-            <Styled.SeeIcon>
-              <ion-icon name="checkmark-done-outline"></ion-icon>
-            </Styled.SeeIcon>
-          ) : !visualizado && dados.idEnviou === websocket.idUser ? (
-            <ion-icon
-            name={"checkmark-outline"}
-            
-          ></ion-icon>
-          ) : ("")}
+        <Styled.MessageText isMessagePedente={qtdMessagePendente > 0 ? true : false}>
           {dados.message ?? message}
         </Styled.MessageText>
       </Styled.CardContent>

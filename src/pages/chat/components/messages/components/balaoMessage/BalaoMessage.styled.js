@@ -38,7 +38,7 @@ const StyledBalaoMessage = {
     justify-content: center;
     width: 100%;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
   `,
 };
 

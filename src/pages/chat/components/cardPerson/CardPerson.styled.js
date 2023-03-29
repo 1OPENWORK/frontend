@@ -55,7 +55,8 @@ const StyledCardPerson = {
   MessageText: styled.p`
     margin: 8px 0 0;
     font-size: 16px;
-    color: #888;
+    color: ${props => props.isMessagePedente ? '#ffff' : '#888'};
+    font-weight: ${props => props.isMessagePedente ? 500 : 400};
   `,
 
   SeeIcon: styled.span`
@@ -74,6 +75,8 @@ const StyledCardPerson = {
     margin-top: 10px;
     border-radius: 100%;
     background-color: #0077b6;
+   
+    
   `,
 };
 

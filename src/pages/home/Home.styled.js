@@ -17,9 +17,9 @@ export const ContainerBodyMetricaHome = styled.div`
 `;
 
 export const ImgHome = styled.img`
-  margin-left: 160px;
-  margin-bottom: 40px;
+  left: 160px;
   height: 545px;
+  margin-top: 58px;
 `;
 
 export const DivUpInformation = styled.div`
@@ -42,12 +42,10 @@ export const DivUpInformation = styled.div`
 export const ContainerAceptedAll = styled.div`
   display: flex;
   flex-direction: row;
-  padding-top: 100px;
-  height: 75vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-right: 70px;
 `;
 
 export const TitleDivInformation = styled.p`
@@ -55,7 +53,8 @@ export const TitleDivInformation = styled.p`
   font-style: normal;
   font-weight: 900;
   font-size: 48px;
-  width: 437px;
+  width: 417px;
+  height: 388px;
   margin-top: 80px;
   line-height: 65.47px;
   color: ${(props) => (props.color ? props.color : Colors.WHITE)};
@@ -78,7 +77,6 @@ export const HomeTextLink = styled.a`
   margin-left: 16px;
   text-decoration: none;
   cursor: pointer;
-
   :hover {
     color: ${Colors.BLACK};
   }

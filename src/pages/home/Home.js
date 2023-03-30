@@ -8,13 +8,7 @@
 import React from "react";
 import NavBar from "../../components/navBar/NavBar";
 import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
-import {
-  ContainerBodyMetricaHome,
-  DivUpInformation,
-  HomeText,
-  HomeTextLink,
-  TitleDivInformation,
-} from "./Home.styled";
+import { ContainerAceptedAll, ContainerBodyMetricaHome, DivHome, DivUpInformation, HomeText, HomeTextLink, ImgHome, TitleDivInformation,} from "./Home.styled";
 import ImgBanner from "../../assets/imgs/imageInitial.svg";
 import Colors from "../../constants/Colors";
 import HomeButton from "./components/HomeButton/HomeButton";
@@ -53,16 +47,17 @@ const Home = () => {
           background={Colors.PRIMARY_COLOR}
           directionColumn={true}
           center={true}
-          padding={"50px"}
-        >
-          <TitleDivInformation> {"Tenha a liberdade de trabalhar de qualquer lugar, com o seu próprio horário de serviço."}
-          </TitleDivInformation>
+          padding={"50px"}>
+
+          <TitleDivInformation> {"Tenha a liberdade de trabalhar de qualquer lugar, com o seu próprio horário de serviço"} </TitleDivInformation>
           <HomeButton title="Saiba mais" />
+
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              marginTop: 88,
+              marginTop: 32,
+              marginBottom: 80,
             }}
           >
             <HomeText>Você está querendo contratar? </HomeText>
@@ -74,7 +69,7 @@ const Home = () => {
           background={ImgBanner}
           directionColumn={false}
           spaceBettewen={true}
-          padding={"30px"}
+          padding={"48px"}
           isFlexEnd={true}
         >
           <CardMetrica metrica={5000} title={"Jobs"} icon={bolsaIcon} />

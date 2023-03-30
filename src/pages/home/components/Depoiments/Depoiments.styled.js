@@ -6,8 +6,7 @@ export const ContainerDepoiments = styled.div`
   flex-direction: column;
   background-color: #161616;
   width: 100%;
-  height:960px;
-  padding-top: 40px;
+  height: 950px;
 `;
 
 export const Paragrafo = styled.p`

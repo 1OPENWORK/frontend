@@ -42,14 +42,17 @@ const SideBar = ({
     const descendingList = prevList
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       .filter((item, index, self) => {
-        const idEnviou = item.idEnviou;
+        const idRecebeu = item.idRecebeu;
         for (let i = 0; i < index; i++) {
-          if (self[i].idEnviou === idEnviou) {
+          if (self[i].idRecebeu === idRecebeu) {
             return false;
           }
         }
         return true;
       });
+    console.log("🚀 ~ file: SideBar.js:53 ~ useEffect ~ descendingList:", descendingList)
+
+      
     setConversationsRecentes(descendingList);
   }, [websocket, dados]);
 
@@ -122,6 +125,8 @@ const SideBar = ({
           })
         );
       }
+
+      console.log(response.listRecentes);
 
       dispatch(
         changeConversationRecentes({

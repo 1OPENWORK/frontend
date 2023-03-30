@@ -63,9 +63,6 @@ export const Chat = ({ socket }) => {
     socket.emit("updateSocketId", { idUser: id }, (user) => {});
   }, []);
 
-  useEffect(() => {
-    console.log(visualized);
-  }, [visualized])
 
   return (
     <Styled.Container>

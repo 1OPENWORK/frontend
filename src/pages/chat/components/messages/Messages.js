@@ -5,7 +5,8 @@ import Loading from "../../../../components/loading/Loading";
 import { selectedWebSocket } from "../../../../store/reducers/WebSocketSlice";
 import BalaoMessage from "./components/balaoMessage/BalaoMessage";
 import SendMessage from "./components/sendMessage/SendMessage";
-import Styled from "./Messages.styled";
+import Styled, { IMessageContainer } from "./Messages.styled";
+import MessageDefault from "../../../../assets/imgs/message_default.svg";
 
 const Messages = ({
   socket,
@@ -13,12 +14,14 @@ const Messages = ({
   messageSeleted,
   setAtualizarUltimaMessage,
   dadosConversa,
-  visualized
+  visualized,
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [idSender, setIdSender] = useState("");
   const [idReceiver, setIdReceiver] = useState("");
   const [messages, setMessages] = useState([]);
+
+  
 
   useEffect(() => {
     setIdSender(websocket.idUser);
@@ -39,22 +42,27 @@ const Messages = ({
                   <Avatar src={dadosConversa.img} />
                   <Styled.Divisor>{dadosConversa.nome}</Styled.Divisor>
                 </Styled.Header>
-                {messages?.map((dados, index) => (
-                  <React.Fragment>
-                    {dados.idSender === idSender ? (
-                      <Styled.Divisor>
-                        <BalaoMessage dados={dados} />
-                      </Styled.Divisor>
-                    ) : (
-                      <Styled.Divisor receiver={true}>
-                        <BalaoMessage receiver={true} dados={dados} />
-                      </Styled.Divisor>
-                    )}
-                  </React.Fragment>
-                ))}
+                {messages.map((dados, index) => {
+                  return (
+                    <IMessageContainer>
+                      {dados.idSender === idSender ? (
+                        <Styled.Divisor>
+                          <BalaoMessage dados={dados} />
+                        </Styled.Divisor>
+                      ) : (
+                        <Styled.Divisor receiver={true}>
+                          <BalaoMessage receiver={true} dados={dados} />
+                        </Styled.Divisor>
+                      )}
+                    </IMessageContainer>
+                  );
+                })}
               </Styled.Reverce>
             ) : (
-              "Nenhuma conversa ativada..."
+              <Styled.ContainerNotSelected>
+                <img src={MessageDefault} />
+
+              </Styled.ContainerNotSelected>
             )}
           </React.Fragment>
         )}

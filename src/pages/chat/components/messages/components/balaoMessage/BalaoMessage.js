@@ -11,18 +11,23 @@ const BalaoMessage = ({ receiver, dados }) => {
   }, [dados]);
 
   return (
-    <Styled.Container className={!receiver ? "mine" : ""} receiver={receiver}>
-      <Styled.Message>{dados.message}</Styled.Message>
-      <Styled.Divisor isMine={receiver}>
-        <Styled.Time>{time}</Styled.Time>
-        {!receiver && (
-          <ion-icon
-            name={dados.visualizado === 1 ? "checkmark-done-outline" : "checkmark-outline"}
-            
-          ></ion-icon>
-        )}
-      </Styled.Divisor>
-    </Styled.Container>
+    <p className={!receiver ? "from-me" : "from-them"}>
+      <Styled.BodyMessage>
+        <Styled.Message>{dados.message}</Styled.Message>
+        <Styled.ContainerFooter>
+          <Styled.Time>{time}</Styled.Time>
+          {!receiver && (
+            <ion-icon
+              name={
+                dados.visualizado === 1
+                  ? "checkmark-done-outline"
+                  : "checkmark-outline"
+              }
+            ></ion-icon>
+          )}
+        </Styled.ContainerFooter>
+      </Styled.BodyMessage>
+    </p>
   );
 };
 

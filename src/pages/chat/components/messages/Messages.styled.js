@@ -41,10 +41,7 @@ const StyledMessage = {
     }
   `,
 
-  Reverce: styled.div`
-  
-  
-  `,
+  Reverce: styled.div``,
 
   Header: styled.div`
     display: flex;
@@ -64,6 +61,88 @@ const StyledMessage = {
     padding-right: 20px;
     justify-content: ${(props) => (props.receiver ? "start" : "flex-end")};
   `,
+
+  ContainerNotSelected: styled.div`
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
 };
+
+export const IMessageContainer = styled.div`
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+
+  & p {
+    border-radius: 1.15rem;
+    line-height: 1.25;
+    font-size: 16px;
+    max-width: 75%;
+    padding: 0.5rem 0.875rem;
+    position: relative;
+    word-wrap: break-word;
+  }
+
+  & p::before,
+  & p::after {
+    bottom: -0.1rem;
+    content: "";
+    height: 1rem;
+    position: absolute;
+  }
+
+  & p.from-me {
+    align-self: flex-end;
+    background-color: #1b4332;
+    color: #fff;
+  }
+
+  & p.from-me::before {
+    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-right: 1rem solid #1b4332;
+    right: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
+
+  & p.from-me::after {
+    background-color: #101318;
+    border-bottom-left-radius: 0.5rem;
+    right: -40px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+  }
+
+  & p[class^="from-"] {
+    width: fit-content;
+  }
+
+  & p.from-them {
+    align-items: flex-start;
+    background-color: #e5e5ea;
+    color: #000;
+  }
+
+  & p.from-them:before {
+    border-bottom-right-radius: 0.8rem 0.7rem;
+    border-left: 1rem solid #e5e5ea;
+    left: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
+
+  & p.from-them::after {
+    background-color: #101318;
+    border-bottom-right-radius: 0.5rem;
+    left: 20px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+  }
+
+  .no-tail::before {
+    display: none;
+  }
+`;
 
 export default StyledMessage;

@@ -50,9 +50,7 @@ const SideBar = ({
         }
         return true;
       });
-    console.log("🚀 ~ file: SideBar.js:53 ~ useEffect ~ descendingList:", descendingList)
 
-      
     setConversationsRecentes(descendingList);
   }, [websocket, dados]);
 
@@ -71,7 +69,7 @@ const SideBar = ({
     socket.emit(
       "listMessagesPerson",
       { otherPeploe: dados.id, myId: websocket.idUser },
-      (dados) => {
+      dados => {
         dispatch(
           changeMessages({
             messages: dados,
@@ -84,7 +82,7 @@ const SideBar = ({
   };
 
   const atualizarVisualized = (idFriend, myId, idSender) => {
-    socket.emit("messagesVisualized", { idFriend, myId }, (messagePedentes) => {
+    socket.emit("messagesVisualized", { idFriend, myId }, messagePedentes => {
       dispatch(
         changeMessagesPendentes({
           messages: messagePedentes,
@@ -100,7 +98,7 @@ const SideBar = ({
   useEffect(() => {
     const idConversationActive = dados.id;
 
-    socket.on("newMessage", (dados) => {
+    socket.on("newMessage", dados => {
       const response = dados;
 
       const idSender = response.dados.idSender;
@@ -139,7 +137,7 @@ const SideBar = ({
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("atualizandoState", (dados) => {
+    socket.on("atualizandoState", dados => {
       setVisualized(Math.random() * 100 + 1 - 1);
 
       if (websocket.conversationActive === dados.idReciver) {

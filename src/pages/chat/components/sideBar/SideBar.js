@@ -18,6 +18,7 @@ import Styled, {
 } from "./SideBar.styled";
 import Logo from "../../../../assets/imgs/logo.svg";
 import Colors from "../../../../constants/Colors";
+import ModalGroup from "../modal/group/ModalGroup";
 
 const SideBar = ({
   socket,
@@ -33,6 +34,7 @@ const SideBar = ({
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
   const [dados, setDados] = useState({});
+  const [show, setShowModal] = useState(false);
   const [on, setOn] = useState([]);
   const dispatch = useDispatch();
 
@@ -157,6 +159,7 @@ const SideBar = ({
 
   return (
     <Styled.Container>
+      <ModalGroup show={show} handleClick={setShowModal} />
       <MenuLateral>
         <Styled.Img src={Logo} />
         <OpcaoMenuLateral>
@@ -168,7 +171,7 @@ const SideBar = ({
             <TitleOpcaoMenuLateral>Adicionar</TitleOpcaoMenuLateral>
           </DivOpcaoLateral>
         </OpcaoMenuLateral>
-        <OpcaoMenuLateral>
+        <OpcaoMenuLateral onClick={() => setShowModal(true)}>
           <ion-icon
             name="people-outline"
             style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}

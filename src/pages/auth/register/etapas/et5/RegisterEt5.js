@@ -24,11 +24,19 @@ const RegisterEt5 = ({}) => {
             space={"24px"}
             width={"734px"}
           />
-          <ColumCount>
-            <ButtonRegisterEt4 title={"React"} />
-            <ButtonRegisterEt4 title={"Angular"} />
-            <ButtonRegisterEt4 title={"HTML"} />
-            <ButtonRegisterEt4 title={"CSS"} />
+          <ColumCount count={4} gap={"1.9rem"}>
+            <ButtonRegisterEt4
+              width={"160px"}
+              height={"44px"}
+              title={"React"}
+            />
+            <ButtonRegisterEt4
+              width={"160px"}
+              height={"44px"}
+              title={"Angular"}
+            />
+            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"HTML"} />
+            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"CSS"} />
           </ColumCount>
 
           <Divider>

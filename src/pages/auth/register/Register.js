@@ -16,6 +16,8 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 import RegisterEt5 from "./etapas/et5/RegisterEt5";
+import RegisterEt6 from "./etapas/et6/RegisterEt6";
+
 
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
@@ -69,7 +71,7 @@ const Register = ({ name }) => {
             ) : register.etapaAutal === 2 ? (
               <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
-              <RegisterEt4 />
+              <RegisterEt6/>
             ) : (
               register.etapaAtual === 4 && <RegisterEt4 />
             )}

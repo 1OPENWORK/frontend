@@ -6,12 +6,12 @@ import etapasRegister from "../../../constants/json/register.json";
 import RegisterEt1 from "./etapas/et1/RegisterEt1";
 import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
+import RegisterEt4 from "./etapas/et4/RegisterEt4";
+import RegisterEt5 from "./etapas/et5/RegisterEt5";
+import RegisterCompany from "./etapas/etCompany/RegisterCompany";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
 import { ToastContainer} from "react-toastify";
-import RegisterEt4 from "./etapas/et4/RegisterEt4";
-import RegisterEt5 from "./etapas/et5/RegisterEt5";
-
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
 const Register = () => {
@@ -50,7 +50,7 @@ const Register = () => {
             {/* ETAPAS */}
 
             {register.etapaAtual === 0 ? (
-              <RegisterEt1 />
+              <RegisterCompany />
             ) : register.etapaAtual === 1 ? (
               <RegisterEt2 />
             ) : register.etapaAutal === 2 ? (

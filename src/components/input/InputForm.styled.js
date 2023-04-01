@@ -20,6 +20,7 @@ const StyledInputForm = {
     margin-right: ${props => props.mr ? props.mr : "0px"};
     margin-top: ${props => props.mt ? props.mt : "0px"};
     margin-bottom: ${props => props.mb ? props.mb : "0px"};
+    font-size: 16px;
 
     &:focus {
       outline: none;

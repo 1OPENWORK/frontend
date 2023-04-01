@@ -58,7 +58,7 @@ const InformationsAuth = ({
           <Styled.DivInformationCenter
             style={{
               justifyContent: "center",
-              height: 200,
+              height: 180,
             }}
           >
             <Styled.Title>{title}</Styled.Title>

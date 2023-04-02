@@ -28,7 +28,7 @@ const Register = () => {
             title={etapas[register.etapaAtual].titleInformation}
             descricao={etapas[register.etapaAtual].description}
             textButton="Home"
-            textButtonVoltar="voltar"
+            textButtonVoltar="Voltar"
           />
           <Styled.ContainerForm position="start">
             {register.etapaAtual >= 3 && (
@@ -37,9 +37,9 @@ const Register = () => {
             <Styled.Divisor
               align={"start"}
               style={{
-                marginTop: "20px",
-                marginLeft: "148px",
-                height: "80px",
+                marginTop: "1.25rem",
+                marginLeft: "9.25rem",
+                height: "5rem",
               }}
             >
               <Styled.TitleForm>
@@ -67,7 +67,7 @@ const Register = () => {
             <Styled.Divisor
               align={"flex-end"}
               style={{
-                paddingRight: 20,
+                paddingRight: "1.25rem",
               }}
             ></Styled.Divisor>
           </Styled.ContainerForm>

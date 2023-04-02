@@ -33,6 +33,8 @@ const SideBar = ({
   const [friends, setFriends] = useState([]);
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
+  const [indexAbaActive, setIndexAbaActive] = useState(3);
+  const [totalMessagePendentes, setTotalMessagePendentes] = useState(3);
   const [dados, setDados] = useState({});
   const [show, setShowModal] = useState(false);
   const [on, setOn] = useState([]);
@@ -41,26 +43,35 @@ const SideBar = ({
   useEffect(() => {
     setFriends(websocket.friends);
     const prevList = [...websocket.conversationRecents];
-    const descendingList = prevList
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      .filter((item, index, self) => {
-        const idRecebeu = item.idRecebeu;
-        for (let i = 0; i < index; i++) {
-          if (self[i].idRecebeu === idRecebeu) {
-            return false;
-          }
-        }
-        return true;
-      });
+    const descendingList = prevList.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
     setConversationsRecentes(descendingList);
   }, [websocket, dados]);
 
-  const handle = (dados, index) => {
+  const handle = (dados, index, isSide) => {
     handleLoading(true);
     handleMessageActive(true);
     setIndexActive(index);
-    atualizarVisualized(dados.idFriend, websocket.idUser, dados.id);
+
+    if (isSide) {
+      let idFriend = "";
+
+      for (const conversationRecents of websocket.conversationRecents) {
+        if (
+          dados.id === conversationRecents.idEnviou ||
+          dados.id === conversationRecents.idRecebeu
+        ) {
+          idFriend = conversationRecents.idFriend;
+          break;
+        }
+      }
+
+      atualizarVisualized(idFriend, websocket.idUser, dados.id);
+    } else {
+      atualizarVisualized(dados.idFriend, websocket.idUser, dados.id);
+    }
 
     dispatch(
       changeConversationActive({
@@ -153,6 +164,18 @@ const SideBar = ({
   }, [on, dados]);
 
   useEffect(() => {
+    let total = 0;
+
+    const messagesPedentes = websocket.messagesPendentes || []; // Define um valor padrão se for null ou undefined
+
+    for (const message of messagesPedentes) {
+      total += message.qtdNaoVisualizados;
+    }
+
+    setTotalMessagePendentes(total);
+  }, [websocket]);
+
+  useEffect(() => {
     setVisualized(Math.random() * 100 + 1 - 1);
     setDadosConversa(dados);
   }, [dados]);
@@ -162,13 +185,25 @@ const SideBar = ({
       <ModalGroup socket={socket} show={show} handleClick={setShowModal} />
       <MenuLateral>
         <Styled.Img src={Logo} />
-        <OpcaoMenuLateral>
-          <Badge color="primary" badgeContent={0} showZero>
+        <OpcaoMenuLateral onClick={() => setIndexAbaActive(1)}>
+          {indexAbaActive !== 1 ? (
+            <Badge color="primary" badgeContent={0} showZero>
+              <ion-icon
+                name="notifications-outline"
+                style={{
+                  color: Colors.WHITE01,
+                  fontSize: 30,
+                  cursor: "pointer",
+                }}
+              ></ion-icon>
+            </Badge>
+          ) : (
             <ion-icon
               name="notifications-outline"
               style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
             ></ion-icon>
-          </Badge>
+          )}
+
           <DivOpcaoLateral>
             <TitleOpcaoMenuLateral>Notificações</TitleOpcaoMenuLateral>
           </DivOpcaoLateral>
@@ -200,11 +235,29 @@ const SideBar = ({
             <TitleOpcaoMenuLateral>Atividades</TitleOpcaoMenuLateral>
           </DivOpcaoLateral>
         </OpcaoMenuLateral>
-        <OpcaoMenuLateral>
-          <ion-icon
-            name="chatbox-ellipses-outline"
-            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-          ></ion-icon>
+        <OpcaoMenuLateral onClick={() => setIndexAbaActive(3)}>
+          {indexAbaActive !== 3 ? (
+            <Badge
+              color="primary"
+              badgeContent={totalMessagePendentes}
+              showZero
+            >
+              <ion-icon
+                name="chatbox-ellipses-outline"
+                style={{
+                  color: Colors.WHITE01,
+                  fontSize: 30,
+                  cursor: "pointer",
+                }}
+              ></ion-icon>
+            </Badge>
+          ) : (
+            <ion-icon
+              name="chatbox-ellipses-outline"
+              style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
+            ></ion-icon>
+          )}
+
           <DivOpcaoLateral>
             <TitleOpcaoMenuLateral>Conversas</TitleOpcaoMenuLateral>
           </DivOpcaoLateral>
@@ -214,7 +267,12 @@ const SideBar = ({
         </TitleOpcaoMenuLateral>
         <Styled.ConexoesMenuLateral>
           {friends.map((d, index) => (
-            <OpcaoMenuLateral key={index} onClick={() => handle(d, index)}>
+            <OpcaoMenuLateral
+              key={index}
+              onClick={() => {
+                handle(d, index, true);
+              }}
+            >
               <Avatar src={d.img} />
               <DivOpcaoLateral>
                 <TitleOpcaoMenuLateral>{d.nome}</TitleOpcaoMenuLateral>
@@ -223,27 +281,47 @@ const SideBar = ({
           ))}
         </Styled.ConexoesMenuLateral>
       </MenuLateral>
-      <Styled.DivColumn>
-        <Styled.Header>
-          <Styled.TitleHeader>Conversas Recentes</Styled.TitleHeader>
-          <ion-icon
-            name="chatbox-ellipses-outline"
-            style={{ color: Colors.WHITE01, fontSize: 30 }}
-          ></ion-icon>
-        </Styled.Header>
-        <Styled.ListPersons>
-          {conversationsRecentes.map((d, index) => (
-            <CardPerson
-              dados={d}
-              key={index}
-              handleClick={handle}
-              index={index}
-              active={indexActive === index}
-              atualizarUltimaMessage={atualizarUltimaMessage}
-            />
-          ))}
-        </Styled.ListPersons>
-      </Styled.DivColumn>
+      {indexAbaActive === 1 ? (
+        <Styled.DivColumn>
+          <Styled.Header>
+            <Styled.TitleHeader>Noticações Recentes</Styled.TitleHeader>
+            <ion-icon
+              name="chatbox-ellipses-outline"
+              style={{ color: Colors.WHITE01, fontSize: 30 }}
+            ></ion-icon>
+          </Styled.Header>
+          <Styled.ListPersons>
+            {/* Colocar os cards de noticações */}
+            {conversationsRecentes.map((d, index) => (
+              <></>
+            ))}
+          </Styled.ListPersons>
+        </Styled.DivColumn>
+      ) : indexAbaActive === 3 ? (
+        <Styled.DivColumn>
+          <Styled.Header>
+            <Styled.TitleHeader>Conversas Recentes</Styled.TitleHeader>
+            <ion-icon
+              name="chatbox-ellipses-outline"
+              style={{ color: Colors.WHITE01, fontSize: 30 }}
+            ></ion-icon>
+          </Styled.Header>
+          <Styled.ListPersons>
+            {conversationsRecentes.map((d, index) => (
+              <CardPerson
+                dados={d}
+                key={index}
+                handleClick={handle}
+                index={index}
+                active={indexActive === index}
+                atualizarUltimaMessage={atualizarUltimaMessage}
+              />
+            ))}
+          </Styled.ListPersons>
+        </Styled.DivColumn>
+      ) : (
+        "Nenhum"
+      )}
     </Styled.Container>
   );
 };

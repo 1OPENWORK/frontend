@@ -9,14 +9,19 @@ import styled from "styled-components";
 import CardConexao from "./components/CardConexao/CardConexao";
 import { useSelector } from "react-redux";
 import { selectedWebSocket } from "../../../../../store/reducers/WebSocketSlice";
+import { handleImgGroup } from "../../../../../store/actions/MicroService";
 
-const ModalGroup = ({ show, handleClick }) => {
+const ModalGroup = ({ socket, show, handleClick }) => {
   const { websocket } = useSelector(selectedWebSocket);
+  // Informações
   const [img, setImg] = useState("");
   const [nomeGroup, setNomeGroup] = useState("");
-  const [search, setSearch] = useState("");
-  const [friends, setFriends] = useState([]);
+  const [describe, setDescribe] = useState("");
   const [participantes, setParticipantes] = useState([]);
+
+  // funcionalidades
+  const [friends, setFriends] = useState([]);
+  const [search, setSearch] = useState("");
   const [showOverlay, setShowOverlay] = useState(false);
   const [target, setTarget] = useState(null);
 
@@ -27,19 +32,42 @@ const ModalGroup = ({ show, handleClick }) => {
     setTarget(event.target);
   };
 
-  function handleAdicionar(newParticipant) {
-    setSearch("")
+  const handleAdicionar = (newParticipant) => {
+    setSearch("");
     setParticipantes((prevParticipant) => [...prevParticipant, newParticipant]);
-  }
+  };
 
-  function handleRemove(participantId) {
+  const handleRemove = (participantId) => {
     if (participantes.length === 1) {
       setShowOverlay(false);
     }
     setParticipantes((prevItems) =>
       prevItems.filter((item) => item.id !== participantId)
     );
-  }
+  };
+
+  const handleGroup = async () => {
+    const bodyFormData = new FormData();
+
+    bodyFormData.append("img", img);
+
+    const {imageFile} = await handleImgGroup(bodyFormData);
+
+    const dados = {
+      nome: nomeGroup,
+      describe: describe,
+      img: imageFile,
+      participantes: [...participantes],
+      myId: websocket.idUser
+    };
+
+    socket.emit("newGroup", {dados}, (callback) => {
+      console.log("🚀 ~ file: ModalGroup.js:64 ~ socket.emit ~ callback:", callback)
+      
+    })
+
+
+  };
 
   const StyledOverlay = styled(Overlay)`
     background-color: #07ea8b;
@@ -82,10 +110,12 @@ const ModalGroup = ({ show, handleClick }) => {
           </Styled.DivBetween>
           <Styled.Body>
             <Styled.Divisor>
-              <ImageCircule />
+              <ImageCircule setImg={setImg} />
               <Styled.DivisorInput>
                 <Styled.Label>Digite um nome</Styled.Label>
                 <Styled.Input
+                  value={nomeGroup}
+                  onChange={(e) => setNomeGroup(e.target.value)}
                   width={"600px"}
                   placeholder="Squad, Amigos, Work"
                 />
@@ -93,13 +123,18 @@ const ModalGroup = ({ show, handleClick }) => {
               <Styled.DivisorInput>
                 <Styled.Label>Descrição</Styled.Label>
                 <Styled.TextArea
+                  value={describe}
+                  onChange={(e) => setDescribe(e.target.value)}
                   width={"600px"}
                   rows={5}
                   placeholder="Esse grupo tem algumas regras...."
                 />
               </Styled.DivisorInput>
               <Styled.DivisorButton>
-                <Styled.Button backgroundColor={"#07ea8b"}>
+                <Styled.Button
+                  onClick={handleGroup}
+                  backgroundColor={"#07ea8b"}
+                >
                   <ion-icon name="people-outline"></ion-icon> Criar grupo
                 </Styled.Button>
                 <Styled.Button

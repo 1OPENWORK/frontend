@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Styled from "./ImageCircule.styled";
 import imgDefault from "../../../../../../assets/imgs/default.png";
-const ImageCircule = () => {
+const ImageCircule = ({setImg}) => {
 
   const [previewImage, setPreviewImage] = useState('');
   const inputRef = useRef(null);
@@ -20,8 +20,10 @@ const ImageCircule = () => {
 
     if (file) {
       reader.readAsDataURL(file);
+      setImg(file);
     }
   };
+
 
   return (
     <Styled.Container onClick={handleImageChange}>

@@ -29,6 +29,9 @@ const ModalGroup = ({ socket, show, handleClick }) => {
 
   const handleClickOverlay = (event) => {
     setShowOverlay(!showOverlay);
+    setNomeGroup("")
+    setDescribe("")
+    setParticipantes([]);
     setTarget(event.target);
   };
 
@@ -63,7 +66,6 @@ const ModalGroup = ({ socket, show, handleClick }) => {
 
     socket.emit("newGroup", {dados}, (callback) => {
       console.log("🚀 ~ file: ModalGroup.js:64 ~ socket.emit ~ callback:", callback)
-      
     })
 
 
@@ -102,7 +104,7 @@ const ModalGroup = ({ socket, show, handleClick }) => {
             <ion-icon
               onClick={() => {
                 handleClick(false);
-                setShowOverlay(false);
+                handleClickOverlay(false);
               }}
               name="close-outline"
               style={{ cursor: "pointer" }}
@@ -140,7 +142,7 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                 <Styled.Button
                   onClick={() => {
                     handleClick(false);
-                    setShowOverlay(false);
+                    handleClickOverlay(false);
                   }}
                 >
                   <ion-icon name="close-outline"></ion-icon> Cancelar

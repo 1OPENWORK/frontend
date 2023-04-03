@@ -47,6 +47,19 @@ export async function postImage(uri, body) {
   }
 }
 
+export async function getImagem(uri) {
+  return await axios
+    .get(uri, {
+      responseType: 'blob'
+    })
+    .then((dados) => {
+      return  dados;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 export async function put(uri, body) {
   return await axios
     .put(uri, body)

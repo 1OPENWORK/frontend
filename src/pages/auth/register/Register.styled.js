@@ -6,6 +6,7 @@ const StyledRegister = {
     justify-content: space-between;
     width: 100%;
     overflow: hidden;
+    font-family: nunito;
   `,
 
   ContainerForm: styled.div`
@@ -32,28 +33,31 @@ const StyledRegister = {
     overflow: hidden;
     overflow-y: scroll;
     overflow-y: auto;
-    height: 450px;
+    height: 28.125rem;
+    margin-top: 2rem;
   `,
 
   TitleForm: styled.h2`
     display: flex;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 2.25rem;
+    line-height: 49px;
     color: ${Colors.PRIMARY_COLOR};
-    margin-bottom: 64px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   `,
 
   Link: styled.a`
     text-decoration: none;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #20ac69;
     cursor: pointer;
   `,
 
   Label: styled.label`
-    font-weight: 300;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 1.125rem;
     color: #545454;
   `,
 
@@ -61,12 +65,12 @@ const StyledRegister = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    grid-gap: 1rem;
+    grid-gap: 2.5rem;
   `,
 
   CheckBox: styled.input`
-    width: 18px;
-    height: 19px;
+    width: 1.125rem;
+    height: 1.188rem;
     background: rgba(32, 172, 105, 0.05);
     border: 1px solid #20ac69;
   `,

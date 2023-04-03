@@ -83,75 +83,57 @@ const RegisterCompany = () => {
           label="Nome Empresa"
           value={nomeEmpresa}
           handle={setnomeEmpresa}
-          space={"20px"}
-          mr={"20px"}
-          disabled={verified}
-        />
+          space={"1.25rem"}
+          disabled={verified}/>
+          
         <InputForm
           label="Email"
           value={email}
           handle={setEmail}
-          space={"20px"}
-          disabled={verified}
-        />
+          space={"1.25rem"}
+          disabled={verified}/>
       </Styled.Row>
+
       <Styled.Row>
         <InputForm
           label="Setor"
           value={setor}
           handle={setSetor}
-          space={"20px"}
-          mr={"20px"}
-          disabled={verified}
-        />
+          space={"1.25rem"}
+          disabled={verified}/>
+
         <InputForm
-          label="CPF / CNPJ"
+          label="CNPJ"
           value={cnpj}
           handle={setCnpj}
-          space={"20px"}
-          disabled={verified}
-        />
+          space={"1.25rem"}
+          disabled={verified}/>
       </Styled.Row>
+      
       <Styled.Row>
         <InputForm
           label="Senha"
           value={password}
           handle={setPassword}
-          space={"20px"}
-          mr={"20px"}
+          space={"1.25rem"}
           type={"password"}
-          disabled={verified}
-        />
+          disabled={verified}/>
+          
         <InputForm
           label="Confirmar Senha"
           value={passwordConfirmed}
           handle={setPasswordConfirmed}
-          space={"20px"}
+          space={"1.25rem"}
           type={"password"}
-          disabled={verified}
-        />
+          disabled={verified}/>
       </Styled.Row>
-      <Styled.Divisor
-        align={"flex-end"}
-        style={{ marginRight: "20px", width: "770px" }}
-      >
+
+      <Styled.Divisor align={"flex-end"} style={{ marginRight: "1.25rem", width: "48.125rem" }}>
         {!isNext ? (
-          <FilledButton
-            onClick={handleForm}
-            color={Colors.PRIMARY_COLOR}
-            width={190}
-            heigth={60}
-          >
-            {"Verificar"}
+          <FilledButton onClick={handleForm} color={Colors.PRIMARY_COLOR} width={190} heigth={60}> {"Verificar"}
           </FilledButton>
         ) : (
-          <FilledButton
-            onClick={nextEtapa}
-            color={Colors.BLACK}
-            width={190}
-            heigth={60}
-          >
-            {"Próximo"}
+          <FilledButton onClick={nextEtapa} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Próximo"}
           </FilledButton>
         )}
       </Styled.Divisor>

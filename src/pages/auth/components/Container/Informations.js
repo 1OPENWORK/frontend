@@ -51,14 +51,11 @@ const InformationsAuth = ({
           <Styled.Imglogo
             src={Logo}
             width={150}
-            style={{
-              marginLeft: -30,
-            }}
           />
           <Styled.DivInformationCenter
             style={{
               justifyContent: "center",
-              height: 180,
+              height: "11.25rem",
             }}
           >
             <Styled.Title>{title}</Styled.Title>
@@ -68,7 +65,7 @@ const InformationsAuth = ({
           </Styled.DivInformationCenter>
           <Styled.DivInformationCenter
             style={{
-              height: 140,
+              height: "8.75rem",
               justifyContent: "flex-end",
             }}
           >

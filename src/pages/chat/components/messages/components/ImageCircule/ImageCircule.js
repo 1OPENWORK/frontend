@@ -1,16 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Styled from "./ImageCircule.styled";
 import imgDefault from "../../../../../../assets/imgs/default.png";
-const ImageCircule = ({setImg}) => {
-
-  const [previewImage, setPreviewImage] = useState('');
+const ImageCircule = ({ setImg }) => {
+  const [previewImage, setPreviewImage] = useState("");
   const inputRef = useRef(null);
 
   const handleImageChange = () => {
     inputRef.current.click();
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -24,7 +23,6 @@ const ImageCircule = ({setImg}) => {
     }
   };
 
-
   return (
     <Styled.Container onClick={handleImageChange}>
       <Styled.Input type="file" onChange={handleInputChange} ref={inputRef} />
@@ -33,7 +31,9 @@ const ImageCircule = ({setImg}) => {
       ) : (
         <Styled.Img src={imgDefault} alt="Preview" />
       )}
-      <p><ion-icon name="camera-outline"></ion-icon> Editar Foto</p>
+      <p>
+        <ion-icon name="camera-outline"></ion-icon> Editar Foto
+      </p>
     </Styled.Container>
   );
 };

@@ -9,7 +9,6 @@ const StyledModalGroup = {
     flex-direction: column;
     background-color: #171a1f;
     width: 100%;
-    height: 100%;
     color: white;
     padding-left: 50px;
   `,
@@ -50,7 +49,7 @@ const StyledModalGroup = {
   `,
 
   Input: styled.input`
-    width: ${(props) => (props.width ? props.width : " 400px")};
+    width: ${props => (props.width ? props.width : " 400px")};
     height: 50px;
     border-radius: 10px;
     border: none;
@@ -67,7 +66,7 @@ const StyledModalGroup = {
   `,
 
   TextArea: styled.textarea`
-    width: ${(props) => (props.width ? props.width : " 400px")};
+    width: ${props => (props.width ? props.width : " 400px")};
     border-radius: 10px;
     border: none;
     padding-left: 20px;
@@ -100,7 +99,7 @@ const StyledModalGroup = {
     border: none;
     font-size: 16px;
     font-weight: 600;
-    background-color: ${(props) =>
+    background-color: ${props =>
       props.backgroundColor ? props.backgroundColor : "white"};
     gap: 0.3rem;
 
@@ -121,14 +120,14 @@ const StyledModalGroup = {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: ${(props) => (props.height ? props.height : "auto")};
+    height: ${props => (props.height ? props.height : "auto")};
   `,
 
   DivPersons: styled.div`
     border-radius: 5px;
     width: 95%;
     height: 100%;
-    background-color: ${(props) =>
+    background-color: ${props =>
       props.backgroundColor ? props.backgroundColor : "auto"};
   `,
   DivPersonsTitle: styled.div`
@@ -167,14 +166,12 @@ const StyledModalGroup = {
     font-weight: 600;
     border: 2px solid #101318;
 
-
     &:focus {
       outline: none;
-       border: 2px solid #101318;
+      border: 2px solid #101318;
     }
   `,
-  BodyConexao: styled.div``
-
+  BodyConexao: styled.div``,
 };
 
 export default StyledModalGroup;

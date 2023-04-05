@@ -27,22 +27,22 @@ const ModalGroup = ({ socket, show, handleClick }) => {
 
   const ref = useRef(null);
 
-  const handleClickOverlay = (event) => {
+  const handleClickOverlay = event => {
     setShowOverlay(!showOverlay);
     setTarget(event.target);
   };
 
-  const handleAdicionar = (newParticipant) => {
+  const handleAdicionar = newParticipant => {
     setSearch("");
-    setParticipantes((prevParticipant) => [...prevParticipant, newParticipant]);
+    setParticipantes(prevParticipant => [...prevParticipant, newParticipant]);
   };
 
-  const handleRemove = (participantId) => {
+  const handleRemove = participantId => {
     if (participantes.length === 1) {
       setShowOverlay(false);
     }
-    setParticipantes((prevItems) =>
-      prevItems.filter((item) => item.id !== participantId)
+    setParticipantes(prevItems =>
+      prevItems.filter(item => item.id !== participantId)
     );
   };
 
@@ -51,22 +51,22 @@ const ModalGroup = ({ socket, show, handleClick }) => {
 
     bodyFormData.append("img", img);
 
-    const {imageFile} = await handleImgGroup(bodyFormData);
+    const { imageFile } = await handleImgGroup(bodyFormData);
 
     const dados = {
       nome: nomeGroup,
       describe: describe,
       img: imageFile,
       participantes: [...participantes],
-      myId: websocket.idUser
+      myId: websocket.idUser,
     };
 
-    socket.emit("newGroup", {dados}, (callback) => {
-      console.log("🚀 ~ file: ModalGroup.js:64 ~ socket.emit ~ callback:", callback)
-      
-    })
-
-
+    socket.emit("newGroup", { dados }, callback => {
+      console.log(
+        "🚀 ~ file: ModalGroup.js:64 ~ socket.emit ~ callback:",
+        callback
+      );
+    });
   };
 
   const StyledOverlay = styled(Overlay)`
@@ -115,7 +115,7 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                 <Styled.Label>Digite um nome</Styled.Label>
                 <Styled.Input
                   value={nomeGroup}
-                  onChange={(e) => setNomeGroup(e.target.value)}
+                  onChange={e => setNomeGroup(e.target.value)}
                   width={"600px"}
                   placeholder="Squad, Amigos, Work"
                 />
@@ -124,7 +124,7 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                 <Styled.Label>Descrição</Styled.Label>
                 <Styled.TextArea
                   value={describe}
-                  onChange={(e) => setDescribe(e.target.value)}
+                  onChange={e => setDescribe(e.target.value)}
                   width={"600px"}
                   rows={5}
                   placeholder="Esse grupo tem algumas regras...."
@@ -233,14 +233,14 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                       <Styled.DivSearch>
                         <Styled.InputSearch
                           value={search}
-                          onChange={(e) => setSearch(e.target.value)}
+                          onChange={e => setSearch(e.target.value)}
                           placeholder="Digite o nome da conexão"
                         />
                       </Styled.DivSearch>
                     </Styled.HeaderConexoes>
                     <Styled.BodyConexao>
                       {friends
-                        .filter((d) =>
+                        .filter(d =>
                           d.nome.toLowerCase().includes(search.toLowerCase())
                         )
                         .map((d, index) => (

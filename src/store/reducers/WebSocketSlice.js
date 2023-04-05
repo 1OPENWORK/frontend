@@ -10,6 +10,7 @@ export const slice = createSlice({
     conversationRecents: [],
     messagesPendentes: [],
     messages: [],
+    notifications: [],
   },
   reducers: {
     changeOn(state, { payload }) {
@@ -36,19 +37,24 @@ export const slice = createSlice({
       return { ...state, messages: payload.messages };
     },
 
-     changeNewMessage(state, { payload }) {
-      return { ...state, messages:  [...state.messages, payload.messages]};
+    changeNewMessage(state, { payload }) {
+      return { ...state, messages: [...state.messages, payload.messages] };
     },
 
     changeConversationRecentes(state, { payload }) {
-      return { ...state, conversationRecents: payload.conversations};
+      return { ...state, conversationRecents: payload.conversations };
     },
 
     changeMessagesPendentes(state, { payload }) {
       return { ...state, messagesPendentes: payload.messages };
     },
 
-
+    changeNewNotification(state, { payload }) {
+      return {
+        ...state,
+        notifications: [...state.notifications, payload.notifications],
+      };
+    },
   },
 });
 
@@ -61,7 +67,8 @@ export const {
   changeMessages,
   changeNewMessage,
   changeConversationRecentes,
-  changeMessagesPendentes
+  changeMessagesPendentes,
+  changeNewNotification,
 } = slice.actions;
-export const selectedWebSocket = (state) => state;
+export const selectedWebSocket = state => state;
 export default slice.reducer;

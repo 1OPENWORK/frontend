@@ -7,6 +7,7 @@ import {
   changeMessages,
   changeMessagesPendentes,
   changeNewMessage,
+  changeNewNotifications,
   selectedWebSocket,
 } from "../../../../store/reducers/WebSocketSlice";
 import CardPerson from "../cardPerson/CardPerson";
@@ -19,6 +20,7 @@ import Styled, {
 import Logo from "../../../../assets/imgs/logo.svg";
 import Colors from "../../../../constants/Colors";
 import ModalGroup from "../modal/group/ModalGroup";
+import CardNotification from "../messages/components/cardNotification/CardNotification";
 
 const SideBar = ({
   socket,
@@ -35,6 +37,7 @@ const SideBar = ({
   const [indexActive, setIndexActive] = useState(-1);
   const [indexAbaActive, setIndexAbaActive] = useState(3);
   const [totalMessagePendentes, setTotalMessagePendentes] = useState(3);
+  const [notifications, setNotifications] = useState([]);
   const [dados, setDados] = useState({});
   const [show, setShowModal] = useState(false);
   const [on, setOn] = useState([]);
@@ -168,6 +171,18 @@ const SideBar = ({
         );
       }
     });
+    return () => socket.off("atualizandoState");
+  }, [on, dados]);
+
+  useEffect(() => {
+    socket.on("notifications", dados => {
+      dispatch(
+        changeNewNotifications({
+          newNotifications: dados,
+        })
+      );
+    });
+
     return () => socket.off("notifications");
   }, [on, dados]);
 
@@ -181,12 +196,18 @@ const SideBar = ({
     }
 
     setTotalMessagePendentes(total);
+
+    setNotifications(websocket.notifications);
   }, [websocket]);
 
   useEffect(() => {
     setVisualized(Math.random() * 100 + 1 - 1);
     setDadosConversa(dados);
   }, [dados]);
+
+  useEffect(() => {
+    console.log("🚀 ~ file: SideBar.js:206 ~ notifications:", notifications);
+  }, [notifications]);
 
   return (
     <Styled.Container>
@@ -294,14 +315,14 @@ const SideBar = ({
           <Styled.Header>
             <Styled.TitleHeader>Noticações Recentes</Styled.TitleHeader>
             <ion-icon
-              name="chatbox-ellipses-outline"
+              name="notifications-outline"
               style={{ color: Colors.WHITE01, fontSize: 30 }}
             ></ion-icon>
           </Styled.Header>
           <Styled.ListPersons>
             {/* Colocar os cards de noticações */}
-            {conversationsRecentes.map((d, index) => (
-              <></>
+            {notifications.map((d, index) => (
+              <CardNotification dados={d} key={index} />
             ))}
           </Styled.ListPersons>
         </Styled.DivColumn>

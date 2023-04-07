@@ -49,6 +49,13 @@ export const slice = createSlice({
       return { ...state, messagesPendentes: payload.messages };
     },
 
+    changeAllNotifications(state, { payload }) {
+      return {
+        ...state,
+        notifications: payload.notifications,
+      };
+    },
+
     changeNewNotifications(state, { payload }) {
       return {
         ...state,
@@ -69,6 +76,7 @@ export const {
   changeConversationRecentes,
   changeMessagesPendentes,
   changeNewNotifications,
+  changeAllNotifications
 } = slice.actions;
-export const selectedWebSocket = state => state;
+export const selectedWebSocket = (state) => state;
 export default slice.reducer;

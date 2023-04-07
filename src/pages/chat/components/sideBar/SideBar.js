@@ -1,7 +1,8 @@
-import { Avatar, Badge } from "@mui/material";
+import { Avatar, Badge, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeAllNotifications,
   changeConversationActive,
   changeConversationRecentes,
   changeMessages,
@@ -42,7 +43,9 @@ const SideBar = ({
   const [dados, setDados] = useState({});
   const [show, setShowModal] = useState(false);
   const [showModalNewConversa, setShowModalNewConversa] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [on, setOn] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -87,7 +90,7 @@ const SideBar = ({
     socket.emit(
       "listMessagesPerson",
       { otherPeploe: dados.id, myId: websocket.idUser },
-      dados => {
+      (dados) => {
         dispatch(
           changeMessages({
             messages: dados,
@@ -100,7 +103,7 @@ const SideBar = ({
   };
 
   const atualizarVisualized = (idFriend, myId, idSender) => {
-    socket.emit("messagesVisualized", { idFriend, myId }, messagePedentes => {
+    socket.emit("messagesVisualized", { idFriend, myId }, (messagePedentes) => {
       dispatch(
         changeMessagesPendentes({
           messages: messagePedentes,
@@ -116,7 +119,7 @@ const SideBar = ({
   useEffect(() => {
     const idConversationActive = dados.id;
 
-    socket.on("newMessage", dados => {
+    socket.on("newMessage", (dados) => {
       const response = dados;
 
       const idSender = response.dados.idSender;
@@ -155,31 +158,12 @@ const SideBar = ({
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("atualizandoState", dados => {
-      console.log("🚀 ~ file: SideBar.js:154 ~ useEffect ~ dados:", dados);
-    });
+    socket.on("atualizandoState", (dados) => {});
     return () => socket.off("atualizandoState");
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("notifications", dados => {
-      setVisualized(Math.random() * 100 + 1 - 1);
-
-      if (websocket.conversationActive === dados.idReciver) {
-        dispatch(
-          changeMessages({
-            messages: dados.messages,
-          })
-        );
-      }
-    });
-    return () => socket.off("atualizandoState");
-  }, [on, dados]);
-
-  useEffect(() => {
-    socket.on("notifications", dados => {
-      console.log("🚀 ~ file: SideBar.js:181 ~ useEffect ~ dados:", dados)
-      
+    socket.on("notifications", (dados) => {
       dispatch(
         changeNewNotifications({
           newNotifications: dados,
@@ -209,7 +193,29 @@ const SideBar = ({
     setDadosConversa(dados);
   }, [dados]);
 
+  useEffect(() => {
+    socket.emit(
+      "listAllNotifications",
+      { idUser: websocket.idUser },
+      (callback) => {
+        dispatch(
+          changeAllNotifications({
+            notifications: callback,
+          })
+        );
+      }
+    );
+  }, [dados, indexAbaActive]);
 
+  useEffect(() => {
+    setLoading(true);
+  }, [indexAbaActive]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, [conversationsRecentes]);
 
   return (
     <Styled.Container>
@@ -219,139 +225,172 @@ const SideBar = ({
         handleClick={setShowModalNewConversa}
         handleConversation={handle}
       />
-      <MenuLateral>
-        <Styled.Img src={Logo} />
-        <OpcaoMenuLateral onClick={() => setIndexAbaActive(1)}>
-          {indexAbaActive !== 1 ? (
-            <Badge color="primary" badgeContent={0} showZero>
-              <ion-icon
-                name="notifications-outline"
-                style={{
-                  color: Colors.WHITE01,
-                  fontSize: 30,
-                  cursor: "pointer",
-                }}
-              ></ion-icon>
-            </Badge>
-          ) : (
-            <ion-icon
-              name="notifications-outline"
-              style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-            ></ion-icon>
-          )}
-
-          <DivOpcaoLateral>
-            <TitleOpcaoMenuLateral>Notificações</TitleOpcaoMenuLateral>
-          </DivOpcaoLateral>
-        </OpcaoMenuLateral>
-        <OpcaoMenuLateral>
-          <ion-icon
-            name="person-add-outline"
-            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-          ></ion-icon>
-          <DivOpcaoLateral>
-            <TitleOpcaoMenuLateral>Adicionar</TitleOpcaoMenuLateral>
-          </DivOpcaoLateral>
-        </OpcaoMenuLateral>
-        <OpcaoMenuLateral onClick={() => setShowModal(true)}>
-          <ion-icon
-            name="people-outline"
-            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-          ></ion-icon>
-          <DivOpcaoLateral>
-            <TitleOpcaoMenuLateral>Novo grupo</TitleOpcaoMenuLateral>
-          </DivOpcaoLateral>
-        </OpcaoMenuLateral>
-        <OpcaoMenuLateral>
-          <ion-icon
-            name="list-outline"
-            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-          ></ion-icon>
-          <DivOpcaoLateral>
-            <TitleOpcaoMenuLateral>Atividades</TitleOpcaoMenuLateral>
-          </DivOpcaoLateral>
-        </OpcaoMenuLateral>
-        <OpcaoMenuLateral onClick={() => setIndexAbaActive(3)}>
-          {indexAbaActive !== 3 ? (
-            <Badge
-              color="primary"
-              badgeContent={totalMessagePendentes}
-              showZero
-            >
-              <ion-icon
-                name="chatbox-ellipses-outline"
-                style={{
-                  color: Colors.WHITE01,
-                  fontSize: 30,
-                  cursor: "pointer",
-                }}
-              ></ion-icon>
-            </Badge>
-          ) : (
-            <ion-icon
-              name="chatbox-ellipses-outline"
-              style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-            ></ion-icon>
-          )}
-
-          <DivOpcaoLateral>
-            <TitleOpcaoMenuLateral>Conversas</TitleOpcaoMenuLateral>
-          </DivOpcaoLateral>
-        </OpcaoMenuLateral>
-        <TitleOpcaoMenuLateral style={{ color: Colors.WHITE01, margin: 20 }}>
-          Conexões
-        </TitleOpcaoMenuLateral>
-        <OpcaoMenuLateral onClick={() => setShowModalNewConversa(true)}>
-          <ion-icon
-            name="chatbubbles-outline"
-            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
-          ></ion-icon>
-
-          <DivOpcaoLateral>
-            <TitleOpcaoMenuLateral>Nova Conversa</TitleOpcaoMenuLateral>
-          </DivOpcaoLateral>
-        </OpcaoMenuLateral>
-      </MenuLateral>
-      {indexAbaActive === 1 ? (
-        <Styled.DivColumn>
-          <Styled.Header>
-            <Styled.TitleHeader>Notificações</Styled.TitleHeader>
-            <ion-icon
-              name="notifications-outline"
-              style={{ color: Colors.WHITE01, fontSize: 30 }}
-            ></ion-icon>
-          </Styled.Header>
-          <Styled.ListPersons>
-            {/* Colocar os cards de noticações */}
-            {notifications.map((d, index) => (
-              <CardNotification dados={d} key={index} />
-            ))}
-          </Styled.ListPersons>
-        </Styled.DivColumn>
-      ) : indexAbaActive === 3 ? (
-        <Styled.DivColumn>
-          <Styled.Header>
-            <Styled.TitleHeader>Conversas Recentes</Styled.TitleHeader>
-            <ion-icon
-              name="chatbox-ellipses-outline"
-              style={{ color: Colors.WHITE01, fontSize: 30 }}
-            ></ion-icon>
-          </Styled.Header>
-          <Styled.ListPersons>
-            {conversationsRecentes.map((d, index) => (
-              <CardPerson
-                dados={d}
-                key={index}
-                handleClick={handle}
-                index={index}
-                active={indexActive === index}
-                atualizarUltimaMessage={atualizarUltimaMessage}
-              />
-            ))}
-          </Styled.ListPersons>
-        </Styled.DivColumn>
+      {isLoading ? (
+        <Styled.ContainerLoading>
+          <CircularProgress size={150} color="success" />
+          <Styled.LabelLoading>Carregando...</Styled.LabelLoading>
+        </Styled.ContainerLoading>
       ) : (
-        "Nenhum"
+        <>
+          <MenuLateral>
+            <Styled.Img src={Logo} />
+            <OpcaoMenuLateral onClick={() => setIndexAbaActive(1)}>
+              {indexAbaActive !== 1 ? (
+                <Badge color="primary" badgeContent={0} showZero>
+                  <ion-icon
+                    name="notifications-outline"
+                    style={{
+                      color: Colors.WHITE01,
+                      fontSize: 30,
+                      cursor: "pointer",
+                    }}
+                  ></ion-icon>
+                </Badge>
+              ) : (
+                <ion-icon
+                  name="notifications-outline"
+                  style={{
+                    color: Colors.WHITE01,
+                    fontSize: 30,
+                    cursor: "pointer",
+                  }}
+                ></ion-icon>
+              )}
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Notificações</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+            <OpcaoMenuLateral>
+              <ion-icon
+                name="person-add-outline"
+                style={{
+                  color: Colors.WHITE01,
+                  fontSize: 30,
+                  cursor: "pointer",
+                }}
+              ></ion-icon>
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Adicionar</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+            <OpcaoMenuLateral onClick={() => setShowModal(true)}>
+              <ion-icon
+                name="people-outline"
+                style={{
+                  color: Colors.WHITE01,
+                  fontSize: 30,
+                  cursor: "pointer",
+                }}
+              ></ion-icon>
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Novo grupo</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+            <OpcaoMenuLateral>
+              <ion-icon
+                name="list-outline"
+                style={{
+                  color: Colors.WHITE01,
+                  fontSize: 30,
+                  cursor: "pointer",
+                }}
+              ></ion-icon>
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Atividades</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+            <OpcaoMenuLateral onClick={() => setIndexAbaActive(3)}>
+              {indexAbaActive !== 3 ? (
+                <Badge
+                  color="primary"
+                  badgeContent={totalMessagePendentes}
+                  showZero
+                >
+                  <ion-icon
+                    name="chatbox-ellipses-outline"
+                    style={{
+                      color: Colors.WHITE01,
+                      fontSize: 30,
+                      cursor: "pointer",
+                    }}
+                  ></ion-icon>
+                </Badge>
+              ) : (
+                <ion-icon
+                  name="chatbox-ellipses-outline"
+                  style={{
+                    color: Colors.WHITE01,
+                    fontSize: 30,
+                    cursor: "pointer",
+                  }}
+                ></ion-icon>
+              )}
+
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Conversas</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+            <TitleOpcaoMenuLateral
+              style={{ color: Colors.WHITE01, margin: 20 }}
+            >
+              Conexões
+            </TitleOpcaoMenuLateral>
+            <OpcaoMenuLateral onClick={() => setShowModalNewConversa(true)}>
+              <ion-icon
+                name="chatbubbles-outline"
+                style={{
+                  color: Colors.WHITE01,
+                  fontSize: 30,
+                  cursor: "pointer",
+                }}
+              ></ion-icon>
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Nova Conversa</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+          </MenuLateral>
+          {indexAbaActive === 1 ? (
+            <Styled.DivColumn>
+              <Styled.Header>
+                <Styled.TitleHeader>Notificações</Styled.TitleHeader>
+                <ion-icon
+                  name="notifications-outline"
+                  style={{ color: Colors.WHITE01, fontSize: 30 }}
+                ></ion-icon>
+              </Styled.Header>
+              <Styled.ListPersons>
+                {/* Colocar os cards de noticações */}
+                {notifications.map((d, index) => (
+                  <CardNotification dados={d} key={index} />
+                ))}
+              </Styled.ListPersons>
+            </Styled.DivColumn>
+          ) : indexAbaActive === 3 ? (
+            <Styled.DivColumn>
+              <Styled.Header>
+                <Styled.TitleHeader>Conversas Recentes</Styled.TitleHeader>
+                <ion-icon
+                  name="chatbox-ellipses-outline"
+                  style={{ color: Colors.WHITE01, fontSize: 30 }}
+                ></ion-icon>
+              </Styled.Header>
+              <Styled.ListPersons>
+                {conversationsRecentes.map((d, index) => (
+                  <CardPerson
+                    dados={d}
+                    key={index}
+                    handleClick={handle}
+                    index={index}
+                    active={indexActive === index}
+                    atualizarUltimaMessage={atualizarUltimaMessage}
+                  />
+                ))}
+              </Styled.ListPersons>
+            </Styled.DivColumn>
+          ) : (
+            "Nenhum"
+          )}
+        </>
       )}
     </Styled.Container>
   );

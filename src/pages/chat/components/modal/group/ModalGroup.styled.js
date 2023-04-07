@@ -10,6 +10,7 @@ const StyledModalGroup = {
     background-color: #171a1f;
     width: 100%;
     color: white;
+    height: 100vh;
     padding-left: 50px;
   `,
 

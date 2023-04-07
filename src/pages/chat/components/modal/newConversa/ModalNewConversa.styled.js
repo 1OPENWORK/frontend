@@ -9,6 +9,7 @@ const StyledModalConversa = {
     flex-direction: column;
     background-color: #171a1f;
     width: 100%;
+    height: 100vh;
     color: white;
     padding-left: 50px;
   `,

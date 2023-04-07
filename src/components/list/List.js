@@ -8,6 +8,7 @@
 import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Styled from "./List.styled";
+import ListJobs from './ListJobs';
 
 // -----------------------------------------------------
 
@@ -43,8 +44,8 @@ const List = ({}) => {
             </Styled.containerButtonTitleList>
         </Styled.titleList>
         
-        {onMenu === 0 ? () : ()}
-
+        {onMenu === 0 ? (<ListJobs></ListJobs>) : (<ListJobs></ListJobs>)}
+        
         </Styled.ContainerList>
   );
 };

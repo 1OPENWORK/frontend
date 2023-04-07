@@ -178,6 +178,8 @@ const SideBar = ({
 
   useEffect(() => {
     socket.on("notifications", dados => {
+      console.log("🚀 ~ file: SideBar.js:181 ~ useEffect ~ dados:", dados)
+      
       dispatch(
         changeNewNotifications({
           newNotifications: dados,
@@ -207,9 +209,7 @@ const SideBar = ({
     setDadosConversa(dados);
   }, [dados]);
 
-  useEffect(() => {
-    console.log("🚀 ~ file: SideBar.js:206 ~ notifications:", notifications);
-  }, [notifications]);
+
 
   return (
     <Styled.Container>
@@ -217,6 +217,7 @@ const SideBar = ({
       <ModalNewConversa
         show={showModalNewConversa}
         handleClick={setShowModalNewConversa}
+        handleConversation={handle}
       />
       <MenuLateral>
         <Styled.Img src={Logo} />
@@ -314,7 +315,7 @@ const SideBar = ({
       {indexAbaActive === 1 ? (
         <Styled.DivColumn>
           <Styled.Header>
-            <Styled.TitleHeader>Noticações</Styled.TitleHeader>
+            <Styled.TitleHeader>Notificações</Styled.TitleHeader>
             <ion-icon
               name="notifications-outline"
               style={{ color: Colors.WHITE01, fontSize: 30 }}

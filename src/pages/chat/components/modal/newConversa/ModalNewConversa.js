@@ -7,33 +7,30 @@ import { useSelector } from "react-redux";
 import { selectedWebSocket } from "../../../../../store/reducers/WebSocketSlice";
 import { handleImgGroup } from "../../../../../store/actions/MicroService";
 
-const ModalNewConversa = ({ show, handleClick }) => {
+const ModalNewConversa = ({ show, handleClick, handleConversation }) => {
   const { websocket } = useSelector(selectedWebSocket);
   // Informações
-  const [img, setImg] = useState("");
 
   // funcionalidades
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [friends, setFriends] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const handleClickOverlay = event => {
-    setShowOverlay(!showOverlay);
-  };
+  useEffect(() => {
+    setFriends(websocket.friends);
+  }, [websocket]);
 
-  const handleGroup = async () => {
-    const bodyFormData = new FormData();
 
-    bodyFormData.append("img", img);
-
-    const { imageFile } = await handleImgGroup(bodyFormData);
-  };
+  useEffect(() => {
+    setSearch("")
+  }, [show])
 
   return (
     <Styled.Modal
       show={show}
-      fullscreen={true}
+      fullscreen={false}
+      size="lg"
       onHide={() => {
         handleClick(false);
-        setShowOverlay(false);
       }}
     >
       <Modal.Body
@@ -47,13 +44,43 @@ const ModalNewConversa = ({ show, handleClick }) => {
             <ion-icon
               onClick={() => {
                 handleClick(false);
-                handleClickOverlay(false);
               }}
               name="close-outline"
               style={{ cursor: "pointer" }}
             ></ion-icon>
           </Styled.DivBetween>
-          <Styled.Body></Styled.Body>
+          <Styled.Body>
+            <Styled.InputSearch
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Pesquisar"
+            />
+            <Styled.HR />
+            <Styled.ContainerConexao>
+              {friends
+                .filter((d) =>
+                  d.nome.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((dados, index) => (
+                  <Styled.BodyConexao key={index}>
+                    <Styled.Divisor>
+                      <Avatar src={dados.img} />
+                      {dados.nome}
+                    </Styled.Divisor>
+                    <Styled.Divisor>
+                      <Styled.Button
+                        onClick={() => {
+                          handleClick(false);
+                          handleConversation(dados);
+                        }}
+                      >
+                        Conversar
+                      </Styled.Button>
+                    </Styled.Divisor>
+                  </Styled.BodyConexao>
+                ))}
+            </Styled.ContainerConexao>
+          </Styled.Body>
         </Styled.Container>
       </Modal.Body>
     </Styled.Modal>

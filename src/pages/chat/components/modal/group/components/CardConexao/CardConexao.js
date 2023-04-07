@@ -43,7 +43,7 @@ const CardConexao = ({
               : handleUser(false, dados.id);
           }}
         >
-          {selecionado ? "Remover" : "Adicionar"}
+          {selecionado ? "Remover" : "Convidar"}
         </Styled.ButtonCheck>
       </Styled.Divisor>
     </Styled.Container>

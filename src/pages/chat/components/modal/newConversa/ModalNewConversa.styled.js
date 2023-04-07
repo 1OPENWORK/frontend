@@ -9,9 +9,8 @@ const StyledModalConversa = {
     flex-direction: column;
     background-color: #171a1f;
     width: 100%;
-    height: 100vh;
+    height: 500px;
     color: white;
-    padding-left: 50px;
   `,
 
   DivBetween: styled.div`
@@ -27,14 +26,15 @@ const StyledModalConversa = {
   Body: styled.div`
     height: 92vh;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
   `,
 
   Divisor: styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    width: 49%;
+    gap: 1rem;
   `,
 
   DivisorInput: styled.div`
@@ -50,7 +50,7 @@ const StyledModalConversa = {
   `,
 
   Input: styled.input`
-    width: ${props => (props.width ? props.width : " 400px")};
+    width: ${(props) => (props.width ? props.width : " 400px")};
     height: 50px;
     border-radius: 10px;
     border: none;
@@ -67,7 +67,7 @@ const StyledModalConversa = {
   `,
 
   TextArea: styled.textarea`
-    width: ${props => (props.width ? props.width : " 400px")};
+    width: ${(props) => (props.width ? props.width : " 400px")};
     border-radius: 10px;
     border: none;
     padding-left: 20px;
@@ -94,13 +94,13 @@ const StyledModalConversa = {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
-    height: 50px;
+    width: 150px;
+    height: 40px;
     border-radius: 10px;
     border: none;
     font-size: 16px;
     font-weight: 600;
-    background-color: ${props =>
+    background-color: ${(props) =>
       props.backgroundColor ? props.backgroundColor : "white"};
     gap: 0.3rem;
 
@@ -121,14 +121,14 @@ const StyledModalConversa = {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: ${props => (props.height ? props.height : "auto")};
+    height: ${(props) => (props.height ? props.height : "auto")};
   `,
 
   DivPersons: styled.div`
     border-radius: 5px;
     width: 95%;
     height: 100%;
-    background-color: ${props =>
+    background-color: ${(props) =>
       props.backgroundColor ? props.backgroundColor : "auto"};
   `,
   DivPersonsTitle: styled.div`
@@ -157,12 +157,13 @@ const StyledModalConversa = {
     width: 60%;
   `,
   InputSearch: styled.input`
-    height: 100%;
+    height: 60px;
+    width: 70%;
     border-radius: 10px;
     border: none;
     padding-left: 20px;
     font-size: 18px;
-    background-color: #171a1f;
+    background-color: #101318;
     color: white;
     font-weight: 600;
     border: 2px solid #101318;
@@ -172,7 +173,51 @@ const StyledModalConversa = {
       border: 2px solid #101318;
     }
   `,
-  BodyConexao: styled.div``,
+
+  ContainerConexao: styled.div`
+    width: 100%;
+    height: 370px;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+      width: 5px;
+      position: absolute;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: transparent;
+      position: absolute;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      position: absolute;
+      opacity: 30%;
+      z-index: 1;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+      position: absolute;
+    }
+  `,
+
+  BodyConexao: styled.div`
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #515357;
+    justify-content: space-between;
+  `,
+
+  HR: styled.hr`
+    width: 100%;
+  `,
 };
 
 export default StyledModalConversa;

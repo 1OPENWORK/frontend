@@ -1,11 +1,8 @@
 import { Avatar, AvatarGroup } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import ImageCircule from "../../messages/components/ImageCircule/ImageCircule";
 import Styled from "./ModalGroup.styled";
-import Overlay from "react-bootstrap/Overlay";
-import Popover from "react-bootstrap/Popover";
-import styled from "styled-components";
 import CardConexao from "./components/CardConexao/CardConexao";
 import { useSelector } from "react-redux";
 import { selectedWebSocket } from "../../../../../store/reducers/WebSocketSlice";
@@ -23,16 +20,13 @@ const ModalGroup = ({ socket, show, handleClick }) => {
   const [friends, setFriends] = useState([]);
   const [search, setSearch] = useState("");
   const [showOverlay, setShowOverlay] = useState(false);
-  const [target, setTarget] = useState(null);
-
-  const ref = useRef(null);
 
   const handleClickOverlay = event => {
     setShowOverlay(!showOverlay);
     setNomeGroup("");
     setDescribe("");
+    setSearch("");
     setParticipantes([]);
-    setTarget(event.target);
   };
 
   const handleAdicionar = newParticipant => {
@@ -41,9 +35,6 @@ const ModalGroup = ({ socket, show, handleClick }) => {
   };
 
   const handleRemove = participantId => {
-    if (participantes.length === 1) {
-      setShowOverlay(false);
-    }
     setParticipantes(prevItems =>
       prevItems.filter(item => item.id !== participantId)
     );
@@ -72,18 +63,13 @@ const ModalGroup = ({ socket, show, handleClick }) => {
     });
   };
 
-  const StyledOverlay = styled(Overlay)`
-    background-color: #07ea8b;
-  `;
-
-  const StyledPopover = styled(Popover)`
-    background-color: #07ea8b;
-    color: black;
-  `;
-
   useEffect(() => {
     setFriends(websocket.friends);
   }, [websocket]);
+
+  useEffect(() => {
+    console.log(participantes);
+  }, [participantes]);
 
   return (
     <Styled.Modal
@@ -161,73 +147,13 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                         </Styled.DivPersonsTitle>
                         <AvatarGroup
                           max={6}
-                          total={parseInt(participantes.length + 1)}
+                          total={parseInt(participantes.length)}
                           style={{
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                           }}
                         >
-                          <div ref={ref}>
-                            {participantes.length > 0 && (
-                              <>
-                                {!showOverlay ? (
-                                  <ion-icon
-                                    onClick={handleClickOverlay}
-                                    name="chevron-forward-outline"
-                                    style={{
-                                      marginRight: 10,
-                                      marginLeft: 10,
-                                      fontSize: 24,
-                                      cursor: "pointer",
-                                    }}
-                                  ></ion-icon>
-                                ) : (
-                                  <ion-icon
-                                    onClick={handleClickOverlay}
-                                    name="chevron-down-outline"
-                                    style={{
-                                      marginRight: 10,
-                                      marginLeft: 10,
-                                      fontSize: 24,
-                                      cursor: "pointer",
-                                    }}
-                                  ></ion-icon>
-                                )}
-                              </>
-                            )}
-
-                            <StyledOverlay
-                              show={showOverlay}
-                              target={target}
-                              placement="bottom"
-                              container={ref}
-                              containerPadding={20}
-                            >
-                              <StyledPopover id="popover-contained">
-                                <StyledPopover.Header as="h3">
-                                  Participantes
-                                </StyledPopover.Header>
-                                <StyledPopover.Body
-                                  style={{
-                                    overflow: "scroll",
-                                    overflowX: "auto",
-                                    height: 400,
-                                  }}
-                                >
-                                  {participantes.map((d, index) => (
-                                    <CardConexao
-                                      type={2}
-                                      dados={d}
-                                      key={index}
-                                      handleRemove={handleRemove}
-                                      participants={participantes}
-                                    />
-                                  ))}
-                                </StyledPopover.Body>
-                              </StyledPopover>
-                            </StyledOverlay>
-                          </div>
                           {participantes.map((d, index) => (
                             <Avatar key={index} alt={d.nome} src={d.img} />
                           ))}

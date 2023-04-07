@@ -23,17 +23,16 @@ const StyledCardConexao = {
   `,
 
   ButtonCheck: styled.button`
-    width: ${(props) => (props.type === 2 ? "50px" : "200px")};
+    width: 200px;
     height: 50px;
     border: none;
-    font-size: ${(props) => (props.type === 2 ? "10px" : "20px")};
-    border-radius: ${(props) => (props.type === 2 ? "10%" : "0")};
+    font-size: 20px;
     font-weight: 600;
-    background-color: ${(props) => (props.type === 2 ? "#ffffff" : props.selected ? "#ced4da" : "#07ea8b")};
-    color: ${(props) => (props.type === 2 ? "#e63946" : "#ffffff")};
+    background-color: ${props => (props.selected ? "#d90429" : "#07ea8b")};
+    color: ${props => props.selected && "#ffffff"};
 
     &:hover {
-      background-color: ${(props) => (props.type === 2 ? "" : props.selected ? "#ced4da" : "#03834d")}; 
+      background-color: ${props => (props.selected ? "#d90429" : "#03834d")};
     }
   `,
 };

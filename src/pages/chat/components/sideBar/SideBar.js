@@ -21,6 +21,7 @@ import Logo from "../../../../assets/imgs/logo.svg";
 import Colors from "../../../../constants/Colors";
 import ModalGroup from "../modal/group/ModalGroup";
 import CardNotification from "../messages/components/cardNotification/CardNotification";
+import ModalNewConversa from "../modal/newConversa/ModalNewConversa";
 
 const SideBar = ({
   socket,
@@ -40,6 +41,7 @@ const SideBar = ({
   const [notifications, setNotifications] = useState([]);
   const [dados, setDados] = useState({});
   const [show, setShowModal] = useState(false);
+  const [showModalNewConversa, setShowModalNewConversa] = useState(false);
   const [on, setOn] = useState([]);
   const dispatch = useDispatch();
 
@@ -212,6 +214,10 @@ const SideBar = ({
   return (
     <Styled.Container>
       <ModalGroup socket={socket} show={show} handleClick={setShowModal} />
+      <ModalNewConversa
+        show={showModalNewConversa}
+        handleClick={setShowModalNewConversa}
+      />
       <MenuLateral>
         <Styled.Img src={Logo} />
         <OpcaoMenuLateral onClick={() => setIndexAbaActive(1)}>
@@ -294,26 +300,21 @@ const SideBar = ({
         <TitleOpcaoMenuLateral style={{ color: Colors.WHITE01, margin: 20 }}>
           Conexões
         </TitleOpcaoMenuLateral>
-        <Styled.ConexoesMenuLateral>
-          {friends.map((d, index) => (
-            <OpcaoMenuLateral
-              key={index}
-              onClick={() => {
-                handle(d, index, true);
-              }}
-            >
-              <Avatar src={d.img} />
-              <DivOpcaoLateral>
-                <TitleOpcaoMenuLateral>{d.nome}</TitleOpcaoMenuLateral>
-              </DivOpcaoLateral>
-            </OpcaoMenuLateral>
-          ))}
-        </Styled.ConexoesMenuLateral>
+        <OpcaoMenuLateral onClick={() => setShowModalNewConversa(true)}>
+          <ion-icon
+            name="chatbubbles-outline"
+            style={{ color: Colors.WHITE01, fontSize: 30, cursor: "pointer" }}
+          ></ion-icon>
+
+          <DivOpcaoLateral>
+            <TitleOpcaoMenuLateral>Nova Conversa</TitleOpcaoMenuLateral>
+          </DivOpcaoLateral>
+        </OpcaoMenuLateral>
       </MenuLateral>
       {indexAbaActive === 1 ? (
         <Styled.DivColumn>
           <Styled.Header>
-            <Styled.TitleHeader>Noticações Recentes</Styled.TitleHeader>
+            <Styled.TitleHeader>Noticações</Styled.TitleHeader>
             <ion-icon
               name="notifications-outline"
               style={{ color: Colors.WHITE01, fontSize: 30 }}

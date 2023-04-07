@@ -42,7 +42,7 @@ const StyledImageCircule = {
   `,
 
   Img: styled.img`
-    width: 2 00px;
+    width: 200px;
     height: 200px;
     border-radius: 100%;
     object-fit: cover;

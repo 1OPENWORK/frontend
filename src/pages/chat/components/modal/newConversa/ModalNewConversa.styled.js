@@ -1,7 +1,7 @@
 import { Modal } from "react-bootstrap";
 import styled from "styled-components";
 
-const StyledModalGroup = {
+const StyledModalConversa = {
   Modal: styled(Modal)``,
 
   Container: styled.div`
@@ -18,7 +18,7 @@ const StyledModalGroup = {
     justify-content: flex-end;
     align-items: center;
     height: 50px;
-    width: 100%;
+    width: 98%;
     color: white;
     font-size: 30px;
   `,
@@ -174,4 +174,4 @@ const StyledModalGroup = {
   BodyConexao: styled.div``,
 };
 
-export default StyledModalGroup;
+export default StyledModalConversa;

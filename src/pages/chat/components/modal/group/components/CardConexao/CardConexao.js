@@ -19,7 +19,7 @@ const CardConexao = ({
   };
 
   useEffect(() => {
-    setSelecionado(participants.some((d) => d.id === dados.id));
+    setSelecionado(participants.some(d => d.id === dados.id));
   }, [handleUser]);
 
   return (
@@ -32,36 +32,18 @@ const CardConexao = ({
           }}
           src={dados.img}
         />
-        {type === 2 ? "" : <label>{dados.nome}</label>}
+        <label>{dados.nome}</label>
       </Styled.Divisor>
       <Styled.Divisor>
         <Styled.ButtonCheck
           selected={selecionado}
-          disabled={type !== 2 && selecionado ? true : false}
           onClick={() => {
-            type !== 2 ? handleUser(true, dados) : handleUser(false, dados.id);
+            !selecionado
+              ? handleUser(true, dados)
+              : handleUser(false, dados.id);
           }}
-          type={type}
         >
-          {type === 2 ? (
-            <>
-              <ion-icon
-                name="person-remove-outline"
-                style={{ fontSize: 25 }}
-              ></ion-icon>
-              <label
-                style={{
-                  fontSize: 10,
-                }}
-              >
-                Remover
-              </label>
-            </>
-          ) : selecionado ? (
-            "Adicionado"
-          ) : (
-            "Adicionar"
-          )}
+          {selecionado ? "Remover" : "Adicionar"}
         </Styled.ButtonCheck>
       </Styled.Divisor>
     </Styled.Container>

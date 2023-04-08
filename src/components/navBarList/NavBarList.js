@@ -39,8 +39,7 @@ const NavBarList = ({}) => {
       <BackgroundNavBar>
         <NavBar/>
       </BackgroundNavBar>
-      <ContainerNavBarList>Jobs Disponiveis
-      </ContainerNavBarList>
+      <ContainerNavBarList>Jobs Disponiveis</ContainerNavBarList>
     </BackgroundNavBarList>
 
     

@@ -18,8 +18,10 @@ const Jobs = () => {
 
 
   return (
-    <><NavBarList />
-    <List /></>
+    <>
+    <NavBarList />
+    <List />
+    </>
     
     );
 };

@@ -13,8 +13,8 @@ export const BackgroundNavBarList = styled.div`
   height: 20vh;
   display: flex;
   align-items: center;
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
+  border-top-right-radius: 1.875rem;
+  border-top-left-radius: 1.875rem;
   background-color: ${Colors.PRIMARY_COLOR};
 
   &:hover {
@@ -30,7 +30,7 @@ export const ContainerNavBarList = styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 2.25rem;
   text-align: center;
   color: ${Colors.white};
 `;

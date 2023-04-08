@@ -1,0 +1,77 @@
+{
+  "proeficiency": [
+    {
+      "title": "FrontEnd",
+      "check": "false",
+      "tools": [
+        {
+          "nameTool": "React js"
+        },
+        {
+          "nameTool": "HTML"
+        },
+        {
+          "nameTool": "CSS"
+        },
+        {
+          "nameTool": "Angular"
+        }
+      ]
+    },
+    {
+      "title": "BackEnd",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "DevOps",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Cyber Security",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Mobile",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Organizador",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "redes",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "QA",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Banco de Dados",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Jogos",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Machine Learning",
+      "check": "false",
+      "tools": [{}]
+    },
+    {
+      "title": "Design",
+      "check": "false",
+      "tools": [{}]
+    }
+  ]
+}

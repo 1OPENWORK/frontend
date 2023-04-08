@@ -15,15 +15,12 @@ import List from "../../components/list/List";
  * @returns The component JSX.
  */
 const Jobs = () => {
-
-
   return (
     <>
-    <NavBarList />
-    <List />
+      <NavBarList />
+      <List />
     </>
-    
-    );
+  );
 };
 
 export default Jobs;

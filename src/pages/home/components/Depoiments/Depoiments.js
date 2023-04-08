@@ -9,11 +9,7 @@ import React, { useEffect, useState } from "react";
 import { TitleLarge } from "../../../../components/UI/generalLayout/Layout.styled";
 import Colors from "../../../../constants/Colors";
 import { TitleDivInformation } from "../../Home.styled";
-import {
-  ContainerDepoiments,
-  ContainerImags,
-  Paragrafo,
-} from "./Depoiments.styled";
+import {ContainerDepoiments, ContainerImags, Paragrafo} from "./Depoiments.styled";
 import ImagePerson from "../../../../assets/imgs/imagePerson.svg";
 import CardPerson from "./components/CardPerson/CardPerson";
 import DadosDep from "../../../../constants/json/Informations.json";
@@ -53,15 +49,11 @@ const Depoiments = ({}) => {
   // --------------------------------------------------------
   return (
     <ContainerDepoiments>
-      <TitleDivInformation
-        style={{
-          textAlign: "center",
-        }}
-        color={Colors.PRIMARY_COLOR}
-      >
+      <TitleDivInformation style={{textAlign: "center", marginTop: "80px", height: "65px"}} color={Colors.PRIMARY_COLOR}>
         {"Depoimentos"}
       </TitleDivInformation>
-      <Paragrafo fw={0}>
+      
+      <Paragrafo fw={0} style={{marginTop: "16px"}}>
         {
           "Dê uma olhada nas histórias de nossos membros e suas jornadas interessantes para o Open  Work."
         }
@@ -92,18 +84,18 @@ const Depoiments = ({}) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+              alignItems: "center",}}>
+
             {personSelected === index && (
               <Paragrafo
                 style={{
                   position: "relative",
-                  width: "500px",
+                  width: "490px",
                   lineHeight: "25px",
-                  top: 50,
+                  top: 80,
+                  bottom: 40,
                 }}
-                fw={500}
+                fw={700}
               >
                 {d.description}
               </Paragrafo>

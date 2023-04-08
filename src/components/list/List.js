@@ -8,7 +8,7 @@
 import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Styled from "./List.styled";
-import ListJobs from './ListJobs';
+import ListJobs from "./ListJobs";
 
 // -----------------------------------------------------
 
@@ -23,30 +23,53 @@ import ListJobs from './ListJobs';
  * @param props The component props.
  * @returns The component JSX.
  */
-const List = ({}) => {
-
+const List = ({ type }) => {
   const [onMenu, setOnMenu] = useState(0);
 
   return (
-        <Styled.ContainerList>
+    <>
+      <Styled.ContainerList>
         <Styled.titleList>
-            <Styled.containerButtonTitleList>
+          <Styled.containerButtonTitleList>
+            {type === 1 ? (
+              <Styled.Button1TitleList
+                index={0}
+                onMenu={onMenu}
+                onClick={() => setOnMenu(1)}
+              >
+                Usuários
+              </Styled.Button1TitleList>
+            ) : type === 2 ? (
+              <Styled.Button1TitleList
+                index={0}
+                onMenu={onMenu}
+                onClick={() => setOnMenu(2)}
+              >
+                Minhas avaliações
+              </Styled.Button1TitleList>
+            ) : (
+              <Styled.Button1TitleList
+                index={0}
+                onMenu={onMenu}
+                onClick={() => setOnMenu(0)}
+              >
+                Jobs
+              </Styled.Button1TitleList>
+            )}
+
             <Styled.Button1TitleList
-            index = {0}
-            onMenu = {onMenu}
-            onClick = {() => setOnMenu(0)}
-            >JOBS</Styled.Button1TitleList>
-            <Styled.Button1TitleList 
-            index = {1}
-            onMenu = {onMenu}
-            onClick = {() => setOnMenu(1)}
-            >FILTROS</Styled.Button1TitleList>
-            </Styled.containerButtonTitleList>
+              index={1}
+              onMenu={onMenu}
+              onClick={() => setOnMenu(3)}
+            >
+              Filtros
+            </Styled.Button1TitleList>
+          </Styled.containerButtonTitleList>
         </Styled.titleList>
-        
-        {onMenu === 0 ? (<ListJobs></ListJobs>) : (<ListJobs></ListJobs>)}
-        
-        </Styled.ContainerList>
+
+        {type === 1 ? <ListJobs type={1}></ListJobs> : <ListJobs></ListJobs>}
+      </Styled.ContainerList>
+    </>
   );
 };
 

@@ -17,7 +17,9 @@ export const ContainerBodyMetricaHome = styled.div`
 `;
 
 export const ImgHome = styled.img`
-  height: 400px;
+  left: 160px;
+  height: 545px;
+  margin-top: 58px;
 `;
 
 export const DivUpInformation = styled.div`
@@ -34,29 +36,35 @@ export const DivUpInformation = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0rem;
-  height: 100vh;
+  height: 90vh;
 `;
 
 export const ContainerAceptedAll = styled.div`
-padding-top: 100px;
-  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
 `;
 
 export const TitleDivInformation = styled.p`
+  font-family: nunito;
   font-style: normal;
   font-weight: 900;
   font-size: 48px;
-  width: 450px;
-  line-height: 65px;
-  color: ${(props) => (props.color ? props.color : Colors.white)};
+  width: 417px;
+  height: 388px;
+  margin-top: 80px;
+  line-height: 65.47px;
+  color: ${(props) => (props.color ? props.color : Colors.WHITE)};
 `;
 
 export const HomeText = styled.p`
+  font-family: nunito;
+  font-style: normal;
   color: #ffffff;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 18px;
 `;
 
@@ -66,12 +74,11 @@ export const HomeTextLink = styled.a`
   font-weight: 700;
   font-size: 18px;
   color: #ffffff;
-  margin-left: 20px;
+  margin-left: 16px;
   text-decoration: none;
   cursor: pointer;
-
   :hover {
-    color: ${Colors.black};
+    color: ${Colors.BLACK};
   }
 `;
 

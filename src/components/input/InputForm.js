@@ -25,7 +25,7 @@ import Styled from "./InputForm.styled";
  * @param props The component props.
  * @returns The component JSX.
  */
-const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, isInvalid }) => {
+const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, disabled, type }) => {
   // --------------------------------------------------------
   // InputForm PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -37,7 +37,7 @@ const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, isInval
   // --------------------------------------------------------
   return (
     <Styled.Container spaceBottom={space}>
-      <Styled.Text isInvalid={isInvalid}>{label}</Styled.Text>
+      <Styled.Text >{label}</Styled.Text>
       <Styled.Input
         w={width}
         value={value}
@@ -46,7 +46,8 @@ const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, isInval
         mr={mr}
         mt={mt}
         mb={mb}
-        isInvalid={isInvalid}
+        disabled={disabled}
+        type={type}
       />
     </Styled.Container>
   );

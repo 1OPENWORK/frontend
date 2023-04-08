@@ -1,68 +1,80 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState } from "react";
 import BarProgress from "../../../components/barProgress/BarProgress";
-import InputForm from "../../../components/input/InputForm";
-import { FilledButton } from "../../../components/UI/buttons/Button";
-import Colors from "../../../constants/Colors";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
-import {useForm} from "react-hook-form";
 import etapasRegister from "../../../constants/json/register.json";
 import RegisterEt1 from "./etapas/et1/RegisterEt1";
 import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
+import RegisterEt4 from "./etapas/et4/RegisterEt4";
+import RegisterEt5 from "./etapas/et5/RegisterEt5";
+import RegisterCompany from "./etapas/etCompany/RegisterCompany";
+import { selectRegister } from "../../../store/reducers/RegisterSlice";
+import { useSelector } from "react-redux";
+import { ToastContainer} from "react-toastify";
+import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
 const Register = () => {
-  const [initial, setInitial] = useState(0);
   const [etapas] = useState(...[etapasRegister.etapas]);
 
-  const { register, handleSubmit, watch, formState: { errors }, reset } =  useForm();
-
-  const  loginUser  =  data  =>  console.log(data);
+  const { register } = useSelector(selectRegister);
 
   return (
     <Styled.Container>
-      
-      {initial !==
-        2 ? (
-          <>
-            <InformationsAuth
-              title={etapas[initial].titleInformation}
-              descricao={etapas[initial].description}
-              textButton="Home"
-            />
-            <Styled.ContainerForm position="start">
-              <Styled.Divisor align={"center"}>
-                <Styled.TitleForm>{etapas[initial].title}</Styled.TitleForm>
-              </Styled.Divisor>
+      <ToastContainer />
+      {register.etapaAtual !== 2 ? (
+        <>
+          <InformationsAuth
+            title={etapas[register.etapaAtual].titleInformation}
+            descricao={etapas[register.etapaAtual].description}
+            textButton="Home"
+            textButtonVoltar="Voltar"
+          />
+          <Styled.ContainerForm position="start">
+            {register.etapaAtual >= 3 && (
+              <Userlog name={"T"} desc={"Olá, Tarifa"} />
+            )}
+            <Styled.Divisor
+              align={"start"}
+              style={{
+                marginTop: "1.25rem",
+                marginLeft: "9.25rem",
+                height: "5rem",
+              }}
+            >
+              <Styled.TitleForm>
+                {etapas[register.etapaAtual].title}
+              </Styled.TitleForm>
+            </Styled.Divisor>
 
-              {/* ETAPAS */}
+            {/* ETAPAS */}
 
-              {initial === 0 ? <RegisterEt1 /> : <RegisterEt2 />}
+            {register.etapaAtual === 0 ? (
+              <RegisterEt1 />
+            ) : register.etapaAtual === 1 ? (
+              <RegisterEt2 />
+            ) : register.etapaAutal === 2 ? (
+              <RegisterEt3 />
+            ) : register.etapaAtual === 3 ? (
+              <RegisterEt1 />
+            ) : (
+              register.etapaAtual === 4 && <RegisterEt4 />
+            )}
 
-              <Styled.Divisor>
-                <BarProgress qtdMax={7} atualEtapa={initial + 1} />
-              </Styled.Divisor>
-              <Styled.Divisor
-                align={"flex-end"}
-                style={{
-                  paddingRight: 20,
-                }}
-              >
-                <FilledButton
-                  onClick={() => {setInitial(initial + 1); handleSubmit(loginUser)}}
-                  color={Colors.black}
-                  width={190}
-                  heigth={60}
-                >
-                  {"Próximo"}
-                </FilledButton>
-              </Styled.Divisor>
-            </Styled.ContainerForm>
-          </>
-        ) : (
-          <RegisterEt3 next={() => setInitial(initial + 1)}/>
-        )}
+            <Styled.Divisor>
+              <BarProgress qtdMax={7} atualEtapa={register.etapaAtual + 1} />
+            </Styled.Divisor>
+            <Styled.Divisor
+              align={"flex-end"}
+              style={{
+                paddingRight: "1.25rem",
+              }}
+            ></Styled.Divisor>
+          </Styled.ContainerForm>
+        </>
+      ) : (
+        <RegisterEt3 />
+      )}
     </Styled.Container>
   );
 };

@@ -37,7 +37,7 @@ export const H3 = styled.h1`
 `;
 
 export const TitleLarge = styled.h1`
-  font-family: "Inter";
+
   font-weight: 600;
   letter-spacing: -0.02em;
 

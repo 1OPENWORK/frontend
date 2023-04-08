@@ -6,7 +6,7 @@ export const Information = styled.div`
   top: 500px;
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
+  padding-top: 10px;
   align-items: center;
   width: 100%;
   border-radius: 30px 30px 0px 0px;
@@ -37,8 +37,8 @@ export const Container = styled.div`
 
     ${Information}:first-child {
       display: flex;
-      background-color: ${props => props.isDark ? Colors.black : Colors.white};
-      color: ${props => props.isDark ? Colors.white : Colors.black};
+      background-color: ${props => props.isDark ? Colors.BLACK : Colors.WHITE};
+      color: ${props => props.isDark ? Colors.WHITE : Colors.BLACK};
       top: 0px;
     }
   }

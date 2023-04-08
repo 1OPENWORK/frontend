@@ -2,8 +2,15 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import thunk from "redux-thunk";
+import AuthSlice from "./reducers/AuthSlice";
+import RegisterSlice from "./reducers/RegisterSlice";
+import WebSocketSlice from "./reducers/WebSocketSlice";
 
-const reducers = combineReducers({});
+const reducers = combineReducers({
+  register: RegisterSlice,
+  auth: AuthSlice,
+  websocket: WebSocketSlice
+});
 
 const persistConfig = {
   key: "root",

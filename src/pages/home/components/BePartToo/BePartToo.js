@@ -5,14 +5,11 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React from "react";
+import React, { useState } from "react";
 import { TitleDivInformation } from "../../Home.styled";
-import {
-  BePartTooCards,
-  BePartTooParagrafo,
-  ContainerBePartToo,
-} from "./BePartToo.styled";
+import {BePartTooCards, BePartTooParagrafo, ContainerBePartToo,} from "./BePartToo.styled";
 import CardBePartToo from "./Card/CardBePartToo";
+import DadosDep from "../../../../constants/json/Informations.json";
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -32,21 +29,14 @@ import CardBePartToo from "./Card/CardBePartToo";
  * @param props The component props.
  * @returns The component JSX.
  */
-const BePartToo = ({}) => {
-  // --------------------------------------------------------
-  // BePartTtoo PRIVATE DECLARATIONS
-  // --------------------------------------------------------
+const BePartToo = () => {
 
-  // --------------------------------------------------------
+  const [list] = useState(DadosDep.benefits);
 
-  // --------------------------------------------------------
-  // REACT RETURN FUNCTION
-  // --------------------------------------------------------
+
   return (
     <ContainerBePartToo>
-      <TitleDivInformation
-        style={{ margin: 0, width: "100%", textAlign: "center" }}
-      >
+      <TitleDivInformation style={{ margin: 0, width: "100%", textAlign: "center", marginTop:"64px", height: "60px"}}>
         {"Faça parte Também"}
       </TitleDivInformation>
       <BePartTooParagrafo>
@@ -55,12 +45,14 @@ const BePartToo = ({}) => {
         }
       </BePartTooParagrafo>
       <BePartTooCards>
-        <CardBePartToo />
-        <CardBePartToo />
-        <CardBePartToo />
-        <CardBePartToo />
-        <CardBePartToo />
-        <CardBePartToo />
+        {list?.map((d, index) => {
+          return (
+            <div>
+              <CardBePartToo index={index} benefit={d.benefit} />
+            </div>
+          );
+        })}
+
       </BePartTooCards>
     </ContainerBePartToo>
   );

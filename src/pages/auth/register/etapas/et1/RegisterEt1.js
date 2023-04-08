@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
-import { changeEtapa1, changeEtapaAll, } from "../../../../../store/reducers/RegisterSlice";
+import {changeEtapa1, changeEtapaAll} from "../../../../../store/reducers/RegisterSlice"
 
 const RegisterEt1 = () => {
   const dispatch = useDispatch();

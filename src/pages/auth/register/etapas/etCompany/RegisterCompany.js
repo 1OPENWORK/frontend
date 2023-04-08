@@ -85,7 +85,7 @@ const RegisterCompany = () => {
           handle={setnomeEmpresa}
           space={"1.25rem"}
           disabled={verified}/>
-
+          
         <InputForm
           label="Email"
           value={email}
@@ -109,7 +109,7 @@ const RegisterCompany = () => {
           space={"1.25rem"}
           disabled={verified}/>
       </Styled.Row>
-
+      
       <Styled.Row>
         <InputForm
           label="Senha"

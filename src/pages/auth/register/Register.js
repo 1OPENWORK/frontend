@@ -50,13 +50,13 @@ const Register = () => {
             {/* ETAPAS */}
 
             {register.etapaAtual === 0 ? (
-              <RegisterCompany />
+              <RegisterEt1 />
             ) : register.etapaAtual === 1 ? (
               <RegisterEt2 />
             ) : register.etapaAutal === 2 ? (
               <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
-              <RegisterEt4 />
+              <RegisterEt1 />
             ) : (
               register.etapaAtual === 4 && <RegisterEt4 />
             )}

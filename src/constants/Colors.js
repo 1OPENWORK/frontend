@@ -10,6 +10,7 @@ const BLACK_GREY02 = "#1f1f1f"
 const BLACK_GREY03 = "#242424";
 const BLACK_GREY04 = "#1f1f1f";
 const BLACK_GREY05 = "#292929";
+const LIGHT_GREY = "cfcfcf"
 const GREEN = "#1b4332";
 
 
@@ -26,5 +27,6 @@ export default {
     BLACK_GREY03,
     BLACK_GREY04,
     BLACK_GREY05,
+    LIGHT_GREY,
     GREEN
 }

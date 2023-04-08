@@ -12,7 +12,6 @@ const CardNotification = ({ dados }) => {
   const fetchImage = async () => {
     if (dados.type === "GROUP") {
       const imagem = await getS3("perfil", dados.img);
-     
 
       setImage(URL.createObjectURL(imagem.data));
     }
@@ -20,7 +19,6 @@ const CardNotification = ({ dados }) => {
 
   useEffect(() => {
     fetchImage();
-    console.log(dados);
   }, []);
 
   return (

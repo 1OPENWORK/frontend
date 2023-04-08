@@ -19,24 +19,23 @@ const ModalGroup = ({ socket, show, handleClick }) => {
   // funcionalidades
   const [friends, setFriends] = useState([]);
   const [search, setSearch] = useState("");
-  const [showOverlay, setShowOverlay] = useState(false);
 
-  const handleClickOverlay = event => {
-    setShowOverlay(!showOverlay);
+  const handleClickOverlay = (event) => {
+    handleClick(false)
     setNomeGroup("");
     setDescribe("");
     setSearch("");
     setParticipantes([]);
   };
 
-  const handleAdicionar = newParticipant => {
+  const handleAdicionar = (newParticipant) => {
     setSearch("");
-    setParticipantes(prevParticipant => [...prevParticipant, newParticipant]);
+    setParticipantes((prevParticipant) => [...prevParticipant, newParticipant]);
   };
 
-  const handleRemove = participantId => {
-    setParticipantes(prevItems =>
-      prevItems.filter(item => item.id !== participantId)
+  const handleRemove = (participantId) => {
+    setParticipantes((prevItems) =>
+      prevItems.filter((item) => item.id !== participantId)
     );
   };
 
@@ -55,11 +54,8 @@ const ModalGroup = ({ socket, show, handleClick }) => {
       myId: websocket.idUser,
     };
 
-    socket.emit("newGroup", { dados }, callback => {
-      console.log(
-        "🚀 ~ file: ModalGroup.js:64 ~ socket.emit ~ callback:",
-        callback
-      );
+    socket.emit("newGroup", { dados }, (callback) => {
+      // Pode criar algum evento após criar um novo grupo.
     });
   };
 
@@ -67,17 +63,12 @@ const ModalGroup = ({ socket, show, handleClick }) => {
     setFriends(websocket.friends);
   }, [websocket]);
 
-  useEffect(() => {
-    console.log(participantes);
-  }, [participantes]);
-
   return (
     <Styled.Modal
       show={show}
       fullscreen={true}
       onHide={() => {
-        handleClick(false);
-        setShowOverlay(false);
+        handleClickOverlay(false);
       }}
     >
       <Modal.Body
@@ -90,7 +81,6 @@ const ModalGroup = ({ socket, show, handleClick }) => {
           <Styled.DivBetween>
             <ion-icon
               onClick={() => {
-                handleClick(false);
                 handleClickOverlay(false);
               }}
               name="close-outline"
@@ -104,7 +94,7 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                 <Styled.Label>Digite um nome</Styled.Label>
                 <Styled.Input
                   value={nomeGroup}
-                  onChange={e => setNomeGroup(e.target.value)}
+                  onChange={(e) => setNomeGroup(e.target.value)}
                   width={"600px"}
                   placeholder="Squad, Amigos, Work"
                 />
@@ -113,7 +103,7 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                 <Styled.Label>Descrição</Styled.Label>
                 <Styled.TextArea
                   value={describe}
-                  onChange={e => setDescribe(e.target.value)}
+                  onChange={(e) => setDescribe(e.target.value)}
                   width={"600px"}
                   rows={5}
                   placeholder="Esse grupo tem algumas regras...."
@@ -121,14 +111,13 @@ const ModalGroup = ({ socket, show, handleClick }) => {
               </Styled.DivisorInput>
               <Styled.DivisorButton>
                 <Styled.Button
-                  onClick={handleGroup}
+                  onClick={() => {handleGroup(); handleClickOverlay(false);}}
                   backgroundColor={"#07ea8b"}
                 >
                   <ion-icon name="people-outline"></ion-icon> Criar grupo
                 </Styled.Button>
                 <Styled.Button
                   onClick={() => {
-                    handleClick(false);
                     handleClickOverlay(false);
                   }}
                 >
@@ -162,14 +151,14 @@ const ModalGroup = ({ socket, show, handleClick }) => {
                       <Styled.DivSearch>
                         <Styled.InputSearch
                           value={search}
-                          onChange={e => setSearch(e.target.value)}
+                          onChange={(e) => setSearch(e.target.value)}
                           placeholder="Digite o nome da conexão"
                         />
                       </Styled.DivSearch>
                     </Styled.HeaderConexoes>
                     <Styled.BodyConexao>
                       {friends
-                        .filter(d =>
+                        .filter((d) =>
                           d.nome.toLowerCase().includes(search.toLowerCase())
                         )
                         .map((d, index) => (

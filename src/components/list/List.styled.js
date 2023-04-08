@@ -39,6 +39,7 @@ const StyledList = {
     text-align: center;
     padding-bottom: 5.2%;
     width: 30%;
+    cursor: pointer;
   `,
 };
 

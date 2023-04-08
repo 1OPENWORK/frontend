@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Styled from "./Jobs.styled";
+import Styled from "./Devs.styled";
 import NavBarList from "../../components/navBarList/NavBarList";
 import List from "../../components/list/List";
 
 // --------------------------------------------------------
-// Jobs INTERFACE
+// Devs INTERFACE
 // --------------------------------------------------------
 /**
  * A component that renders a Screen.
@@ -14,13 +14,14 @@ import List from "../../components/list/List";
  * @param props.navigation The navigator
  * @returns The component JSX.
  */
-const Jobs = () => {
+
+const Devs = () => {
   return (
     <>
-      <NavBarList />
-      <List />
+      <NavBarList type={1} />
+      <List type={1} />
     </>
   );
 };
 
-export default Jobs;
+export default Devs;

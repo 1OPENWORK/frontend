@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "../../constants/Colors";
+
 const StyledJobs = {
   Container: styled.div`
     display: flex;

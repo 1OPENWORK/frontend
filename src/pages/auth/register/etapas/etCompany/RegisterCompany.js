@@ -130,7 +130,7 @@ const RegisterCompany = () => {
 
       <Styled.Divisor align={"flex-end"} style={{ marginRight: "1.25rem", width: "48.125rem" }}>
         {!isNext ? (
-          <FilledButton onClick={handleForm} color={Colors.PRIMARY_COLOR} width={190} heigth={60}> {"Verificar"}
+          <FilledButton onClick={handleForm} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}
           </FilledButton>
         ) : (
           <FilledButton onClick={nextEtapa} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Próximo"}

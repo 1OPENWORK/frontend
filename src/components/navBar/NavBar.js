@@ -40,15 +40,29 @@ const NavBar = ({}) => {
     <Styled.ContainerNavBar>
       <Styled.Divisor>
         <Styled.LogoImg src={Logo} />
-        <Styled.TitleNavBarLogo size={32}> {"Open Work"} </Styled.TitleNavBarLogo>
+        <Styled.TitleNavBarLogo size={32}>{"Open Work"}</Styled.TitleNavBarLogo>
       </Styled.Divisor>
 
       <Styled.NavigateNavBar>
-        <Styled.TitleNavBar size={24}> {"Como contratamos"} </Styled.TitleNavBar>
+        <Styled.TitleNavBar size={24}>{"Como contratamos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
         <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
-        <FilledButton onClick={() => navigate("/auth")} color={Colors.BLACK} width={190} heigth={60}> {"Entrar"} </FilledButton>
-        <FilledButton onClick={() => navigate("/register")} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Junte-se a nós"} </FilledButton>
+        <FilledButton
+          onClick={() => navigate("/auth")}
+          color={Colors.BLACK}
+          width={190}
+          heigth={60}
+        >
+          {"Entrar"}
+        </FilledButton>
+        <FilledButton
+          onClick={() => navigate("/register")}
+          color={Colors.SECONDARY_COLOR}
+          width={190}
+          heigth={60}
+        >
+          {"Junte-se a nós"}
+        </FilledButton>
       </Styled.NavigateNavBar>
     </Styled.ContainerNavBar>
   );

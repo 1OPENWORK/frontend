@@ -7,6 +7,7 @@ const StyledCardPerson = {
     align-items: center;
     margin-bottom: 16px;
     cursor: pointer;
+    padding-left: 16px;
 
     &:hover {
       mix-blend-mode: difference;

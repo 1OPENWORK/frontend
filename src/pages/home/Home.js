@@ -37,10 +37,9 @@ const Home = () => {
   // Home PRIVATE DECLARATIONS
   // --------------------------------------------------------
 
-
   return (
     <GeneralContainer>
-      <NavBar />
+      <NavBar isLogin={true}/>
       <ContainerBodyMetricaHome>
         <DivUpInformation
           isImg={false}

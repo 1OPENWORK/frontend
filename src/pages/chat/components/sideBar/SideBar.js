@@ -21,8 +21,11 @@ import Styled, {
 import Logo from "../../../../assets/imgs/logo.svg";
 import Colors from "../../../../constants/Colors";
 import ModalGroup from "../modal/group/ModalGroup";
-import CardNotification from "../messages/components/cardNotification/CardNotification";
+import CardNotification from "./components/cardNotification/CardNotification";
 import ModalNewConversa from "../modal/newConversa/ModalNewConversa";
+import ToastNewMessage from "../messages/components/toastNewMessage/ToastNewMessage";
+import { ToastNewMessageContainer } from "../messages/components/toastNewMessage/ToastNewMessage.styled";
+import { useSpring, animated } from "react-spring";
 
 const SideBar = ({
   socket,
@@ -38,8 +41,12 @@ const SideBar = ({
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
   const [indexAbaActive, setIndexAbaActive] = useState(3);
-  const [totalMessagePendentes, setTotalMessagePendentes] = useState(3);
+  const [totalMessagePendentes, setTotalMessagePendentes] = useState(0);
+  const [totalNotificationPendentes, setTotalNotificationPendentes] =
+    useState(0);
   const [notifications, setNotifications] = useState([]);
+  const [toastNewMessage, setToastNewMessage] = useState({});
+  const [showToastNewMessage, setShowToastNewMessage] = useState(false);
   const [dados, setDados] = useState({});
   const [show, setShowModal] = useState(false);
   const [showModalNewConversa, setShowModalNewConversa] = useState(false);
@@ -143,9 +150,31 @@ const SideBar = ({
             messages: response.messagePedentes,
           })
         );
-      }
 
-      console.log(response.listRecentes);
+        const friends = websocket.friends;
+        const messagesPendentes = response.messagePedentes;
+        const message = response.dados.message;
+        let img = "";
+        let qtdMessagesPendentes = 0;
+
+        for (const friend of friends) {
+          if (friend.id === idSender) {
+            img = friend.img;
+          }
+        }
+
+        for (const message of messagesPendentes) {
+          if (message.idFriend === response.dados.idFriend) {
+            qtdMessagesPendentes = message.qtdNaoVisualizados;
+          }
+        }
+        setShowToastNewMessage(true);
+        setToastNewMessage({
+          img,
+          message,
+          qtdMessagesPendentes,
+        });
+      }
 
       dispatch(
         changeConversationRecentes({
@@ -203,9 +232,46 @@ const SideBar = ({
             notifications: callback,
           })
         );
+
+        // Mostrar o total de noticações pendentes para visualiação.
+        attQtdNotification(callback);
       }
     );
   }, [dados, indexAbaActive]);
+
+  const visualizedNotifications = async () => {
+    const notifys = websocket.notifications;
+
+    let arrayNotify = [];
+
+    for (const notify of notifys) {
+      if (!notify.isVisualizado) {
+        arrayNotify.push(notify);
+      }
+    }
+
+    if (arrayNotify.length > 0) {
+      socket.emit("updateNotifyVisualized", { arrayNotify }, (callback) => {});
+    }
+    setTotalNotificationPendentes(0);
+  };
+
+  const attQtdNotification = (cb) => {
+    let total = 0;
+
+    cb.forEach((element) => {
+      if (!element.isVisualizado) {
+        total++;
+      }
+    });
+
+    setTotalNotificationPendentes(total);
+  };
+
+  const fadeAnim = useSpring({
+    opacity: showToastNewMessage ? 1 : 0,
+    transform: showToastNewMessage ? "translateY(0%)" : "translateY(-10%)",
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -217,6 +283,15 @@ const SideBar = ({
     }, 500);
   }, [conversationsRecentes]);
 
+  useEffect(() => {
+    if (showToastNewMessage) {
+      const timeout = setTimeout(() => {
+        setShowToastNewMessage(false);
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [toastNewMessage]);
+
   return (
     <Styled.Container>
       <ModalGroup socket={socket} show={show} handleClick={setShowModal} />
@@ -225,6 +300,12 @@ const SideBar = ({
         handleClick={setShowModalNewConversa}
         handleConversation={handle}
       />
+      <ToastNewMessageContainer>
+        <animated.div style={fadeAnim}>
+          {showToastNewMessage && <ToastNewMessage dados={toastNewMessage} />}
+        </animated.div>
+      </ToastNewMessageContainer>
+
       {isLoading ? (
         <Styled.ContainerLoading>
           <CircularProgress size={150} color="success" />
@@ -234,9 +315,18 @@ const SideBar = ({
         <>
           <MenuLateral>
             <Styled.Img src={Logo} />
-            <OpcaoMenuLateral onClick={() => setIndexAbaActive(1)}>
+            <OpcaoMenuLateral
+              onClick={() => {
+                setIndexAbaActive(1);
+                visualizedNotifications();
+              }}
+            >
               {indexAbaActive !== 1 ? (
-                <Badge color="primary" badgeContent={0} showZero>
+                <Badge
+                  color="primary"
+                  badgeContent={parseInt(totalNotificationPendentes)}
+                  showZero
+                >
                   <ion-icon
                     name="notifications-outline"
                     style={{
@@ -330,11 +420,7 @@ const SideBar = ({
                 <TitleOpcaoMenuLateral>Conversas</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
-            <TitleOpcaoMenuLateral
-              style={{ color: Colors.WHITE01, margin: 20 }}
-            >
-              Conexões
-            </TitleOpcaoMenuLateral>
+
             <OpcaoMenuLateral onClick={() => setShowModalNewConversa(true)}>
               <ion-icon
                 name="chatbubbles-outline"

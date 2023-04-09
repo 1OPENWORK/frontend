@@ -6,7 +6,7 @@ const CardGroup = ({ dados, img }) => {
   return (
     <Styled.Container>
       <Styled.Imagem img={img} />
-      <Styled.Divisor>
+      <Styled.Divisor paddingLeft={"16px"} paddingTop={"16px"}>
         <Styled.ImgUser src={dados.imgSender} />
         <Styled.Title>{dados.nomeSender}, te convidou.</Styled.Title>
       </Styled.Divisor>
@@ -17,7 +17,6 @@ const CardGroup = ({ dados, img }) => {
             <Styled.Button success={true}><ion-icon name="checkmark-outline"></ion-icon> Aceitar</Styled.Button>
             <Styled.Button> <ion-icon name="close-outline"></ion-icon> Recusar</Styled.Button>
         </Styled.Divisor>
-     
     </Styled.Container>
   );
 };

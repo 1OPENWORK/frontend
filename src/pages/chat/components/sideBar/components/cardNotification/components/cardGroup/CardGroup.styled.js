@@ -45,6 +45,8 @@ const StyledCardGroup = {
     flex-wrap: wrap;
     gap: 1rem;
     width: ${(props) => (props.width ? props.width : "100%")};
+    padding-left: ${props => props.paddingLeft ? props.paddingLeft : "0px"};
+    padding-top: ${props => props.paddingTop ? props.paddingTop : "0px"};
   `,
 
   Button: styled.button`

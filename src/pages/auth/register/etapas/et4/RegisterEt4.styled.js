@@ -13,11 +13,12 @@ export const Flex = styled.div`
   align-items: center;
   justify-content: start;
   flex-direction: column;
+  gap: ${(props) => props.gap};
 `;
 
 export const ColumCount = styled.div`
-  column-count: 4;
-  column-gap: 32px;
+  column-count: ${(props) => props.count};
+  column-gap: ${(props) => props.gap};
 `;
 
 export const Divider = styled.div`

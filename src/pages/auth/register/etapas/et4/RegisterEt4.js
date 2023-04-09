@@ -63,12 +63,13 @@ const RegisterEt4 = () => {
     <>
       <Container>
         <Flex>
-          <ColumCount>
-            {proefiency?.map(dados => (
-              <ButtonRegisterEt4
-                title={dados.name}
-                handleClick={handleAdicionarLista}
-              />
+          <ColumCount count={4} gap={"2rem"}>
+            {list?.map((title) => (
+              <ButtonRegisterEt4 
+              width={"160px"}
+              heigth={"4px"}
+
+              title={title.title} />
             ))}
           </ColumCount>
           <InputForm
@@ -76,7 +77,7 @@ const RegisterEt4 = () => {
             value=""
             handle={() => ""}
             space={"20px"}
-            width={"750px"}
+            width={"740px"}
           />
           <Divider>
             <FilledButton

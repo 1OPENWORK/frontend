@@ -7,31 +7,27 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
-import {changeEtapa1, changeEtapaAll} from "../../../../../store/reducers/RegisterSlice"
+import {changeEtapa7, changeEtapaAll,} from "../../../../../store/reducers/RegisterSlice";
 
-const RegisterEt1 = () => {
+const RegisterCompany = () => {
   const dispatch = useDispatch();
 
-  const [nome, setNome] = useState("");
+  const [nomeEmpresa, setnomeEmpresa] = useState("");
   const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
-  const [cpfOrCnpj, setCpfOrCnpj] = useState("");
+  const [setor, setSetor] = useState("");
+  const [cnpj, setCnpj] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmed, setPasswordConfirmed] = useState("");
   const [isNext, setIsNext] = useState(false);
   const [verified, setVerified] = useState(false);
 
   const validRegister = object({
-    comfirmed_password: string()
-      .required("Preencha o campo confirmar senha.")
-      .oneOf([ref("password")], "Senhas diferentes"),
+    comfirmed_password: string().required("Preencha o campo confirmar senha.").oneOf([ref("password")], "Senhas diferentes"),
     password: string().required("Preencha o campo senha."),
-    cfp_cnpj: string().required("Preencha o campo CPF/CNPJ."),
-    tel: string().required("Preencha o campo telefone."),
-    email: string()
-      .email("E-mail inválido")
-      .required("Preencha o campo Email."),
-    fullname: string().required("Preencha o campo nome."),
+    cnpj: string().required("Preencha o campo CNPJ."),
+    setor: string().required("Preencha o campo setor."),
+    email: string().email("E-mail inválido").required("Preencha o campo Email."),
+    fullname: string().required("Preencha o campo nome empresa."),
   });
 
 
@@ -39,17 +35,17 @@ const RegisterEt1 = () => {
     const dados = {
       comfirmed_password: passwordConfirmed,
       password: password,
-      cfp_cnpj: cpfOrCnpj,
-      tel: tel,
+      cnpj: cnpj,
+      setor: setor,
       email: email,
-      fullname: nome,
+      fullname: nomeEmpresa,
     };
 
     try {
       await validRegister.validate(dados);
 
       dispatch(
-        changeEtapa1({
+        changeEtapa7({
           ...dados,
         })
       );
@@ -74,7 +70,7 @@ const RegisterEt1 = () => {
   function nextEtapa() {
     dispatch(
       changeEtapaAll({
-        etapa: 1,
+        etapa: 7,
       })
     );
   }
@@ -84,66 +80,65 @@ const RegisterEt1 = () => {
       <ToastContainer />
       <Styled.Row>
         <InputForm
-          label="Nome Completo"
-          value={nome}
-          handle={setNome}
+          label="Nome Empresa"
+          value={nomeEmpresa}
+          handle={setnomeEmpresa}
           space={"1.25rem"}
-          mr={"1.25rem"}
-          disabled={verified}
-        />
+          disabled={verified}/>
+          
         <InputForm
           label="Email"
           value={email}
           handle={setEmail}
           space={"1.25rem"}
-          disabled={verified}
-        />
+          disabled={verified}/>
       </Styled.Row>
+
       <Styled.Row>
         <InputForm
-          label="Telefone"
-          value={tel}
-          handle={setTel}
+          label="Setor"
+          value={setor}
+          handle={setSetor}
           space={"1.25rem"}
-          mr={"1.25rem"}
-          disabled={verified}
-        />
+          disabled={verified}/>
+
         <InputForm
-          label="CPF / CNPJ"
-          value={cpfOrCnpj}
-          handle={setCpfOrCnpj}
+          label="CNPJ"
+          value={cnpj}
+          handle={setCnpj}
           space={"1.25rem"}
-          disabled={verified}
-        />
+          disabled={verified}/>
       </Styled.Row>
+      
       <Styled.Row>
         <InputForm
           label="Senha"
           value={password}
           handle={setPassword}
           space={"1.25rem"}
-          mr={"1.25rem"}
           type={"password"}
-          disabled={verified}
-        />
+          disabled={verified}/>
+          
         <InputForm
           label="Confirmar Senha"
           value={passwordConfirmed}
           handle={setPasswordConfirmed}
           space={"1.25rem"}
           type={"password"}
-          disabled={verified}
-        />
+          disabled={verified}/>
       </Styled.Row>
-      <Styled.Divisor align={"flex-end"} style={{ marginRight: "1.25rem", width: "770px" }}>
+
+      <Styled.Divisor align={"flex-end"} style={{ marginRight: "1.25rem", width: "48.125rem" }}>
         {!isNext ? (
-          <FilledButton onClick={handleForm} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}</FilledButton>
+          <FilledButton onClick={handleForm} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}
+          </FilledButton>
         ) : (
-          <FilledButton onClick={nextEtapa} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Cadastrar"} </FilledButton>
+          <FilledButton onClick={nextEtapa} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Próximo"}
+          </FilledButton>
         )}
       </Styled.Divisor>
     </Styled.Form>
   );
 };
 
-export default RegisterEt1;
+export default RegisterCompany;

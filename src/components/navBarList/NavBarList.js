@@ -11,7 +11,6 @@ import NavBar from "../navBar/NavBar";
 import Styled, {
   BackgroundNavBar,
   BackgroundNavBarList,
-  ContainerNavBarList,
 } from "./NavBarList.styled";
 
 // -----------------------------------------------------
@@ -27,7 +26,7 @@ import Styled, {
  * @param props The component props.
  * @returns The component JSX.
  */
-const NavBarList = ({}) => {
+const NavBarList = ({ type }) => {
   // --------------------------------------------------------
   // NavBar PRIVATE DECLARATIONS
   // ------------------------------
@@ -40,9 +39,15 @@ const NavBarList = ({}) => {
   return (
     <BackgroundNavBarList>
       <BackgroundNavBar>
-        <NavBar />
+        <NavBar isLogin={true} />
       </BackgroundNavBar>
-      <ContainerNavBarList>Hover Me</ContainerNavBarList>
+      <Styled.ContainerNavBarList>
+        {type === 1
+          ? "Desenvolvedores disponíveis"
+          : type === 2
+          ? "Avaliações"
+          : "Jobs disponíveis"}
+      </Styled.ContainerNavBarList>
     </BackgroundNavBarList>
   );
 };

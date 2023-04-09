@@ -12,6 +12,7 @@ const StyledNavBar = {
     border-bottom: 5px solid ${Colors.SECONDARY_COLOR};
     background-color: ${Colors.WHITE};
     z-index: 1000;
+    padding: ${(props) => (props.isLogin ? "40px 40px" : "0px")};
   `,
 
   TitleNavBar: styled.h1`
@@ -62,8 +63,7 @@ const StyledNavBar = {
     margin-right: 48px;
   `,
 
-  LogoImg: styled.img`
-  `,
+  LogoImg: styled.img``,
 
   Divisor: styled.div`
     display: flex;

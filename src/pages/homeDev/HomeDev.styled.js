@@ -12,11 +12,15 @@ export const Container = styled.div`
 
 export const Aside = styled.div`
   position: relative;
-  top: 80px;
+  top: 128px;
   width: 70%;
   column-count: 2;
   column-gap: 40px;
   height: 70%;
+`;
+
+export const DivAside = styled.div`
+  height: 50%;
 `;
 
 export const Article = styled.div`
@@ -27,20 +31,19 @@ export const Article = styled.div`
 `;
 
 export const Input = styled.input`
-  width: 70.5%;
+  width: 69.8%;
   height: 58px;
   border: 1px solid ${Colors.PRIMARY_COLOR};
   background: rgba(32, 172, 105, 0.05);
   outline: none;
   border-radius: 16px;
   position: absolute;
-  top: 179px;
+  top: 160px;
   left: 40px;
-  font-size: 24px;
+  font-size: 1.5rem;
 `;
 
 export const Card = styled.div`
-  margin-bottom: 40px;
   width: 100%;
   height: 220px;
   background-color: white;
@@ -49,6 +52,8 @@ export const Card = styled.div`
   -webkit-font-smoothing: antialiased !important;
   display: flex;
   justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
 `;
 
 export const ChatBot = styled.div`
@@ -103,11 +108,6 @@ export const CardImg = styled.img`
 `;
 export const BootImg = styled.img`
   height: 40px;
-`;
-
-export const BarSearchImg = styled.img`
-  height: 24px;
-  margin-right: 16px;
 `;
 
 export const GenericSolidButton = styled.button`

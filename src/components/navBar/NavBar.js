@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
  * @param props The component props.
  * @returns The component JSX.
  */
-const NavBar = ({ isLogin }) => {
+const NavBar = ({ nav }) => {
   // --------------------------------------------------------
   // NavBar PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -37,8 +37,8 @@ const NavBar = ({ isLogin }) => {
   // REACT RETURN FUNCTION
   // --------------------------------------------------------
   return (
-    <Styled.ContainerNavBar isLogin={isLogin}>
-      {isLogin ? (
+    <Styled.ContainerNavBar nav={1}>
+      {nav === 1 ? (
         <>
           <Styled.Divisor>
             <Styled.LogoImg src={Logo} />
@@ -47,6 +47,25 @@ const NavBar = ({ isLogin }) => {
           <Styled.NavigateNavBar>
             <Styled.TitleNavBar size={24}>{"Projetos"}</Styled.TitleNavBar>
             <Styled.TitleNavBar size={24}>{"Comunidade"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
+          </Styled.NavigateNavBar>
+          <FilledButton
+            onClick={() => navigate("/auth")}
+            color={Colors.BLACK}
+            width={190}
+            heigth={60}
+          >
+            {"Sair"}
+          </FilledButton>
+        </>
+      ) : nav === 2 ? (
+        <>
+          <Styled.Divisor>
+            <Styled.LogoImg src={Logo} />
+          </Styled.Divisor>
+
+          <Styled.NavigateNavBar>
+            <Styled.TitleNavBar size={24}>{"Projetos"}</Styled.TitleNavBar>
             <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton

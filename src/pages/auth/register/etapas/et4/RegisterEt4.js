@@ -9,17 +9,52 @@ import listLoad from "../../../../../constants/json/selectProf.json";
 //   changeEtapaAll,
 // } from "../../../../../../store/reducers/RegisterSlice";
 
-const RegisterEt4 = ({}) => {
-  const [list] = React.useState(listLoad.proeficiency);
-  // const dispatch = useDispatch();
+const RegisterEt4 = () => {
+  const [proefiency, setProeficiency] = useState([]);
+  const dispatch = useDispatch();
+  const [list, setList] = useState([]);
+  let array = [];
 
-  // function nextEtapa() {
-  //   dispatch(
-  //     changeEtapa4({
-  //       etapa: 4,
-  //     })
-  //   );
-  // }
+  const handleRemoveItemList = React.useCallback((proefiency) => {
+    const newProefiency = [...list];
+    newProefiency.splice(list.indexOf(proefiency), 1);
+    setList(newProefiency);
+  });
+
+  const Tools = (title) => {
+    proefiency
+      .filter((list) => list.name === title)
+      .map((d) => {
+        const tools = d.tools;
+
+        array.push(...tools);
+      });
+  };
+
+  const handleAdicionarLista = (title, checked) => {
+    if (!checked) {
+      handleRemoveItemList(title);
+    } else {
+      Tools(title);
+    }
+  };
+
+  const listar = async () => {
+    const dados = await handleProeficiency();
+    setProeficiency(dados.data);
+  };
+
+  const handleSubmitReducer = () => {
+    dispatch(
+      changeEtapa4({
+        lista: array,
+      })
+    );
+  };
+
+  useEffect(() => {
+    listar();
+  }, []);
 
   return (
     <>
@@ -27,11 +62,11 @@ const RegisterEt4 = ({}) => {
         <Flex>
           <ColumCount count={4} gap={"2rem"}>
             {list?.map((title) => (
-              <ButtonRegisterEt4 
-              width={"160px"}
-              heigth={"4px"}
-
-              title={title.title} />
+              <ButtonRegisterEt4
+                width={"160px"}
+                heigth={"4px"}
+                title={title.title}
+              />
             ))}
           </ColumCount>
           <InputForm

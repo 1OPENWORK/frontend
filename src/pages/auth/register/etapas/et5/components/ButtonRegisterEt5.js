@@ -1,16 +1,16 @@
 import { React, useState, useEffect } from "react";
 
-import { ButtonCheck, TitleProf } from "./ButtonRegisterEt4.styled";
+import { ButtonCheck, TitleProf } from "./ButtonRegisterEt5.styled";
 
-export const ButtonRegisterEt4 = ({ dados, width, height, handleClick }) => {
-  const [checked, setChecked] = useState(false);
+ const ButtonRegisterEt5 = ({ dados, width, height, handleClick, selected }) => {
+  const [checked, setChecked] = useState(selected);
   const [color, setColor] = useState("");
   const [backColor, setColorBack] = useState("");
 
   useEffect(() => {
-    setColorBack(() => (checked ? "#20ac69" : "rgba(32, 172, 105, 0.05)"));
-    setColor(() => (checked ? "#fff" : "#20ac69"));
-  }, [checked]);
+    setColorBack(() => (checked || selected ? "#20ac69" : "rgba(32, 172, 105, 0.05)"));
+    setColor(() => (checked || selected ? "#fff" : "#20ac69"));
+  }, [checked, selected]);
 
   return (
     <>
@@ -23,7 +23,7 @@ export const ButtonRegisterEt4 = ({ dados, width, height, handleClick }) => {
         color={color}
         onClick={() => {
           setChecked((old) => !old);
-          handleClick(dados, !checked);
+          handleClick(dados, checked)
         }}
       >
         <TitleProf>{dados.name}</TitleProf>
@@ -31,3 +31,6 @@ export const ButtonRegisterEt4 = ({ dados, width, height, handleClick }) => {
     </>
   );
 };
+
+
+export default ButtonRegisterEt5

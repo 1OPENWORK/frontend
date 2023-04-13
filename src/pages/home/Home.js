@@ -39,7 +39,7 @@ const Home = () => {
 
   return (
     <GeneralContainer>
-      <NavBar isLogin={true}/>
+      <NavBar />
       <ContainerBodyMetricaHome>
         <DivUpInformation
           isImg={false}

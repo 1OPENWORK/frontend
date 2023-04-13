@@ -10,33 +10,31 @@ import { changeEtapa4 } from "../../../../../store/reducers/RegisterSlice";
 const RegisterEt4 = () => {
   const [proefiency, setProeficiency] = useState([]);
   const dispatch = useDispatch();
-  const [lista, setList] = useState([]);
-  let array = [];
+  const [list, setList] = useState([]);
+  const [arrayTools, setTools] = useState([]);
 
-  const handleRemoveItemList = React.useCallback(proefiency => {
-    const newProefiency = [...lista];
-    newProefiency.splice(lista.indexOf(proefiency), 1);
-    setList(newProefiency);
+  const handleRemoveItemList = React.useCallback((proefiency) => {
+    const tools = proefiency.tools;
+
+    const newProefiency = [...arrayTools];
+    for (const tool of tools) {
+      newProefiency.splice(arrayTools.indexOf(tool.id), 1);
+    }
+
+    setTools(newProefiency);
   });
 
+  const tools = (dados, checked) => {
+    if (checked) {
+      proefiency
+        .filter((list) => list.name === dados.name)
+        .map((d) => {
+          const tools = d.tools;
 
-  const Tools = title => {
-    proefiency
-      .filter(list => list.name === title)
-      .map(d => {
-        const tools = d.tools;
-
-        array.push(...tools);
-      });
-
-
-  };
-
-  const handleAdicionarLista = (title, checked) => {
-    if (!checked) {
-      handleRemoveItemList(title);
+          setTools([...arrayTools, ...tools]);
+        });
     } else {
-      Tools(title);
+      handleRemoveItemList(dados);
     }
   };
 
@@ -46,11 +44,9 @@ const RegisterEt4 = () => {
   };
 
   const handleSubmitReducer = () => {
-
-
     dispatch(
       changeEtapa4({
-        lista: array,
+        lista: arrayTools,
       })
     );
   };
@@ -59,17 +55,25 @@ const RegisterEt4 = () => {
     listar();
   }, []);
 
+  useEffect(() => {
+    console.log(
+      "🚀 ~ file: RegisterEt4.js:56 ~ RegisterEt4 ~ arrayTools:",
+      arrayTools
+    );
+  }, [arrayTools]);
+
   return (
     <>
       <Container>
         <Flex>
           <ColumCount count={4} gap={"2rem"}>
-            {list?.map((title) => (
-              <ButtonRegisterEt4 
-              width={"160px"}
-              heigth={"4px"}
-
-              title={title.title} />
+            {proefiency?.map((dados) => (
+              <ButtonRegisterEt4
+                width={"160px"}
+                heigth={"4px"}
+                dados={dados}
+                handleClick={tools}
+              />
             ))}
           </ColumCount>
           <InputForm

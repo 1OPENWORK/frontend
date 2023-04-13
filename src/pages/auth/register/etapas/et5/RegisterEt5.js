@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import {
   Container,
@@ -6,10 +6,55 @@ import {
   ColumCount,
   Divider,
 } from "../et4/RegisterEt4.styled";
-import { ButtonRegisterEt4 } from "../et4/components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
+import ButtonRegisterEt5 from "./components/ButtonRegisterEt5";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeEtapa5,
+  selectRegister,
+} from "../../../../../store/reducers/RegisterSlice";
+import { Register5Divisor } from "./components/ButtonRegisterEt5.styled";
 
 const RegisterEt5 = () => {
+  const { register } = useSelector(selectRegister);
+  const [tools, setTools] = useState([]);
+  const [toolSelected, setToolSelected] = useState([]);
+  const [searchTools, setSearchTools] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleClick = (dados, checked) => {
+    if (checked) {
+      const index = toolSelected.findIndex((tool) => tool.id === dados.id);
+      const newToolSelected = [...toolSelected];
+      newToolSelected.splice(index, 1);
+      setToolSelected(newToolSelected);
+      setTools([...tools, dados]);
+    } else {
+      const index = tools.findIndex((tool) => tool.id === dados.id);
+      const newTools = [...tools];
+      newTools.splice(index, 1);
+      setTools(newTools);
+      setToolSelected([...toolSelected, dados]);
+    }
+    setSearchTools("");
+  };
+
+  useEffect(() => {
+    setTools(register.etapa4);
+  }, []);
+
+  const filteredTools = tools.filter((tool) =>
+    tool.name.toLowerCase().includes(searchTools.toLowerCase())
+  );
+
+  const handleNext = () => {
+    dispatch(
+      changeEtapa5({
+        lista: toolSelected,
+      })
+    );
+  };
 
   return (
     <>
@@ -17,34 +62,50 @@ const RegisterEt5 = () => {
         <Flex>
           <InputForm
             label="Pesquisar"
-            value=""
-            handle={() => ""}
+            value={searchTools}
+            handle={setSearchTools}
             space={"24px"}
             width={"734px"}
           />
+
           <ColumCount count={4} gap={"1.9rem"}>
-            <ButtonRegisterEt4
-              width={"160px"}
-              height={"44px"}
-              title={"React"}
-            />
-            <ButtonRegisterEt4
-              width={"160px"}
-              height={"44px"}
-              title={"Angular"}
-            />
-            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"HTML"} />
-            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"CSS"} />
+            {toolSelected?.map((dados, index) => {
+              return (
+                <ButtonRegisterEt5
+                  key={dados.id}
+                  width={"160px"}
+                  height={"44px"}
+                  dados={dados}
+                  selected={true}
+                  handleClick={handleClick}
+                />
+              );
+            })}
+          </ColumCount>
+
+          <ColumCount count={4} gap={"1.9rem"}>
+            {filteredTools.slice(0, 4).map((dados, index) => {
+              if (index <= 3) {
+                return (
+                  <ButtonRegisterEt5
+                    key={dados.id}
+                    width={"160px"}
+                    height={"44px"}
+                    dados={dados}
+                    handleClick={handleClick}
+                  />
+                );
+              }
+            })}
           </ColumCount>
 
           <Divider>
             <FilledButton
-              // onClick={() => nextEtapa()}
-
+              onClick={() => handleNext()}
               color={"black"}
               width={190}
               heigth={60}
-              disabled={true}
+              disabled={toolSelected.length > 0 ? false : true}
             >
               {"Próximo"}
             </FilledButton>

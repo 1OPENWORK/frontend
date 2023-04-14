@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import * as ReactDOM from "react-dom";
 import InputForm from "../../../../../components/input/InputForm";
 import {
@@ -18,22 +18,38 @@ import {
 } from "./RegisterEt6.styled";
 import { ComboBox } from "./components/ComboBox";
 import Item from "./components/item/Item";
+import { useSelector } from "react-redux";
+import { selectRegister } from "../../../../../store/reducers/RegisterSlice";
 
 const RegisterEt6 = ({ checked }) => {
+  const { register } = useSelector(selectRegister);
+  const [itens, setItens] = useState([]);
+  const [compotencias, setCompetencias] = useState([]);
+
   const [sports] = ["Badminton", "Cricket", "Football", "Golf", "Tennis"];
+
+  const handleAdd = competencia => {
+    setCompetencias(prev => [...prev, competencia]);
+  };
+
+  useEffect(() => {
+    console.log(
+      "🚀 ~ file: RegisterEt6.js:41 ~ RegisterEt6 ~ compotencias:",
+      compotencias
+    );
+  }, [compotencias]);
+
+  useEffect(() => {
+    setItens(register.etapa5);
+  }, []);
 
   return (
     <>
       <Container>
         <DivFlowScroll>
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+          {itens.map((dados, index) => (
+            <Item key={index} nome={dados.name} />
+          ))}
         </DivFlowScroll>
         <Flex gap={"2rem"}>
           <Divider>

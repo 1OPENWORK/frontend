@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
+import Styled from "./RegisterEt5.styled";
 import {
   Container,
   Flex,
@@ -25,13 +26,13 @@ const RegisterEt5 = () => {
 
   const handleClick = (dados, checked) => {
     if (checked) {
-      const index = toolSelected.findIndex((tool) => tool.id === dados.id);
+      const index = toolSelected.findIndex(tool => tool.id === dados.id);
       const newToolSelected = [...toolSelected];
       newToolSelected.splice(index, 1);
       setToolSelected(newToolSelected);
       setTools([...tools, dados]);
     } else {
-      const index = tools.findIndex((tool) => tool.id === dados.id);
+      const index = tools.findIndex(tool => tool.id === dados.id);
       const newTools = [...tools];
       newTools.splice(index, 1);
       setTools(newTools);
@@ -44,7 +45,7 @@ const RegisterEt5 = () => {
     setTools(register.etapa4);
   }, []);
 
-  const filteredTools = tools.filter((tool) =>
+  const filteredTools = tools.filter(tool =>
     tool.name.toLowerCase().includes(searchTools.toLowerCase())
   );
 
@@ -68,36 +69,38 @@ const RegisterEt5 = () => {
             width={"734px"}
           />
 
-          <ColumCount count={4} gap={"1.9rem"}>
-            {toolSelected?.map((dados, index) => {
-              return (
-                <ButtonRegisterEt5
-                  key={dados.id}
-                  width={"160px"}
-                  height={"44px"}
-                  dados={dados}
-                  selected={true}
-                  handleClick={handleClick}
-                />
-              );
-            })}
-          </ColumCount>
-
-          <ColumCount count={4} gap={"1.9rem"}>
-            {filteredTools.slice(0, 4).map((dados, index) => {
-              if (index <= 3) {
+          <Styled.DivScroll>
+            <ColumCount count={4} gap={"1.9rem"}>
+              {toolSelected?.map((dados, index) => {
                 return (
                   <ButtonRegisterEt5
                     key={dados.id}
                     width={"160px"}
                     height={"44px"}
                     dados={dados}
+                    selected={true}
                     handleClick={handleClick}
                   />
                 );
-              }
-            })}
-          </ColumCount>
+              })}
+            </ColumCount>
+
+            <ColumCount count={4} gap={"1.9rem"}>
+              {filteredTools.slice(0, 4).map((dados, index) => {
+                if (index <= 3) {
+                  return (
+                    <ButtonRegisterEt5
+                      key={dados.id}
+                      width={"160px"}
+                      height={"44px"}
+                      dados={dados}
+                      handleClick={handleClick}
+                    />
+                  );
+                }
+              })}
+            </ColumCount>
+          </Styled.DivScroll>
 
           <Divider>
             <FilledButton

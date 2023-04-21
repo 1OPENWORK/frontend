@@ -5,16 +5,22 @@ import { ComboBox } from "../ComboBox";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const Item = ({ nome, handleCompetencia }) => {
+const Item = ({ dados, handleProeficiencia }) => {
   const [combox, setCombox] = useState("");
-  const [anos, setAnos] = useState("");
+  const [anos, setAnos] = useState(0);
 
-  const handleVerifyAnos = value => {
-    // Fazer verification de anos
-    setAnos(value);
+  const handleEvent = () => {
+    debugger;
+    let prevArray = dados;
+    prevArray.anos = parseInt(anos);
+    console.log("🚀 ~ file: Item.js:22 ~ useEffect ~ dados:", prevArray);
   };
 
-  useEffect(() => {}, [combox, anos]);
+  useEffect(() => {
+    if (anos !== 0 && anos > 0) {
+      handleEvent();
+    }
+  }, [combox, anos]);
 
   return (
     <ColumCount count={3} gap={"1.9rem"}>
@@ -23,15 +29,15 @@ const Item = ({ nome, handleCompetencia }) => {
         backGround={"#20ac69"}
         width={"199px"}
         height={"53px"}
-        title={nome}
+        title={dados.name}
       >
-        {nome}
+        {dados.name}
       </Button>
 
       <DivInput>
         <Input
           value={anos}
-          onChange={e => handleVerifyAnos(e.target.value)}
+          onChange={e => setAnos(e.target.value)}
           w={"58px"}
           type="number"
           min="0"

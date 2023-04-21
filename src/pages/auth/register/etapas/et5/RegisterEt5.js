@@ -25,18 +25,20 @@ const RegisterEt5 = () => {
   const dispatch = useDispatch();
 
   const handleClick = (dados, checked) => {
+    const newDados = { ...dados, anos: 0, proficiencia: 0 };
+
     if (checked) {
       const index = toolSelected.findIndex(tool => tool.id === dados.id);
       const newToolSelected = [...toolSelected];
       newToolSelected.splice(index, 1);
       setToolSelected(newToolSelected);
-      setTools([...tools, dados]);
+      setTools([...tools, newDados]);
     } else {
       const index = tools.findIndex(tool => tool.id === dados.id);
       const newTools = [...tools];
       newTools.splice(index, 1);
       setTools(newTools);
-      setToolSelected([...toolSelected, dados]);
+      setToolSelected([...toolSelected, newDados]);
     }
     setSearchTools("");
   };

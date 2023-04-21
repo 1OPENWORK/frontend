@@ -33,11 +33,8 @@ const RegisterEt6 = ({ checked }) => {
   };
 
   useEffect(() => {
-    console.log(
-      "🚀 ~ file: RegisterEt6.js:41 ~ RegisterEt6 ~ compotencias:",
-      compotencias
-    );
-  }, [compotencias]);
+    console.log("🚀 ~ file: RegisterEt6.js:36 ~ RegisterEt6 ~ itens:", itens);
+  }, [itens]);
 
   useEffect(() => {
     setItens(register.etapa5);
@@ -48,16 +45,15 @@ const RegisterEt6 = ({ checked }) => {
       <Container>
         <DivFlowScroll>
           {itens.map((dados, index) => (
-            <Item key={index} nome={dados.name} />
+            <Item key={index} dados={dados} />
           ))}
         </DivFlowScroll>
         <Flex gap={"2rem"}>
           <Divider>
             <FilledButton
               // onClick={() => nextEtapa()}
-
               color={"black"}
-              width={100}
+              width={200}
               heigth={60}
               disabled={true}
             >

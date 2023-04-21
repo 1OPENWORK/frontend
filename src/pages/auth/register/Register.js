@@ -23,7 +23,6 @@ const Register = () => {
 
   const { register } = useSelector(selectRegister);
 
-  
   return (
     <Styled.Container>
       <ToastContainer />
@@ -76,10 +75,10 @@ const Register = () => {
                     completedBgColor: Colors.PRIMARY_COLOR,
                   }}
                   steps={[
-                    { label: "Boas-vindas" },
                     { label: "Informações pessoais" },
                     { label: "Local de trabalho" },
                     { label: "Oque você é?" },
+                    { label: "Suas especialidades" },
                     { label: "Ferramentas e Metodologias" },
                     { label: "Ajuste suas competências" },
                   ]}

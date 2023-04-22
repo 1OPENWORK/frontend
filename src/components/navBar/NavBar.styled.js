@@ -26,6 +26,8 @@ const StyledNavBar = {
     font-style: normal;
     line-height: 33px;
     margin: 40px;
+
+    :hover {
       color: ${Colors.SECONDARY_COLOR};
     }
   `,
@@ -58,7 +60,7 @@ const StyledNavBar = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 48px;
+    margin-right: 3rem;
   `,
 
   LogoImg: styled.img``,

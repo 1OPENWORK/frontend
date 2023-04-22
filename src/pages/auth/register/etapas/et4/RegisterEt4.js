@@ -3,34 +3,33 @@ import InputForm from "../../../../../components/input/InputForm";
 import { Container, Flex, ColumCount, Divider } from "./RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "./components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
-// import { handleProeficiency } from "../../../../../store/actions/Proeficiency";
+import { handleProeficiency } from "../../../../../store/actions/Proeficiency";
 
 import { useDispatch } from "react-redux";
 import { changeEtapa4 } from "../../../../../store/reducers/RegisterSlice";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const RegisterEt4 = () => {
   const [proefiency, setProeficiency] = useState([]);
   const dispatch = useDispatch();
-  const [lista, setList] = useState([]);
+  const [list, setList] = useState([]);
   let array = [];
 
-  const handleRemoveItemList = React.useCallback(proefiency => {
-    const newProefiency = [...lista];
-    newProefiency.splice(lista.indexOf(proefiency), 1);
+  const handleRemoveItemList = React.useCallback((proefiency) => {
+    const newProefiency = [...list];
+    newProefiency.splice(list.indexOf(proefiency), 1);
     setList(newProefiency);
   });
 
-
-  const Tools = title => {
+  const Tools = (title) => {
     proefiency
-      .filter(list => list.name === title)
-      .map(d => {
+      .filter((list) => list.name === title)
+      .map((d) => {
         const tools = d.tools;
 
         array.push(...tools);
       });
-
-
   };
 
   const handleAdicionarLista = (title, checked) => {
@@ -47,8 +46,6 @@ const RegisterEt4 = () => {
   };
 
   const handleSubmitReducer = () => {
-
-
     dispatch(
       changeEtapa4({
         lista: array,

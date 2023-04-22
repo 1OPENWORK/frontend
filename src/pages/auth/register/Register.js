@@ -10,16 +10,10 @@ import RegisterEt3 from "./etapas/et3/RegisterEt3";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 import RegisterEt5 from "./etapas/et5/RegisterEt5";
 import RegisterEt6 from "./etapas/et6/RegisterEt6";
-
-// import RegisterCompany from "./etapas/etCompany/RegisterCompany";
-import RegisterEt4 from "./etapas/et4/RegisterEt4";
-import RegisterEt5 from "./etapas/et5/RegisterEt5";
 import RegisterCompany from "./etapas/etCompany/RegisterCompany";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import RegisterEt4 from "./etapas/et4/RegisterEt4";
-import RegisterEt5 from "./etapas/et5/RegisterEt5";
 
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 

@@ -23,6 +23,12 @@ import Auth from "./pages/auth/Auth";
 import Register from "./pages/auth/register/Register";
 import Jobs from "./pages/jobs/Jobs";
 import HomeDev from "./pages/homeDev/HomeDev";
+import Chat from "./pages/chat/Chat";
+import Devs from "./pages/homeDev/HomeDev";
+import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
+import Comunidade from "./pages/comunidade/Comunidade";
+import { useDispatch } from "react-redux";
+import { changeOn } from "./store/reducers/WebSocketSlice";
 
 const socket = socketIO.connect("http://localhost:3333");
 

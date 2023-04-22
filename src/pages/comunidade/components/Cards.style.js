@@ -34,11 +34,21 @@ const StyledCard = {
   `,
 
   ItemCard: styled.div`
-    width: 84.8%;
+    width: 100%;
     height: 26.1%;
     margin: 1.5rem;
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  `,
+
+  ContainerTextCard: styled.div`
+    width: 140px;
+    height: auto;
+    display: flex;
     flex-direction: column;
+    align-itens: center;
+    justify-content: center;
   `,
 
   Text: styled.div`
@@ -51,9 +61,20 @@ const StyledCard = {
     align-itens: flex-end;
   `,
 
+  TextBold: styled.div`
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 148.4%;
+    padding-top: 0.5rem;
+    display: flex;
+    align-itens: flex-end;
+  `,
+
   ImgGroupCard: styled.div`
     width: 104px;
     height: 94px;
+    background-repeat: no-repeat;
     background-color: ${(props) => (props.isImg ? "" : props.background)};
     background-image: url(${(props) => (props.isImg ? props.background : "")});
     display: flex;

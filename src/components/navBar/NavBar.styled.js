@@ -26,8 +26,6 @@ const StyledNavBar = {
     font-style: normal;
     line-height: 33px;
     margin: 40px;
-
-    :hover {
       color: ${Colors.SECONDARY_COLOR};
     }
   `,

@@ -13,7 +13,9 @@ const BLACK_GREY05 = "#292929";
 const LIGHT_GREY = "cfcfcf";
 const GREEN = "#1b4332";
 const WHITE_TEST = "#f5f5f5";
+const GRAY = "#d9d9d9";
 
+// eslint-disable-next-line
 export default {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
@@ -30,4 +32,5 @@ export default {
   LIGHT_GREY,
   GREEN,
   WHITE_TEST,
+  GRAY,
 };

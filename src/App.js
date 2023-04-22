@@ -15,6 +15,7 @@ import {
   DevsPath,
   AvaliacoesPath,
   ComunidadePath,
+  PortifolioPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -27,6 +28,7 @@ import Chat from "./pages/chat/Chat";
 import Devs from "./pages/devs/Devs";
 import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
 import Comunidade from "./pages/comunidade/Comunidade";
+import Portifolio from "./pages/portifolio/Portifolio";
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
 
@@ -56,6 +58,7 @@ function App() {
         <Route path={DevsPath} element={<Devs />} />
         <Route path={AvaliacoesPath} element={<Avaliacoes />} />
         <Route path={ComunidadePath} element={<Comunidade />} />
+        <Route path={PortifolioPath} element={<Portifolio />} />
       </Routes>
     </Router>
   );

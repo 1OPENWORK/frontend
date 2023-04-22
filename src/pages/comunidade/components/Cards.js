@@ -7,7 +7,7 @@ import IconClapHands from "../../../../src/assets/icons/icon-slap.svg";
 import IconHeart from "../../../../src/assets/icons/icon-heart.svg";
 import IconMessage from "../../../../src/assets/icons/icon-message.svg";
 import IconShare from "../../../../src/assets/icons/icon-share.svg";
-import IconLogo from "../../../../src/assets/icons/logoIcon.svg";
+import IconLogo from "../../../../src/assets/imgs/logo.svg";
 
 const Cards = () => {
   return (
@@ -20,21 +20,35 @@ const Cards = () => {
               isImg={true}
               background={IconLogo}
             ></Styled.ImgGroupCard>
-            <Styled.Text>Sistemas</Styled.Text>
-            <Styled.Text>Nome</Styled.Text>
-            <Styled.Text>Membros</Styled.Text>
+            <Styled.ContainerTextCard>
+              <Styled.Text>Sistemas web</Styled.Text>
+              <Styled.TextBold>Yucatan</Styled.TextBold>
+              <Styled.Text>2 membros</Styled.Text>
+            </Styled.ContainerTextCard>
           </Styled.ItemCard>
 
           <Styled.ItemCard>
-            <Styled.Text>Sistemas</Styled.Text>
-            <Styled.Text>Nome</Styled.Text>
-            <Styled.Text>Membros</Styled.Text>
+            <Styled.ImgGroupCard
+              isImg={true}
+              background={IconLogo}
+            ></Styled.ImgGroupCard>
+            <Styled.ContainerTextCard>
+              <Styled.Text>Sistemas web</Styled.Text>
+              <Styled.TextBold>Yucatan</Styled.TextBold>
+              <Styled.Text>2 membros</Styled.Text>
+            </Styled.ContainerTextCard>
           </Styled.ItemCard>
 
           <Styled.ItemCard>
-            <Styled.Text>Sistemas</Styled.Text>
-            <Styled.Text>Nome</Styled.Text>
-            <Styled.Text>Membros</Styled.Text>
+            <Styled.ImgGroupCard
+              isImg={true}
+              background={IconLogo}
+            ></Styled.ImgGroupCard>
+            <Styled.ContainerTextCard>
+              <Styled.Text>Sistemas web</Styled.Text>
+              <Styled.TextBold>Yucatan</Styled.TextBold>
+              <Styled.Text>2 membros</Styled.Text>
+            </Styled.ContainerTextCard>
           </Styled.ItemCard>
         </Styled.ContainerCardSquad>
 

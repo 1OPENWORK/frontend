@@ -10,10 +10,10 @@ const Item = ({ dados, handleProeficiencia }) => {
   const [anos, setAnos] = useState(0);
 
   const handleEvent = () => {
-    debugger;
-    let prevArray = dados;
-    prevArray.anos = parseInt(anos);
-    console.log("🚀 ~ file: Item.js:22 ~ useEffect ~ dados:", prevArray);
+    let prevArray = { ...dados };
+    prevArray.years = anos;
+    prevArray.proficiency = combox;
+    handleProeficiencia(prevArray);
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Item = ({ dados, handleProeficiencia }) => {
       <DivInput>
         <Input
           value={anos}
-          onChange={e => setAnos(e.target.value)}
+          onChange={(e) => setAnos(parseInt(e.target.value))}
           w={"58px"}
           type="number"
           min="0"

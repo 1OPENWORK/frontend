@@ -55,13 +55,6 @@ const RegisterEt4 = () => {
     listar();
   }, []);
 
-  useEffect(() => {
-    console.log(
-      "🚀 ~ file: RegisterEt4.js:56 ~ RegisterEt4 ~ arrayTools:",
-      arrayTools
-    );
-  }, [arrayTools]);
-
   return (
     <>
       <Container>

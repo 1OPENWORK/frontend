@@ -6,13 +6,13 @@ export const ComboBox = ({ handleProefiencia }) => {
     <>
       <Select onClick={e => handleProefiencia(e.target.value)}>
         <option>Proficiência</option>
-        <option value="1" min="0" step="1">
+        <option value="Iniciante" min="0" step="1">
           Iniciante
         </option>
-        <option value="2" min="0" step="1">
+        <option value="Intermediário" min="0" step="1">
           Intermediário
         </option>
-        <option value="3" min="0" step="1">
+        <option value="Avançado" min="0" step="1">
           Avançado
         </option>
       </Select>

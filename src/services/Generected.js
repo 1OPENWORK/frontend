@@ -21,6 +21,7 @@ export async function post(uri, body) {
       console.log(error);
     });
 }
+
 export async function postImage(uri, body) {
   try {
     const response = await axios.post(uri, body, {

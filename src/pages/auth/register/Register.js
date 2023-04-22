@@ -1,4 +1,6 @@
-import React, {useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import BarProgress from "../../../components/barProgress/BarProgress";
 import InputForm from "../../../components/input/InputForm";
 import { FilledButton } from "../../../components/UI/buttons/Button";
@@ -12,10 +14,12 @@ import RegisterEt2 from "./etapas/et2/RegisterEt2";
 import RegisterEt3 from "./etapas/et3/RegisterEt3";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 import RegisterEt5 from "./etapas/et5/RegisterEt5";
-import RegisterCompany from "./etapas/etCompany/RegisterCompany";
+import RegisterEt6 from "./etapas/et6/RegisterEt6";
+
+// import RegisterCompany from "./etapas/etCompany/RegisterCompany";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
 const Register = ({ name }) => {
@@ -68,9 +72,9 @@ const Register = ({ name }) => {
             ) : register.etapaAutal === 2 ? (
               <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
-              <RegisterEt1 />
+              <RegisterEt6 />
             ) : (
-              register.etapaAtual === 4 && <RegisterEt4 />
+              register.etapaAtual === 4 && <RegisterEt6 />
             )}
 
             <Styled.Divisor>

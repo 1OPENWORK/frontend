@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthPath, HomePagePath, RegisterPath, JobsPath, HomeDevPath } from "./constants/Path";
+import {
+  AuthPath,
+  HomePagePath,
+  RegisterPath,
+  JobsPath,
+  HomeDevPath,
+  ProjectsPath,
+} from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
 import Home from "./pages/home/Home";
@@ -8,8 +15,7 @@ import Auth from "./pages/auth/Auth";
 import Register from "./pages/auth/register/Register";
 import Jobs from "./pages/jobs/Jobs";
 import HomeDev from "./pages/homeDev/HomeDev";
-
-
+import Projects from "./pages/projects/Projects.js";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -25,16 +31,14 @@ function App() {
   //       console.log(dados);
   //     });
 
-// <<<<<<< HEAD
-//       socket.on("message", { id: isConnected }, (message) => {
-//         console.log(message);
-//       });
-//     });
-//   }, []);
+  // <<<<<<< HEAD
+  //       socket.on("message", { id: isConnected }, (message) => {
+  //         console.log(message);
+  //       });
+  //     });
+  //   }, []);
 
-
-    
-// =======
+  // =======
   //     socket.on("message", {id: isConnected}, (message) => {
 
   //       console.log(message);
@@ -49,12 +53,12 @@ function App() {
         <Route path={HomePagePath} element={<Home />} />
         <Route path={AuthPath} element={<Auth />} />
         <Route path={RegisterPath} element={<Register />} />
-        <Route path={JobsPath} element={<Jobs />} /> */
+        <Route path={JobsPath} element={<Jobs />} />
         <Route path={HomeDevPath} element={<HomeDev />} />
-
+        <Route path={ProjectsPath} element={<Projects />} />
       </Routes>
     </Router>
-// >>>>>>> c167bd0bc9cc30101c22862d90c2ab31b37ccf6b
+    // >>>>>>> c167bd0bc9cc30101c22862d90c2ab31b37ccf6b
   );
 }
 

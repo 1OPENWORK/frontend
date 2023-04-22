@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState, useEffect}from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import { Container, Flex, ColumCount, Divider } from "./RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "./components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
-import listLoad from "../../../../../constants/json/selectProf.json";
+// import listLoad from "../../../../../constants/json/selectProf.json";
+
 // import {
 //   changeEtapa4,
 //   changeEtapaAll,

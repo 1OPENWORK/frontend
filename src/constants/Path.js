@@ -1,9 +1,10 @@
 const HomePagePath = "/";
 const AuthPath = "/auth";
 const ChatPath = "/chat";
-const HomeDevPath = '/home-dev';
+const HomeDevPath = "/home-dev";
 const RegisterPath = "/register";
 const JobsPath = "/jobs";
+const ProjectsPath = "/projects";
 
 module.exports = {
   HomePagePath,
@@ -11,5 +12,6 @@ module.exports = {
   ChatPath,
   RegisterPath,
   JobsPath,
-  HomeDevPath
+  HomeDevPath,
+  ProjectsPath,
 };

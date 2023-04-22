@@ -22,11 +22,19 @@ const RegisterEt5 = () => {
             space={"24px"}
             width={"734px"}
           />
-          <ColumCount>
-            <ButtonRegisterEt4 title={"React"} handleClick={() => ("")}/>
-            <ButtonRegisterEt4 title={"Angular"} handleClick={() => ("")}/>
-            <ButtonRegisterEt4 title={"HTML"} handleClick={() => ("")}/>
-            <ButtonRegisterEt4 title={"CSS"} handleClick={() => ("")}/>
+          <ColumCount count={4} gap={"1.9rem"}>
+            <ButtonRegisterEt4
+              width={"160px"}
+              height={"44px"}
+              title={"React"}
+            handleClick={() => ("")}/>
+            <ButtonRegisterEt4
+              width={"160px"}
+              height={"44px"}
+              title={"Angular"}
+            handleClick={() => ("")}/>
+            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"HTML"} handleClick={() => ("")}/>
+            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"CSS"} handleClick={() => ("")}/>
           </ColumCount>
 
           <Divider>

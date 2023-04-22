@@ -10,7 +10,7 @@ const StyledCard = {
     font-family: nunito;
   `,
 
-  ContainerCard: styled.div`
+  ContainerCardSquad: styled.div`
     width: 316px;
     height: 483px;
     margin: 7.625rem 0 3rem 3rem;
@@ -18,15 +18,8 @@ const StyledCard = {
     border-radius: 30px;
     padding-top: 1.5rem;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  `,
-
-  ItemCard: styled.div`
-    width: 84.8%;
-    height: 26.1%;
-    margin: 1.5rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
   `,
 
   TitleCard: styled.div`
@@ -40,6 +33,14 @@ const StyledCard = {
     letter-spacing: 0.22em;
   `,
 
+  ItemCard: styled.div`
+    width: 84.8%;
+    height: 26.1%;
+    margin: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  `,
+
   Text: styled.div`
     font-style: normal;
     font-weight: 200;
@@ -47,6 +48,16 @@ const StyledCard = {
     line-height: 148.4%;
     padding-top: 0.5rem;
     display: flex;
+    align-itens: flex-end;
+  `,
+
+  ImgGroupCard: styled.div`
+    width: 104px;
+    height: 94px;
+    background-color: ${(props) => (props.isImg ? "" : props.background)};
+    background-image: url(${(props) => (props.isImg ? props.background : "")});
+    display: flex;
+    align-items: flex-start;
   `,
 
   ContainerCardMiddle: styled.div`
@@ -131,6 +142,66 @@ const StyledCard = {
     letter-spacing: 0.22em;
   `,
 
+  ContainerReactionsCardMiddle: styled.div`
+    width: 417px;
+    height: 32px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  `,
+
+  CircleReactionsCardMiddle: styled.div`
+    width: 32px;
+    height: 100%;
+    background-color: ${Colors.GRAY};
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :hover {
+      cursor: pointer;
+    }
+  `,
+
+  IconReactionCardMiddle: styled.div`
+    width: 16px;
+    height: 16px;
+    background-color: ${(props) => (props.isImg ? "" : props.background)};
+    background-image: url(${(props) => (props.isImg ? props.background : "")});
+  `,
+
+  ContainerCommentCardMiddle: styled.div`
+    width: 126px;
+    height: 100%;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    background-color: ${Colors.GRAY};
+  `,
+
+  TextCommentCardMiddle: styled.div`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 148.4%;
+    letter-spacing: 0.22em;
+    padding-left: 0.5rem;
+    color: ${Colors.AZUL_LINK};
+  `,
+
+  ContainerShareCardMiddle: styled.div`
+    width: 163px;
+    height: 100%;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    background-color: ${Colors.GRAY};
+  `,
+
   ContainerSideCards: styled.div`
     width: 337px;
     height: 483px;
@@ -162,7 +233,6 @@ const StyledCard = {
     font-weight: 700;
     font-size: 1.125rem;
     line-height: 1.563rem;
-    text-decoration-line: underline;
     padding-top: 1rem;
     padding-left: 2rem;
   `,
@@ -175,6 +245,7 @@ const StyledCard = {
     background: ${Colors.WHITE};
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     display: flex;
+    flex-direction: column;
   `,
 
   TitleContactCard: styled.div`
@@ -188,10 +259,15 @@ const StyledCard = {
   `,
 
   ContentContactCard: styled.div`
-    width: 165px;
+    width: auto;
     height: 48px;
+    margin-top: 1rem;
     padding: 1rem;
-    align-itens: row;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
   `,
 
   ContentTextContactCard: styled.div`
@@ -199,7 +275,8 @@ const StyledCard = {
     font-weight: 700;
     font-size: 18px;
     line-height: 25px;
-    text-decoration-line: underline;
+    text-decoration-line: none;
+    margin-left: 1rem;
     color: ${Colors.AZUL_LINK};
   `,
 };

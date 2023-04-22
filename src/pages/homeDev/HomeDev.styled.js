@@ -7,45 +7,53 @@ export const Container = styled.div`
   align-items: center;
   min-height: 100%;
   overflow: hidden;
+  font-family: nunito;
 `;
 
 export const Aside = styled.div`
   position: relative;
-  top: 100px;
+  top: 128px;
   width: 70%;
   column-count: 2;
   column-gap: 40px;
   height: 70%;
 `;
 
+export const DivAside = styled.div`
+  height: 50%;
+`;
+
 export const Article = styled.div`
   position: relative;
   top: 50px;
   width: 20%;
-
   height: 70%;
 `;
 
 export const Input = styled.input`
-  width: 100%;
-  height: 32px;
+  width: 69.8%;
+  height: 58px;
   border: 1px solid ${Colors.PRIMARY_COLOR};
+  background: rgba(32, 172, 105, 0.05);
   outline: none;
-  border-radius: 10px;
+  border-radius: 16px;
   position: absolute;
-  top: -60px;
+  top: 160px;
+  left: 40px;
+  font-size: 1.5rem;
 `;
 
 export const Card = styled.div`
-  margin-bottom: 40px;
   width: 100%;
-  height: 200px;
+  height: 220px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   -webkit-font-smoothing: antialiased !important;
   display: flex;
   justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
 `;
 
 export const ChatBot = styled.div`
@@ -62,17 +70,23 @@ export const ChatBot = styled.div`
 `;
 
 export const TitleCard = styled.h2`
-  font-weight: 600;
+  font-weight: 700;
   font-size: 28px;
+  line-height: 38px;
+  letter-spacing: 0.22em;
   color: ${Colors.black};
-  letter-spacing: 3px;
   text-align: left;
+  margin-left: 16px;
+  margin-top: 24px;
 `;
 
 export const DescPara = styled.p`
   font-weight: 400;
   font-size: 18px;
-  letter-spacing: 3px;
+  line-height: 25px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 8px;
 `;
 
 export const DescParaBot = styled.p`
@@ -84,15 +98,16 @@ export const DescParaBot = styled.p`
 `;
 
 export const FlexCard = styled.div`
-  align-self: center;
+  align-itens: center;
 `;
 
 export const CardImg = styled.img`
-  height: 24px;
-  margin: 10px;
+  height: 32px;
+  margin-top: 24px;
+  margin-left: 24px;
 `;
 export const BootImg = styled.img`
-  height: 42px;
+  height: 40px;
 `;
 
 export const GenericSolidButton = styled.button`
@@ -127,7 +142,7 @@ export const GenericSolidButton = styled.button`
   &:active {
     background-color: ${(props) =>
       props.disabled ? "" : Colors.PRIMARY_COLOR};
-    color: ${(props) => (props.disabled ? "" : Colors.white)};
+    color: ${(props) => (props.disabled ? "" : Colors.WHITE)};
     border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }
 

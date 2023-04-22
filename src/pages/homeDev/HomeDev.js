@@ -26,10 +26,10 @@ const HomeDev = () => {
   return (
     <>
       <GeneralContainer>
-        <NavBar />
+        <NavBar nav={1} />
         <Container>
+          <Input></Input>
           <Aside>
-            <Input></Input>
             <Card>
               <CardImg src={imgCard} />
 
@@ -42,6 +42,7 @@ const HomeDev = () => {
                 </DescPara>
               </FlexCard>
             </Card>
+
             <Card>
               <CardImg src={imgCard} />
 
@@ -57,7 +58,6 @@ const HomeDev = () => {
 
             <Card>
               <CardImg src={imgCard} />
-
               <FlexCard>
                 <TitleCard>{"Jobs"}</TitleCard>
                 <DescPara>
@@ -70,7 +70,6 @@ const HomeDev = () => {
 
             <Card>
               <CardImg src={imgCard} />
-
               <FlexCard>
                 <TitleCard>{"Cursos"}</TitleCard>
                 <DescPara>
@@ -85,17 +84,13 @@ const HomeDev = () => {
           <Article>
             <ChatBot>
               <BootImg src={imgBot} />
-              <TitleCard color={Colors.white}>{"ChatBot"}</TitleCard>
+              <TitleCard color={Colors.WHITE}>{"ChatBot"}</TitleCard>
               <DescParaBot>
                 {
                   "Como podemos te ajudar, tire suas dúvidas com o nosso bot Yuca"
                 }
               </DescParaBot>
-              <GenericSolidButton
-              
-              >
-                {"Iniciar"}
-              </GenericSolidButton>
+              <GenericSolidButton>{"Iniciar"}</GenericSolidButton>
             </ChatBot>
           </Article>
         </Container>

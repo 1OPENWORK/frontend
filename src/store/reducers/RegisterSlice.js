@@ -24,6 +24,15 @@ export const slice = createSlice({
     etapa3: {
       isDesenvolvedor: false,
     },
+    etapa4: [],
+  },
+    etapa7: {
+      fullname: "",
+      email: "",
+      setor: "",
+      cnpj: "",
+      password: "",
+      comfirmed_password: "",
   },
 
   reducers: {
@@ -73,8 +82,22 @@ export const slice = createSlice({
     changeEtapa4(state, { payload }) {
       return {
         ...state,
-        etapaAtual: 4,
-        etapa4: {},
+        etapaAtual: 3,
+        etapa4: payload.lista,
+      };
+    },
+
+    changeEtapa7(state, { payload }) {
+      return {
+        ...state,
+        etapa7: {
+          fullname: payload.fullname,
+          email: payload.email,
+          setor: payload.setor,
+          cnpj: payload.cnpj,
+          password: payload.password,
+          comfirmed_password: payload.comfirmed_password,
+        },
       };
     },
   },
@@ -85,7 +108,8 @@ export const {
   changeEtapa2,
   changeEtapa3,
   changeEtapa4,
+  changeEtapa7,
   changeEtapaAll,
 } = slice.actions;
-export const selectRegister = (state) => state;
+export const selectRegister = state => state;
 export default slice.reducer;

@@ -8,10 +8,8 @@ import {
 } from "../et4/RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "../et4/components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
-import listLoad from "../../../../../constants/json/selectProf.json";
 
-const RegisterEt5 = ({}) => {
-  const [list] = React.useState(listLoad.proeficiency);
+const RegisterEt5 = () => {
 
   return (
     <>
@@ -29,14 +27,14 @@ const RegisterEt5 = ({}) => {
               width={"160px"}
               height={"44px"}
               title={"React"}
-            />
+            handleClick={() => ("")}/>
             <ButtonRegisterEt4
               width={"160px"}
               height={"44px"}
               title={"Angular"}
-            />
-            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"HTML"} />
-            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"CSS"} />
+            handleClick={() => ("")}/>
+            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"HTML"} handleClick={() => ("")}/>
+            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"CSS"} handleClick={() => ("")}/>
           </ColumCount>
 
           <Divider>

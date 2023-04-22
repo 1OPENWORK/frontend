@@ -1,10 +1,12 @@
 const HomePagePath = "/";
-const AuthPath = "/auth";
-const ChatPath = "/chat";
-const HomeDevPath = "/home-dev";
-const RegisterPath = "/register";
+const AuthPath = "/login";
+const ChatPath = "/chat/:id";
+const RegisterPath = "/cadastro";
 const JobsPath = "/jobs";
-const ProjectsPath = "/projects";
+const HomeDevPath = "/desenvolvedor";
+const DevsPath = "/desenvolvedores";
+const AvaliacoesPath = "/avaliacoes";
+const ComunidadePath = "/comunidade";
 
 module.exports = {
   HomePagePath,
@@ -13,5 +15,7 @@ module.exports = {
   RegisterPath,
   JobsPath,
   HomeDevPath,
-  ProjectsPath,
+  DevsPath,
+  AvaliacoesPath,
+  ComunidadePath,
 };

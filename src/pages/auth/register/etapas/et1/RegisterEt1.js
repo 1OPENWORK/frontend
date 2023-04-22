@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
-
 import Styled from "../../Register.styled";
 import { object, string, ref } from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
-import {
-  changeEtapa1,
-  changeEtapaAll,
-} from "../../../../../store/reducers/RegisterSlice";
+import {changeEtapa1, changeEtapaAll} from "../../../../../store/reducers/RegisterSlice"
 
 const RegisterEt1 = () => {
   const dispatch = useDispatch();
@@ -91,15 +87,15 @@ const RegisterEt1 = () => {
           label="Nome Completo"
           value={nome}
           handle={setNome}
-          space={"20px"}
-          mr={"20px"}
+          space={"1.25rem"}
+          mr={"1.25rem"}
           disabled={verified}
         />
         <InputForm
           label="Email"
           value={email}
           handle={setEmail}
-          space={"20px"}
+          space={"1.25rem"}
           disabled={verified}
         />
       </Styled.Row>
@@ -108,15 +104,15 @@ const RegisterEt1 = () => {
           label="Telefone"
           value={tel}
           handle={setTel}
-          space={"20px"}
-          mr={"20px"}
+          space={"1.25rem"}
+          mr={"1.25rem"}
           disabled={verified}
         />
         <InputForm
           label="CPF / CNPJ"
           value={cpfOrCnpj}
           handle={setCpfOrCnpj}
-          space={"20px"}
+          space={"1.25rem"}
           disabled={verified}
         />
       </Styled.Row>
@@ -125,8 +121,8 @@ const RegisterEt1 = () => {
           label="Senha"
           value={password}
           handle={setPassword}
-          space={"20px"}
-          mr={"20px"}
+          space={"1.25rem"}
+          mr={"1.25rem"}
           type={"password"}
           disabled={verified}
         />
@@ -134,33 +130,16 @@ const RegisterEt1 = () => {
           label="Confirmar Senha"
           value={passwordConfirmed}
           handle={setPasswordConfirmed}
-          space={"20px"}
+          space={"1.25rem"}
           type={"password"}
           disabled={verified}
         />
       </Styled.Row>
-      <Styled.Divisor
-        align={"flex-end"}
-        style={{ marginRight: "20px", width: "770px" }}
-      >
+      <Styled.Divisor align={"flex-end"} style={{ marginRight: "1.25rem", width: "770px" }}>
         {!isNext ? (
-          <FilledButton
-            onClick={handleForm}
-            color={Colors.PRIMARY_COLOR}
-            width={190}
-            heigth={60}
-          >
-            {"Verificar"}
-          </FilledButton>
+          <FilledButton onClick={handleForm} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}</FilledButton>
         ) : (
-          <FilledButton
-            onClick={nextEtapa}
-            color={Colors.black}
-            width={190}
-            heigth={60}
-          >
-            {"Próximo"}
-          </FilledButton>
+          <FilledButton onClick={nextEtapa} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Cadastrar"} </FilledButton>
         )}
       </Styled.Divisor>
     </Styled.Form>

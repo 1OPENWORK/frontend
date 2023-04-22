@@ -5,7 +5,6 @@ const StyledList = {
   ContainerList: styled.div`
     width: 100%;
     height: auto;
-    
   `,
 
   titleList: styled.div`
@@ -32,13 +31,13 @@ const StyledList = {
     font-family: "Nunito";
     font-style: normal;
     font-weight: 800;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 148.4%;
-    /* identical to box height, or 24px */
     letter-spacing: 0.22em;
     text-align: center;
     padding-bottom: 5.2%;
     width: 30%;
+    cursor: pointer;
   `,
 };
 

@@ -5,26 +5,44 @@ const StyledNavBar = {
   ContainerNavBar: styled.div`
     display: flex;
     align-items: center;
-    padding-left: 20px;
     justify-content: space-between;
-    padding-left: 20px;
     height: 120px;
     width: 100%;
     position: fixed;
     border-bottom: 5px solid ${Colors.SECONDARY_COLOR};
-    background-color: ${Colors.white};
+    background-color: ${Colors.WHITE};
     z-index: 1000;
+    padding: ${(props) => (props.isLogin ? "40px 40px" : "0px")};
   `,
 
   TitleNavBar: styled.h1`
-    font-weight: 700;
-    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "28px")};
+    font-weight: 900;
+    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "24px")};
     line-height: 10px;
     color: ${Colors.PRIMARY_COLOR};
     cursor: pointer;
     transition: all 0.3s;
+    font-family: nunito;
+    font-style: normal;
+    line-height: 33px;
+    margin: 40px;
+      color: ${Colors.SECONDARY_COLOR};
+    }
+  `,
 
-    :hover{
+  TitleNavBarLogo: styled.h1`
+    font-weight: 900;
+    font-size: ${(props) => (props.size > 0 ? props.size + "px" : "24px")};
+    line-height: 10px;
+    color: ${Colors.PRIMARY_COLOR};
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: nunito;
+    font-style: normal;
+    line-height: 33px;
+    margin-left: -10px;
+
+    :hover {
       color: ${Colors.SECONDARY_COLOR};
     }
   `,
@@ -40,9 +58,7 @@ const StyledNavBar = {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-    margin-right: 50px;
-  
+    margin-right: 48px;
   `,
 
   LogoImg: styled.img``,

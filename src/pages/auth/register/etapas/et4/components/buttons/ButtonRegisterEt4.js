@@ -12,6 +12,10 @@ export const ButtonRegisterEt4 = ({ title, handleClick, width, height}) => {
     setColor(() => (checked ? "#fff" : "#20ac69"));
   }, [checked]);
 
+  useEffect(() => {
+    handleClick(title, checked);
+  }, [checked]);
+
   return (
     <>
       <input type="hidden" checked={checked} />
@@ -22,7 +26,7 @@ export const ButtonRegisterEt4 = ({ title, handleClick, width, height}) => {
         backGround={backColor}
         color={color}
         onClick={() => {
-          setChecked((old) => !old);
+          setChecked(old => !old);
         }}
       >
         <TitleProf>{title}</TitleProf>

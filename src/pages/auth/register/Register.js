@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import BarProgress from "../../../components/barProgress/BarProgress";
-import InputForm from "../../../components/input/InputForm";
-import { FilledButton } from "../../../components/UI/buttons/Button";
-import Colors from "../../../constants/Colors";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
-import { useForm } from "react-hook-form";
 import etapasRegister from "../../../constants/json/register.json";
 import RegisterEt1 from "./etapas/et1/RegisterEt1";
 import RegisterEt2 from "./etapas/et2/RegisterEt2";
@@ -17,23 +12,21 @@ import RegisterEt5 from "./etapas/et5/RegisterEt5";
 import RegisterEt6 from "./etapas/et6/RegisterEt6";
 
 // import RegisterCompany from "./etapas/etCompany/RegisterCompany";
+import RegisterEt4 from "./etapas/et4/RegisterEt4";
+import RegisterEt5 from "./etapas/et5/RegisterEt5";
+import RegisterCompany from "./etapas/etCompany/RegisterCompany";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import RegisterEt4 from "./etapas/et4/RegisterEt4";
+import RegisterEt5 from "./etapas/et5/RegisterEt5";
+
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 
-const Register = ({ name }) => {
+const Register = () => {
   const [etapas] = useState(...[etapasRegister.etapas]);
 
   const { register } = useSelector(selectRegister);
-
-  const loginUser = (data) => console.log(data);
-
-  // const [user] = () => {
-  //   if (register.etapaAtual === 4) {
-  //     <Userlog name={name} />;
-  //   }
-  // };
 
   return (
     <Styled.Container>
@@ -44,7 +37,7 @@ const Register = ({ name }) => {
             title={etapas[register.etapaAtual].titleInformation}
             descricao={etapas[register.etapaAtual].description}
             textButton="Home"
-            textButtonVoltar="voltar"
+            textButtonVoltar="Voltar"
           />
           <Styled.ContainerForm position="start">
             {register.etapaAtual >= 3 && (
@@ -53,9 +46,9 @@ const Register = ({ name }) => {
             <Styled.Divisor
               align={"start"}
               style={{
-                marginTop: "20px",
-                marginLeft: "148px",
-                height: "80px",
+                marginTop: "1.25rem",
+                marginLeft: "9.25rem",
+                height: "5rem",
               }}
             >
               <Styled.TitleForm>
@@ -72,7 +65,7 @@ const Register = ({ name }) => {
             ) : register.etapaAutal === 2 ? (
               <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
-              <RegisterEt6 />
+              <RegisterEt1 />
             ) : (
               register.etapaAtual === 4 && <RegisterEt6 />
             )}
@@ -83,7 +76,7 @@ const Register = ({ name }) => {
             <Styled.Divisor
               align={"flex-end"}
               style={{
-                paddingRight: 20,
+                paddingRight: "1.25rem",
               }}
             ></Styled.Divisor>
           </Styled.ContainerForm>

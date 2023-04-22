@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Styled from "./Jobs.styled";
+import styled from "./Jobs.styled";
 import NavBarList from "../../components/navBarList/NavBarList";
 import List from "../../components/list/List";
 
@@ -15,13 +15,12 @@ import List from "../../components/list/List";
  * @returns The component JSX.
  */
 const Jobs = () => {
-
-
   return (
-    <><NavBarList />
-    <List /></>
-    
-    );
+    <>
+      <NavBarList type={3} />
+      <List />
+    </>
+  );
 };
 
 export default Jobs;

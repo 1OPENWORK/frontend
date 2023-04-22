@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 import {
   AuthPath,
   HomePagePath,
   RegisterPath,
-  JobsPath,
   HomeDevPath,
-  ProjectsPath,
+  ChatPath,
+  JobsPath,
+  DevsPath,
+  AvaliacoesPath,
+  ComunidadePath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -15,37 +23,20 @@ import Auth from "./pages/auth/Auth";
 import Register from "./pages/auth/register/Register";
 import Jobs from "./pages/jobs/Jobs";
 import HomeDev from "./pages/homeDev/HomeDev";
-import Projects from "./pages/projects/Projects.js";
 
 const socket = socketIO.connect("http://localhost:3333");
 
 function App() {
-  const [isConnected, setIsConnected] = useState("");
-
-  // useEffect(() => {
-  //   socket.on("connect", () => {
-  //     setIsConnected(socket.id);
-
-  //     const idUser = 1;
-  //     socket.emit("access_chat", { idUser }, (dados, socketId) => {
-  //       console.log(dados);
-  //     });
-
-  // <<<<<<< HEAD
-  //       socket.on("message", { id: isConnected }, (message) => {
-  //         console.log(message);
-  //       });
-  //     });
-  //   }, []);
-
-  // =======
-  //     socket.on("message", {id: isConnected}, (message) => {
-
-  //       console.log(message);
-  //     })
-
-  //   });
-  // }, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    socket.on("connect", () => {
+      dispatch(
+        changeOn({
+          id: socket.id,
+        })
+      );
+    });
+  }, []);
 
   return (
     <Router>
@@ -55,10 +46,12 @@ function App() {
         <Route path={RegisterPath} element={<Register />} />
         <Route path={JobsPath} element={<Jobs />} />
         <Route path={HomeDevPath} element={<HomeDev />} />
-        <Route path={ProjectsPath} element={<Projects />} />
+        <Route path={ChatPath} element={<Chat socket={socket} />} />
+        <Route path={DevsPath} element={<Devs />} />
+        <Route path={AvaliacoesPath} element={<Avaliacoes />} />
+        <Route path={ComunidadePath} element={<Comunidade />} />
       </Routes>
     </Router>
-    // >>>>>>> c167bd0bc9cc30101c22862d90c2ab31b37ccf6b
   );
 }
 

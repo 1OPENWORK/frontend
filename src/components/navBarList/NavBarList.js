@@ -42,11 +42,15 @@ const NavBarList = ({ type }) => {
         <NavBar isLogin={true} />
       </BackgroundNavBar>
       <Styled.ContainerNavBarList>
-        {type === 1
+        {
+          type === 1
           ? "Desenvolvedores disponíveis"
           : type === 2
           ? "Avaliações"
-          : "Jobs disponíveis"}
+          : type === 3
+          ? "Jobs disponíveis"
+          : "Financeira"
+        }
       </Styled.ContainerNavBarList>
     </BackgroundNavBarList>
   );

@@ -6,6 +6,8 @@ const JobsPath = "/jobs";
 const HomeDevPath = "/home-dev";
 const DevsPath = "/devs";
 const AvaliacoesPath = "/avaliacoes";
+const DashboardFinanceiraPath = "/dashboard"
+const FinanceiraPath = "/financeira"
 
 module.exports = {
   HomePagePath,
@@ -16,4 +18,7 @@ module.exports = {
   HomeDevPath,
   DevsPath,
   AvaliacoesPath,
+  DashboardFinanceiraPath,
+  FinanceiraPath
+
 };

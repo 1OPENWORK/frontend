@@ -14,6 +14,8 @@ import {
   JobsPath,
   DevsPath,
   AvaliacoesPath,
+  DashboardFinanceiraPath,
+  FinanceiraPath
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -24,6 +26,8 @@ import Jobs from "./pages/jobs/Jobs";
 import HomeDev from "./pages/homeDev/HomeDev";
 import Chat from "./pages/chat/Chat";
 import Devs from "./pages/devs/Devs";
+import DashboardFinanceira from "./pages/dashboardFinanceira/DashboardFinanceira";
+import Financeira from "./pages/dashboardFinanceira/Financeira/Financeira";
 import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
@@ -53,6 +57,8 @@ function App() {
         <Route path={ChatPath} element={<Chat socket={socket} />} />
         <Route path={DevsPath} element={<Devs />} />
         <Route path={AvaliacoesPath} element={<Avaliacoes />} />
+        <Route path={DashboardFinanceiraPath} element={<DashboardFinanceira />}/>
+        <Route path={FinanceiraPath} element={<Financeira />}/>
       </Routes>
     </Router>
   );

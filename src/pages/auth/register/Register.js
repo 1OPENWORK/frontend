@@ -17,11 +17,22 @@ import { ToastContainer } from "react-toastify";
 import { Box } from "@mui/material";
 import { Stepper } from "react-form-stepper";
 import Colors from "../../../constants/Colors";
+import RegisterCompany from "./etapas/etCompany/RegisterCompany";
 
 const Register = () => {
   const [etapas] = useState(...[etapasRegister.etapas]);
 
   const { register } = useSelector(selectRegister);
+
+  const FetchTitle = ({}) => {
+    if (register.etapaAtual <= 3) {
+      return register.etapa3.isDesenvolvedor
+        ? etapas[register.etapaAtual].title
+        : etapas[register.etapaAtual].titleEmpresa;
+    } else {
+      return etapas[register.etapaAtual].title;
+    }
+  };
 
   return (
     <Styled.Container>
@@ -36,7 +47,10 @@ const Register = () => {
           />
           <Styled.ContainerForm position="start">
             {register.etapaAtual >= 3 && (
-              <Userlog name={"T"} desc={"Olá, Tarifa"} />
+              <Userlog
+                name={register.etapa1.fullname.substr(0, 1)}
+                desc={"Olá, " + register.etapa1.fullname}
+              />
             )}
             <Styled.Divisor
               align={"start"}
@@ -47,7 +61,7 @@ const Register = () => {
               }}
             >
               <Styled.TitleForm>
-                {etapas[register.etapaAtual].title}
+                <FetchTitle />
               </Styled.TitleForm>
             </Styled.Divisor>
 
@@ -60,7 +74,11 @@ const Register = () => {
             ) : register.etapaAutal === 2 ? (
               <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
-              <RegisterEt4 />
+              register.etapa3.isDesenvolvedor ? (
+                <RegisterEt4 />
+              ) : (
+                <RegisterCompany />
+              )
             ) : register.etapaAtual === 4 ? (
               <RegisterEt5 />
             ) : (
@@ -74,14 +92,22 @@ const Register = () => {
                     activeBgColor: Colors.SECONDARY_COLOR,
                     completedBgColor: Colors.PRIMARY_COLOR,
                   }}
-                  steps={[
-                    { label: "Informações pessoais" },
-                    { label: "Local de trabalho" },
-                    { label: "Oque você é?" },
-                    { label: "Suas especialidades" },
-                    { label: "Ferramentas e Metodologias" },
-                    { label: "Ajuste suas competências" },
-                  ]}
+                  steps={
+                    register.etapa3.isDesenvolvedor
+                      ? [
+                          { label: "Informações pessoais" },
+                          { label: "Local de trabalho" },
+                          { label: "Oque você é?" },
+                          { label: "Suas especialidades" },
+                          { label: "Ferramentas e Metodologias" },
+                          { label: "Ajuste suas competências" },
+                        ]
+                      : [
+                          { label: "Informações pessoais" },
+                          { label: "Local de trabalho" },
+                          { label: "Informações da empresa" },
+                        ]
+                  }
                   activeStep={parseInt(register.etapaAtual)}
                 />
               </Box>

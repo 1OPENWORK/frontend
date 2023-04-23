@@ -6,9 +6,8 @@ import Item from "./components/item/Item";
 import { useSelector } from "react-redux";
 import { selectRegister } from "../../../../../store/reducers/RegisterSlice";
 import { post } from "../../../../../services/Generected";
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
-import { HomeDevPath } from "../../../../../constants/Path";
+import { AuthPath, HomeDevPath } from "../../../../../constants/Path";
 
 const RegisterEt6 = ({ checked }) => {
   const { register } = useSelector(selectRegister);
@@ -61,8 +60,7 @@ const RegisterEt6 = ({ checked }) => {
     const response = await post(`${URI}/api/cadastros/dev`, dados);
 
     if(response.status === 201){
-      Cookies.set('token', response.data, { expires: 1 });
-      navigate(HomeDevPath);
+      navigate(AuthPath);
     }
 
     

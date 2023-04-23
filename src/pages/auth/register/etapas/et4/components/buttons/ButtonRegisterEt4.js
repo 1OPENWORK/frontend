@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 
 import { ButtonCheck, TitleProf } from "./ButtonRegisterEt4.styled";
 
-export const ButtonRegisterEt4 = ({ title, handleClick, width, height}) => {
+export const ButtonRegisterEt4 = ({ dados, width, height, handleClick }) => {
   const [checked, setChecked] = useState(false);
   const [color, setColor] = useState("");
   const [backColor, setColorBack] = useState("");
@@ -12,24 +12,21 @@ export const ButtonRegisterEt4 = ({ title, handleClick, width, height}) => {
     setColor(() => (checked ? "#fff" : "#20ac69"));
   }, [checked]);
 
-  useEffect(() => {
-    handleClick(title, checked);
-  }, [checked]);
-
   return (
     <>
       <input type="hidden" checked={checked} />
 
       <ButtonCheck
-      width={width}
-      height={height}
+        width={width}
+        height={height}
         backGround={backColor}
         color={color}
         onClick={() => {
-          setChecked(old => !old);
+          setChecked((old) => !old);
+          handleClick(dados, !checked);
         }}
       >
-        <TitleProf>{title}</TitleProf>
+        <TitleProf>{dados.name}</TitleProf>
       </ButtonCheck>
     </>
   );

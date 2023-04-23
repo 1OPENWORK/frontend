@@ -18,12 +18,13 @@
     {
       "titleInformation": "Etapa 4",
       "description": "Escolha uma ou mais especialidades de acordo com seu conhecimento. A partir daqui, teremos a base do seu perfil",
-      "title": "Selecione suas especialidades"
+      "title": "Selecione suas especialidades",
+      "titleEmpresa": "Informações da empresa"
     },
     {
       "titleInformation": "Etapa 5",
       "description": "De acordo com o selecionado na etapa anterior, escolha as linguagens no qual desenvolve",
-      "title": "Procure suas Linguagens / Ferramentas / Metodologias etc... "
+      "title": "Linguagens / Ferramentas / Metodologias "
     },
     {
       "titleInformation": "Etapa 6",

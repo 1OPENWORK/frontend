@@ -1,15 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
+import Styled from "./RegisterEt5.styled";
 import {
   Container,
   Flex,
   ColumCount,
   Divider,
 } from "../et4/RegisterEt4.styled";
-import { ButtonRegisterEt4 } from "../et4/components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
+import ButtonRegisterEt5 from "./components/ButtonRegisterEt5";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeEtapa5,
+  selectRegister,
+} from "../../../../../store/reducers/RegisterSlice";
 
 const RegisterEt5 = () => {
+  const { register } = useSelector(selectRegister);
+  const [tools, setTools] = useState([]);
+  const [toolSelected, setToolSelected] = useState([]);
+  const [searchTools, setSearchTools] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleClick = (dados, checked) => {
+    const newDados = { ...dados, years: 0, proficiency: "Iniciante" };
+
+    if (checked) {
+      const index = toolSelected.findIndex((tool) => tool.id === dados.id);
+      const newToolSelected = [...toolSelected];
+      newToolSelected.splice(index, 1);
+      setToolSelected(newToolSelected);
+      setTools([...tools, newDados]);
+    } else {
+      const index = tools.findIndex((tool) => tool.id === dados.id);
+      const newTools = [...tools];
+      newTools.splice(index, 1);
+      setTools(newTools);
+      setToolSelected([...toolSelected, newDados]);
+    }
+    setSearchTools("");
+  };
+
+  useEffect(() => {
+    setTools(register.etapa4);
+  }, []);
+
+  const filteredTools = tools.filter((tool) =>
+    tool.name.toLowerCase().includes(searchTools.toLowerCase())
+  );
+
+  const handleNext = () => {
+    dispatch(
+      changeEtapa5({
+        lista: toolSelected,
+      })
+    );
+  };
 
   return (
     <>
@@ -17,34 +64,52 @@ const RegisterEt5 = () => {
         <Flex>
           <InputForm
             label="Pesquisar"
-            value=""
-            handle={() => ""}
+            value={searchTools}
+            handle={setSearchTools}
             space={"24px"}
             width={"734px"}
           />
-          <ColumCount count={4} gap={"1.9rem"}>
-            <ButtonRegisterEt4
-              width={"160px"}
-              height={"44px"}
-              title={"React"}
-            handleClick={() => ("")}/>
-            <ButtonRegisterEt4
-              width={"160px"}
-              height={"44px"}
-              title={"Angular"}
-            handleClick={() => ("")}/>
-            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"HTML"} handleClick={() => ("")}/>
-            <ButtonRegisterEt4 width={"160px"} height={"44px"} title={"CSS"} handleClick={() => ("")}/>
-          </ColumCount>
+
+          <Styled.DivScroll>
+            <ColumCount count={4} gap={"1.9rem"}>
+              {toolSelected?.map((dados, index) => {
+                return (
+                  <ButtonRegisterEt5
+                    key={dados.id}
+                    width={"160px"}
+                    height={"44px"}
+                    dados={dados}
+                    selected={true}
+                    handleClick={handleClick}
+                  />
+                );
+              })}
+            </ColumCount>
+
+            <ColumCount count={4} gap={"1.9rem"}>
+              {filteredTools.slice(0, 4).map((dados, index) => {
+                if (index <= 3) {
+                  return (
+                    <ButtonRegisterEt5
+                      key={dados.id}
+                      width={"160px"}
+                      height={"44px"}
+                      dados={dados}
+                      handleClick={handleClick}
+                    />
+                  );
+                }
+              })}
+            </ColumCount>
+          </Styled.DivScroll>
 
           <Divider>
             <FilledButton
-              // onClick={() => nextEtapa()}
-
+              onClick={() => handleNext()}
               color={"black"}
               width={190}
               heigth={60}
-              disabled={true}
+              disabled={toolSelected.length > 0 ? false : true}
             >
               {"Próximo"}
             </FilledButton>

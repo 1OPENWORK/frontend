@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BarProgress from "../../../components/barProgress/BarProgress";
@@ -10,17 +11,29 @@ import RegisterEt3 from "./etapas/et3/RegisterEt3";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 import RegisterEt5 from "./etapas/et5/RegisterEt5";
 import RegisterEt6 from "./etapas/et6/RegisterEt6";
-import RegisterCompany from "./etapas/etCompany/RegisterCompany";
-import { selectRegister } from "../../../store/reducers/RegisterSlice";
-import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
+import { useSelector } from "react-redux";
+import { selectRegister } from "../../../store/reducers/RegisterSlice";
+import { ToastContainer } from "react-toastify";
+import { Box } from "@mui/material";
+import { Stepper } from "react-form-stepper";
+import Colors from "../../../constants/Colors";
+import RegisterCompany from "./etapas/etCompany/RegisterCompany";
 
 const Register = () => {
   const [etapas] = useState(...[etapasRegister.etapas]);
 
   const { register } = useSelector(selectRegister);
+
+  const FetchTitle = ({}) => {
+    if (register.etapaAtual <= 3) {
+      return register.etapa3.isDesenvolvedor
+        ? etapas[register.etapaAtual].title
+        : etapas[register.etapaAtual].titleEmpresa;
+    } else {
+      return etapas[register.etapaAtual].title;
+    }
+  };
 
   return (
     <Styled.Container>
@@ -35,7 +48,10 @@ const Register = () => {
           />
           <Styled.ContainerForm position="start">
             {register.etapaAtual >= 3 && (
-              <Userlog name={"T"} desc={"Olá, Tarifa"} />
+              <Userlog
+                name={register.etapa1.fullname.substr(0, 1)}
+                desc={"Olá, " + register.etapa1.fullname}
+              />
             )}
             <Styled.Divisor
               align={"start"}
@@ -46,7 +62,7 @@ const Register = () => {
               }}
             >
               <Styled.TitleForm>
-                {etapas[register.etapaAtual].title}
+                <FetchTitle />
               </Styled.TitleForm>
             </Styled.Divisor>
 
@@ -59,13 +75,43 @@ const Register = () => {
             ) : register.etapaAutal === 2 ? (
               <RegisterEt3 />
             ) : register.etapaAtual === 3 ? (
-              <RegisterEt1 />
+              register.etapa3.isDesenvolvedor ? (
+                <RegisterEt4 />
+              ) : (
+                <RegisterCompany />
+              )
+            ) : register.etapaAtual === 4 ? (
+              <RegisterEt5 />
             ) : (
-              register.etapaAtual === 4 && <RegisterEt6 />
+              <RegisterEt6 />
             )}
 
             <Styled.Divisor>
-              <BarProgress qtdMax={7} atualEtapa={register.etapaAtual + 1} />
+              <Box sx={{ width: "100%" }}>
+                <Stepper
+                  styleConfig={{
+                    activeBgColor: Colors.SECONDARY_COLOR,
+                    completedBgColor: Colors.PRIMARY_COLOR,
+                  }}
+                  steps={
+                    register.etapa3.isDesenvolvedor
+                      ? [
+                          { label: "Informações pessoais" },
+                          { label: "Local de trabalho" },
+                          { label: "Oque você é?" },
+                          { label: "Suas especialidades" },
+                          { label: "Ferramentas e Metodologias" },
+                          { label: "Ajuste suas competências" },
+                        ]
+                      : [
+                          { label: "Informações pessoais" },
+                          { label: "Local de trabalho" },
+                          { label: "Informações da empresa" },
+                        ]
+                  }
+                  activeStep={parseInt(register.etapaAtual)}
+                />
+              </Box>
             </Styled.Divisor>
             <Styled.Divisor
               align={"flex-end"}

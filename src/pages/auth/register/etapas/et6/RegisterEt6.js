@@ -1,106 +1,97 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import InputForm from "../../../../../components/input/InputForm";
-import {
-  Container,
-  Flex,
-  ColumCount,
-  Divider,
-} from "../et4/RegisterEt4.styled";
+import React, { useEffect, useState } from "react";
+import { Container, Flex, Divider } from "../et4/RegisterEt4.styled";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
-import { ButtonRegisterEt4 } from "../et4/components/buttons/ButtonRegisterEt4";
-import { Button, DivInput, H3Input, Input } from "./RegisterEt6.styled";
-import { ComboBox } from "./components/ComboBox";
+import { DivFlowScroll } from "./RegisterEt6.styled";
+import Item from "./components/item/Item";
+import { useSelector } from "react-redux";
+import { selectRegister } from "../../../../../store/reducers/RegisterSlice";
+import { post } from "../../../../../services/Generected";
+import { useNavigate } from "react-router-dom";
+import { AuthPath, HomeDevPath } from "../../../../../constants/Path";
 
 const RegisterEt6 = ({ checked }) => {
-  const [sports] = ["Badminton", "Cricket", "Football", "Golf", "Tennis"];
+  const { register } = useSelector(selectRegister);
+  const [itens, setItens] = useState([]);
+  const navigate = useNavigate();
+
+  const URI = process.env.REACT_APP_BACKEND_LOCAL_HOST;
+
+  const editCompotencias = (dados) => {
+    const prevItens = [...itens];
+    const newItens = prevItens.map((i) => {
+      if (i.id === dados.id) {
+        return {
+          ...i,
+          years: dados.years,
+          proficiency: dados.proficiency,
+        };
+      } else {
+        return i;
+      }
+    });
+
+    setItens(newItens);
+  };
+
+  const handleFinished = async () => {
+    const dados = {
+      user: {
+        name: register.etapa1.fullname,
+        email: register.etapa1.email,
+        cpfCnpj: register.etapa1.cfp_cnpj,
+        cellphone: register.etapa1.tel,
+        password: register.etapa1.password,
+        autentication: false,
+      },
+      address: {
+        zipcode: register.etapa2.cep,
+        state: register.etapa2.estado,
+        city: register.etapa2.cidade,
+        district: register.etapa2.bairro,
+        address: register.etapa2.rua,
+        number: register.etapa2.numero,
+        complement: register.etapa2.complemento,
+      },
+      userTool: {
+        userTools: [...[...itens]],
+      },
+    };
+
+    const response = await post(`${URI}/api/cadastros/dev`, dados);
+
+    if(response.status === 201){
+      navigate(AuthPath);
+    }
+
+    
+  };
+
+  useEffect(() => {
+    setItens(register.etapa5);
+  }, []);
 
   return (
     <>
       <Container>
+        <DivFlowScroll>
+          {itens.map((dados, index) => (
+            <Item
+              key={index}
+              dados={dados}
+              handleProeficiencia={editCompotencias}
+            />
+          ))}
+        </DivFlowScroll>
         <Flex gap={"2rem"}>
-          <ColumCount count={3} gap={"4rem"}>
-            <Button
-              color={"#fff"}
-              backGround={"#20ac69"}
-              width={"199px"}
-              height={"53px"}
-              title={"React"}
-            >
-              {"React"}
-            </Button>
-
-            <DivInput>
-              <Input
-                w={"58px"}
-                type="number"
-                min="0"
-                max="100"
-                placeholder="0"
-              />
-              <H3Input>{"Anos"}</H3Input>
-            </DivInput>
-            <ComboBox />
-          </ColumCount>
-
-          <ColumCount count={3} gap={"4rem"}>
-            <Button
-              color={"#fff"}
-              backGround={"#20ac69"}
-              width={"199px"}
-              height={"53px"}
-              title={"React"}
-            >
-              {"CSS"}
-            </Button>
-
-            <DivInput>
-              <Input
-                w={"58px"}
-                type="number"
-                min="0"
-                max="100"
-                placeholder="0"
-              />
-              <H3Input>{"Anos"}</H3Input>
-            </DivInput>
-            <ComboBox />
-          </ColumCount>
-
-          <ColumCount count={3} gap={"4rem"}>
-            <Button
-              color={"#fff"}
-              backGround={"#20ac69"}
-              width={"199px"}
-              height={"53px"}
-              title={"React"}
-            >
-              {"html"}
-            </Button>
-
-            <DivInput>
-              <Input
-                w={"58px"}
-                type="number"
-                min="0"
-                max="100"
-                placeholder="0"
-              />
-              <H3Input>{"Anos"}</H3Input>
-            </DivInput>
-            <ComboBox />
-          </ColumCount>
-
           <Divider>
             <FilledButton
-              // onClick={() => nextEtapa()}
-
+              onClick={() => handleFinished()}
               color={"black"}
-              width={190}
+              width={200}
               heigth={60}
-              disabled={true}
+              disabled={false}
             >
-              {"Próximo"}
+              {"Finalizar"}
             </FilledButton>
           </Divider>
         </Flex>

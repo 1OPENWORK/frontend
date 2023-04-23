@@ -1,42 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import { Container, Flex, ColumCount, Divider } from "./RegisterEt4.styled";
 import { ButtonRegisterEt4 } from "./components/buttons/ButtonRegisterEt4";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import { handleProeficiency } from "../../../../../store/actions/Proeficiency";
-
 import { useDispatch } from "react-redux";
 import { changeEtapa4 } from "../../../../../store/reducers/RegisterSlice";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const RegisterEt4 = () => {
   const [proefiency, setProeficiency] = useState([]);
   const dispatch = useDispatch();
   const [list, setList] = useState([]);
-  let array = [];
+  const [arrayTools, setTools] = useState([]);
 
   const handleRemoveItemList = React.useCallback((proefiency) => {
-    const newProefiency = [...list];
-    newProefiency.splice(list.indexOf(proefiency), 1);
-    setList(newProefiency);
+    const tools = proefiency.tools;
+
+    const newProefiency = [...arrayTools];
+    for (const tool of tools) {
+      newProefiency.splice(arrayTools.indexOf(tool.id), 1);
+    }
+
+    setTools(newProefiency);
   });
 
-  const Tools = (title) => {
-    proefiency
-      .filter((list) => list.name === title)
-      .map((d) => {
-        const tools = d.tools;
+  const tools = (dados, checked) => {
+    if (checked) {
+      proefiency
+        .filter((list) => list.name === dados.name)
+        .map((d) => {
+          const tools = d.tools;
 
-        array.push(...tools);
-      });
-  };
-
-  const handleAdicionarLista = (title, checked) => {
-    if (!checked) {
-      handleRemoveItemList(title);
+          setTools([...arrayTools, ...tools]);
+        });
     } else {
-      Tools(title);
+      handleRemoveItemList(dados);
     }
   };
 
@@ -48,7 +46,7 @@ const RegisterEt4 = () => {
   const handleSubmitReducer = () => {
     dispatch(
       changeEtapa4({
-        lista: array,
+        lista: arrayTools,
       })
     );
   };
@@ -61,9 +59,14 @@ const RegisterEt4 = () => {
     <>
       <Container>
         <Flex>
-          <ColumCount>
-            {list?.map((title) => (
-              <ButtonRegisterEt4 title={title.title} />
+          <ColumCount count={4} gap={"2rem"}>
+            {proefiency?.map((dados) => (
+              <ButtonRegisterEt4
+                width={"160px"}
+                heigth={"4px"}
+                dados={dados}
+                handleClick={tools}
+              />
             ))}
           </ColumCount>
           <InputForm

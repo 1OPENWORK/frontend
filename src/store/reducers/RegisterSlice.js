@@ -25,7 +25,8 @@ export const slice = createSlice({
       isDesenvolvedor: false,
     },
     etapa4: [],
-  },
+    etapa5: [],
+    etapa6: [],
     etapa7: {
       fullname: "",
       email: "",
@@ -33,6 +34,7 @@ export const slice = createSlice({
       cnpj: "",
       password: "",
       comfirmed_password: "",
+    },
   },
 
   reducers: {
@@ -82,8 +84,24 @@ export const slice = createSlice({
     changeEtapa4(state, { payload }) {
       return {
         ...state,
-        etapaAtual: 3,
+        etapaAtual: 4,
         etapa4: payload.lista,
+      };
+    },
+
+    changeEtapa5(state, { payload }) {
+      return {
+        ...state,
+        etapaAtual: 5,
+        etapa5: payload.lista,
+      };
+    },
+
+    changeEtapa6(state, { payload }) {
+      return {
+        ...state,
+        etapaAtual: 6,
+        etapa6: payload.competencias,
       };
     },
 
@@ -108,6 +126,8 @@ export const {
   changeEtapa2,
   changeEtapa3,
   changeEtapa4,
+  changeEtapa5,
+  changeEtapa6,
   changeEtapa7,
   changeEtapaAll,
 } = slice.actions;

@@ -5,8 +5,7 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
+import React, { useState } from "react";
 import Styled from "./List.styled";
 import ListJobs from "./ListJobs";
 
@@ -46,6 +45,14 @@ const List = ({ type }) => {
                 onClick={() => setOnMenu(2)}
               >
                 Minhas avaliações
+              </Styled.Button1TitleList>
+            ) : type === 3 ? (
+              <Styled.Button1TitleList
+                index={0}
+                onMenu={onMenu}
+                onClick={() => setOnMenu(2)}
+              >
+                Explorar
               </Styled.Button1TitleList>
             ) : (
               <Styled.Button1TitleList

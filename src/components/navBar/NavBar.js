@@ -5,7 +5,7 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
  * @param props The component props.
  * @returns The component JSX.
  */
-const NavBar = ({ isLogin }) => {
+const NavBar = ({ nav }) => {
   // --------------------------------------------------------
   // NavBar PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -37,8 +37,8 @@ const NavBar = ({ isLogin }) => {
   // REACT RETURN FUNCTION
   // --------------------------------------------------------
   return (
-    <Styled.ContainerNavBar isLogin={isLogin}>
-      {isLogin ? (
+    <Styled.ContainerNavBar nav={1}>
+      {nav === 1 ? (
         <>
           <Styled.Divisor>
             <Styled.LogoImg src={Logo} />
@@ -50,7 +50,26 @@ const NavBar = ({ isLogin }) => {
             <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton
-            onClick={() => navigate("/auth")}
+            onClick={() => navigate("/login")}
+            color={Colors.BLACK}
+            width={190}
+            heigth={60}
+          >
+            {"Sair"}
+          </FilledButton>
+        </>
+      ) : nav === 2 ? (
+        <>
+          <Styled.Divisor>
+            <Styled.LogoImg src={Logo} />
+          </Styled.Divisor>
+
+          <Styled.NavigateNavBar>
+            <Styled.TitleNavBar size={24}>{"Projetos"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
+          </Styled.NavigateNavBar>
+          <FilledButton
+            onClick={() => navigate("/login")}
             color={Colors.BLACK}
             width={190}
             heigth={60}
@@ -74,7 +93,7 @@ const NavBar = ({ isLogin }) => {
             <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
             <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
             <FilledButton
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate("/login")}
               color={Colors.BLACK}
               width={190}
               heigth={60}

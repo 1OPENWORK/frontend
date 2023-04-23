@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BarProgress from "../../../components/barProgress/BarProgress";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
@@ -9,7 +11,6 @@ import RegisterEt3 from "./etapas/et3/RegisterEt3";
 import RegisterEt4 from "./etapas/et4/RegisterEt4";
 import RegisterEt5 from "./etapas/et5/RegisterEt5";
 import RegisterEt6 from "./etapas/et6/RegisterEt6";
-
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 import { useSelector } from "react-redux";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";

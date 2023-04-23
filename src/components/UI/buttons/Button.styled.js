@@ -5,7 +5,7 @@ export const GenericSolidButton = styled.button`
   background-color: ${(props) =>
     props.color ? props.color : props.inverted ? "#E0F0F5" : Colors.lightBlue};
   display: flex;
-  color: ${props => props.isDark ? Colors.BLACK : Colors.WHITE};
+  color: ${(props) => (props.isDark ? Colors.BLACK : Colors.WHITE)};
   width: ${(props) => (props.width !== null ? `${props.width}px` : "auto")};
   height: ${(props) => (props.heigth !== null ? `${props.heigth}px` : "auto")};
   flex-direction: row;
@@ -33,7 +33,8 @@ export const GenericSolidButton = styled.button`
   }
 
   &:active {
-    background-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
+    background-color: ${(props) =>
+      props.disabled ? "" : Colors.PRIMARY_COLOR};
     color: ${(props) => (props.disabled ? "" : Colors.WHITE)};
     border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }
@@ -128,4 +129,3 @@ export const OutlinedUpdateButton = styled.div`
   border: 1px solid ${Colors.PROJECT500};
   border-radius: 8px;
 `;
-

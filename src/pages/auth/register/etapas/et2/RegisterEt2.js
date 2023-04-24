@@ -100,7 +100,7 @@ const RegisterEt2 = () => {
   return (
     <Styled.Form
       style={{
-        paddingTop: "150px",
+        paddingTop: "2rem",
       }}
     >
       <ToastContainer />
@@ -154,11 +154,11 @@ const RegisterEt2 = () => {
         value={complemento}
         handle={setComplemento}
         space={"20px"}
-        width={"750px"}
+        width={"770px"}
       />
       <Styled.Divisor
         align={"flex-end"}
-        style={{ marginRight: "20px", width: "770px" }}
+        style={{ width: "770px" }}
       >
         {!isNext ? (
           <FilledButton

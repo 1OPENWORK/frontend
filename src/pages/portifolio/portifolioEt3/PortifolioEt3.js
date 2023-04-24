@@ -1,9 +1,9 @@
 import React from "react";
-import SideBar from "./components/SideBar";
-import RegisterEt1 from "../auth/register/etapas/et1/RegisterEt1";
-import Styled from "./Portifolio.style";
+import SideBar from "../../portifolio/components/SideBar";
+import RegisterEt4 from "../../auth/register/etapas/et4/RegisterEt4";
+import Styled from "../Portifolio.style";
 
-const Portifolio = () => {
+const Portifolio3 = () => {
   return (
     <>
       <Styled.Container>
@@ -12,11 +12,11 @@ const Portifolio = () => {
         </Styled.ContainerSideBarPortifolio>
 
         <Styled.ContainerInputs>
-          <RegisterEt1 />
+          <RegisterEt4 />
         </Styled.ContainerInputs>
       </Styled.Container>
     </>
   );
 };
 
-export default Portifolio;
+export default Portifolio3;

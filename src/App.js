@@ -17,6 +17,7 @@ import {
   ComunidadePath,
   PortifolioPath,
   ProjectsPath,
+  TodoPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -31,8 +32,10 @@ import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
 import Comunidade from "./pages/comunidade/Comunidade";
 import Portifolio from "./pages/portifolio/Portifolio";
 import Projects from "./pages/projects/Projects";
+
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
+import Todo from "./pages/todo-list/Todo.js";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -62,6 +65,7 @@ function App() {
         <Route path={ComunidadePath} element={<Comunidade />} />
         <Route path={PortifolioPath} element={<Portifolio />} />
         <Route path={ProjectsPath} element={<Projects />} />
+        <Route path={TodoPath} element={<Todo />} />
       </Routes>
     </Router>
   );

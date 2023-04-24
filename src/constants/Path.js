@@ -9,6 +9,7 @@ const AvaliacoesPath = "/avaliacoes";
 const ComunidadePath = "/comunidade";
 const PortifolioPath = "/portifolio";
 const ProjectsPath = "/projetos";
+const TodoPath = "/gerenciador";
 
 module.exports = {
   HomePagePath,
@@ -22,4 +23,5 @@ module.exports = {
   ComunidadePath,
   PortifolioPath,
   ProjectsPath,
+  TodoPath,
 };

@@ -40,7 +40,7 @@ function Auth() {
     try {
       const response = await handleLogin({
         email,
-        password,
+        senha: password,
       });
       const token = response.data.token;
 

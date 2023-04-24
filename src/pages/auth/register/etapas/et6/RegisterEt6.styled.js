@@ -62,3 +62,14 @@ export const Button = styled.button`
 
   font-size: 1.2rem;
 `;
+
+
+export const DivFlowScroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-y: auto;
+  height: 100%;
+`;
+

@@ -1,10 +1,20 @@
 import React from "react";
-import NavBarList from "../../components/navBarList/NavBarList";
+import SideBar from "./components/SideBar";
+import RegisterEt1 from "../auth/register/etapas/et1/RegisterEt1";
+import Styled from "./Portifolio.style";
 
 const Portifolio = () => {
   return (
     <>
-      <NavBarList />
+      <Styled.Container>
+        <Styled.ContainerSideBarPortifolio>
+          <SideBar />
+        </Styled.ContainerSideBarPortifolio>
+
+        <Styled.ContainerInputs>
+          <RegisterEt1 />
+        </Styled.ContainerInputs>
+      </Styled.Container>
     </>
   );
 };

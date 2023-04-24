@@ -7,6 +7,7 @@ const StyledCardPerson = {
     align-items: center;
     margin-bottom: 16px;
     cursor: pointer;
+    padding-left: 16px;
 
     &:hover {
       mix-blend-mode: difference;
@@ -42,6 +43,7 @@ const StyledCardPerson = {
 
   MessageInfo: styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
   `,
 
@@ -54,13 +56,28 @@ const StyledCardPerson = {
   MessageText: styled.p`
     margin: 8px 0 0;
     font-size: 16px;
-    color: #888;
+    color: ${props => props.isMessagePedente ? '#ffff' : '#888'};
+    font-weight: ${props => props.isMessagePedente ? 500 : 400};
   `,
 
   SeeIcon: styled.span`
     margin-right: 5px;
     color: #4fc3f7;
     font-size: 16px;
+  `,
+
+  MessagesPendente: styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
+    border-radius: 100%;
+    background-color: #0077b6;
+   
+    
   `,
 };
 

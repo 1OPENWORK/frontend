@@ -11,7 +11,7 @@ const PortifolioStyle = {
 
   ContainerSideBarPortifolio: styled.div`
     width: 425px;
-    height: 100vh;
+    height: 90vh;
   `,
 
   ContainerInputs: styled.div`

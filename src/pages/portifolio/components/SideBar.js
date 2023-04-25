@@ -5,8 +5,12 @@ import IconProfile from "../../../assets/icons/icon-profile.svg";
 import IconAbout from "../../../assets/icons/icon-about.svg";
 import IconSpecialyts from "../../../assets/icons/icon-specialtys.svg";
 import IconExperiences from "../../../assets/icons/icon-experiences.svg";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Styled.Container>
@@ -17,13 +21,14 @@ const SideBar = () => {
         <Styled.AddPhotograph>Adicionar foto</Styled.AddPhotograph>
 
         <Styled.ContainerSideBarOption>
-          <Styled.SideBarOption>
+          <Styled.SideBarOption isSelected={true}>
             <Styled.IconSideBarOption
               isImg={true}
               background={IconProfile}
             ></Styled.IconSideBarOption>
-            <Styled.TextSideBarOption>Perfil</Styled.TextSideBarOption>
+            <Styled.TextSideBarOption isSelected={true}>Perfil</Styled.TextSideBarOption>
           </Styled.SideBarOption>
+
           <Styled.SideBarOption>
             <Styled.IconSideBarOption
               isImg={true}
@@ -31,6 +36,7 @@ const SideBar = () => {
             ></Styled.IconSideBarOption>
             <Styled.TextSideBarOption>Sobre</Styled.TextSideBarOption>
           </Styled.SideBarOption>
+
           <Styled.SideBarOption>
             <Styled.IconSideBarOption
               isImg={true}
@@ -38,6 +44,7 @@ const SideBar = () => {
             ></Styled.IconSideBarOption>
             <Styled.TextSideBarOption>Especialidades</Styled.TextSideBarOption>
           </Styled.SideBarOption>
+
           <Styled.SideBarOption>
             <Styled.IconSideBarOption
               isImg={true}

@@ -68,7 +68,7 @@ const StyleSideBar = {
   SideBarOption: styled.div`
     width: 100%;
     height: 120px;
-    background-color: ${Colors.BLACK};
+    background-color: ${(props) => (props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.BLACK}`)};
     display: flex;
     flex-direction: row;
 
@@ -96,7 +96,7 @@ const StyleSideBar = {
     font-weight: 900;
     font-size: 1.5rem;
     line-height: 2.063rem;
-    color: ${Colors.WHITE};
+    color: ${(props) => (props.isSelected ? `${Colors.BLACK}` : `${Colors.WHITE}`)};
   `,
 };
 

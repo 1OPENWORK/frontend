@@ -6,21 +6,21 @@ const PortifolioStyle = {
     width: 100vh;
     height: 100vh;
     display: flex;
-    fkex-direction: row;
+    flex-direction: row;
   `,
 
   ContainerSideBarPortifolio: styled.div`
     width: 425px;
-    height: 100vh;
+    height: 90vh;
   `,
 
   ContainerInputs: styled.div`
-    width: 100vh;
+    width: 110vh;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 7.969rem;
+    margin-left: 10rem;
   `,
 
   Title: styled.div`

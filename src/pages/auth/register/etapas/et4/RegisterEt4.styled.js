@@ -15,9 +15,11 @@ export const Flex = styled.div`
   flex-direction: column;
 `;
 
+
+
 export const ColumCount = styled.div`
-  column-count: 4;
-  column-gap: 32px;
+  column-count: ${(props) => props.count};
+  column-gap: ${(props) => props.gap};
 `;
 
 export const Divider = styled.div`

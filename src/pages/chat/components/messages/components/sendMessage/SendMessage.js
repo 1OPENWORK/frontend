@@ -5,21 +5,22 @@ import Colors from "../../../../../../constants/Colors";
 import {
   changeConversationRecentes,
   changeMessages,
+  selectedWebSocket,
 } from "../../../../../../store/reducers/WebSocketSlice";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+
 const SendMessage = ({
   socket,
   idSender,
   idReceiver,
   setAtualizarUltimaMessage,
+  visualized
 }) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const [messagesRecentes, setMessagesRecentes] = useState([]);
   const [updateMessage, setUpdateMessage] = useState([]);
-
-
 
   const handleKeyPress = (event) => {
     // Verifica se a tecla pressionada é o Enter
@@ -42,7 +43,7 @@ const SendMessage = ({
       );
     } else {
       toast.error("Mensagem vazia.", {
-        position: "top-right",
+        position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -68,7 +69,7 @@ const SendMessage = ({
         );
       }
     );
-  }, [updateMessage]);
+  }, [updateMessage, visualized]);
 
   useEffect(() => {
     dispatch(
@@ -78,9 +79,13 @@ const SendMessage = ({
     );
   }, [messagesRecentes]);
 
+  useEffect(() => {
+    setUpdateMessage([])
+  }, [])
+
   return (
     <Styled.Container>
-     
+      <ToastContainer/>
       <Styled.InputSendMessage
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -93,7 +98,6 @@ const SendMessage = ({
           style={{ color: Colors.WHITE01, fontSize: 20 }}
         ></ion-icon>
       </Styled.ButtonSend>
-      
     </Styled.Container>
   );
 };

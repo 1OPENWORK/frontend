@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ButtonCheck = styled.button`
-  width: 160px;
-  height: 44px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   color: ${(props) => props.color};
 
   background-color: ${(props) => props.backGround};

@@ -5,7 +5,7 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
@@ -50,7 +50,7 @@ const NavBar = ({ nav }) => {
             <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton
-            onClick={() => navigate("/auth")}
+            onClick={() => navigate("/login")}
             color={Colors.BLACK}
             width={190}
             heigth={60}
@@ -69,7 +69,7 @@ const NavBar = ({ nav }) => {
             <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton
-            onClick={() => navigate("/auth")}
+            onClick={() => navigate("/login")}
             color={Colors.BLACK}
             width={190}
             heigth={60}
@@ -93,7 +93,7 @@ const NavBar = ({ nav }) => {
             <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
             <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
             <FilledButton
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate("/login")}
               color={Colors.BLACK}
               width={190}
               heigth={60}

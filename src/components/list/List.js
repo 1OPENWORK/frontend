@@ -5,8 +5,7 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
+import React, { useState } from "react";
 import Styled from "./List.styled";
 import ListJobs from "./ListJobs";
 import { useNavigate } from 'react-router-dom';

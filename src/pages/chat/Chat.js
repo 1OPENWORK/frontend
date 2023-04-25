@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   changeConversationRecentes,
   changeFriends,
   changeIdUser,
+  changeMessagesPendentes,
 } from "../../store/reducers/WebSocketSlice";
 import Styled from "./Chat.styled";
 import Messages from "./components/messages/Messages";
@@ -13,6 +14,7 @@ import SideBar from "./components/sideBar/SideBar";
 export const Chat = ({ socket }) => {
   const [loading, setLoading] = useState(false);
   const [messageActive, setMessageActive] = useState(false);
+  const [visualized, setVisualized] = useState([]);
   const [dadosConversa, setDadosConversa] = useState({});
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
@@ -30,7 +32,19 @@ export const Chat = ({ socket }) => {
       socket.emit(
         "allFriends",
         { idUser: id },
-        (friends, listConversationsRecentes) => {
+        (friends, listConversationsRecentes, messagePedentes) => {
+          let messagesPendentes = [];
+
+          for (const item of messagePedentes) {
+            messagesPendentes.push(item);
+          }
+
+          dispatch(
+            changeMessagesPendentes({
+              messages: messagesPendentes,
+            })
+          );
+
           dispatch(
             changeFriends({
               friends,
@@ -49,6 +63,7 @@ export const Chat = ({ socket }) => {
     socket.emit("updateSocketId", { idUser: id }, (user) => {});
   }, []);
 
+
   return (
     <Styled.Container>
       <Styled.Div width={"30%"}>
@@ -58,6 +73,8 @@ export const Chat = ({ socket }) => {
           handleMessageActive={setMessageActive}
           atualizarUltimaMessage={atualizarUltimaMessage}
           setDadosConversa={setDadosConversa}
+          visualized={visualized}
+          setVisualized={setVisualized}
         />
       </Styled.Div>
       <Styled.Div width={"70%"} style={{ height: "100vh" }}>
@@ -67,6 +84,7 @@ export const Chat = ({ socket }) => {
           messageSeleted={messageActive}
           setAtualizarUltimaMessage={setAtualizarUltimaMessage}
           dadosConversa={dadosConversa}
+          visualized={visualized}
         />
       </Styled.Div>
     </Styled.Container>

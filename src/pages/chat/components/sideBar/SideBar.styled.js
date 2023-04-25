@@ -39,6 +39,16 @@ const StyledSideBar = {
     }
   `,
 
+  ContainerLoading: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  `,
+
+  LabelLoading: styled.h1``,
+
   Header: styled.div`
     display: flex;
     align-items: center;
@@ -108,6 +118,7 @@ export const OpcaoMenuLateral = styled.div`
   width: 100%;
   height: 80px;
   border-bottom: 1px solid ${Colors.BLACK_GREY04};
+
   cursor: pointer;
 
   &:hover {
@@ -142,7 +153,7 @@ export const MenuLateral = styled.div`
   transition: all 0.5s;
   background-color: #20252b;
 
-  z-index: 2;
+  z-index: 1000;
 
   &:hover {
     width: 20%;

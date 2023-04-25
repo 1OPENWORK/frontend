@@ -194,7 +194,7 @@ export default function Board({ listId }) {
           <Droppable droppableId={String(list.id)} key={list.id}>
             {(provided) => (
               <Content ref={provided.innerRef} {...provided.droppableProps}>
-                <List index={index} data={list} />
+                <List index={list.id} data={list} />
                 {provided.placeholder}
               </Content>
             )}

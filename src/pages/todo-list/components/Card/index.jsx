@@ -88,8 +88,7 @@ export default function Card({ data, index }) {
   // dragRef(dropRef(ref));
 
   return (
-
-    <Container  >
+    <Container>
       <header>
         {data.labels.map((label) => (
           <Label key={label} color={label}>
@@ -112,14 +111,23 @@ export default function Card({ data, index }) {
           />
           <div className="tasks-container">
             {tasks.map((task) => (
-              <div key={task.id} className="task-item">
-                <input type="checkbox" checked={task.checked} />
+              <label className="container" key={task.id}>
                 <input
-                  type="text"
-                  value={newDescribe}
-                  onChange={(event) => setNewDescribe(event.target.value)}
+                  type="checkbox"
+                  checked={task.checked}
+                  onChange={() => {
+                    const updatedTasks = tasks.map((item) => {
+                      if (item.id === task.id) {
+                        return { ...item, checked: !item.checked };
+                      } else {
+                        return item;
+                      }
+                    });
+                    setTasks(updatedTasks);
+                  }}
                 />
-              </div>
+                <div className="checkmark"></div>
+              </label>
             ))}
             <button className="add-task-button" onClick={handleAddTask}>
               <AiOutlinePlusCircle size={16} />
@@ -139,6 +147,5 @@ export default function Card({ data, index }) {
         {data.user && <img src={data.user} alt="" />}
       </footer>
     </Container>
-
   );
 }

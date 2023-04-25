@@ -10,6 +10,22 @@ export const DivCard = styled.div`
   display: flex;
 `;
 
+export const BtnReset = styled.button`
+  background-color: #20ac69;
+  color: white;
+  border-radius: 20px;
+  width: 184px;
+  height: 42px;
+  width: 132px;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  align-self: center;
+  justify-content: center;
+
+  border-radius: 20px;
+`;
+
 export const DivLeft = styled.div`
   height: 100%;
   width: 33%;
@@ -64,6 +80,10 @@ export const DivRight = styled.div`
     margin-top: 1.5em;
   }
 
+  .btn-reset.clicked {
+    background-color: red;
+  }
+
   h2,
   h3 {
     font-size: 1rem;
@@ -76,6 +96,24 @@ export const DivFooterCard = styled.div`
   height: 45%;
   background-color: white;
   display: flex;
+
+  .div-row-re {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    h2 {
+      align-self: center;
+      margin-top: 0.5em;
+      font-weight: 500;
+      line-height: 148.4%;
+    }
+  }
+
+  .btn-reset.clicked {
+    background: red;
+  }
 `;
 
 export const DivData = styled.div`
@@ -112,8 +150,8 @@ export const TitleImg = styled.h3`
 
 export const ConfigImg = styled.img`
   height: 1rem;
-  color: #e5e5e5;
   position: relative;
+  cursor: pointer;
 `;
 
 export const AlertData = styled.div`
@@ -127,11 +165,44 @@ export const AlertData = styled.div`
   justify-content: center;
 
   border-radius: 20px;
+`;
 
-  h2 {
-    align-self: center;
-    margin-top: 0.5em;
-    font-weight: 500;
-    line-height: 148.4%;
+export const DivConfig = styled.div`
+  background: linear-gradient(145deg, #fff, #ffffff);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  width: 120px;
+  position: fixed;
+  z-index: 1;
+  right: 132px;
+  transform: translateY(-5px);
+  border-radius: 5px;
+  font-style: Nunito, sans-serif;
+  transition: all 1s ease-in-out !important;
+`;
+
+export const Ul = styled.ul`
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  margin-top: 5px;
+`;
+
+export const Li = styled.li`
+  align-self: center;
+  transition: all 0.2s ease-in-out;
+  width: 80%;
+
+  cursor: pointer;
+
+  :hover {
+    background: #20ac69;
+    color: white;
+    border-radius: 5px;
   }
 `;

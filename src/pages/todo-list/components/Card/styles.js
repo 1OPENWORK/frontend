@@ -57,7 +57,7 @@ export const Container = styled.div`
     color: #b3b3b3;
   }
 
-  .container input {
+  .container-label input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -65,12 +65,13 @@ export const Container = styled.div`
     width: 0;
   }
 
-  .container {
+  .container-label {
     display: block;
     position: relative;
     cursor: pointer;
     font-size: 20px;
     user-select: none;
+    top: 20px;
   }
 
   /* Create a custom checkbox */
@@ -86,7 +87,7 @@ export const Container = styled.div`
   }
 
   /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
+  .container-label input:checked ~ .checkmark {
     background-color: limegreen;
     border-radius: 25px;
     transition: 0.15s;
@@ -100,12 +101,12 @@ export const Container = styled.div`
   }
 
   /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+  .container-label input:checked ~ .checkmark:after {
     display: block;
   }
 
   /* Style the checkmark/indicator */
-  .container .checkmark:after {
+  .container-label .checkmark:after {
     left: 0.45em;
     top: 0.25em;
     width: 0.25em;

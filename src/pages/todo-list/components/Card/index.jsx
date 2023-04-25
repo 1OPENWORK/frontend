@@ -111,23 +111,25 @@ export default function Card({ data, index }) {
           />
           <div className="tasks-container">
             {tasks.map((task) => (
-              <label className="container" key={task.id}>
-                <input
-                  type="checkbox"
-                  checked={task.checked}
-                  onChange={() => {
-                    const updatedTasks = tasks.map((item) => {
-                      if (item.id === task.id) {
-                        return { ...item, checked: !item.checked };
-                      } else {
-                        return item;
-                      }
-                    });
-                    setTasks(updatedTasks);
-                  }}
-                />
-                <div className="checkmark"></div>
-              </label>
+              <div className="div-check">
+                <label className="container-label" key={task.id}>
+                  <input
+                    type="checkbox"
+                    checked={task.checked}
+                    onChange={() => {
+                      const updatedTasks = tasks.map((item) => {
+                        if (item.id === task.id) {
+                          return { ...item, checked: !item.checked };
+                        } else {
+                          return item;
+                        }
+                      });
+                      setTasks(updatedTasks);
+                    }}
+                  />
+                  <div className="checkmark"></div>
+                </label>
+              </div>
             ))}
             <button className="add-task-button" onClick={handleAddTask}>
               <AiOutlinePlusCircle size={16} />

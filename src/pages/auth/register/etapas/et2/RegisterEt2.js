@@ -98,11 +98,7 @@ const RegisterEt2 = () => {
   }
 
   return (
-    <Styled.Form
-      style={{
-        paddingTop: "2rem",
-      }}
-    >
+    <Styled.Form>
       <ToastContainer />
       <Styled.Row>
         <InputForm
@@ -163,7 +159,7 @@ const RegisterEt2 = () => {
         {!isNext ? (
           <FilledButton
             onClick={handleForm}
-            color={Colors.PRIMARY_COLOR}
+            color={Colors.BLACK}
             width={190}
             heigth={60}
           >
@@ -172,7 +168,7 @@ const RegisterEt2 = () => {
         ) : (
           <FilledButton
             onClick={() => nextEtapa()}
-            color={Colors.BLACK}
+            color={Colors.PRIMARY_COLOR}
             width={190}
             heigth={60}
           >

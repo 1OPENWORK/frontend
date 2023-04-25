@@ -41,7 +41,7 @@ const NavBar = ({ nav }) => {
       {nav === 1 ? (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} />
+            <Styled.LogoImg src={Logo} onClick={() => navigate("/desenvolvedor")}/>
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
@@ -80,7 +80,7 @@ const NavBar = ({ nav }) => {
       ) : (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} />
+            <Styled.LogoImg src={Logo} onClick={() => navigate("/")}/>
             <Styled.TitleNavBarLogo size={32}>
               {"Open Work"}
             </Styled.TitleNavBarLogo>

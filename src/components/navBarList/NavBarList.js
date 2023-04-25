@@ -42,7 +42,8 @@ const NavBarList = ({ type }) => {
         <NavBar nav={1} />
       </BackgroundNavBar>
       <Styled.ContainerNavBarList>
-        {type === 1
+        {
+          type === 1
           ? "Desenvolvedores disponíveis"
           : type === 2
           ? "Avaliações"

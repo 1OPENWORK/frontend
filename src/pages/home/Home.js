@@ -37,7 +37,6 @@ const Home = () => {
   // Home PRIVATE DECLARATIONS
   // --------------------------------------------------------
 
-
   return (
     <GeneralContainer>
       <NavBar />

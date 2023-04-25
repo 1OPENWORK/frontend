@@ -45,6 +45,7 @@ const Register = () => {
             descricao={etapas[register.etapaAtual].description}
             textButton="Home"
             textButtonVoltar="Voltar"
+            isRegister={true}
           />
           <Styled.ContainerForm position="start">
             {register.etapaAtual >= 3 && (

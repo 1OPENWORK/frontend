@@ -135,7 +135,7 @@ const RegisterEt1 = () => {
           disabled={verified}
         />
       </Styled.Row>
-      <Styled.Divisor align={"flex-end"} style={{ marginRight: "1.25rem", width: "770px" }}>
+      <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
         {!isNext ? (
           <FilledButton onClick={handleForm} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}</FilledButton>
         ) : (

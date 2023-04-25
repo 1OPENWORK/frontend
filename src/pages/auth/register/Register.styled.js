@@ -30,9 +30,6 @@ const StyledRegister = {
     justify-content: center;
     border-radius: 30px;
     width: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
-    overflow-y: auto;
     height: 28.125rem;
     margin-top: 2rem;
   `,

@@ -41,13 +41,13 @@ const NavBar = ({ nav }) => {
       {nav === 1 ? (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} />
+            <Styled.LogoImg src={Logo} onClick={() => navigate("/desenvolvedor")}/>
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar size={24}>{"Projetos"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Comunidade"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar onClick={() => navigate("/projetos")}  size={24}>{"Projetos"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar onClick={() => navigate("/comunidade")} size={24}>{"Comunidade"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar onClick={() => navigate("/dashboard")} size={24}>{"Financeiro"}</Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton
             onClick={() => navigate("/login")}
@@ -65,8 +65,8 @@ const NavBar = ({ nav }) => {
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar size={24}>{"Projetos"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Financeiro"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar onClick={() => navigate("/projetos")} size={24}>{"Projetos"}</Styled.TitleNavBar>
+            <Styled.TitleNavBar onClick={() => navigate("/dashboard")} size={24}>{"Financeiro"}</Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton
             onClick={() => navigate("/login")}
@@ -80,7 +80,7 @@ const NavBar = ({ nav }) => {
       ) : (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} />
+            <Styled.LogoImg src={Logo} onClick={() => navigate("/")}/>
             <Styled.TitleNavBarLogo size={32}>
               {"Open Work"}
             </Styled.TitleNavBarLogo>
@@ -101,7 +101,7 @@ const NavBar = ({ nav }) => {
               {"Entrar"}
             </FilledButton>
             <FilledButton
-              onClick={() => navigate("/register")}
+              onClick={() => navigate("/cadastro")}
               color={Colors.SECONDARY_COLOR}
               width={190}
               heigth={60}

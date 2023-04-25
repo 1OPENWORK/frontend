@@ -33,6 +33,7 @@ const InformationsAuth = ({
   descricao,
   textButton,
   textButtonVoltar,
+  isRegister
 }) => {
   // --------------------------------------------------------
   // InformationsAuth PRIVATE DECLARATIONS
@@ -69,7 +70,7 @@ const InformationsAuth = ({
               justifyContent: "flex-end",
             }}
           >
-            <Styled.DivHomeBack>
+            {isRegister ?  <Styled.DivHomeBack>
               <Styled.BtnRetorno onClick={() => navigate("/")}>
                 <img src={ArrowLeftWhite} alt="" />
                 {textButton}
@@ -78,7 +79,12 @@ const InformationsAuth = ({
                 <img src={ArrowLeftWhite} alt="" />
                 {textButtonVoltar}
               </Styled.BtnRetorno>
-            </Styled.DivHomeBack>
+            </Styled.DivHomeBack> : <Styled.DivHomeBack>
+              <Styled.BtnRetorno onClick={() => navigate("/")}>
+                <img src={ArrowLeftWhite} alt="" />
+                {textButton}
+              </Styled.BtnRetorno>
+            </Styled.DivHomeBack>}
           </Styled.DivInformationCenter>
         </Styled.DivInformationCenter>
       </Styled.DivInformation>

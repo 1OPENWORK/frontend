@@ -7,11 +7,10 @@ const Portifolio = () => {
   return (
     <>
       <Styled.Container>
-        <Styled.ContainerSideBarPortifolio>
           <SideBar />
-        </Styled.ContainerSideBarPortifolio>
 
         <Styled.ContainerInputs>
+          <Styled.TitlePortfolio>Informações pessoais</Styled.TitlePortfolio>
           <RegisterEt1 />
         </Styled.ContainerInputs>
       </Styled.Container>

@@ -162,6 +162,7 @@ const RegisterEt2 = () => {
             color={Colors.BLACK}
             width={190}
             heigth={60}
+            marginRight={"0px"}
           >
             {"Verificar"}
           </FilledButton>
@@ -171,6 +172,7 @@ const RegisterEt2 = () => {
             color={Colors.PRIMARY_COLOR}
             width={190}
             heigth={60}
+            marginRight={"0px"}
           >
             {"Próximo"}
           </FilledButton>

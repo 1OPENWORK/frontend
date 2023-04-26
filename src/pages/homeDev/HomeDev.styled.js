@@ -14,6 +14,7 @@ export const Aside = styled.div`
   position: relative;
   top: 128px;
   width: 70%;
+  margin-left: 40px;
   column-count: 2;
   column-gap: 40px;
   height: 70%;
@@ -25,13 +26,13 @@ export const DivAside = styled.div`
 
 export const Article = styled.div`
   position: relative;
-  top: 50px;
+  top: 60px;
   width: 20%;
-  height: 70%;
+  height: 75%;
 `;
 
 export const Input = styled.input`
-  width: 69.8%;
+  width: 68%;
   height: 58px;
   border: 1px solid ${Colors.PRIMARY_COLOR};
   background: rgba(32, 172, 105, 0.05);
@@ -39,13 +40,13 @@ export const Input = styled.input`
   border-radius: 16px;
   position: absolute;
   top: 160px;
-  left: 40px;
+  left: 80px;
   font-size: 1.5rem;
 `;
 
 export const Card = styled.div`
-  width: 100%;
-  height: 220px;
+  width: 95%;
+  height: 180px;
   background-color: white;
   border-radius: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -62,11 +63,11 @@ export const ChatBot = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 500px;
+  height: 520px;
   width: 100%;
   background-color: ${Colors.PRIMARY_COLOR};
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-radius: 20px;
+  border-radius: 24px;
   -webkit-font-smoothing: antialiased !important;
 `;
 
@@ -92,8 +93,8 @@ export const DescPara = styled.p`
 
 export const DescParaBot = styled.p`
   font-weight: 400;
-  font-size: 18px;
-  width: 150px;
+  font-size: 1.125rem;
+  width: 55%;
   letter-spacing: 3px;
   color: white;
 `;
@@ -123,13 +124,12 @@ export const GenericSolidButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
-  font-size: 18px;
+  font-size: 1.125rem;
   gap: 12px;
   border: ${props =>
     props.inverted ? "0px solid #4D638D" : "0px solid #4D638D"};
   border-radius: 8px;
-  font-family: "Inter", sans-serif;
-  letter-spacing: 0.5px;
+  font-family: "nunito";
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   &:disabled {

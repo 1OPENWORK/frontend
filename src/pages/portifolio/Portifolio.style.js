@@ -3,35 +3,40 @@ import Colors from "../../constants/Colors";
 
 const PortifolioStyle = {
   Container: styled.div`
-    width: 100vh;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
-  `,
-
+    overflow: hidden;
+`,
   ContainerSideBarPortifolio: styled.div`
     width: 425px;
-    height: 90vh;
+    height: 100vh;
   `,
 
   ContainerInputs: styled.div`
-    width: 110vh;
-    height: 100vh;
+    position: relative;
+    width: auto;
+    height: auto;
+    top: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10rem;
+    flex-direction: column;
+    margin-left: 10%;
   `,
 
-  Title: styled.div`
+  TitlePortfolio: styled.div`
+    position: absolute;
     width: auto;
     height: auto;
+    top: 0;
+    left: 0px;
     font-family: "Nunito";
     font-style: normal;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 2rem;
     line-height: 49px;
-    text-align: center;
     color: ${Colors.PRIMARY_COLOR};
   `,
 };

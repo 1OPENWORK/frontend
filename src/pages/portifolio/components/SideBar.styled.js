@@ -4,10 +4,11 @@ import Colors from "../../../constants/Colors";
 const StyleSideBar = {
   Container: styled.div`
     width: 425px;
-    height: 100vh;
+    height: 90vh;
     border-radius: 0px 30px 30px 0px;
     background-color: ${Colors.BLACK};
     display: flex;
+    overflow: hidden;
   `,
 
   Header: styled.div`
@@ -83,6 +84,7 @@ const StyleSideBar = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   `,
 
   SideBarOption: styled.div`

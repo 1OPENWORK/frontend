@@ -135,11 +135,11 @@ const RegisterEt1 = () => {
           disabled={verified}
         />
       </Styled.Row>
-      <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
+      <Styled.Divisor align={"flex-end"} style={{ width: "770px"}}>
         {!isNext ? (
-          <FilledButton onClick={handleForm} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}</FilledButton>
+          <FilledButton onClick={handleForm} marginRight={"0px"} color={Colors.BLACK} width={190} heigth={60}> {"Verificar"}</FilledButton>
         ) : (
-          <FilledButton onClick={nextEtapa} color={Colors.SECONDARY_COLOR} width={190} heigth={60}> {"Cadastrar"} </FilledButton>
+          <FilledButton onClick={nextEtapa} marginRight={"0px"} color={Colors.PRIMARY_COLOR} width={190} heigth={60}> {"Cadastrar"} </FilledButton>
         )}
       </Styled.Divisor>
     </Styled.Form>

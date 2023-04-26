@@ -59,7 +59,7 @@ const HomeDev = () => {
                 <TitleCard>{"Portfólio"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "No menu portfólio você terá todas as informações que fez em nosso cadastro. Caso queira, poderá também alterar seus dados"
                   }
                 </DescPara>
               </FlexCard>
@@ -72,7 +72,7 @@ const HomeDev = () => {
                 <TitleCard>{"Avaliação"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "Na página de avaliação, poderá realizar uma avaliação dos projetos em que participou"
                   }
                 </DescPara>
               </FlexCard>
@@ -84,7 +84,7 @@ const HomeDev = () => {
                 <TitleCard>{"Jobs"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "É nessa tela onde você, desenvolvedor, terá acesso aos trabalhos anunciados pelas empresas"
                   }
                 </DescPara>
               </FlexCard>
@@ -96,7 +96,7 @@ const HomeDev = () => {
                 <TitleCard>{"Desenvolvedores"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "Aqui é onde todos os desenvolvedores cadastrados em nosso site estão. Também é possível acessar o seu portfólio"
                   }
                 </DescPara>
               </FlexCard>
@@ -109,7 +109,7 @@ const HomeDev = () => {
               <TitleCard color={Colors.WHITE}>{"ChatBot"}</TitleCard>
               <DescParaBot>
                 {
-                  "Como podemos te ajudar, tire suas dúvidas com o nosso bot Yuca"
+                  "Como podemos te ajudar? Tire suas dúvidas com o nosso bot virtual"
                 }
               </DescParaBot>
               <GenericSolidButton>{"Iniciar"}</GenericSolidButton>

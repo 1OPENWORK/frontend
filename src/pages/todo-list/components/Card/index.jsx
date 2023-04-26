@@ -88,8 +88,7 @@ export default function Card({ data, index }) {
   // dragRef(dropRef(ref));
 
   return (
-
-    <Container  >
+    <Container>
       <header>
         {data.labels.map((label) => (
           <Label key={label} color={label}>
@@ -112,13 +111,24 @@ export default function Card({ data, index }) {
           />
           <div className="tasks-container">
             {tasks.map((task) => (
-              <div key={task.id} className="task-item">
-                <input type="checkbox" checked={task.checked} />
-                <input
-                  type="text"
-                  value={newDescribe}
-                  onChange={(event) => setNewDescribe(event.target.value)}
-                />
+              <div className="div-check">
+                <label className="container-label" key={task.id}>
+                  <input
+                    type="checkbox"
+                    checked={task.checked}
+                    onChange={() => {
+                      const updatedTasks = tasks.map((item) => {
+                        if (item.id === task.id) {
+                          return { ...item, checked: !item.checked };
+                        } else {
+                          return item;
+                        }
+                      });
+                      setTasks(updatedTasks);
+                    }}
+                  />
+                  <div className="checkmark"></div>
+                </label>
               </div>
             ))}
             <button className="add-task-button" onClick={handleAddTask}>
@@ -139,6 +149,5 @@ export default function Card({ data, index }) {
         {data.user && <img src={data.user} alt="" />}
       </footer>
     </Container>
-
   );
 }

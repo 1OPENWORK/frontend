@@ -17,7 +17,7 @@ export const Container = styled.div`
   font-size: 1rem;
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: #fff;
     letter-spacing: 1.5px;

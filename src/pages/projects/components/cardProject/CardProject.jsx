@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   DivCard,
   DivLeft,
@@ -9,14 +9,31 @@ import {
   ConfigImg,
   DivData,
   AlertData,
+  BtnReset,
+  DivConfig,
+  Ul,
+  Li,
 } from "./CardProject.styled";
 import { Logo } from "../navBar/Header.styled";
 import LogoLink from "../navBar/img/logo.svg";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import PointLink from "../../assets/pontis-config.png";
+import { useNavigate } from "react-router-dom";
 
 function CardProject() {
   const now = 100;
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+
+  const clickNavigate = () => {
+    setClicked(true);
+    navigate("/gerenciador");
+  };
+
+
+
   return (
     <>
       <DivCard>
@@ -43,12 +60,24 @@ function CardProject() {
                 label={`${now}%`}
               />
             </div>
+
             <div className="div-user-config">
               <UserImg>
                 <TitleImg>{"T"}</TitleImg>
               </UserImg>
 
-              <ConfigImg src={PointLink} />
+              <ConfigImg onClick={() => setOpen(!open)} src={PointLink} />
+
+              {open && (
+                <DivConfig>
+                  <Ul>
+                    <Li>Editar</Li>
+                    <Li>Finalizar</Li>
+
+                    <Li>Deletar</Li>
+                  </Ul>
+                </DivConfig>
+              )}
             </div>
           </div>
 
@@ -63,9 +92,18 @@ function CardProject() {
                 <h3>31/12/2023</h3>
               </DivData>
             </div>
-            <AlertData>
-              <h2>Faltam 8 meses</h2>
-            </AlertData>
+            <div className="div-row-re">
+              <BtnReset
+                className={clicked ? "btn-reset clicked" : "btn-reset"}
+                onClick={() => clickNavigate()}
+              >
+                <h2>Abrir</h2>
+              </BtnReset>
+
+              <AlertData>
+                <h2>Faltam 8 meses</h2>
+              </AlertData>
+            </div>
           </DivFooterCard>
         </DivRight>
       </DivCard>

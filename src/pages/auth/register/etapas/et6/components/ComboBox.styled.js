@@ -4,10 +4,10 @@ export const Select = styled.select`
   background: rgba(32, 172, 105, 0.05);
   border: 1px solid #20ac69;
   border-radius: 12px;
-  width: ${(props) => props.w};
-  height: 57px;
+  width: 132px;
+  height: 48px;
   padding-left: 10px;
-  font-size: 24px;
+  font-size: 1rem;
   outline: none;
   color: #20ac69;
 

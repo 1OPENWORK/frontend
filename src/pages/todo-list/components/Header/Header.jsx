@@ -5,11 +5,14 @@ import { BsFillClipboard2PlusFill } from "react-icons/bs";
 import { RxDashboard } from "react-icons/rx";
 
 import logoLink from "./img/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 function Header(height) {
+  const navigate = useNavigate();
+
   return (
     <Container>
-      <button type="button">
+      <button type="button" onClick={() => navigate("/projetos")}>
         <RxDashboard size={32} />
 
         <h2>Projetos</h2>

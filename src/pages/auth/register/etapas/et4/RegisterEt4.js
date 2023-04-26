@@ -70,7 +70,7 @@ const RegisterEt4 = () => {
             ))}
           </ColumCount>
           <InputForm
-            label="outros"
+            label="Outros"
             value=""
             handle={() => ""}
             space={"20px"}

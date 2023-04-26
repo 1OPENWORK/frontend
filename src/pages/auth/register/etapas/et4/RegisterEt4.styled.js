@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 60%;
+  height: 70%;
   display: flex;
   align-items: start;
   justify-content: center;
-  overflow-y: hidden;
+  overflow: hidden;
 `;
 
 export const Flex = styled.div`

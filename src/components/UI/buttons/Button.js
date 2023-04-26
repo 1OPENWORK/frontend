@@ -8,9 +8,11 @@ export const FilledButton = ({
   children,
   heigth,
   isDark,
+  marginRight,
 }) => {
   return (
     <GenericSolidButton
+      marginRight={marginRight}
       color={color}
       width={width}
       disabled={disabled}

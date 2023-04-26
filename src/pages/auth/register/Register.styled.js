@@ -5,6 +5,7 @@ const StyledRegister = {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 100vh;
     overflow: hidden;
     font-family: nunito;
   `,
@@ -19,7 +20,7 @@ const StyledRegister = {
   Divisor: styled.div`
     display: flex;
     align-items: ${props => props.align ? props.align : "start"};
-    justify-content: ${props => props.align ? props.align : "start"};;
+    justify-content: ${props => props.align ? props.align : "start"};
     width: 100%;
   `,
 
@@ -30,7 +31,7 @@ const StyledRegister = {
     justify-content: center;
     border-radius: 30px;
     width: 100%;
-    height: 28.125rem;
+    height: 25rem;
     margin-top: 2rem;
   `,
 

@@ -13,7 +13,7 @@ const StyledCard = {
   ContainerCardSquad: styled.div`
     width: 316px;
     height: 483px;
-    margin: 7.625rem 0 3rem 3rem;
+    margin: 4rem 0 3rem 3rem;
     background: ${Colors.WHITE};
     border-radius: 30px;
     padding-top: 1.5rem;
@@ -88,7 +88,7 @@ const StyledCard = {
     margin-left: 3rem;
     background: ${Colors.WHITE};
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    margin-top: 7.625rem;
+    margin-top: 4rem;
   `,
 
   HeaderPubli: styled.div`
@@ -226,7 +226,7 @@ const StyledCard = {
   ContainerSideCards: styled.div`
     width: 337px;
     height: 483px;
-    margin-top: 7.625rem;
+    margin-top: 4rem;
     margin-left: 3rem;
   `,
 

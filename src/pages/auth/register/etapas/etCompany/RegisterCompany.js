@@ -34,9 +34,7 @@ const RegisterCompany = () => {
   const validRegister = object({
     cnpj: string().required("Preencha o campo CNPJ."),
     sector: string().required("Preencha o campo setor."),
-    email: string()
-      .email("E-mail inválido")
-      .required("Preencha o campo Email."),
+    email: string().email("E-mail inválido").required("Preencha o campo Email."),
     name: string().required("Preencha o campo nome empresa."),
   });
 
@@ -142,7 +140,7 @@ const RegisterCompany = () => {
 
       <Styled.Divisor
         align={"flex-end"}
-        style={{ marginRight: "1.25rem", width: "48.125rem" }}
+        style={{ width: "48.125rem" }}
       >
         {!isNext ? (
           <FilledButton
@@ -151,7 +149,6 @@ const RegisterCompany = () => {
             width={190}
             heigth={60}
           >
-            {" "}
             {"Verificar"}
           </FilledButton>
         ) : (
@@ -161,7 +158,6 @@ const RegisterCompany = () => {
             width={190}
             heigth={60}
           >
-            {" "}
             {"Próximo"}
           </FilledButton>
         )}

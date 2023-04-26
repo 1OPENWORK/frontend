@@ -6,7 +6,7 @@ export const Sec = styled.div`
   display: flex;
   align-items: center;
   padding-left: 142px;
-  gap: 14px;
+  gap: 1rem;
 `;
 
 export const UserImg = styled.div`

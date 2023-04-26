@@ -38,7 +38,7 @@ export const H3Input = styled.h3`
   margin-top: 0.5rem;
   align-self: center;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   color: #20ac69;
 `;
@@ -53,7 +53,6 @@ export const Button = styled.button`
   border: 1px solid #20ac69;
   border-radius: 12px;
   margin-bottom: 32px;
-  padding-top: 8px;
 
   display: flex;
   align-items: center;
@@ -69,6 +68,6 @@ export const DivFlowScroll = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 60%;
+  height: 70%;
   width: 55%;
 `;

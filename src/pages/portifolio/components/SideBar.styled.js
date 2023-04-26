@@ -10,11 +10,31 @@ const StyleSideBar = {
     display: flex;
   `,
 
+  Header: styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 5rem;
+  `,
+
+  IconCallBack: styled.div`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+  `,
+
   ContainerPhotograph: styled.div`
     width: 88px;
     height: 88px;
-    margin-left: 10.531rem;
-    margin-top: 5rem;
     background-color: ${Colors.WHITE_TEST};
     border-radius: 100%;
     display: flex;
@@ -30,8 +50,8 @@ const StyleSideBar = {
     width: 24px;
     height: 24px;
     background-repeat: no-repeat;
-    background-color: ${(props) => (props.isImg ? "" : props.background)};
-    background-image: url(${(props) => (props.isImg ? props.background : "")});
+    background-color: ${props => (props.isImg ? "" : props.background)};
+    background-image: url(${props => (props.isImg ? props.background : "")});
   `,
 
   AddPhotograph: styled.div`
@@ -39,7 +59,7 @@ const StyleSideBar = {
     width: 117px;
     height: 25px;
     left: 9.625rem;
-    top: 11rem;
+    top: 6rem;
     font-family: "Nunito";
     font-style: normal;
     font-weight: 400;
@@ -68,7 +88,8 @@ const StyleSideBar = {
   SideBarOption: styled.div`
     width: 100%;
     height: 120px;
-    background-color: ${(props) => (props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.BLACK}`)};
+    background-color: ${props =>
+      props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.BLACK}`};
     display: flex;
     flex-direction: row;
 
@@ -82,8 +103,8 @@ const StyleSideBar = {
     height: 56px;
     margin-left: 5.5rem;
     margin-top: 2rem;
-    background-color: ${(props) => (props.isImg ? "" : props.background)};
-    background-image: url(${(props) => (props.isImg ? props.background : "")});
+    background-color: ${props => (props.isImg ? "" : props.background)};
+    background-image: url(${props => (props.isImg ? props.background : "")});
   `,
 
   TextSideBarOption: styled.div`
@@ -96,7 +117,8 @@ const StyleSideBar = {
     font-weight: 900;
     font-size: 1.5rem;
     line-height: 2.063rem;
-    color: ${(props) => (props.isSelected ? `${Colors.BLACK}` : `${Colors.WHITE}`)};
+    color: ${props =>
+      props.isSelected ? `${Colors.BLACK}` : `${Colors.WHITE}`};
   `,
 };
 

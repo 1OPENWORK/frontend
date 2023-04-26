@@ -23,6 +23,7 @@ export const GenericSolidButton = styled.button`
   letter-spacing: 0.5px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   margin-left: 24px;
+  margin-right: ${props => props.marginRight ? props.marginRight : "24px"} !important;
 
   &:disabled {
     opacity: 0.5;

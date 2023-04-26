@@ -78,6 +78,7 @@ const NavBar = ({ nav }) => {
             color={Colors.BLACK}
             width={190}
             heigth={60}
+            marginRight={"1.5rem"}
           >
             {"Sair"}
           </FilledButton>
@@ -104,6 +105,7 @@ const NavBar = ({ nav }) => {
             color={Colors.BLACK}
             width={190}
             heigth={60}
+            marginRight={"1.5rem"}
           >
             {"Sair"}
           </FilledButton>

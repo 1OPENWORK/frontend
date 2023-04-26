@@ -1,9 +1,7 @@
-
-
-const DEVELOPER = 'Developer'
-const COMPANY = 'Company'
+const DEVELOPER = "Developer";
+const COMPANY = "Company";
 
 export default {
-    DEVELOPER,
-    COMPANY
-}
+  DEVELOPER,
+  COMPANY,
+};

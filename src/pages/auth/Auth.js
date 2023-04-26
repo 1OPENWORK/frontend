@@ -16,6 +16,9 @@ import { useDispatch } from "react-redux";
 import { handleLogin } from "../../store/actions/UserAuth";
 import { changeActiveToken } from "../../store/reducers/AuthSlice";
 import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
+import { HomeDevPath } from "../../constants/Path";
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -31,6 +34,7 @@ function Auth() {
   // --------------------------------------------------------
   // Auth PRIVATE DECLARATIONS
   // --------------------------------------------------------
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,24 +46,33 @@ function Auth() {
         email,
         senha: password,
       });
-      const token = response.data.token;
+      if (response.status === 200) {
+        const token = response.data.token;
+        const id = response.data.userId;
 
-      toast.success("Logado com sucesso.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+        Cookies.set("token", token, { expires: 1 });
+        Cookies.set("id", id, { expires: 1 });
+        Cookies.set("isDev", true, { expires: 1 });
 
-      dispatch(
-        changeActiveToken({
-          token: token,
-        })
-      );
+        dispatch(
+          changeActiveToken({
+            token: token,
+          })
+        );
+
+        navigate(HomeDevPath);
+
+        toast.success("Logado com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
     } catch (error) {
       toast.error("Credências incorretas.", {
         position: "top-right",
@@ -107,7 +120,10 @@ function Auth() {
               }}
             >
               <Styled.Label>Não possui conta?</Styled.Label>
-              <Styled.Link> Cadastre-se</Styled.Link>
+              <Styled.Link onClick={() => navigate("/cadastro")}>
+                {" "}
+                Cadastre-se
+              </Styled.Link>
             </Styled.Row>
             <Styled.Row>
               <Styled.CheckBox type={"checkbox"} />

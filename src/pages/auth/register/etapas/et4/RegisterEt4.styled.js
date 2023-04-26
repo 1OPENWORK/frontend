@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: start;
   justify-content: center;
+  overflow-y: hidden;
 `;
 
 export const Flex = styled.div`
@@ -14,8 +15,6 @@ export const Flex = styled.div`
   justify-content: start;
   flex-direction: column;
 `;
-
-
 
 export const ColumCount = styled.div`
   column-count: ${(props) => props.count};

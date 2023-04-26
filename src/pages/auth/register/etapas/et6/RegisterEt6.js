@@ -87,7 +87,7 @@ const RegisterEt6 = ({ checked }) => {
             <FilledButton
               onClick={() => handleFinished()}
               color={"black"}
-              width={200}
+              width={138}
               heigth={60}
               disabled={false}
             >

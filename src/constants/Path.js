@@ -6,10 +6,10 @@ const JobsPath = "/jobs";
 const HomeDevPath = "/desenvolvedor";
 const DevsPath = "/desenvolvedores";
 const AvaliacoesPath = "/avaliacoes";
-const DashboardFinanceiraPath = "/dashboard"
-const FinanceiraPath = "/financeira"
+const DashboardFinanceiraPath = "/dashboard";
+const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
-const PortifolioPath = "/portifolio";
+const PortfolioPath = "/portfolio";
 const ProjectsPath = "/projetos";
 const TodoPath = "/gerenciador";
 
@@ -25,7 +25,7 @@ module.exports = {
   DashboardFinanceiraPath,
   FinanceiraPath,
   ComunidadePath,
-  PortifolioPath,
+  PortfolioPath,
   ProjectsPath,
   TodoPath,
 };

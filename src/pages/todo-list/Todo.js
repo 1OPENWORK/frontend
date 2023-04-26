@@ -1,12 +1,12 @@
 import React from "react";
 import GlobalStyle from "./styles/global";
 import Board from "./components/Board/Board";
-import Header from "./components/Header/Header";
+import SidebarProjecteds from "../projects/components/sideBar/SidebarProjecteds";
 
 function Todo() {
   return (
     <>
-      <Header />
+      <SidebarProjecteds />
       <Board />
 
       <GlobalStyle />

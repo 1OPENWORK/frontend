@@ -14,8 +14,8 @@ import {
   Ul,
   Li,
 } from "./CardProject.styled";
-import { Logo } from "../navBar/Header.styled";
-import LogoLink from "../navBar/img/logo.svg";
+import { Logo } from "../sideBar/SidebarProjecteds.styled";
+import LogoLink from "../sideBar/img/logo.svg";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import PointLink from "../../assets/pontis-config.png";
 import { useNavigate } from "react-router-dom";
@@ -26,13 +26,10 @@ function CardProject() {
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-
   const clickNavigate = () => {
     setClicked(true);
     navigate("/gerenciador");
   };
-
-
 
   return (
     <>

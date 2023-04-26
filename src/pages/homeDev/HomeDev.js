@@ -21,8 +21,30 @@ import {
 
 import imgCard from "../../assets/imgs/card-img.svg";
 import imgBot from "../../assets/imgs/chat-bot-img.svg";
+import { useNavigate } from "react-router";
+import {
+  AvaliacoesPath,
+  DevsPath,
+  JobsPath,
+  PortfolioPath,
+} from "../../constants/Path";
 
 const HomeDev = () => {
+  const navigate = useNavigate();
+
+  const goToPortfolio = () => {
+    navigate(PortfolioPath);
+  };
+  const goToAvaliation = () => {
+    navigate(AvaliacoesPath);
+  };
+  const goToJogs = () => {
+    navigate(JobsPath);
+  };
+  const goToDevs = () => {
+    navigate(DevsPath);
+  };
+
   return (
     <>
       <GeneralContainer>
@@ -30,11 +52,11 @@ const HomeDev = () => {
         <Container>
           <Input></Input>
           <Aside>
-            <Card>
+            <Card onClick={() => goToPortfolio()}>
               <CardImg src={imgCard} />
 
               <FlexCard>
-                <TitleCard>{"Portifólio"}</TitleCard>
+                <TitleCard>{"Portfólio"}</TitleCard>
                 <DescPara>
                   {
                     "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
@@ -43,7 +65,7 @@ const HomeDev = () => {
               </FlexCard>
             </Card>
 
-            <Card>
+            <Card onClick={() => goToAvaliation()}>
               <CardImg src={imgCard} />
 
               <FlexCard>
@@ -56,7 +78,7 @@ const HomeDev = () => {
               </FlexCard>
             </Card>
 
-            <Card>
+            <Card onClick={() => goToJogs()}>
               <CardImg src={imgCard} />
               <FlexCard>
                 <TitleCard>{"Jobs"}</TitleCard>
@@ -68,10 +90,10 @@ const HomeDev = () => {
               </FlexCard>
             </Card>
 
-            <Card>
+            <Card onClick={() => goToDevs()}>
               <CardImg src={imgCard} />
               <FlexCard>
-                <TitleCard>{"Cursos"}</TitleCard>
+                <TitleCard>{"Desenvolvedores"}</TitleCard>
                 <DescPara>
                   {
                     "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"

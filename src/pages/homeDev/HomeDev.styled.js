@@ -54,6 +54,7 @@ export const Card = styled.div`
   justify-content: center;
   position: relative;
   margin-bottom: 40px;
+  cursor: pointer;
 `;
 
 export const ChatBot = styled.div`
@@ -124,7 +125,7 @@ export const GenericSolidButton = styled.button`
   padding: 12px 16px;
   font-size: 18px;
   gap: 12px;
-  border: ${(props) =>
+  border: ${props =>
     props.inverted ? "0px solid #4D638D" : "0px solid #4D638D"};
   border-radius: 8px;
   font-family: "Inter", sans-serif;
@@ -136,14 +137,13 @@ export const GenericSolidButton = styled.button`
   }
 
   &:hover {
-    cursor: ${(props) => (props.disabled ? "text" : "pointer")};
+    cursor: ${props => (props.disabled ? "text" : "pointer")};
   }
 
   &:active {
-    background-color: ${(props) =>
-      props.disabled ? "" : Colors.PRIMARY_COLOR};
-    color: ${(props) => (props.disabled ? "" : Colors.WHITE)};
-    border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
+    background-color: ${props => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
+    color: ${props => (props.disabled ? "" : Colors.WHITE)};
+    border-color: ${props => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }
 
   @media screen and (max-width: 760px) {

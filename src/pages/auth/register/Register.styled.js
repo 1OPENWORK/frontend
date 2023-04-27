@@ -31,7 +31,7 @@ const StyledRegister = {
     justify-content: center;
     border-radius: 30px;
     width: 100%;
-    height: 25rem;
+    height: 70%;
     margin-top: 2rem;
   `,
 

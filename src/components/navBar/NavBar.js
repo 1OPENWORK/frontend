@@ -130,6 +130,7 @@ const NavBar = ({ nav }) => {
               color={Colors.BLACK}
               width={190}
               heigth={60}
+              marginRight={"0px;"}
             >
               {"Entrar"}
             </FilledButton>
@@ -138,6 +139,7 @@ const NavBar = ({ nav }) => {
               color={Colors.SECONDARY_COLOR}
               width={190}
               heigth={60}
+              marginRight={"0px;"}
             >
               {"Junte-se a nós"}
             </FilledButton>

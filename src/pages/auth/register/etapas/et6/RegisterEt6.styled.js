@@ -8,7 +8,7 @@ export const Input = styled.input`
   width: ${(props) => (props.w ? props.w : "358px")};
   height: 48px;
   padding-left: 10px;
-  font-size: 28px;
+  font-size: 1.5rem;
   color: #20ac69;
 
   font-weight: 700;

@@ -91,15 +91,6 @@ const RegisterEt1 = () => {
     );
   }
 
-  function determineMask(value) {
-    const onlyNumbers = value.replace(/[^\d]/g, ""); // remove tudo que não for número
-    if (onlyNumbers.length <= 11) {
-      return "999.999.999-99"; // CPF
-    } else {
-      return "99.999.999/9999-99"; // CNPJ
-    }
-  }
-
   return (
     <Styled.Form>
       <ToastContainer />

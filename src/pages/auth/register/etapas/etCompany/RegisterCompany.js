@@ -8,13 +8,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
 import {
-  changeEtapa7,
   changeEtapaAll,
   selectRegister,
 } from "../../../../../store/reducers/RegisterSlice";
 import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
 import { AuthPath } from "../../../../../constants/Path";
+import InputMask from "react-input-mask";
 
 const RegisterCompany = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,9 @@ const RegisterCompany = () => {
   const validRegister = object({
     cnpj: string().required("Preencha o campo CNPJ."),
     sector: string().required("Preencha o campo setor."),
-    email: string().email("E-mail inválido").required("Preencha o campo Email."),
+    email: string()
+      .email("E-mail inválido")
+      .required("Preencha o campo Email."),
     name: string().required("Preencha o campo nome empresa."),
   });
 
@@ -129,19 +131,24 @@ const RegisterCompany = () => {
           disabled={verified}
         />
 
-        <InputForm
-          label="CNPJ"
-          value={cnpj}
-          handle={setCnpj}
-          space={"1.25rem"}
-          disabled={verified}
-        />
+        <Styled.Column>
+          <Styled.Text>{"CNPJ"}</Styled.Text>
+          <InputMask
+            className="InputMask2"
+            mask="99.999.999/9999-99"
+            value={cnpj}
+            onChange={e => setCnpj(e.target.value)}
+            onKeyPress={event => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+              }
+            }}
+            disabled={verified}
+          />
+        </Styled.Column>
       </Styled.Row>
 
-      <Styled.Divisor
-        align={"flex-end"}
-        style={{ width: "48.125rem" }}
-      >
+      <Styled.Divisor align={"flex-end"} style={{ width: "48.125rem" }}>
         {!isNext ? (
           <FilledButton
             onClick={handleForm}

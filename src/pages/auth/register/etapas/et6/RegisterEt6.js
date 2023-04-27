@@ -4,21 +4,26 @@ import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import { DivFlowScroll } from "./RegisterEt6.styled";
 import Item from "./components/item/Item";
 import { useSelector } from "react-redux";
-import { selectRegister } from "../../../../../store/reducers/RegisterSlice";
+import {
+  changeClearRegister,
+  selectRegister,
+} from "../../../../../store/reducers/RegisterSlice";
 import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
 import { AuthPath, HomeDevPath } from "../../../../../constants/Path";
+import { useDispatch } from "react-redux";
 
 const RegisterEt6 = ({ checked }) => {
   const { register } = useSelector(selectRegister);
   const [itens, setItens] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const URI = process.env.REACT_APP_BACKEND_LOCAL_HOST;
 
-  const editCompotencias = (dados) => {
+  const editCompotencias = dados => {
     const prevItens = [...itens];
-    const newItens = prevItens.map((i) => {
+    const newItens = prevItens.map(i => {
       if (i.id === dados.id) {
         return {
           ...i,
@@ -59,11 +64,11 @@ const RegisterEt6 = ({ checked }) => {
 
     const response = await post(`${URI}/api/cadastros/dev`, dados);
 
-    if(response.status === 201){
+    if (response.status === 201) {
       navigate(AuthPath);
     }
 
-    
+    dispatch(changeClearRegister());
   };
 
   useEffect(() => {

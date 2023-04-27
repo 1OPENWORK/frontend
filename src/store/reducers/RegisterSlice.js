@@ -118,6 +118,44 @@ export const slice = createSlice({
         },
       };
     },
+
+    changeClearRegister(state) {
+      return {
+        ...state,
+        etapaAtual: 0,
+        etapa1: {
+          fullname: "",
+          email: "",
+          tel: "",
+          cfp_cnpj: "",
+          password: "",
+          comfirmed_password: "",
+        },
+        etapa2: {
+          cep: "",
+          estado: "",
+          cidade: "",
+          bairro: "",
+          rua: "",
+          numero: "",
+          complemento: "",
+        },
+        etapa3: {
+          isDesenvolvedor: false,
+        },
+        etapa4: [],
+        etapa5: [],
+        etapa6: [],
+        etapa7: {
+          fullname: "",
+          email: "",
+          setor: "",
+          cnpj: "",
+          password: "",
+          comfirmed_password: "",
+        },
+      };
+    },
   },
 });
 
@@ -130,6 +168,7 @@ export const {
   changeEtapa6,
   changeEtapa7,
   changeEtapaAll,
+  changeClearRegister,
 } = slice.actions;
 export const selectRegister = state => state;
 export default slice.reducer;

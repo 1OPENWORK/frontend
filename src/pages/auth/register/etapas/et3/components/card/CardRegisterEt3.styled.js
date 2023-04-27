@@ -22,12 +22,13 @@ export const Container = styled.div`
   align-items: flex-end;
   width: 50%;
   height: 100%;
-  background-image: url(${(props) => (props.img ? props.img : "")});
+  background-image: url(${props => (props.img ? props.img : "")});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: grayscale(100%);
+  filter: grayscale(100%) blur(0.1rem);
   transition: all 1.2s;
+
   cursor: pointer;
 
   &:hover {
@@ -37,8 +38,9 @@ export const Container = styled.div`
 
     ${Information}:first-child {
       display: flex;
-      background-color: ${props => props.isDark ? Colors.BLACK : Colors.WHITE};
-      color: ${props => props.isDark ? Colors.WHITE : Colors.BLACK};
+      background-color: ${props =>
+        props.isDark ? Colors.BLACK : Colors.WHITE};
+      color: ${props => (props.isDark ? Colors.WHITE : Colors.BLACK)};
       top: 0px;
     }
   }

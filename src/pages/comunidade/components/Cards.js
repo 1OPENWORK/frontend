@@ -8,6 +8,7 @@ import IconHeart from "../../../../src/assets/icons/icon-heart.svg";
 import IconMessage from "../../../../src/assets/icons/icon-message.svg";
 import IconShare from "../../../../src/assets/icons/icon-share.svg";
 import IconLogo from "../../../../src/assets/imgs/logo.svg";
+import Desenvolvedor from "../../../../src/assets/imgs/desenvolvedor.svg"
 
 const Cards = () => {
   return (
@@ -77,7 +78,7 @@ const Cards = () => {
             backend, frontend, bd conectado na nuvem, e aplicação mobile.
           </Styled.CaptionsCardMiddle>
 
-          <Styled.PublicationsCardMiddle></Styled.PublicationsCardMiddle>
+          <Styled.PublicationsCardMiddle isImg={true} background={Desenvolvedor}></Styled.PublicationsCardMiddle>
 
           <Styled.MetricsCardMiddle>
             4 Comentarios 2 Compartilhamentos

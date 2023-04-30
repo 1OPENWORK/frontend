@@ -138,6 +138,7 @@ const SideBar = ({
           })
         );
 
+
         // atualizar o visualization
         atualizarVisualized(
           response.dados.idFriend,

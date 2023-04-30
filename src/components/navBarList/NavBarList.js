@@ -39,14 +39,19 @@ const NavBarList = ({ type }) => {
   return (
     <BackgroundNavBarList>
       <BackgroundNavBar>
-        <NavBar isLogin={true} />
+        <NavBar nav={1} />
       </BackgroundNavBar>
       <Styled.ContainerNavBarList>
-        {type === 1
+        {
+          type === 1
           ? "Desenvolvedores disponíveis"
           : type === 2
           ? "Avaliações"
-          : "Jobs disponíveis"}
+          : type === 3
+          ? "Jobs disponíveis"
+          : type === 4
+          ? "Comunidade"
+          : "Financeira"}
       </Styled.ContainerNavBarList>
     </BackgroundNavBarList>
   );

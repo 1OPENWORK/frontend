@@ -6,6 +6,7 @@ import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import { handleProeficiency } from "../../../../../store/actions/Proeficiency";
 import { useDispatch } from "react-redux";
 import { changeEtapa4 } from "../../../../../store/reducers/RegisterSlice";
+import Colors from "../../../../../constants/Colors";
 
 const RegisterEt4 = () => {
   const [proefiency, setProeficiency] = useState([]);
@@ -70,7 +71,7 @@ const RegisterEt4 = () => {
             ))}
           </ColumCount>
           <InputForm
-            label="outros"
+            label="Outros"
             value=""
             handle={() => ""}
             space={"20px"}
@@ -79,10 +80,11 @@ const RegisterEt4 = () => {
           <Divider>
             <FilledButton
               onClick={handleSubmitReducer}
-              color={"black"}
+              color={Colors.BLACK}
               width={190}
               heigth={60}
               disabled={false}
+              marginRight={"0px"}
             >
               {"Próximo"}
             </FilledButton>

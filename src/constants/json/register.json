@@ -2,7 +2,7 @@
   "etapas": [
     {
       "titleInformation": "Etapa 1",
-      "description": "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor.",
+      "description": "Primeiro passo. Insira suas informações para conhecermos você melhor",
       "title": "Comece sua jornada!"
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "titleInformation": "Etapa 4",
-      "description": "Escolha uma ou mais especialidades de acordo com seu conhecimento. A partir daqui, teremos a base do seu perfil",
+      "description": "Preencha algumas informações básicas sobre sua empresa para finalizarmos o cadastro",
       "title": "Selecione suas especialidades",
       "titleEmpresa": "Informações da empresa"
     },

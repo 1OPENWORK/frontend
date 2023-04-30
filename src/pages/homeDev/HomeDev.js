@@ -17,69 +17,88 @@ import {
   BootImg,
   FlexCard,
   GenericSolidButton,
-  BarSearchImg,
 } from "./HomeDev.styled";
 
 import imgCard from "../../assets/imgs/card-img.svg";
 import imgBot from "../../assets/imgs/chat-bot-img.svg";
-import imgBarSearch from "../../assets/icons/searchIcon.svg";
+import { useNavigate } from "react-router";
+import {
+  AvaliacoesPath,
+  DevsPath,
+  JobsPath,
+  PortfolioPath,
+} from "../../constants/Path";
 
 const HomeDev = () => {
+  const navigate = useNavigate();
+
+  const goToPortfolio = () => {
+    navigate(PortfolioPath);
+  };
+  const goToAvaliation = () => {
+    navigate(AvaliacoesPath);
+  };
+  const goToJogs = () => {
+    navigate(JobsPath);
+  };
+  const goToDevs = () => {
+    navigate(DevsPath);
+  };
+
+  const placeholder = "Digite o quer encontrar no site";
+
   return (
     <>
       <GeneralContainer>
-        <NavBar />
+        <NavBar nav={1} />
         <Container>
-          <Input>
-            <BarSearchImg src={imgBarSearch} />
-          </Input>
-
-            <Aside>
-            <Card>
+          <Input placeholder={placeholder}></Input>
+          <Aside>
+            <Card onClick={() => goToPortfolio()}>
               <CardImg src={imgCard} />
 
               <FlexCard>
-                <TitleCard>{"Portifólio"}</TitleCard>
+                <TitleCard>{"Portfólio"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "No menu portfólio você terá todas as informações que fez em nosso cadastro. Caso queira, poderá também alterar seus dados"
                   }
                 </DescPara>
               </FlexCard>
             </Card>
 
-            <Card>
+            <Card onClick={() => goToAvaliation()}>
               <CardImg src={imgCard} />
 
               <FlexCard>
                 <TitleCard>{"Avaliação"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "Na página de avaliação, poderá realizar uma avaliação dos projetos em que participou"
                   }
                 </DescPara>
               </FlexCard>
             </Card>
 
-            <Card>
+            <Card onClick={() => goToJogs()}>
               <CardImg src={imgCard} />
               <FlexCard>
                 <TitleCard>{"Jobs"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "É nessa tela onde você, desenvolvedor, terá acesso aos trabalhos anunciados pelas empresas"
                   }
                 </DescPara>
               </FlexCard>
             </Card>
 
-            <Card>
+            <Card onClick={() => goToDevs()}>
               <CardImg src={imgCard} />
               <FlexCard>
-                <TitleCard>{"Cursos"}</TitleCard>
+                <TitleCard>{"Desenvolvedores"}</TitleCard>
                 <DescPara>
                   {
-                    "Primeiro passos. Cadastre informações pessoais para conhecermos você melhor"
+                    "Aqui é onde todos os desenvolvedores cadastrados em nosso site estão. Também é possível acessar o seu portfólio"
                   }
                 </DescPara>
               </FlexCard>
@@ -92,11 +111,10 @@ const HomeDev = () => {
               <TitleCard color={Colors.WHITE}>{"ChatBot"}</TitleCard>
               <DescParaBot>
                 {
-                  "Como podemos te ajudar, tire suas dúvidas com o nosso bot Yuca"
+                  "Como podemos te ajudar? Tire suas dúvidas com o nosso bot virtual"
                 }
               </DescParaBot>
-              <GenericSolidButton>{"Iniciar"}
-              </GenericSolidButton>
+              <GenericSolidButton>{"Iniciar"}</GenericSolidButton>
             </ChatBot>
           </Article>
         </Container>

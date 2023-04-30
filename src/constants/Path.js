@@ -1,11 +1,17 @@
 const HomePagePath = "/";
-const AuthPath = "/auth";
+const AuthPath = "/login";
 const ChatPath = "/chat/:id";
-const RegisterPath = "/register";
+const RegisterPath = "/cadastro";
 const JobsPath = "/jobs";
-const HomeDevPath = "/home-dev";
-const DevsPath = "/devs";
+const HomeDevPath = "/desenvolvedor";
+const DevsPath = "/desenvolvedores";
 const AvaliacoesPath = "/avaliacoes";
+const DashboardFinanceiraPath = "/dashboard";
+const FinanceiraPath = "/financeira";
+const ComunidadePath = "/comunidade";
+const PortfolioPath = "/portfolio";
+const ProjectsPath = "/projetos";
+const TodoPath = "/gerenciador";
 
 module.exports = {
   HomePagePath,
@@ -16,4 +22,10 @@ module.exports = {
   HomeDevPath,
   DevsPath,
   AvaliacoesPath,
+  DashboardFinanceiraPath,
+  FinanceiraPath,
+  ComunidadePath,
+  PortfolioPath,
+  ProjectsPath,
+  TodoPath,
 };

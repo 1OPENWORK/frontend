@@ -6,9 +6,9 @@ export const Input = styled.input`
   outline: none;
   border-radius: 12px;
   width: ${(props) => (props.w ? props.w : "358px")};
-  height: 57px;
+  height: 48px;
   padding-left: 10px;
-  font-size: 28px;
+  font-size: 1.5rem;
   color: #20ac69;
 
   font-weight: 700;
@@ -26,10 +26,9 @@ export const DivInput = styled.div`
   background: rgba(32, 172, 105, 0.05);
   border: 1px solid #20ac69;
   border-radius: 12px;
-  width: ${(props) => props.w};
-  height: 57px;
+  width: 132px;
+  height: 48px;
   padding-left: 10px;
-  font-size: 24px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -39,10 +38,13 @@ export const H3Input = styled.h3`
   margin-top: 0.5rem;
   align-self: center;
   font-weight: 700;
+  font-size: 1rem;
+
   color: #20ac69;
 `;
 
 export const Button = styled.button`
+  position: relative;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   color: ${(props) => props.color};
@@ -51,7 +53,6 @@ export const Button = styled.button`
   border: 1px solid #20ac69;
   border-radius: 12px;
   margin-bottom: 32px;
-  padding-top: 8px;
 
   display: flex;
   align-items: center;
@@ -59,14 +60,14 @@ export const Button = styled.button`
 
   font-weight: 800;
 
-  font-size: 1.2rem;
+  font-size: 1rem;
 `;
 
 export const DivFlowScroll = styled.div`
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   overflow-y: scroll;
-  overflow-y: auto;
-  height: 100%;
+  height: 70%;
+  width: 55%;
 `;

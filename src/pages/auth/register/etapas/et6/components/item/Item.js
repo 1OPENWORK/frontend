@@ -27,8 +27,8 @@ const Item = ({ dados, handleProeficiencia }) => {
       <Button
         color={"#fff"}
         backGround={"#20ac69"}
-        width={"199px"}
-        height={"53px"}
+        width={"132px"}
+        height={"48px"}
         title={dados.name}
       >
         {dados.name}

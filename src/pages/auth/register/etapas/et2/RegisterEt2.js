@@ -98,11 +98,7 @@ const RegisterEt2 = () => {
   }
 
   return (
-    <Styled.Form
-      style={{
-        paddingTop: "150px",
-      }}
-    >
+    <Styled.Form>
       <ToastContainer />
       <Styled.Row>
         <InputForm
@@ -154,27 +150,29 @@ const RegisterEt2 = () => {
         value={complemento}
         handle={setComplemento}
         space={"20px"}
-        width={"750px"}
+        width={"770px"}
       />
       <Styled.Divisor
         align={"flex-end"}
-        style={{ marginRight: "20px", width: "770px" }}
+        style={{ width: "770px" }}
       >
         {!isNext ? (
           <FilledButton
             onClick={handleForm}
-            color={Colors.PRIMARY_COLOR}
+            color={Colors.BLACK}
             width={190}
             heigth={60}
+            marginRight={"0px"}
           >
             {"Verificar"}
           </FilledButton>
         ) : (
           <FilledButton
             onClick={() => nextEtapa()}
-            color={Colors.BLACK}
+            color={Colors.PRIMARY_COLOR}
             width={190}
             heigth={60}
+            marginRight={"0px"}
           >
             {"Próximo"}
           </FilledButton>

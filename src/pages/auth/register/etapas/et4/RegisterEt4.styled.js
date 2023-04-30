@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 60%;
+  height: 68%;
   display: flex;
   align-items: start;
   justify-content: center;
+  overflow: hidden;
 `;
 
 export const Flex = styled.div`
@@ -13,13 +14,11 @@ export const Flex = styled.div`
   align-items: center;
   justify-content: start;
   flex-direction: column;
-  gap: ${props => props.gap};
 `;
 
 export const ColumCount = styled.div`
-  column-count: ${props => props.count};
-  column-gap: ${props => props.gap};
-  margin-bottom: 10px;
+  column-count: ${(props) => props.count};
+  column-gap: ${(props) => props.gap};
 `;
 
 export const Divider = styled.div`

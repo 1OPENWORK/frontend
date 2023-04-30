@@ -30,8 +30,43 @@ code {
   font-family: "nunito";
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none; /* Remove a aparência padrão */
   margin: 0; /* Remove a margem padrão */
+}
+
+.InputMask {
+  background: rgba(32, 172, 105, 0.05);
+  border: 1px solid #20ac69;
+  border-radius: 12px;
+  width: 22.375rem;
+  height: 3.563rem;
+  padding-left: 0.625rem;
+  color: #495057;
+  font-weight: normal;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.InputMask:focus {
+  outline: none;
+}
+
+.InputMask2 {
+  background: rgba(32, 172, 105, 0.05);
+  border: 1px solid #20ac69;
+  border-radius: 12px;
+  width: 22.375rem;
+  height: 3.563rem;
+  padding-left: 0.625rem;
+  color: #495057;
+  font-weight: normal;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.InputMask2:focus {
+  outline: none;
 }

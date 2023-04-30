@@ -60,7 +60,7 @@ const StyledNavBar = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 48px;
+    margin-right: 3rem;
   `,
 
   LogoImg: styled.img``,
@@ -69,6 +69,10 @@ const StyledNavBar = {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    :hover {
+      cursor: pointer;
+    }
   `,
 };
 

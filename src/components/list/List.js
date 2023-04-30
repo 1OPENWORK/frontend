@@ -5,10 +5,10 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
+import React, { useState } from "react";
 import Styled from "./List.styled";
 import ListJobs from "./ListJobs";
+import { useNavigate } from 'react-router-dom';
 
 // -----------------------------------------------------
 
@@ -25,6 +25,7 @@ import ListJobs from "./ListJobs";
  */
 const List = ({ type }) => {
   const [onMenu, setOnMenu] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -47,6 +48,31 @@ const List = ({ type }) => {
               >
                 Minhas avaliações
               </Styled.Button1TitleList>
+            ) : type === 3 ? (
+              <>
+                <Styled.Button1TitleList
+                  index={0}
+                  onMenu={onMenu}
+                  onClick={() => {
+                    setOnMenu(0)
+                    navigate('/dashboard');
+                  }}
+                >
+                  Dashboard
+                </Styled.Button1TitleList>
+
+                <Styled.Button1TitleList
+                  index={1}
+                  onMenu={onMenu}
+                  onClick={() => {
+                    setOnMenu(1)
+                    navigate('/financeira');
+                  }}
+                >
+                  Financeira
+
+                </Styled.Button1TitleList>
+              </>
             ) : (
               <Styled.Button1TitleList
                 index={0}
@@ -57,17 +83,21 @@ const List = ({ type }) => {
               </Styled.Button1TitleList>
             )}
 
-            <Styled.Button1TitleList
-              index={1}
-              onMenu={onMenu}
-              onClick={() => setOnMenu(3)}
-            >
-              Filtros
-            </Styled.Button1TitleList>
+            {type !== 3 ? (
+              <Styled.Button1TitleList
+                index={1}
+                onMenu={onMenu}
+                onClick={() => setOnMenu(3)}
+              >
+                Filtros
+              </Styled.Button1TitleList>
+            ) : (
+              ""
+            )}
           </Styled.containerButtonTitleList>
         </Styled.titleList>
 
-        {type === 1 ? <ListJobs type={1}></ListJobs> : <ListJobs></ListJobs>}
+        {type === 1 ? <ListJobs type={1}></ListJobs> : type !== 3 ? <ListJobs></ListJobs> : ""}
       </Styled.ContainerList>
     </>
   );

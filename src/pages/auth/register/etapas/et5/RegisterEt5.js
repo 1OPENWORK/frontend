@@ -14,6 +14,7 @@ import {
   changeEtapa5,
   selectRegister,
 } from "../../../../../store/reducers/RegisterSlice";
+import Colors from "../../../../../constants/Colors";
 
 const RegisterEt5 = () => {
   const { register } = useSelector(selectRegister);
@@ -106,10 +107,11 @@ const RegisterEt5 = () => {
           <Divider>
             <FilledButton
               onClick={() => handleNext()}
-              color={"black"}
+              color={Colors.BLACK}
               width={190}
               heigth={60}
               disabled={toolSelected.length > 0 ? false : true}
+              marginRight={"0px"}
             >
               {"Próximo"}
             </FilledButton>

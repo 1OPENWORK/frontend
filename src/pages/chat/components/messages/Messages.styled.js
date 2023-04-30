@@ -77,7 +77,7 @@ export const IMessageContainer = styled.div`
   font-size: 1.25rem;
 
   & p {
-    border-radius: 1.15rem;
+
     line-height: 1.25;
     font-size: 16px;
     max-width: 75%;
@@ -86,22 +86,17 @@ export const IMessageContainer = styled.div`
     word-wrap: break-word;
   }
 
-  & p::before,
-  & p::after {
-    bottom: -0.1rem;
-    content: "";
-    height: 1rem;
-    position: absolute;
-  }
+ 
 
   & p.from-me {
+    border-radius: 5px 5px 10px 5px;
     align-self: flex-end;
     background-color: #1b4332;
     color: #fff;
   }
 
   & p.from-me::before {
-    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-radius: 1.15rem;
     border-right: 1rem solid #1b4332;
     right: -0.35rem;
     transform: translate(0, -0.1rem);
@@ -120,6 +115,7 @@ export const IMessageContainer = styled.div`
   }
 
   & p.from-them {
+    border-radius: 5px 5px 5px 10px;
     align-items: flex-start;
     background-color: #e5e5ea;
     color: #000;

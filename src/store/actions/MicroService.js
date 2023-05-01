@@ -1,6 +1,6 @@
 import { getImagem, postImage } from "../../services/Generected";
 
-const URI = "http://20.226.66.121:80";
+const URI = process.env.REACT_APP_MICROSERVICE_PRODUCAO;
 
 export const handleImgGroup = async (dados) => {
   return await postImage(URI + "/newImgGroup", dados);

@@ -1,6 +1,6 @@
 import { getImagem, postImage } from "../../services/Generected";
 
-const URI = "http://localhost:3333";
+const URI = "http://20.226.66.121:80";
 
 export const handleImgGroup = async (dados) => {
   return await postImage(URI + "/newImgGroup", dados);

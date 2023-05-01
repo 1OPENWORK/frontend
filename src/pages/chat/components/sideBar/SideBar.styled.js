@@ -109,6 +109,11 @@ const StyledSideBar = {
       position: absolute;
     }
   `,
+
+    SubTitle: styled.label`
+      color: #07ea8b;
+    `
+
 };
 
 export const OpcaoMenuLateral = styled.div`
@@ -133,6 +138,8 @@ export const TitleOpcaoMenuLateral = styled.h3`
 
   font-size: 18px;
 `;
+
+
 
 export const DivOpcaoLateral = styled.div`
   display: flex;

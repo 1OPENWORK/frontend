@@ -37,7 +37,7 @@ import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import { getIsDev } from "./hooks/Cookies";
 
-const socket = socketIO.connect("http://localhost:3333");
+const socket = socketIO.connect("http://20.226.66.121:80");
 
 function App() {
   const dispatch = useDispatch();

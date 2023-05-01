@@ -26,6 +26,7 @@ import ModalNewConversa from "../modal/newConversa/ModalNewConversa";
 import ToastNewMessage from "../messages/components/toastNewMessage/ToastNewMessage";
 import { ToastNewMessageContainer } from "../messages/components/toastNewMessage/ToastNewMessage.styled";
 import { useSpring, animated } from "react-spring";
+import { MdOutlineEditNote } from "react-icons/md";
 
 const SideBar = ({
   socket,
@@ -138,7 +139,6 @@ const SideBar = ({
           })
         );
 
-
         // atualizar o visualization
         atualizarVisualized(
           response.dados.idFriend,
@@ -199,6 +199,12 @@ const SideBar = ({
           newNotifications: dados,
         })
       );
+
+      listAllNotifications();
+
+      if (indexAbaActive === 1) {
+        visualizedNotifications();
+      }
     });
 
     return () => socket.off("notifications");
@@ -223,7 +229,7 @@ const SideBar = ({
     setDadosConversa(dados);
   }, [dados]);
 
-  useEffect(() => {
+  const listAllNotifications = () => {
     socket.emit(
       "listAllNotifications",
       { idUser: websocket.idUser },
@@ -238,6 +244,10 @@ const SideBar = ({
         attQtdNotification(callback);
       }
     );
+  };
+
+  useEffect(() => {
+    listAllNotifications();
   }, [dados, indexAbaActive]);
 
   const visualizedNotifications = async () => {
@@ -316,6 +326,34 @@ const SideBar = ({
         <>
           <MenuLateral>
             <Styled.Img src={Logo} />
+            <OpcaoMenuLateral
+              style={{
+                flexDirection: "column",
+                justifyContent: "start",
+                height: "auto",
+              }}
+            >
+              <Styled.Img
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "100%",
+                  objectFit: "cover",
+                  marginBottom: "10px",
+                }}
+                src={
+                  "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                }
+              />
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>Jefferson</TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+
+              <DivOpcaoLateral style={{ marginBottom: "10px" }}>
+                <Styled.SubTitle>#00001</Styled.SubTitle>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+
             <OpcaoMenuLateral
               onClick={() => {
                 setIndexAbaActive(1);
@@ -448,7 +486,7 @@ const SideBar = ({
               <Styled.ListPersons>
                 {/* Colocar os cards de noticações */}
                 {notifications.map((d, index) => (
-                  <CardNotification dados={d} key={index} />
+                  <CardNotification dados={d} socket={socket} key={index} />
                 ))}
               </Styled.ListPersons>
             </Styled.DivColumn>

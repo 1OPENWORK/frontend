@@ -16,7 +16,6 @@ const BalaoMessage = ({ receiver, dados }) => {
         <Styled.Message>{dados.message}</Styled.Message>
         <Styled.ContainerFooter>
           <Styled.Time>{time}</Styled.Time>
-         
         </Styled.ContainerFooter>
       </Styled.BodyMessage>
     </p>

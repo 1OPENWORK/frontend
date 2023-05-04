@@ -36,8 +36,9 @@ import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import { getIsDev } from "./hooks/Cookies";
+import { Ambiente } from "./hooks/Ambiente";
 
-const socket = socketIO.connect(process.env.REACT_APP_MICROSERVICE_PRODUCAO);
+const socket = socketIO.connect(Ambiente());
 
 function App() {
   const dispatch = useDispatch();

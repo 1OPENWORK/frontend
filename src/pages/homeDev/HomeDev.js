@@ -24,6 +24,7 @@ import imgBot from "../../assets/imgs/chat-bot-img.svg";
 import { useNavigate } from "react-router";
 import {
   AvaliacoesPath,
+  ComunidadePath,
   DevsPath,
   JobsPath,
   PortfolioPath,
@@ -41,8 +42,8 @@ const HomeDev = () => {
   const goToJogs = () => {
     navigate(JobsPath);
   };
-  const goToDevs = () => {
-    navigate(DevsPath);
+  const goToComunidade = () => {
+    navigate(ComunidadePath);
   };
 
   const placeholder = "Digite o quer encontrar no site";
@@ -92,10 +93,10 @@ const HomeDev = () => {
               </FlexCard>
             </Card>
 
-            <Card onClick={() => goToDevs()}>
+            <Card onClick={() => goToComunidade()}>
               <CardImg src={imgCard} />
               <FlexCard>
-                <TitleCard>{"Desenvolvedores"}</TitleCard>
+                <TitleCard>{"Comunidade"}</TitleCard>
                 <DescPara>
                   {
                     "Aqui é onde todos os desenvolvedores cadastrados em nosso site estão. Também é possível acessar o seu portfólio"

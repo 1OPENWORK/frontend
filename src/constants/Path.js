@@ -1,6 +1,6 @@
 const HomePagePath = "/";
 const AuthPath = "/login";
-const ChatPath = "/chat/:id";
+const ChatPath = "/chat";
 const RegisterPath = "/cadastro";
 const JobsPath = "/jobs";
 const HomeDevPath = "/desenvolvedor";

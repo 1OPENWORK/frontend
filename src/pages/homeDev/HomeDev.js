@@ -45,12 +45,14 @@ const HomeDev = () => {
     navigate(DevsPath);
   };
 
+  const placeholder = "Digite o quer encontrar no site";
+
   return (
     <>
       <GeneralContainer>
         <NavBar nav={1} />
         <Container>
-          <Input></Input>
+          <Input placeholder={placeholder}></Input>
           <Aside>
             <Card onClick={() => goToPortfolio()}>
               <CardImg src={imgCard} />

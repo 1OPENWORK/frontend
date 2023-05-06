@@ -13,14 +13,14 @@ const StyledRegister = {
   ContainerForm: styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: ${(props) => (props.position ? props.position : "start")};
+    justify-content: ${props => (props.position ? props.position : "start")};
     width: 75%;
   `,
 
   Divisor: styled.div`
     display: flex;
-    align-items: ${props => props.align ? props.align : "start"};
-    justify-content: ${props => props.align ? props.align : "start"};
+    align-items: ${props => (props.align ? props.align : "start")};
+    justify-content: ${props => (props.align ? props.align : "start")};
     width: 100%;
   `,
 
@@ -31,7 +31,7 @@ const StyledRegister = {
     justify-content: center;
     border-radius: 30px;
     width: 100%;
-    height: 25rem;
+    height: 70%;
     margin-top: 2rem;
   `,
 
@@ -71,6 +71,18 @@ const StyledRegister = {
     height: 1.188rem;
     background: rgba(32, 172, 105, 0.05);
     border: 1px solid #20ac69;
+  `,
+
+  Text: styled.p`
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #20ac69;
+    margin-bottom: 0.5rem;
+  `,
+
+  Column: styled.div`
+    display: flex;
+    flex-direction: column;
   `,
 };
 

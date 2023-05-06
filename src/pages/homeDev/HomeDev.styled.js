@@ -41,7 +41,8 @@ export const Input = styled.input`
   position: absolute;
   top: 160px;
   left: 80px;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
+  padding-left: 1rem;
 `;
 
 export const Card = styled.div`

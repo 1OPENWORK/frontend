@@ -1,7 +1,5 @@
 
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import BarProgress from "../../../components/barProgress/BarProgress";
+import React, { useState } from "react";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
 import etapasRegister from "../../../constants/json/register.json";
@@ -25,7 +23,7 @@ const Register = () => {
 
   const { register } = useSelector(selectRegister);
 
-  const FetchTitle = ({}) => {
+  const FetchTitle = () => {
     if (register.etapaAtual <= 3) {
       return register.etapa3.isDesenvolvedor
         ? etapas[register.etapaAtual].title

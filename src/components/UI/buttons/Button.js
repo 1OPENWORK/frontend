@@ -9,6 +9,7 @@ export const FilledButton = ({
   heigth,
   isDark,
   marginRight,
+  marginLeft,
 }) => {
   return (
     <GenericSolidButton
@@ -19,6 +20,7 @@ export const FilledButton = ({
       heigth={heigth}
       onClick={onClick}
       isDark={isDark}
+      marginLeft={marginLeft}
     >
       {children}
     </GenericSolidButton>

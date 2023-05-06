@@ -3,12 +3,12 @@ import Styled from "./SideBar.styled";
 import IconPlus from "../../../assets/icons/icon-plus.svg";
 import IconProfile from "../../../assets/icons/icon-profile.svg";
 import IconAbout from "../../../assets/icons/icon-about.svg";
-import IconSpecialyts from "../../../assets/icons/icon-specialtys.svg";
-import IconExperiences from "../../../assets/icons/icon-experiences.svg";
+import IconExperiences from "../../../assets/icons/icon-specialtys.svg";
+import IconProject from "../../../assets/icons/icon-projects.svg";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import Colors from "../../../constants/Colors";
-import { HomeDevPath } from "../../../constants/Path";
+import { HomeDevPath, PortfolioEt5Path, PortfolioEt6Path, PortfolioProjectsPath } from "../../../constants/Path";
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const SideBar = () => {
       <Styled.Container>
         <Styled.Header>
           <Styled.IconCallBack onClick={() => navigate(HomeDevPath)}>
-            <MdArrowBack size={56} color={Colors.SECONDARY_COLOR} />
+            <MdArrowBack size={40} color={Colors.WHITE} />
           </Styled.IconCallBack>
           <Styled.ContainerPhotograph>
             <Styled.IconPlus
@@ -35,13 +35,13 @@ const SideBar = () => {
             <Styled.IconSideBarOption
               isImg={true}
               background={IconProfile}
-            ></Styled.IconSideBarOption>
+            />
             <Styled.TextSideBarOption isSelected={true}>
               Perfil
             </Styled.TextSideBarOption>
           </Styled.SideBarOption>
 
-          <Styled.SideBarOption>
+          <Styled.SideBarOption onClick={() => navigate(PortfolioEt5Path)}>
             <Styled.IconSideBarOption
               isImg={true}
               background={IconAbout}
@@ -49,21 +49,22 @@ const SideBar = () => {
             <Styled.TextSideBarOption>Sobre</Styled.TextSideBarOption>
           </Styled.SideBarOption>
 
-          <Styled.SideBarOption>
-            <Styled.IconSideBarOption
-              isImg={true}
-              background={IconSpecialyts}
-            ></Styled.IconSideBarOption>
-            <Styled.TextSideBarOption>Especialidades</Styled.TextSideBarOption>
-          </Styled.SideBarOption>
-
-          <Styled.SideBarOption>
+          <Styled.SideBarOption  onClick={() => navigate(PortfolioEt6Path)}>
             <Styled.IconSideBarOption
               isImg={true}
               background={IconExperiences}
             ></Styled.IconSideBarOption>
             <Styled.TextSideBarOption>Experiências</Styled.TextSideBarOption>
           </Styled.SideBarOption>
+
+          <Styled.SideBarOption onClick={() => navigate(PortfolioProjectsPath)}>
+            <Styled.IconSideBarOption
+              isImg={true}
+              background={IconProject}
+            ></Styled.IconSideBarOption>
+            <Styled.TextSideBarOption>Projetos</Styled.TextSideBarOption>
+          </Styled.SideBarOption>
+
         </Styled.ContainerSideBarOption>
       </Styled.Container>
     </>

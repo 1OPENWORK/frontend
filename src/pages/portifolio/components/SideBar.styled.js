@@ -5,8 +5,7 @@ const StyleSideBar = {
   Container: styled.div`
     width: 425px;
     height: 90vh;
-    border-radius: 0px 30px 30px 0px;
-    background-color: ${Colors.BLACK};
+    background-color: ${Colors.PRIMARY_COLOR};
     display: flex;
     overflow: hidden;
   `,
@@ -80,7 +79,7 @@ const StyleSideBar = {
     width: 425px;
     height: 480px;
     left: 0px;
-    top: 17.188rem;
+    top: 14.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -89,9 +88,8 @@ const StyleSideBar = {
 
   SideBarOption: styled.div`
     width: 100%;
-    height: 120px;
-    background-color: ${props =>
-      props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.BLACK}`};
+    height: 104px;
+    background-color: ${props =>props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.PRIMARY_COLOR}`};
     display: flex;
     flex-direction: row;
 
@@ -101,8 +99,8 @@ const StyleSideBar = {
   `,
 
   IconSideBarOption: styled.div`
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
     margin-left: 5.5rem;
     margin-top: 2rem;
     background-color: ${props => (props.isImg ? "" : props.background)};
@@ -110,10 +108,11 @@ const StyleSideBar = {
   `,
 
   TextSideBarOption: styled.div`
+    position: relative;
     width: auto;
     height: 33px;
-    margin-top: 2.719rem;
     margin-left: 1rem;
+    margin-top: 2.219rem;
     font-family: "Nunito";
     font-style: normal;
     font-weight: 900;

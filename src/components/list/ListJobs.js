@@ -5,8 +5,7 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
+import React from "react";
 import Styled from "./ListJobs.styled";
 import stars from "../../assets/imgs/stars.svg";
 import logo from "../../assets/icons/logoIcon.svg";
@@ -28,112 +27,112 @@ const ListJobs = ({ type }) => {
   return (
     <>
       {type === 1 ? (
-        <Styled.divTitleJobs>
-          <Styled.h2>Nome</Styled.h2>
-          <Styled.h2>Descrição</Styled.h2>
-          <Styled.h2>Projeto Concluido</Styled.h2>
-          <Styled.h2>Valor hora</Styled.h2>
-        </Styled.divTitleJobs>
+        <Styled.DivTitleJobs>
+          <Styled.H2>Nome</Styled.H2>
+          <Styled.H2>Descrição</Styled.H2>
+          <Styled.H2>Projeto Concluido</Styled.H2>
+          <Styled.H2>Valor hora</Styled.H2>
+        </Styled.DivTitleJobs>
       ) : (
-        <Styled.divTitleJobs>
-          <Styled.h2>Empresa</Styled.h2>
-          <Styled.h2>Descrição</Styled.h2>
-          <Styled.h2>Tempo Aproximado</Styled.h2>
-          <Styled.h2>Pessoas Necessárias</Styled.h2>
-        </Styled.divTitleJobs>
+        <Styled.DivTitleJobs>
+          <Styled.H2>Empresa</Styled.H2>
+          <Styled.H2>Descrição</Styled.H2>
+          <Styled.H2>Tempo Aproximado</Styled.H2>
+          <Styled.H2>Pessoas Necessárias</Styled.H2>
+        </Styled.DivTitleJobs>
       )}
 
-      <Styled.cardJobs>
-        <Styled.containerT1>
+      <Styled.CardJobs>
+        <Styled.ContainerT1>
           <img src={logo} alt="logo da empresa" />
-          <Styled.containerT1small>
-            <Styled.t1>OpenWork</Styled.t1>
-            <Styled.containerRollT1Small>
+          <Styled.ContainerT1small>
+            <Styled.T1>OpenWork</Styled.T1>
+            <Styled.ContainerRollT1Small>
               <img
                 src={stars}
                 alt="img stars"
                 style={{ width: "16px", height: "14px" }}
               />
-              <Styled.h2>4,50</Styled.h2>
-            </Styled.containerRollT1Small>
-          </Styled.containerT1small>
-        </Styled.containerT1>
-        <Styled.t2>
+              <Styled.H2>4,50</Styled.H2>
+            </Styled.ContainerRollT1Small>
+          </Styled.ContainerT1small>
+        </Styled.ContainerT1>
+        <Styled.T2>
           Criar plataforma freelancer do zero, backend, frontend, bd conectado
           na nuvem, e aplicação mobile.
-        </Styled.t2>
-        <Styled.t3>1 ano</Styled.t3>
-        <Styled.t3>6 pessoas</Styled.t3>
-      </Styled.cardJobs>
+        </Styled.T2>
+        <Styled.T3>1 ano</Styled.T3>
+        <Styled.T3>6 pessoas</Styled.T3>
+      </Styled.CardJobs>
 
-      <Styled.cardJobs style={{ backgroundColor: "#eaeaea" }}>
-        <Styled.containerT1>
+      <Styled.CardJobs style={{ backgroundColor: "#eaeaea" }}>
+        <Styled.ContainerT1>
           <img src={logo} alt="logo da empresa" />
-          <Styled.containerT1small>
-            <Styled.t1>OpenWork</Styled.t1>
-            <Styled.containerRollT1Small>
+          <Styled.ContainerT1small>
+            <Styled.T1>OpenWork</Styled.T1>
+            <Styled.ContainerRollT1Small>
               <img
                 src={stars}
                 alt="img stars"
                 style={{ width: "16px", height: "14px" }}
               />
-              <Styled.h2>4,50</Styled.h2>
-            </Styled.containerRollT1Small>
-          </Styled.containerT1small>
-        </Styled.containerT1>
-        <Styled.t2>
+              <Styled.H2>4,50</Styled.H2>
+            </Styled.ContainerRollT1Small>
+          </Styled.ContainerT1small>
+        </Styled.ContainerT1>
+        <Styled.T2>
           Criar plataforma freelancer do zero, backend, frontend, bd conectado
           na nuvem, e aplicação mobile.
-        </Styled.t2>
-        <Styled.t3>1 ano</Styled.t3>
-        <Styled.t3>6 pessoas</Styled.t3>
-      </Styled.cardJobs>
+        </Styled.T2>
+        <Styled.T3>1 ano</Styled.T3>
+        <Styled.T3>6 pessoas</Styled.T3>
+      </Styled.CardJobs>
 
-      <Styled.cardJobs>
-        <Styled.containerT1>
+      <Styled.CardJobs>
+        <Styled.ContainerT1>
           <img src={logo} alt="logo da empresa" />
-          <Styled.containerT1small>
-            <Styled.t1>OpenWork</Styled.t1>
-            <Styled.containerRollT1Small>
+          <Styled.ContainerT1small>
+            <Styled.T1>OpenWork</Styled.T1>
+            <Styled.ContainerRollT1Small>
               <img
                 src={stars}
                 alt="img stars"
                 style={{ width: "16px", height: "14px" }}
               />
-              <Styled.h2>4,50</Styled.h2>
-            </Styled.containerRollT1Small>
-          </Styled.containerT1small>
-        </Styled.containerT1>
-        <Styled.t2>
+              <Styled.H2>4,50</Styled.H2>
+            </Styled.ContainerRollT1Small>
+          </Styled.ContainerT1small>
+        </Styled.ContainerT1>
+        <Styled.T2>
           Criar plataforma freelancer do zero, backend, frontend, bd conectado
           na nuvem, e aplicação mobile.
-        </Styled.t2>
-        <Styled.t3>1 ano</Styled.t3>
-        <Styled.t3>6 pessoas</Styled.t3>
-      </Styled.cardJobs>
+        </Styled.T2>
+        <Styled.T3>1 ano</Styled.T3>
+        <Styled.T3>6 pessoas</Styled.T3>
+      </Styled.CardJobs>
 
-      <Styled.cardJobs style={{ backgroundColor: "#eaeaea" }}>
-        <Styled.containerT1>
+      <Styled.CardJobs style={{ backgroundColor: "#eaeaea" }}>
+        <Styled.ContainerT1>
           <img src={logo} alt="logo da empresa" />
-          <Styled.containerT1small>
-            <Styled.t1>OpenWork</Styled.t1>
-            <Styled.containerRollT1Small>
+          <Styled.ContainerT1small>
+            <Styled.T1>OpenWork</Styled.T1>
+            <Styled.ContainerRollT1Small>
               <img
                 src={stars}
                 alt="img stars"
                 style={{ width: "16px", height: "16px" }}
               />
-              <Styled.h2>4,50</Styled.h2>
-            </Styled.containerRollT1Small>
-          </Styled.containerT1small>
-        </Styled.containerT1>
-        <Styled.t2>
+              <Styled.H2>4,50</Styled.H2>
+            </Styled.ContainerRollT1Small>
+          </Styled.ContainerT1small>
+        </Styled.ContainerT1>
+        <Styled.T2>
           Criar plataforma freelancer do zero, backend, frontend, bd conectado
           na nuvem, e aplicação mobile.
-        </Styled.t2>
-        <Styled.t3>1 ano</Styled.t3>
-        <Styled.t3>6 pessoas</Styled.t3>
-      </Styled.cardJobs>
+        </Styled.T2>
+        <Styled.T3>1 ano</Styled.T3>
+        <Styled.T3>6 pessoas</Styled.T3>
+      </Styled.CardJobs>
     </>
   );
 };

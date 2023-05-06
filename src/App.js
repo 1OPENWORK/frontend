@@ -18,6 +18,7 @@ import {
   PortfolioEt5Path,
   PortfolioEt6Path,
   PortfolioProjectsPath,
+  AvaliarPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -37,6 +38,7 @@ import Projects from "./pages/projects/Projects";
 import PortifolioEt5 from "./pages/portifolio/portfolioEt5/PortfolioEt5";
 import PortifolioEt6 from "./pages/portifolio/portfolioEt6/PortfolioEt6";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
+import Avaliar from "./components/list/listAvaliar/ListAvaliar"
 
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
@@ -77,6 +79,7 @@ function App() {
         <Route path={PortfolioEt5Path} element={<PortifolioEt5 />} />
         <Route path={PortfolioEt6Path} element={<PortifolioEt6 />} />
         <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
+        <Route path={AvaliarPath} element={<Avaliar />} />
       </Routes>
     </Router>
   );

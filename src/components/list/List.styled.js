@@ -7,7 +7,7 @@ const StyledList = {
     height: auto;
   `,
 
-  titleList: styled.div`
+  TitleList: styled.div`
     background-color: ${Colors.white2};
     height: 14vh;
     border-bottom: 3.4px solid rgba(211, 211, 211, 0.65);
@@ -15,7 +15,7 @@ const StyledList = {
     align-items: flex-end;
   `,
 
-  containerButtonTitleList: styled.div`
+  ContainerButtonTitleList: styled.div`
     width: 30%;
     padding-left: 8%;
     padding-bottom: 0%;

@@ -5,8 +5,12 @@ import Colors from '../../../../constants/Colors';
 import SideBar from '../../components/SideBar';
 import ImageDev from '../../../../assets/imgs/imageInitial.svg';
 import { FilledButton } from '../../../../components/UI/buttons/Button';
+import { useNavigate } from 'react-router-dom';
+import { PortfolioPath } from '../../../../constants/Path';
 
 function Projects() {
+
+    const navigate = useNavigate();
 
   return (
     <>
@@ -50,7 +54,11 @@ function Projects() {
             </Styled.ContainerData>
             <Styled.ContainerButtons>
                 <FilledButton marginLeft={"0px"} color={Colors.BLACK} width={190} heigth={60}>
-                Alterar dados
+                    Alterar dados
+                </FilledButton>
+
+                <FilledButton onClick={() => navigate(PortfolioPath)} marginRight={"0px"} color={Colors.PRIMARY_COLOR} width={190} heigth={60}>
+                    Voltar
                 </FilledButton>
             </Styled.ContainerButtons>
           </Styled.ContainerContent>

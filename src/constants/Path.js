@@ -15,7 +15,7 @@ const TodoPath = "/gerenciador";
 const PortfolioEt5Path = "/portfolio/sobre-mim"
 const PortfolioEt6Path = "/portfolio/experiencias"
 const PortfolioProjectsPath = "/portfolio/projetos"
-
+const AvaliarPath = "avaliacoes/avaliar"
 module.exports = {
   HomePagePath,
   AuthPath,
@@ -33,5 +33,6 @@ module.exports = {
   TodoPath,
   PortfolioEt5Path,
   PortfolioEt6Path,
-  PortfolioProjectsPath
+  PortfolioProjectsPath,
+  AvaliarPath,
 };

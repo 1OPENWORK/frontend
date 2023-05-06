@@ -151,3 +151,10 @@ export const GenericSolidButton = styled.button`
     width: 100%;
   }
 `;
+
+export const ChatbotDiv=styled.div`
+width:40px;
+height:40px;
+
+
+`

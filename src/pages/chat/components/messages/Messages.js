@@ -22,8 +22,6 @@ const Messages = ({
   const [idReceiver, setIdReceiver] = useState("");
   const [messages, setMessages] = useState([]);
 
-  
-
   useEffect(() => {
     setIdSender(websocket.idUser);
     setIdReceiver(websocket.conversationActive.id);
@@ -62,7 +60,6 @@ const Messages = ({
             ) : (
               <Styled.ContainerNotSelected>
                 <img src={MessageDefault} />
-
               </Styled.ContainerNotSelected>
             )}
           </React.Fragment>

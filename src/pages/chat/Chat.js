@@ -10,6 +10,7 @@ import {
 import Styled from "./Chat.styled";
 import Messages from "./components/messages/Messages";
 import SideBar from "./components/sideBar/SideBar";
+import { getId } from "../../hooks/Cookies";
 
 export const Chat = ({ socket }) => {
   const [loading, setLoading] = useState(false);
@@ -19,50 +20,53 @@ export const Chat = ({ socket }) => {
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const id = getId();
 
   useEffect(() => {
-    dispatch(
-      changeIdUser({
-        id: id,
-      })
-    );
-
     socket.on("connect", () => {
-      socket.emit(
-        "allFriends",
-        { idUser: id },
-        (friends, listConversationsRecentes, messagePedentes) => {
-          let messagesPendentes = [];
+      socket.emit("myInformation", { id }, callback => {
+        const idUser = callback.id;
 
-          for (const item of messagePedentes) {
-            messagesPendentes.push(item);
+        dispatch(
+          changeIdUser({
+            id: idUser,
+          })
+        );
+
+        socket.emit(
+          "allFriends",
+          { idUser },
+          (friends, listConversationsRecentes, messagePedentes) => {
+            let messagesPendentes = [];
+
+            for (const item of messagePedentes) {
+              messagesPendentes.push(item);
+            }
+
+            dispatch(
+              changeMessagesPendentes({
+                messages: messagesPendentes,
+              })
+            );
+
+            dispatch(
+              changeFriends({
+                friends,
+              })
+            );
+
+            dispatch(
+              changeConversationRecentes({
+                conversations: listConversationsRecentes,
+              })
+            );
           }
+        );
 
-          dispatch(
-            changeMessagesPendentes({
-              messages: messagesPendentes,
-            })
-          );
-
-          dispatch(
-            changeFriends({
-              friends,
-            })
-          );
-
-          dispatch(
-            changeConversationRecentes({
-              conversations: listConversationsRecentes,
-            })
-          );
-        }
-      );
+        socket.emit("updateSocketId", { idUser }, user => {});
+      });
     });
-
-    socket.emit("updateSocketId", { idUser: id }, (user) => {});
   }, []);
-
 
   return (
     <Styled.Container>

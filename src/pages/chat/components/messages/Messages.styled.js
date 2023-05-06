@@ -59,7 +59,7 @@ const StyledMessage = {
     display: flex;
     padding-left: 20px;
     padding-right: 20px;
-    justify-content: ${(props) => (props.receiver ? "start" : "flex-end")};
+    justify-content: ${props => (props.receiver ? "start" : "flex-end")};
   `,
 
   ContainerNotSelected: styled.div`
@@ -71,13 +71,7 @@ const StyledMessage = {
 };
 
 export const IMessageContainer = styled.div`
-  border-radius: 0.25rem;
-  display: flex;
-  flex-direction: column;
-  font-size: 1.25rem;
-
   & p {
-
     line-height: 1.25;
     font-size: 16px;
     max-width: 75%;
@@ -86,13 +80,12 @@ export const IMessageContainer = styled.div`
     word-wrap: break-word;
   }
 
- 
-
   & p.from-me {
-    border-radius: 5px 5px 10px 5px;
+    border-radius: 5px 5px 5px 5px;
     align-self: flex-end;
     background-color: #1b4332;
     color: #fff;
+    margin: 2px;
   }
 
   & p.from-me::before {
@@ -115,10 +108,11 @@ export const IMessageContainer = styled.div`
   }
 
   & p.from-them {
-    border-radius: 5px 5px 5px 10px;
+    border-radius: 5px 5px 5px 5px;
     align-items: flex-start;
     background-color: #e5e5ea;
     color: #000;
+    margin: 2px;
   }
 
   & p.from-them:before {

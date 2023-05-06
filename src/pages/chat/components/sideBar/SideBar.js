@@ -98,7 +98,7 @@ const SideBar = ({
     socket.emit(
       "listMessagesPerson",
       { otherPeploe: dados.id, myId: websocket.idUser },
-      (dados) => {
+      dados => {
         dispatch(
           changeMessages({
             messages: dados,
@@ -111,7 +111,7 @@ const SideBar = ({
   };
 
   const atualizarVisualized = (idFriend, myId, idSender) => {
-    socket.emit("messagesVisualized", { idFriend, myId }, (messagePedentes) => {
+    socket.emit("messagesVisualized", { idFriend, myId }, messagePedentes => {
       dispatch(
         changeMessagesPendentes({
           messages: messagePedentes,
@@ -127,7 +127,7 @@ const SideBar = ({
   useEffect(() => {
     const idConversationActive = dados.id;
 
-    socket.on("newMessage", (dados) => {
+    socket.on("newMessage", dados => {
       const response = dados;
 
       const idSender = response.dados.idSender;
@@ -188,12 +188,12 @@ const SideBar = ({
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("atualizandoState", (dados) => {});
+    socket.on("atualizandoState", dados => {});
     return () => socket.off("atualizandoState");
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("notifications", (dados) => {
+    socket.on("notifications", dados => {
       dispatch(
         changeNewNotifications({
           newNotifications: dados,
@@ -233,7 +233,7 @@ const SideBar = ({
     socket.emit(
       "listAllNotifications",
       { idUser: websocket.idUser },
-      (callback) => {
+      callback => {
         dispatch(
           changeAllNotifications({
             notifications: callback,
@@ -262,15 +262,15 @@ const SideBar = ({
     }
 
     if (arrayNotify.length > 0) {
-      socket.emit("updateNotifyVisualized", { arrayNotify }, (callback) => {});
+      socket.emit("updateNotifyVisualized", { arrayNotify }, callback => {});
     }
     setTotalNotificationPendentes(0);
   };
 
-  const attQtdNotification = (cb) => {
+  const attQtdNotification = cb => {
     let total = 0;
 
-    cb.forEach((element) => {
+    cb.forEach(element => {
       if (!element.isVisualizado) {
         total++;
       }

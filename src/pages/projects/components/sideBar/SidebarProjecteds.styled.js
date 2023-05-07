@@ -7,7 +7,6 @@ export const Container = styled.div`
   background: #111111;
   color: #fff;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
-  border-radius: 0 24px 24px 0;
   align-items: center;
   gap: 2rem;
   display: flex;

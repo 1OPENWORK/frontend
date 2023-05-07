@@ -11,9 +11,9 @@ const CardNotification = ({ dados, socket }) => {
 
   const fetchImage = async () => {
     if (dados.type === "GROUP") {
-      const imagem = await getS3("perfil", dados.img);
+      const imagem = await getS3(dados.img);
 
-      setImage(URL.createObjectURL(imagem.data));
+      setImage(imagem);
     }
   };
 
@@ -23,8 +23,10 @@ const CardNotification = ({ dados, socket }) => {
 
   return (
     <Styled.Container>
-      {dados.type === "GROUP" && <CardGroup dados={dados} img={img} socket={socket} />}
-    </Styled.Container> 
+      {dados.type === "GROUP" && (
+        <CardGroup dados={dados} img={img} socket={socket} />
+      )}
+    </Styled.Container>
   );
 };
 

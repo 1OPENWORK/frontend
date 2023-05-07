@@ -36,6 +36,7 @@ const SideBar = ({
   setDadosConversa,
   visualized,
   setVisualized,
+  myInformation
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
@@ -335,22 +336,22 @@ const SideBar = ({
             >
               <Styled.Img
                 style={{
-                  width: "60px",
-                  height: "60px",
+                  width: "80px",
+                  height: "80px",
                   borderRadius: "100%",
                   objectFit: "cover",
                   marginBottom: "10px",
                 }}
                 src={
-                  "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                  myInformation.img
                 }
               />
               <DivOpcaoLateral>
-                <TitleOpcaoMenuLateral>Jefferson</TitleOpcaoMenuLateral>
+                <TitleOpcaoMenuLateral>{myInformation.nome}</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
 
               <DivOpcaoLateral style={{ marginBottom: "10px" }}>
-                <Styled.SubTitle>#00001</Styled.SubTitle>
+                <Styled.SubTitle>#{myInformation.tag}</Styled.SubTitle>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
 

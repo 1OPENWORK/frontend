@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const DivCard = styled.div`
   height: 16em;
@@ -8,6 +8,17 @@ export const DivCard = styled.div`
   border-radius: 30px;
   padding: 16px;
   display: flex;
+
+  ${(props) =>
+    props.checked && css`
+      div,
+      h1,
+      h2,
+      p,
+      button {
+        opacity: 0.5;
+      }
+    `};
 `;
 
 export const BtnReset = styled.button`

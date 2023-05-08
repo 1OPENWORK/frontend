@@ -6,13 +6,13 @@ import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
 function Projects() {
   return (
     <>
-      <SidebarProjecteds type={1} />
+      <SidebarProjecteds type={2} />
       <ContainerMain>
         <ContainerContent>
           <h1>Projetos</h1>
 
-          <CardProject />
-          <CardProject />
+          <CardProject now={100} checked={false}/>
+          <CardProject now={100} checked={false}/>
         </ContainerContent>
       </ContainerMain>
     </>

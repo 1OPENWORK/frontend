@@ -20,8 +20,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import PointLink from "../../assets/pontis-config.png";
 import { useNavigate } from "react-router-dom";
 
-function CardProject() {
-  const now = 100;
+function CardProject({now, checked}) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -33,7 +32,7 @@ function CardProject() {
 
   return (
     <>
-      <DivCard>
+      <DivCard checked={checked}>
         <DivLeft>
           <div className="div-pro">
             <Logo height={"32px"} src={LogoLink} />
@@ -52,9 +51,9 @@ function CardProject() {
               <h2>Progresso</h2>
               <ProgressBar
                 max={"100"}
-                variant={"success"}
                 now={now}
                 label={`${now}%`}
+                variant={"success"}
               />
             </div>
 

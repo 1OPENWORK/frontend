@@ -10,12 +10,15 @@ const DashboardFinanceiraPath = "/dashboard";
 const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
-const ProjectsPath = "/projetos";
 const TodoPath = "/gerenciador";
-const PortfolioEt5Path = "/portfolio/sobre-mim"
-const PortfolioEt6Path = "/portfolio/experiencias"
-const PortfolioProjectsPath = "/portfolio/projetos"
-const AvaliarPath = "avaliacoes/avaliar"
+const PortfolioEt5Path = "/portfolio/sobre-mim";
+const PortfolioEt6Path = "/portfolio/experiencias";
+const PortfolioProjectsPath = "/portfolio/projetos";
+const AvaliarPath = "avaliacoes/avaliar";
+const ProgressPath = "/projetos-andamentos";
+const ProjectsPath = "/projetos-concluidos";
+const canceledPath = "/projetos-cancelados";
+
 module.exports = {
   HomePagePath,
   AuthPath,
@@ -29,10 +32,12 @@ module.exports = {
   FinanceiraPath,
   ComunidadePath,
   PortfolioPath,
-  ProjectsPath,
   TodoPath,
   PortfolioEt5Path,
   PortfolioEt6Path,
   PortfolioProjectsPath,
   AvaliarPath,
+  ProgressPath,
+  ProjectsPath,
+  canceledPath,
 };

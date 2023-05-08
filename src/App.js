@@ -20,6 +20,7 @@ import {
   PortfolioProjectsPath,
   AvaliarPath,
   ProgressPath,
+  canceledPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -45,6 +46,7 @@ import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import Progress from "./pages/projects/pages/progress/Progress";
+import Canceled from "./pages/projects/pages/canceled/Canceled";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -86,6 +88,8 @@ function App() {
         <Route path={AvaliarPath} element={<Avaliar />} />
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={ProgressPath} element={<Progress />} />
+        <Route path={canceledPath} element={<Canceled />} />
+
       </Routes>
     </Router>
   );

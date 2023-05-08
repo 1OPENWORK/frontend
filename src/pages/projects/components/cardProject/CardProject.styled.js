@@ -16,7 +16,7 @@ export const DivCard = styled.div`
       h2,
       p,
       button {
-        opacity: 0.5;
+        opacity: 0.75;
       }
     `};
 `;

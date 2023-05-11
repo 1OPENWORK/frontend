@@ -148,7 +148,8 @@ const StyledCard = {
     height: 198px;
     margin-top: 1rem;
     margin-left: 2rem;
-    background-color: ${Colors.BLACK};
+    background-color: ${(props) => (props.isImg ? "" : props.background)};
+    background-image: url(${(props) => (props.isImg ? props.background : "")});
     border-radius: 24px;
   `,
 

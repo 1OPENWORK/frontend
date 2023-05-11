@@ -1,6 +1,5 @@
-import React from "react";
+import {React, useState} from "react";
 import NavBar from "../../components/navBar/NavBar";
-
 import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
 import Colors from "../../constants/Colors";
 import {
@@ -17,6 +16,7 @@ import {
   BootImg,
   FlexCard,
   GenericSolidButton,
+  ChatbotDiv,
 } from "./HomeDev.styled";
 
 import imgCard from "../../assets/imgs/card-img.svg";
@@ -29,9 +29,20 @@ import {
   JobsPath,
   PortfolioPath,
 } from "../../constants/Path";
+import CardHelp from '../../components/UI/chatbot/Landbot'
 
 const HomeDev = () => {
   const navigate = useNavigate();
+
+  const [showCardHelp, setShowCardHelp] = useState(false);
+
+  function handleButtonClick() {
+    setShowCardHelp(true);
+  }
+
+  // useScript(
+  //   "https://static.zdassets.com/ekr/snippet.js?key=f2ba511b-7b3f-4227-9be2-de2152e5677e"
+  // )
 
   const goToPortfolio = () => {
     navigate(PortfolioPath);
@@ -107,7 +118,9 @@ const HomeDev = () => {
           </Aside>
 
           <Article>
+ 
             <ChatBot>
+            {showCardHelp && <CardHelp />}
               <BootImg src={imgBot} />
               <TitleCard color={Colors.WHITE}>{"ChatBot"}</TitleCard>
               <DescParaBot>
@@ -115,11 +128,24 @@ const HomeDev = () => {
                   "Como podemos te ajudar? Tire suas dúvidas com o nosso bot virtual"
                 }
               </DescParaBot>
-              <GenericSolidButton>{"Iniciar"}</GenericSolidButton>
+            
+              <GenericSolidButton onClick={handleButtonClick}>Iniciar</GenericSolidButton>
+             
+              
+              <ChatbotDiv> </ChatbotDiv>
+             
             </ChatBot>
+
+      
+
+            
           </Article>
+     
+          
         </Container>
       </GeneralContainer>
+     
+      
     </>
   );
 };

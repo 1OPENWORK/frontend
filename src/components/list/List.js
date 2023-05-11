@@ -5,10 +5,12 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useState } from "react";
+import React from "react";
 import Styled from "./List.styled";
 import ListJobs from "./ListJobs";
+import ListAvaliacao from './listAvaliacao/ListAvaliacao'
 import { useNavigate } from 'react-router-dom';
+import { AvaliarPath } from "../../constants/Path";
 
 // -----------------------------------------------------
 
@@ -24,38 +26,39 @@ import { useNavigate } from 'react-router-dom';
  * @returns The component JSX.
  */
 const List = ({ type }) => {
-  const [onMenu, setOnMenu] = useState(0);
   const navigate = useNavigate();
 
   return (
     <>
       <Styled.ContainerList>
-        <Styled.titleList>
-          <Styled.containerButtonTitleList>
+        <Styled.TitleList>
+          <Styled.ContainerButtonTitleList>
             {type === 1 ? (
               <Styled.Button1TitleList
                 index={0}
-                onMenu={onMenu}
-                onClick={() => setOnMenu(1)}
               >
                 Usuários
               </Styled.Button1TitleList>
             ) : type === 2 ? (
+              <>
               <Styled.Button1TitleList
                 index={0}
-                onMenu={onMenu}
-                onClick={() => setOnMenu(2)}
               >
-                Minhas avaliações
+                Avaliações
               </Styled.Button1TitleList>
+
+              <Styled.Button1TitleList
+              index={1}
+              >
+              Avaliar
+              </Styled.Button1TitleList>
+              </>
             ) : type === 3 ? (
               <>
                 <Styled.Button1TitleList
                   index={0}
-                  onMenu={onMenu}
                   onClick={() => {
-                    setOnMenu(0)
-                    navigate('/dashboard');
+                  navigate('/dashboard');
                   }}
                 >
                   Dashboard
@@ -63,10 +66,8 @@ const List = ({ type }) => {
 
                 <Styled.Button1TitleList
                   index={1}
-                  onMenu={onMenu}
                   onClick={() => {
-                    setOnMenu(1)
-                    navigate('/financeira');
+                  navigate('/financeira');
                   }}
                 >
                   Financeira
@@ -76,28 +77,26 @@ const List = ({ type }) => {
             ) : (
               <Styled.Button1TitleList
                 index={0}
-                onMenu={onMenu}
-                onClick={() => setOnMenu(0)}
+                onClick={() => {
+                navigate(AvaliarPath)}}
               >
                 Jobs
               </Styled.Button1TitleList>
             )}
 
-            {type !== 3 ? (
+            {type !== 2 ? (
               <Styled.Button1TitleList
                 index={1}
-                onMenu={onMenu}
-                onClick={() => setOnMenu(3)}
               >
                 Filtros
               </Styled.Button1TitleList>
             ) : (
               ""
             )}
-          </Styled.containerButtonTitleList>
-        </Styled.titleList>
+          </Styled.ContainerButtonTitleList>
+        </Styled.TitleList>
 
-        {type === 1 ? <ListJobs type={1}></ListJobs> : type !== 3 ? <ListJobs></ListJobs> : ""}
+        {type === 1 ? <ListJobs type={1}></ListJobs> : type === 2 ? <ListAvaliacao type={1}></ListAvaliacao> : ""}
       </Styled.ContainerList>
     </>
   );

@@ -6,7 +6,7 @@ const StyledListJobs = {
     width: 100%;
     height: auto;
   `,
-  divTitleJobs: styled.div`
+  DivTitleJobs: styled.div`
     background-color: ${Colors.white2};
     height: 7vh;
     padding-left: 14px;
@@ -15,7 +15,7 @@ const StyledListJobs = {
     justify-content: space-around;
     align-items: center;
   `,
-  h2: styled.div`
+  H2: styled.div`
     font-family: "Nunito";
     font-style: normal;
     font-weight: 500;
@@ -24,7 +24,7 @@ const StyledListJobs = {
     /* identical to box height, or 24px */
     letter-spacing: 0.22em;
   `,
-  cardJobs: styled.div`
+  CardJobs: styled.div`
   background-color: ${Colors.white2};
   height: 16vh;
   display: flex;
@@ -32,23 +32,23 @@ const StyledListJobs = {
   gap: 8vw;
   padding-left: 5.2vw;
 `,
-containerT1: styled.div`
+ContainerT1: styled.div`
   display: flex;
   flex-direction: row;
   
 `,
-containerT1small: styled.div`
+ContainerT1small: styled.div`
   display: flex;
   flex-direction: column;
 `,
-containerRollT1Small: styled.div`
+ContainerRollT1Small: styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   
 `,
 
-t1: styled.div`
+T1: styled.div`
   color: ${Colors.AZUL_LINK};
   font-family: "Nunito";
   font-style: normal;
@@ -59,7 +59,7 @@ t1: styled.div`
   text-align: center;
   text-decoration-line: underline;
 `,
-t2: styled.div`
+T2: styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
@@ -71,7 +71,7 @@ t2: styled.div`
   padding-top: 1%;
   
 `,
-t3: styled.div`
+T3: styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 900;

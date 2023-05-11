@@ -1,10 +1,10 @@
-import React from 'react';
-import About from '../About&Experience/About';
+import React from "react";
+import About from "../About&Experience/About";
 
 function portfolioEt5() {
   return (
     <>
-        <About isAbout={true} />
+      <About isAbout={true} />
     </>
   );
 }

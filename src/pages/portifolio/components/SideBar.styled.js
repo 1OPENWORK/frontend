@@ -3,8 +3,9 @@ import Colors from "../../../constants/Colors";
 
 const StyleSideBar = {
   Container: styled.div`
-    width: 425px;
-    height: 90vh;
+    position: fixed;
+    min-width: 425px;
+    min-height: 100vh;
     background-color: ${Colors.PRIMARY_COLOR};
     display: flex;
     overflow: hidden;
@@ -89,7 +90,8 @@ const StyleSideBar = {
   SideBarOption: styled.div`
     width: 100%;
     height: 104px;
-    background-color: ${props =>props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.PRIMARY_COLOR}`};
+    background-color: ${props =>
+      props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.PRIMARY_COLOR}`};
     display: flex;
     flex-direction: row;
 

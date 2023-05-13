@@ -5,7 +5,6 @@ export const Container = styled.div`
   width: 10em;
   position: fixed;
   background: #20ac51;
-  color: #fff;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
   align-items: center;
   gap: 2rem;
@@ -26,12 +25,7 @@ export const BodyContainerProjecteds = styled.div`
   h2 {
     font-size: 1.2rem;
     font-weight: 400;
-    color: #fff;
     letter-spacing: 1.5px;
-  }
-
-  button  h2 {
-    color: ${props => props.color};
   }
 
   button {
@@ -39,11 +33,12 @@ export const BodyContainerProjecteds = styled.div`
     border: none;
     color: #fff;
     cursor: pointer;
+    color: ${(props) => props.color};
   }
 `;
 
 export const Logo = styled.img`
-  height: ${props => props.height};
+  height: ${(props) => props.height};
 `;
 
 export const Tarefa = styled.img`

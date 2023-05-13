@@ -101,7 +101,7 @@ export const DescParaBot = styled.p`
 `;
 
 export const FlexCard = styled.div`
-  align-itens: center;
+  align-items: center;
 `;
 
 export const CardImg = styled.img`

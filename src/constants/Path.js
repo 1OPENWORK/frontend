@@ -18,6 +18,8 @@ const AvaliarPath = "avaliacoes/avaliar";
 const ProgressPath = "/projetos-andamentos";
 const ProjectsPath = "/projetos-concluidos";
 const canceledPath = "/projetos-cancelados";
+const CreateProjectPath = "/cadastrar-projeto";
+
 
 module.exports = {
   HomePagePath,
@@ -40,4 +42,5 @@ module.exports = {
   ProgressPath,
   ProjectsPath,
   canceledPath,
+  CreateProjectPath
 };

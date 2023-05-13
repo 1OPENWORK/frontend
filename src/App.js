@@ -21,6 +21,7 @@ import {
   AvaliarPath,
   ProgressPath,
   canceledPath,
+  CreateProjectPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -47,6 +48,7 @@ import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";
+import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -89,7 +91,7 @@ function App() {
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={ProgressPath} element={<Progress />} />
         <Route path={canceledPath} element={<Canceled />} />
-
+        <Route path={CreateProjectPath} element={<CreateProject />} />
       </Routes>
     </Router>
   );

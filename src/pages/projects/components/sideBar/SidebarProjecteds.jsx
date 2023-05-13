@@ -7,10 +7,18 @@ import { TiCancel } from "react-icons/ti";
 import { MdArrowBack } from "react-icons/md";
 import Colors from "../../../../constants/Colors";
 import { useNavigate } from "react-router";
-import { HomeDevPath } from "../../../../constants/Path";
+import {
+  HomeDevPath,
+  CreateProjectPath,
+  ProgressPath,
+  ProjectsPath,
+  canceledPath,
+} from "../../../../constants/Path";
 import { RxDashboard } from "react-icons/rx";
 import { BsFillClipboard2PlusFill } from "react-icons/bs";
 import { useState } from "react";
+
+import ButtonCompleted from "./components/ButtonCompleted";
 
 function SidebarProjecteds({ type }) {
   const navigate = useNavigate();
@@ -23,17 +31,21 @@ function SidebarProjecteds({ type }) {
   };
 
   const goToProgress = () => {
-    navigate("/projetos-andamentos");
+    navigate(ProgressPath);
     setType(1);
   };
   const goToCompleted = () => {
-    navigate("/projetos-concluidos");
+    navigate(ProjectsPath);
     setType(2);
   };
 
   const goToCanceled = () => {
-    navigate("/projetos-cancelados");
+    navigate(canceledPath);
     setType(3);
+  };
+
+  const goToCreateProject = () => {
+    navigate(CreateProjectPath);
   };
 
   return (
@@ -47,31 +59,30 @@ function SidebarProjecteds({ type }) {
           marginTop: "1rem",
           cursor: "pointer",
         }}
-        color={Colors.SECONDARY_COLOR}
+        color={Colors.WHITE}
+        active={Colors.SECONDARY_COLOR}
       />
       <BodyContainerProjecteds>
         {type === 3 ? (
           <>
-            <button type="button" onClick={() => goToProgress()}>
-              <MdOutlineRunCircle size={40} />
+            <ButtonCompleted
+              type={1}
+              desc={"Andamento"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              type={2}
+              desc={"Concluídos"}
+              onClick={() => goToCompleted()}
+            />
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={3}
+              desc={"Cancelados"}
+              onClick={() => goToCanceled()}
+            />
 
-              <h2>Andamento</h2>
-            </button>
-            <button type="button" onClick={() => goToCompleted()}>
-              <AiOutlineCheckCircle size={40} />
-              <h2>Concluídos</h2>
-            </button>
-            <button type="button" onClick={() => goToCanceled()}>
-              <TiCancel
-                size={40}
-                className="icon-cancel"
-                color={"rgb(77, 255, 126)"}
-              />
-
-              <h2 color={"rgb(77, 255, 126)"}>Cancelados</h2>
-            </button>
-
-            <button type="button">
+            <button type="button" onClick={() => goToCreateProject()}>
               <AiFillFolderAdd size={40} className="icon-cancel" />
 
               <h2>Criar Projeto</h2>
@@ -79,22 +90,24 @@ function SidebarProjecteds({ type }) {
           </>
         ) : type === 2 ? (
           <>
-            <button type="button" onClick={() => goToProgress()}>
-              <MdOutlineRunCircle size={40} />
+            <ButtonCompleted
+              type={1}
+              desc={"Andamento"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={2}
+              desc={"Concluídos"}
+              onClick={() => goToCompleted()}
+            />
+            <ButtonCompleted
+              type={3}
+              desc={"Cancelados"}
+              onClick={() => goToCanceled()}
+            />
 
-              <h2>Andamento</h2>
-            </button>
-            <button type="button" onClick={() => goToCompleted()}>
-              <AiOutlineCheckCircle size={40} color={"rgb(77, 255, 126)"} />
-              <h2 color={"rgb(77, 255, 126)"}>Concluídos</h2>
-            </button>
-            <button type="button" onClick={() => goToCanceled()}>
-              <TiCancel size={40} className="icon-cancel" />
-
-              <h2>Cancelados</h2>
-            </button>
-
-            <button type="button">
+            <button type="button" onClick={() => goToCreateProject()}>
               <AiFillFolderAdd size={40} className="icon-cancel" />
 
               <h2>Criar Projeto</h2>
@@ -102,24 +115,23 @@ function SidebarProjecteds({ type }) {
           </>
         ) : type === 1 ? (
           <>
-            <button type="button" onClick={() => goToProgress()}>
-              <MdOutlineRunCircle size={40} color={"rgb(77, 255, 126)"} />
-
-              <h2 color={"rgb(77, 255, 126)"}>
-                Andamento
-              </h2>
-            </button>
-            <button type="button" onClick={() => goToCompleted()}>
-              <AiOutlineCheckCircle size={40} />
-              <h2>Concluídos</h2>
-            </button>
-            <button type="button" onClick={() => goToCanceled()}>
-              <TiCancel size={40} className="icon-cancel" />
-
-              <h2>Cancelados</h2>
-            </button>
-
-            <button type="button">
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={1}
+              desc={"Andamento"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              type={2}
+              desc={"Concluídos"}
+              onClick={() => goToCompleted()}
+            />
+            <ButtonCompleted
+              type={3}
+              desc={"Cancelados"}
+              onClick={() => goToCanceled()}
+            />
+            <button type="button" onClick={() => goToCreateProject()}>
               <AiFillFolderAdd size={40} className="icon-cancel" />
 
               <h2>Criar Projeto</h2>
@@ -127,7 +139,10 @@ function SidebarProjecteds({ type }) {
           </>
         ) : (
           <>
-            <button type="button" onClick={() => navigate("/projetos-andamentos")}>
+            <button
+              type="button"
+              onClick={() => navigate("/projetos-andamentos")}
+            >
               <RxDashboard size={32} />
 
               <h2>Projetos</h2>

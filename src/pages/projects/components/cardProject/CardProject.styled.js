@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import Colors from "../../../../constants/Colors";
+import styled, { css } from 'styled-components'
+import Colors from '../../../../constants/Colors'
 
 export const DivCard = styled.div`
   min-height: 16em;
@@ -10,7 +10,7 @@ export const DivCard = styled.div`
   padding: 1.5em;
   display: flex;
   margin-bottom: 1.5em;
-  z-index: -2;
+  z-index: -4;
   ${(props) =>
     props.canceled &&
     css`
@@ -22,7 +22,7 @@ export const DivCard = styled.div`
         opacity: 0.75;
       }
     `};
-`;
+`
 
 export const BtnReset = styled.button`
   background-color: ${Colors.PRIMARY_COLOR};
@@ -38,7 +38,7 @@ export const BtnReset = styled.button`
   justify-content: center;
 
   border-radius: 20px;
-`;
+`
 
 export const DivLeft = styled.div`
   height: 100%;
@@ -51,7 +51,7 @@ export const DivLeft = styled.div`
   p {
     margin-top: 1.5rem;
     width: 300px;
-    font-family: "Nunito";
+    font-family: 'Nunito';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -67,7 +67,7 @@ export const DivLeft = styled.div`
   .div-pro {
     display: flex;
   }
-`;
+`
 
 export const DivRight = styled.div`
   height: 100%;
@@ -173,7 +173,7 @@ export const DivRight = styled.div`
     font-weight: 700;
     align-self: flex-start;
   }
-`;
+`
 
 export const DivFooterCard = styled.div`
   height: 45%;
@@ -199,7 +199,7 @@ export const DivFooterCard = styled.div`
   .btn-reset.clicked {
     background: red;
   }
-`;
+`
 
 export const DivData = styled.div`
   width: 25%;
@@ -212,7 +212,7 @@ export const DivData = styled.div`
   h3 {
     align-self: center;
   }
-`;
+`
 
 export const UserImg = styled.div`
   background-image: url(${(props) => props.imageSrc});
@@ -229,19 +229,19 @@ export const UserImg = styled.div`
   align-self: flex-end;
   margin-left: 0.5em;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
+`
 
 export const TitleImg = styled.h3`
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
-`;
+`
 
 export const ConfigImg = styled.img`
   height: 1rem;
   position: relative;
   cursor: pointer;
-`;
+`
 
 export const AlertData = styled.div`
   width: 184px;
@@ -254,7 +254,7 @@ export const AlertData = styled.div`
   justify-content: center;
 
   border-radius: 20px;
-`;
+`
 
 export const DivConfig = styled.div`
   background: linear-gradient(145deg, #fff, #ffffff);
@@ -267,7 +267,7 @@ export const DivConfig = styled.div`
   font-style: Nunito, sans-serif;
   transition: all 1s ease-in-out !important;
   position: absolute;
-`;
+`
 
 export const Ul = styled.ul`
   text-decoration: none;
@@ -279,7 +279,7 @@ export const Ul = styled.ul`
   text-align: center;
   padding: 0;
   margin-top: 5px;
-`;
+`
 
 export const Li = styled.li`
   align-self: center;
@@ -293,4 +293,4 @@ export const Li = styled.li`
     color: white;
     border-radius: 5px;
   }
-`;
+`

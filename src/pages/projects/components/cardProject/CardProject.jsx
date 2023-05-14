@@ -22,8 +22,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-import { createPopper } from "@popperjs/core";
 import { usePopper } from "react-popper";
+import Cookies from 'js-cookie';
 
 function CardProject({
   developers,
@@ -45,6 +45,11 @@ function CardProject({
 
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
+
+
+
+
+
 
   const clickNavigate = () => {
     setClicked(true);
@@ -93,26 +98,30 @@ function CardProject({
                 ref={referenceElement}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
+
               >
                 {hovered ? (
                   <div
                     ref={popperElement}
                     style={styles.popper}
                     {...attributes.popper}
+
                   >
                     <div style={{ backgroundColor: "white" }}>
                       {developers.slice(0).map((developer) => (
                         <>
                           <UserImg
+                            style={{ zIndex: "5" }}
                             ref={popperElement}
                             width="24px"
                             height="24px"
                             key={developer.id}
                             imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie"
+
                           >
                             <TitleImg></TitleImg>
                           </UserImg>
-                          <p>{developer.id}</p>
+                          <p >{developer.nameUser}</p>
                         </>
                       ))}
                     </div>
@@ -122,9 +131,8 @@ function CardProject({
                     {developers.map((developer) => (
                       <div
                         key={developer.id}
-                        className={`developer-card ${
-                          numDevelopers > 2 ? "card-block" : ""
-                        }`}
+                        className={`developer-card ${numDevelopers > 2 ? "card-block" : ""
+                          }`}
                       >
                         <UserImg imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie">
                           <TitleImg></TitleImg>

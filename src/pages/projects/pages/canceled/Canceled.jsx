@@ -4,19 +4,31 @@ import { ContainerContent, ContainerMain } from "../../Projects.styled";
 import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 function Canceled({ developers }) {
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const isDev = true
+  const id = 1
+
+
+  const fetchChange = isDev
+    ? `http://localhost:8004/projetos-aceitos/cancelados/desenvolvedor/${id}`
+    : `http://localhost:8004/projetos-aceitos/cancelados/empresa/${id}`
+
   useEffect(() => {
     async function fetchProjetos() {
       await axios
-        .get("http://localhost:8004/api/projetos-aceitos/assinados")
+        .get(fetchChange)
         .then((response) => {
-          setProjetos(response.data);
-          console.log(response.data);
+          console.log(response);
           setLoading(false);
+
+          if (response.status === 200)
+            setProjetos(response.data);
+
         })
         .catch((error) => {
           console.log("Deu erro: " + error);

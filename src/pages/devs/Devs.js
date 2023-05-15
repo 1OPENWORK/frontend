@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Styled from "./Devs.styled";
+import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
-import List from "../../components/list/List";
+import Desenvolvedores from "./DevsTable";
 
 // --------------------------------------------------------
 // Devs INTERFACE
@@ -19,7 +18,7 @@ const Devs = () => {
   return (
     <>
       <NavBarList type={1} />
-      <List type={1} />
+      <Desenvolvedores />
     </>
   );
 };

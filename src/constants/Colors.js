@@ -14,6 +14,7 @@ const LIGHT_GREY = "cfcfcf";
 const GREEN = "#1b4332";
 const WHITE_TEST = "#f5f5f5";
 const GRAY = "#d9d9d9";
+const GRAY_EA = "EAEAEA";
 
 // eslint-disable-next-line
 export default {
@@ -33,4 +34,5 @@ export default {
   GREEN,
   WHITE_TEST,
   GRAY,
+  GRAY_EA,
 };

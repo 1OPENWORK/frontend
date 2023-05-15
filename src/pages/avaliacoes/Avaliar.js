@@ -1,9 +1,8 @@
 import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
-import JobsTable from "./JobsTable";
-
+import AvaliarTable from "./AvaliarTable";
 // --------------------------------------------------------
-// Jobs INTERFACE
+// Devs INTERFACE
 // --------------------------------------------------------
 /**
  * A component that renders a Screen.
@@ -13,13 +12,14 @@ import JobsTable from "./JobsTable";
  * @param props.navigation The navigator
  * @returns The component JSX.
  */
-const Jobs = () => {
+
+const Avaliar = () => {
   return (
     <>
-      <NavBarList type={3} />
-      <JobsTable />
+      <NavBarList type={2} />
+      <AvaliarTable />
     </>
   );
 };
 
-export default Jobs;
+export default Avaliar;

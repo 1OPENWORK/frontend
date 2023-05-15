@@ -41,8 +41,12 @@ import Projects from "./pages/projects/Projects";
 import PortifolioEt5 from "./pages/portifolio/portfolioEt5/PortfolioEt5";
 import PortifolioEt6 from "./pages/portifolio/portfolioEt6/PortfolioEt6";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
+<<<<<<< HEAD
 import Avaliar from "./components/list/listAvaliar/ListAvaliar";
 
+=======
+import Avaliar from "./pages/avaliacoes/Avaliar";
+>>>>>>> b4eff2b1c4db01e04c0e8aef99293295a67b4b44
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";

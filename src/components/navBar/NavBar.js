@@ -57,7 +57,7 @@ const NavBar = ({ nav }) => {
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar onClick={() => navigate("/projetos")} size={24}>
+            <Styled.TitleNavBar onClick={() => navigate("/projetos-andamentos")} size={24}>
               {"Projetos"}
             </Styled.TitleNavBar>
             <Styled.TitleNavBar

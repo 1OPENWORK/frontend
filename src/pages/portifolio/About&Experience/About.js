@@ -15,7 +15,7 @@ function About({isAbout}) {
 
   return (
     <Styled.Container>
-    {isAbout === true ? (
+    {!isAbout === true ? (
     <>
         <SideBar />
         <Styled.ContainerContent>

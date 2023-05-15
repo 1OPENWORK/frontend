@@ -2,10 +2,13 @@ import styled from "styled-components";
 
 export const ContainerMain = styled.div`
   min-height: 100vh;
+  padding: 3em 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
+  background: #f2f2f2;
+  z-index: -10;
+  overflow-x: hidden;
 
   h1 {
     font-weight: bold;
@@ -15,10 +18,26 @@ export const ContainerMain = styled.div`
 `;
 
 export const ContainerContent = styled.div`
-  height: 40em;
+  z-index: 5;
   width: 80%;
-  margin-left: 10%;
   display: flex;
   flex-direction: column;
-  gap: 1.5em;
+  margin-left: 10%;
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  .loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .loading h3 {
+    font-size: 2rem;
+    color: #20ac51;
+  }
 `;

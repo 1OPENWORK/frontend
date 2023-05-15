@@ -19,6 +19,9 @@ import {
   PortfolioEt6Path,
   PortfolioProjectsPath,
   AvaliarPath,
+  ProgressPath,
+  canceledPath,
+  CreateProjectPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -38,10 +41,18 @@ import Projects from "./pages/projects/Projects";
 import PortifolioEt5 from "./pages/portifolio/portfolioEt5/PortfolioEt5";
 import PortifolioEt6 from "./pages/portifolio/portfolioEt6/PortfolioEt6";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
+<<<<<<< HEAD
+import Avaliar from "./components/list/listAvaliar/ListAvaliar";
+
+=======
 import Avaliar from "./pages/avaliacoes/Avaliar";
+>>>>>>> b4eff2b1c4db01e04c0e8aef99293295a67b4b44
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
+import Progress from "./pages/projects/pages/progress/Progress";
+import Canceled from "./pages/projects/pages/canceled/Canceled";
+import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -76,12 +87,15 @@ function App() {
         <Route path={FinanceiraPath} element={<Financeira />} />
         <Route path={ComunidadePath} element={<Comunidade />} />
         <Route path={PortfolioPath} element={<Portifolio />} />
-        <Route path={ProjectsPath} element={<Projects />} />
         <Route path={TodoPath} element={<Todo />} />
         <Route path={PortfolioEt5Path} element={<PortifolioEt5 />} />
         <Route path={PortfolioEt6Path} element={<PortifolioEt6 />} />
         <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
         <Route path={AvaliarPath} element={<Avaliar />} />
+        <Route path={ProjectsPath} element={<Projects />} />
+        <Route path={ProgressPath} element={<Progress />} />
+        <Route path={canceledPath} element={<Canceled />} />
+        <Route path={CreateProjectPath} element={<CreateProject />} />
       </Routes>
     </Router>
   );

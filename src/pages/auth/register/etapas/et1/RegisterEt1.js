@@ -38,7 +38,7 @@ const RegisterEt1 = () => {
     cfp_cnpj: string()
       .required("Preencha o campo CPF.")
       .min(11, "O CPF deve ter pelo menos 11 caracteres")
-      .test("valid-cpf", "CPF inválido", value => validateCpf.isValid(value)),
+      .test("valid-cpf", "CPF inválido", (value) => validateCpf.isValid(value)),
     tel: string().required("Preencha o campo telefone."),
     email: string()
       .email("E-mail inválido")
@@ -119,8 +119,8 @@ const RegisterEt1 = () => {
             mask="(99) 99999-9999"
             // mask="999.999.999-99"
             value={tel}
-            onChange={e => setTel(e.target.value)}
-            onKeyPress={event => {
+            onChange={(e) => setTel(e.target.value)}
+            onKeyPress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
               }
@@ -135,8 +135,8 @@ const RegisterEt1 = () => {
             className="InputMask2"
             mask="999.999.999-99"
             value={cpfOrCnpj}
-            onChange={e => setCpfOrCnpj(e.target.value)}
-            onKeyPress={event => {
+            onChange={(e) => setCpfOrCnpj(e.target.value)}
+            onKeyPress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
               }

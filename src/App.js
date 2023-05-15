@@ -38,8 +38,7 @@ import Projects from "./pages/projects/Projects";
 import PortifolioEt5 from "./pages/portifolio/portfolioEt5/PortfolioEt5";
 import PortifolioEt6 from "./pages/portifolio/portfolioEt6/PortfolioEt6";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
-import Avaliar from "./components/list/listAvaliar/ListAvaliar"
-
+import Avaliar from "./pages/avaliacoes/Avaliar";
 import { useDispatch } from "react-redux";
 import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
@@ -56,7 +55,7 @@ function App() {
         })
       );
     });
-  }, );
+  });
 
   return (
     <Router>
@@ -70,7 +69,10 @@ function App() {
         <Route path={ChatPath} element={<Chat socket={socket} />} />
         <Route path={DevsPath} element={<Devs />} />
         <Route path={AvaliacoesPath} element={<Avaliacoes />} />
-        <Route path={DashboardFinanceiraPath} element={<DashboardFinanceira />}/>
+        <Route
+          path={DashboardFinanceiraPath}
+          element={<DashboardFinanceira />}
+        />
         <Route path={FinanceiraPath} element={<Financeira />} />
         <Route path={ComunidadePath} element={<Comunidade />} />
         <Route path={PortfolioPath} element={<Portifolio />} />

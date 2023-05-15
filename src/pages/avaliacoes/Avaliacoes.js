@@ -1,6 +1,6 @@
 import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
-import List from "../../components/list/List";
+import AvaliacaoTable from "./AvaliacaoTable";
 
 // --------------------------------------------------------
 // Devs INTERFACE
@@ -18,7 +18,7 @@ const Avaliacoes = () => {
   return (
     <>
       <NavBarList type={2} />
-      <List type={2} />
+      <AvaliacaoTable />
     </>
   );
 };

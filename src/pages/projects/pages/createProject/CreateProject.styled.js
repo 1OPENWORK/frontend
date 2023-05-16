@@ -75,6 +75,48 @@ export const Aside = styled.aside`
     justify-content: space-between;
     gap: 80px;
   }
+  .modal {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    left: 5%;
+    top: 991px;
+    height: 144px;
+    width: 20%;
+    border-radius: 5px;
+    background: #f2f2f2;
+    border: 1px solid ${Colors.PRIMARY_COLOR};
+
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.15em;
+
+    list-style: none;
+    text-decoration: none;
+  }
+
+  .modal.display {
+    display: flex;
+  }
+
+  .modal ul {
+    list-style: none;
+    text-decoration: none;
+    padding: 8px 0;
+  }
+  .modal ul li {
+    cursor: pointer;
+  }
+
+  .modal ul li:hover {
+    margin-left: 10%;
+    width: 80%;
+    background-color: ${Colors.PRIMARY_COLOR};
+    color: #ffffff;
+    border-radius: 5px;
+  }
 
   .content-desc .lang-program .qnt-check {
     width: 100%;
@@ -163,7 +205,7 @@ export const Article = styled.article`
 `;
 
 export const InputText = styled.input`
-  width: 100%;
+  width: ${(props) => (props.w ? props.w : "100%")};
   height: 58px;
   border: 1px solid ${Colors.PRIMARY_COLOR};
   background: rgba(32, 172, 105, 0.05);

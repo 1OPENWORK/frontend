@@ -5,7 +5,7 @@ import Colors from "../../../../../../constants/Colors";
 import moment from "moment";
 import { NumericFormat } from "react-number-format";
 
-function CardOverviewOne({ debouncedInputValues }) {
+function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
   const [startDate, setStartDate] = useState(moment()); // Data inicial, pode ser atualizada conforme necessário
   const [durationInMonths, setDurationInMonths] = useState(
     debouncedInputValues.estimatedTime
@@ -73,10 +73,7 @@ function CardOverviewOne({ debouncedInputValues }) {
           <br />
           <div className="content-data">
             <h3>
-              Data Inicio: <span>{startDate.format("DD/MM/YYYY")}</span>
-            </h3>
-            <h3>
-              Data Final:{" "}
+              Fim estimado:{" "}
               <span>{endDate ? endDate.format("DD/MM/YYYY") : "-"}</span>
             </h3>
             <h3>
@@ -93,24 +90,11 @@ function CardOverviewOne({ debouncedInputValues }) {
             <label>{"Linguagens e Softwares"}</label>
             <br />
             <div className="content-tools">
-              <div className="card-tool">
-                <p>React</p>
-              </div>
-              <div className="card-tool">
-                <p>Java</p>
-              </div>
-              <div className="card-tool">
-                <p>C#</p>
-              </div>
-              <div className="card-tool">
-                <p>Python</p>
-              </div>
-              <div className="card-tool">
-                <p>PHP</p>
-              </div>
-              <div className="card-tool">
-                <p>Ruby</p>
-              </div>
+              {selectedOptions.map((option) => (
+                <div key={option.id} className="card-tool">
+                  <p>{option.name}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

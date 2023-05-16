@@ -36,17 +36,10 @@ const RegisterEt1 = () => {
       .required('Preencha o campo senha.')
       .min(8, 'A senha deve ter pelo menos 8 caracteres'),
     cfp_cnpj: string()
-<<<<<<< HEAD
       .required('Preencha o campo CPF.')
       .min(11, 'O CPF deve ter pelo menos 11 caracteres')
       .test('valid-cpf', 'CPF inválido', (value) => validateCpf.isValid(value)),
     tel: string().required('Preencha o campo telefone.'),
-=======
-      .required("Preencha o campo CPF.")
-      .min(11, "O CPF deve ter pelo menos 11 caracteres")
-      .test("valid-cpf", "CPF inválido", (value) => validateCpf.isValid(value)),
-    tel: string().required("Preencha o campo telefone."),
->>>>>>> b4eff2b1c4db01e04c0e8aef99293295a67b4b44
     email: string()
       .email('E-mail inválido')
       .required('Preencha o campo Email.'),
@@ -128,13 +121,8 @@ const RegisterEt1 = () => {
             value={tel}
             onChange={(e) => setTel(e.target.value)}
             onKeyPress={(event) => {
-<<<<<<< HEAD
               if (event.key === 'Enter') {
                 event.preventDefault()
-=======
-              if (event.key === "Enter") {
-                event.preventDefault();
->>>>>>> b4eff2b1c4db01e04c0e8aef99293295a67b4b44
               }
             }}
             disabled={verified}
@@ -149,13 +137,8 @@ const RegisterEt1 = () => {
             value={cpfOrCnpj}
             onChange={(e) => setCpfOrCnpj(e.target.value)}
             onKeyPress={(event) => {
-<<<<<<< HEAD
               if (event.key === 'Enter') {
                 event.preventDefault()
-=======
-              if (event.key === "Enter") {
-                event.preventDefault();
->>>>>>> b4eff2b1c4db01e04c0e8aef99293295a67b4b44
               }
             }}
             disabled={verified}

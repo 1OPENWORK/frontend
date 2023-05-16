@@ -71,6 +71,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 80%;
+    gap: 1em;
   }
 
   .content-data h3 {
@@ -111,7 +112,14 @@ export const Container = styled.div`
     letter-spacing: 0.25em;
   }
   .content-tools {
-    column-count: 2;
+    height: 332px;
+    padding: 0 10px;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    grid-auto-rows: 72px;
   }
 
   .content-tools .card-tool {
@@ -122,9 +130,11 @@ export const Container = styled.div`
     padding: 18px 18px;
     margin-bottom: 18px;
     text-align: center;
+    min-height: 72px;
   }
 
   .content-tools .card-tool p {
+    font-size: 1rem;
     color: #ffffff;
     align-self: center;
   }

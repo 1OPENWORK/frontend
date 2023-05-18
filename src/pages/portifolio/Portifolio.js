@@ -21,6 +21,7 @@ const Portifolio = () => {
           <Styled.TitlePortfolio>Seu cantinho</Styled.TitlePortfolio>
           <Portifolio2 />
           <Styled.Divisor />
+          <Portifolio2 />
         </Styled.ContainerInputs>
       </Styled.Container>
     </>

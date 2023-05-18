@@ -121,29 +121,11 @@ const Formulario = () => {
                 event.preventDefault();
               }
             }}
-            disabled={verified}
+            disabled={true}
           />
         </Styled.Column>
       </Styled.Row>
-      <Styled.Row>
-        <InputForm
-          label="Senha"
-          value={password}
-          handle={setPassword}
-          space={"1.25rem"}
-          mr={"1.25rem"}
-          type={"password"}
-          disabled={verified}
-        />
-        <InputForm
-          label="Confirmar Senha"
-          value={passwordConfirmed}
-          handle={setPasswordConfirmed}
-          space={"1.25rem"}
-          type={"password"}
-          disabled={verified}
-        />
-      </Styled.Row>
+
       <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
         <FilledButton
           onClick={() => ""}

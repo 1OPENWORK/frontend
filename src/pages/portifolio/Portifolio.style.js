@@ -18,7 +18,7 @@ const PortifolioStyle = {
     position: relative;
     width: auto;
     height: auto;
-    top: 5rem;
+    top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,6 +67,12 @@ const PortifolioStyle = {
     color: ${Colors.PRIMARY_COLOR};
     margin-top: 2rem;
     margin-bottom: 2rem;
+  `,
+
+  RowJustifyEnd: styled.div`
+    display: flex;
+    align-items: end;
+    justify-content: end;
   `,
 };
 

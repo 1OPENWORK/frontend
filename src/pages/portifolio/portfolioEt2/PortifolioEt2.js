@@ -131,17 +131,17 @@ const Portifolio2 = () => {
         space={"20px"}
         width={"770px"}
       />
-      <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
+      <Styled.RowJustifyEnd align={"flex-end"} style={{ width: "770px" }}>
         <FilledButton
-          onClick={handleForm}
-          color={Colors.BLACK}
+          onClick={() => ""}
+          marginRight={"0px"}
+          color={Colors.PRIMARY_COLOR}
           width={190}
           heigth={60}
-          marginRight={"0px"}
         >
           {"Atualizar"}
         </FilledButton>
-      </Styled.Divisor>
+      </Styled.RowJustifyEnd>
     </Styled.Form>
   );
 };

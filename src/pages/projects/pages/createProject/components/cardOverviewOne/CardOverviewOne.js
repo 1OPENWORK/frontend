@@ -61,7 +61,7 @@ function CardOverviewOne({ debouncedInputValues, selectedOptions, type }) {
             </>
           ) : (
             <>
-              <FaUser size={66} color={`${Colors.PRIMARY_COLOR}`} />
+              <FaUser size={54} color={`${Colors.PRIMARY_COLOR}`} />
               <br />
               <label>Projeto pequeno</label>
             </>

@@ -22,9 +22,13 @@ import { handleProeficiency } from "../../../../store/actions/Proeficiency";
 
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function CreateProject() {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState();
+  
+  const [selectedOption, setSelectedOption] = useState(1);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,6 +43,47 @@ function CreateProject() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const notifySucess = () => {
+    toast.success("Projeto cadastrado com sucesso", {
+      position: "top-left",
+      autoClose: 500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: 1,
+      theme: "light",
+    });
+  };
+
+  const notifyError = () => {
+    toast.error("Algo está errado com cadastro", {
+      position: "top-left",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  //given
+
+  //   const URI =
+  //   process.env.REACT_APP_BACKEND_LOCAL_HOST + "/";
+  // const [avaliacao, setAvaliacao] = useState([]);
+
+  // async function handleFetchAvaliacao() {
+  //   const response = await get(URI);
+  //   setAvaliacao(response.data.myAvaliations);
+  // }
+
+  // useEffect(() => {
+  //   handleFetchAvaliacao();
+  // }, []);
 
   // lista de proeficiencias e ferramentas
 
@@ -105,10 +150,15 @@ function CreateProject() {
         },
       })
       .then((res) => {
-        navigate("/projetos-andamentos");
         console.log(res);
+        notifySucess();
+        const myTimeout = () =>
+          setTimeout(() => navigate("/projetos-andamentos"), 1000);
+        myTimeout();
       })
       .catch((err) => {
+        notifyError();
+
         console.log("Deu erro: " + err);
         console.log(registerProject);
       });
@@ -219,6 +269,19 @@ function CreateProject() {
   return (
     <>
       <Container>
+        <ToastContainer
+          position="top-left"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
         <Aside>
           <div className="container-align">
             <FilledButton

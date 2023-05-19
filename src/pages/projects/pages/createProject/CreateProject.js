@@ -27,10 +27,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 function CreateProject() {
   const navigate = useNavigate();
-
   const [selectedOption, setSelectedOption] = useState(1);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const [search, setSearch] = useState("");
+  const [proef, setProef] = useState([]);
+  const [tools, setTools] = useState([]);
 
   useEffect(() => {
     listar();
@@ -99,10 +103,6 @@ function CreateProject() {
   // }, []);
 
   // lista de proeficiencias e ferramentas
-
-  const [search, setSearch] = useState("");
-  const [proef, setProef] = useState([]);
-  const [tools, setTools] = useState([]);
 
   const listar = async () => {
     const dados = await handleProeficiency();
@@ -182,7 +182,7 @@ function CreateProject() {
 
   //filtro de ferramentas
 
-  const filter = useMemo(() => {
+  const filterSearch = useMemo(() => {
     const searchLowerCase = search.toLowerCase();
 
     return tools.filter((tool) =>
@@ -192,12 +192,10 @@ function CreateProject() {
 
   //seleção de ferramentas
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
   const handleSelectOption = (option) => {
     if (selectedOptions.includes(option)) {
       notifyInfo();
-    } else {
+    } else if (!selectedOptions.includes(option)) {
       setSelectedOptions((prevOptions) => [...prevOptions, option]);
       console.log(selectedOptions);
     }
@@ -208,6 +206,10 @@ function CreateProject() {
       prevOptions.filter((selectedOption) => selectedOption !== option)
     );
   };
+
+  useEffect(() => {
+    console.log(selectedOptions);
+  }, [selectedOptions]);
 
   // useEffect(() => {
   //   setSelectedOptions((prevOptions) =>
@@ -371,8 +373,18 @@ function CreateProject() {
                 />
 
                 <div className={`modal ${isModalOpen ? "display" : ""}`}>
+                  {/* <AiFillCloseCircle
+                    onClick={() => closeModal()}
+                    size={24}
+                    style={{
+                      position: "fixed",
+                      top: 8,
+                      right: 4,
+                      cursor: "pointer",
+                    }}
+                  /> */}
                   <ul>
-                    {filter.map((tool) => (
+                    {filterSearch.map((tool) => (
                       <li
                         onClick={() => handleSelectOption(tool)}
                         key={tool.id}
@@ -381,17 +393,17 @@ function CreateProject() {
                       </li>
                     ))}
                   </ul>
-
-                  <AiFillCloseCircle
-                    onClick={() => closeModal()}
-                    size={24}
-                    style={{
-                      position: "absolute",
-                      top: 8,
-                      right: 4,
-                      cursor: "pointer",
-                    }}
-                  />
+                  <div
+                    className={`modal-close ${isModalOpen ? "display" : ""}`}
+                  >
+                    <AiFillCloseCircle
+                      onClick={() => closeModal()}
+                      size={24}
+                      style={{
+                        cursor: "pointer",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

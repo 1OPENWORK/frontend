@@ -99,11 +99,19 @@ export const Aside = styled.aside`
     transform: scale(1);
     transition: 0.2s ease-in-out;
     z-index: 1000;
+
+    overflow-y: auto;
   }
 
   .modal.display {
     display: flex;
     transform: scale(1.02);
+  }
+
+  .modal-close {
+    position: fixed;
+    top: 0.3em;
+    right: 0.2em;
   }
 
   .modal ul {

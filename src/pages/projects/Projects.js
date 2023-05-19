@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { ContainerMain, ContainerContent } from './Projects.styled'
-import CardProject from './components/cardProject/CardProject'
-import SidebarProjecteds from './components/sideBar/SidebarProjecteds'
-import axios from 'axios'
-import Cookies from 'js-cookie'
-import { canceledPath } from '../../constants/Path'
-import { Navigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { ContainerMain, ContainerContent } from "./Projects.styled";
+import CardProject from "./components/cardProject/CardProject";
+import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { canceledPath } from "../../constants/Path";
+import { Navigate } from "react-router-dom";
 
 function Projects() {
-  const [projetos, setProjetos] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [projetos, setProjetos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const isDev = true
-  const id = 1
+  const isDev = true;
+  const id = 2;
 
   const fetchChange = isDev
     ? `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`
-    : `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`
+    : `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`;
 
   // Exemplo
   //   axios({
@@ -32,18 +32,19 @@ function Projects() {
       await axios
         .get(fetchChange)
         .then((response) => {
-          setProjetos(response.data)
-          console.log(response)
-
-          setLoading(false)
+          if (response.status === 200) {
+            setLoading(false);
+            setProjetos(response.data);
+            console.log(response);
+          }
         })
         .catch((error) => {
-          console.log('Deu erro: ' + error)
-        })
+          console.log("Deu erro: " + error);
+        });
     }
 
-    fetchProjetos()
-  }, [])
+    fetchProjetos();
+  }, []);
 
   return (
     <>
@@ -75,7 +76,7 @@ function Projects() {
         </ContainerContent>
       </ContainerMain>
     </>
-  )
+  );
 }
 
-export default Projects
+export default Projects;

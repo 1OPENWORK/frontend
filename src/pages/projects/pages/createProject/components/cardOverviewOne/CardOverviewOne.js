@@ -5,8 +5,14 @@ import Colors from "../../../../../../constants/Colors";
 import moment from "moment";
 import { NumericFormat } from "react-number-format";
 import { FaUser } from "react-icons/fa";
+import { GrFormClose } from "react-icons/gr";
 
-function CardOverviewOne({ debouncedInputValues, selectedOptions, type }) {
+function CardOverviewOne({
+  debouncedInputValues,
+  selectedOptions,
+  type,
+  handleDeselectOption,
+}) {
   const [startDate, setStartDate] = useState(moment()); // Data inicial, pode ser atualizada conforme necessário
   const [durationInMonths, setDurationInMonths] = useState(
     debouncedInputValues.estimatedTime
@@ -106,6 +112,12 @@ function CardOverviewOne({ debouncedInputValues, selectedOptions, type }) {
               {selectedOptions.map((option) => (
                 <div key={option.id} className="card-tool">
                   <p>{option.name}</p>
+                  <GrFormClose
+                    onClick={() => handleDeselectOption(option)}
+                    size={26}
+                    style={{ cursor: "pointer", alignSelf: "center", color: "white" }}
+                    className="btn-close"
+                  />
                 </div>
               ))}
             </div>

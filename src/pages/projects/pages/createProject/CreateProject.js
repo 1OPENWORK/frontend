@@ -27,7 +27,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function CreateProject() {
   const navigate = useNavigate();
-  
+
   const [selectedOption, setSelectedOption] = useState(1);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,6 +70,19 @@ function CreateProject() {
     });
   };
 
+  const notifyInfo = () => {
+    toast.info("Ferramenta já adicionada", {
+      position: "top-left",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   //given
 
   //   const URI =
@@ -89,14 +102,14 @@ function CreateProject() {
 
   const [search, setSearch] = useState("");
   const [proef, setProef] = useState([]);
-  const [tools, setTool] = useState([]);
+  const [tools, setTools] = useState([]);
 
   const listar = async () => {
     const dados = await handleProeficiency();
     setProef(dados.data);
 
-    setTool(proef.flatMap(({ tools }) => Object.values(tools)));
-    console.log(tools);
+    const allTools = proef.flatMap(({ tools }) => Object.values(tools));
+    setTools(allTools);
   };
 
   //info empresa - GET
@@ -182,9 +195,25 @@ function CreateProject() {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleSelectOption = (option) => {
-    setSelectedOptions([...selectedOptions, option]);
-    console.log(selectedOptions);
+    if (selectedOptions.includes(option)) {
+      notifyInfo();
+    } else {
+      setSelectedOptions((prevOptions) => [...prevOptions, option]);
+      console.log(selectedOptions);
+    }
   };
+
+  const handleDeselectOption = (option) => {
+    setSelectedOptions((prevOptions) =>
+      prevOptions.filter((selectedOption) => selectedOption !== option)
+    );
+  };
+
+  // useEffect(() => {
+  //   setSelectedOptions((prevOptions) =>
+  //     prevOptions.filter((option) => selectedOptions.includes(option))
+  //   );
+  // }, [selectedOptions]);
 
   //captura de informações(input) com debounced
 
@@ -464,6 +493,7 @@ function CreateProject() {
             <br />
             <CardOverviewOne
               selectedOptions={selectedOptions}
+              handleDeselectOption={handleDeselectOption}
               debouncedInputValues={debouncedInputValues}
               type={selectedOption}
             />

@@ -15,8 +15,8 @@ function Projects() {
   const id = 1
 
   const fetchChange = isDev
-    ? `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`
-    : `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`
+    ? `http://localhost:8080/projetos-aceitos/completos/desenvolvedor/${id}`
+    : `http://localhost:8080/projetos-aceitos/completos/empresa/${id}`
 
   // Exemplo
   //   axios({

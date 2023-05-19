@@ -22,6 +22,7 @@ import {
   ProgressPath,
   canceledPath,
   CreateProjectPath,
+  SubmenuPath
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -48,6 +49,7 @@ import Todo from "./pages/todo-list/Todo.js";
 import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";
 import CreateProject from "./pages/projects/pages/createProject/CreateProject";
+import SubMenu from "./components/subMenu/subMenu";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -91,6 +93,7 @@ function App() {
         <Route path={ProgressPath} element={<Progress />} />
         <Route path={canceledPath} element={<Canceled />} />
         <Route path={CreateProjectPath} element={<CreateProject />} />
+        <Route path={SubmenuPath} element={<SubMenu />} />
       </Routes>
     </Router>
   );

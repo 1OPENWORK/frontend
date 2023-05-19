@@ -1,6 +1,7 @@
 import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import Desenvolvedores from "./DevsTable";
+import SubMenu from "../../components/subMenu/subMenu";
 
 // --------------------------------------------------------
 // Devs INTERFACE
@@ -18,6 +19,7 @@ const Devs = () => {
   return (
     <>
       <NavBarList type={1} />
+      <SubMenu type={1} />
       <Desenvolvedores />
     </>
   );

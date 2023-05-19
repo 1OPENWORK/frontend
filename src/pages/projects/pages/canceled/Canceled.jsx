@@ -14,8 +14,8 @@ function Canceled({ developers }) {
   const id = 1;
 
   const fetchChange = isDev
-    ? `http://localhost:8004/projetos-aceitos/cancelados/desenvolvedor/${id}`
-    : `http://localhost:8004/projetos-aceitos/cancelados/empresa/${id}`;
+    ? `http://localhost:8080/projetos-aceitos/cancelados/desenvolvedor/${id}`
+    : `http://localhost:8080/projetos-aceitos/cancelados/empresa/${id}`;
 
   useEffect(() => {
     async function fetchProjetos() {

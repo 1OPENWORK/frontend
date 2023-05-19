@@ -12,7 +12,7 @@ const Progress = ({ developers }) => {
   useEffect(() => {
     async function fetchProjetos() {
       await axios
-        .get("http://localhost:8004/api/projetos-aceitos/assinados")
+        .get("http://localhost:8080/api/projetos-aceitos/assinados")
         .then((response) => {
           setProjetos(response.data);
           console.log(response.data);

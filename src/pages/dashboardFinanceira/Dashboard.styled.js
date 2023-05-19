@@ -5,7 +5,7 @@ export const DashboardContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-//   margin-bottom: 20px;
+  border-top: 2px solid rgba(211, 211, 211, 0.65);
   font-family: "Nunito";
   @media screen and (max-width: 768px) {
     flex-direction: column;

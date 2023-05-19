@@ -4,8 +4,9 @@ import { HiUserGroup } from "react-icons/hi";
 import Colors from "../../../../../../constants/Colors";
 import moment from "moment";
 import { NumericFormat } from "react-number-format";
+import { FaUser } from "react-icons/fa";
 
-function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
+function CardOverviewOne({ debouncedInputValues, selectedOptions, type }) {
   const [startDate, setStartDate] = useState(moment()); // Data inicial, pode ser atualizada conforme necessário
   const [durationInMonths, setDurationInMonths] = useState(
     debouncedInputValues.estimatedTime
@@ -45,15 +46,27 @@ function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
 
     calculateEndDate();
   }, [startDate, durationInMonths]);
+
   return (
     <>
       <Container>
         <h2>{debouncedInputValues.nameProject}</h2>
 
         <div className="content-desc-over">
-          <HiUserGroup size={66} color={`${Colors.PRIMARY_COLOR}`} />
-          <br />
-          <label>Projeto grande</label>
+          {type === 1 ? (
+            <>
+              <HiUserGroup size={66} color={`${Colors.PRIMARY_COLOR}`} />
+              <br />
+              <label>Projeto grande</label>
+            </>
+          ) : (
+            <>
+              <FaUser size={66} color={`${Colors.PRIMARY_COLOR}`} />
+              <br />
+              <label>Projeto pequeno</label>
+            </>
+          )}
+
           <br />
           <p
             style={{

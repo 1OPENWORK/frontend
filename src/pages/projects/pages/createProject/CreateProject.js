@@ -15,17 +15,22 @@ import {
 import CardOverviewOne from "./components/cardOverviewOne/CardOverviewOne";
 import { MdEmail, MdPhoneInTalk } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
+
 import Cookies from "js-cookie";
 import { handleProeficiency } from "../../../../store/actions/Proeficiency";
-import { Filter } from "../../../dashboardFinanceira/Dashboard.styled";
+
+import axios from "axios";
 
 function CreateProject() {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState();
-  const fullname = Cookies.get("fullname");
-  const email = Cookies.get("email");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    listar();
+  }, [isModalOpen]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -35,43 +40,112 @@ function CreateProject() {
     setIsModalOpen(false);
   };
 
+  // lista de proeficiencias e ferramentas
+
   const [search, setSearch] = useState("");
   const [proef, setProef] = useState([]);
+  const [tools, setTool] = useState([]);
 
   const listar = async () => {
     const dados = await handleProeficiency();
     setProef(dados.data);
-    console.log(dados.data);
+
+    setTool(proef.flatMap(({ tools }) => Object.values(tools)));
+    console.log(tools);
   };
 
+  //info empresa - GET
+
+  const [infoUser, setInfoUser] = useState({
+    name: "",
+    sector: "",
+    email: "",
+    user: {
+      name: "",
+      cellphone: "",
+    },
+  });
+
   useEffect(() => {
-    listar();
+    async function fetchUser() {
+      await axios
+        .get("http://localhost:8004/api/empresas/1")
+        .then((response) => {
+          setInfoUser(response.data);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log("Deu erro: " + error);
+        });
+    }
+
+    fetchUser();
   }, []);
+
+  //cadastro projetos - POST
+
+  function cadastrar() {
+    const registerProject = {
+      title: debouncedInputValues.nameProject,
+      description: debouncedInputValues.describe,
+      value: debouncedInputValues.value,
+      idCompany: 1,
+      qtdSprint: debouncedInputValues.estimatedTime,
+      daysToSprint: debouncedInputValues.estimatedTime,
+      maxDevelopers: debouncedInputValues.qntdPeople,
+      tools: {
+        projectTool: selectedOptions,
+      },
+    };
+
+    axios
+      .post("http://localhost:8004/api/projetos-grandes", registerProject, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        navigate("/projetos-andamentos");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("Deu erro: " + err);
+        console.log(registerProject);
+      });
+  }
+
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWVpcmFAZ21haWwiLCJpYXQiOjE2ODQ0NjMzNjEsImV4cCI6MTY4NDQ2NDgwMX0.6pRV4-tjkTOu7ih7uq0f1rS0CLWizT3fNDN34VtuMZU";
+
+  //filtro de ferramentas
 
   const filter = useMemo(() => {
     const searchLowerCase = search.toLowerCase();
 
-    return proef.filter((proef) =>
-      proef.name.toLowerCase().includes(searchLowerCase)
+    return tools.filter((tool) =>
+      tool.name.toLowerCase().includes(searchLowerCase)
     );
-  }, [proef, search]);
+  }, [tools, search]);
+
+  //seleção de ferramentas
 
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleSelectOption = (option) => {
     setSelectedOptions([...selectedOptions, option]);
-    closeModal();
     console.log(selectedOptions);
   };
+
+  //captura de informações(input) com debounced
 
   const [inputValues, setInputValues] = useState({
     nameProject: "",
     nameCompany: "",
     languages: [{ id: "" }],
     describe: "",
-    qntdPeople: "",
-    estimatedTime: "",
-    value: "",
+    qntdPeople: 0,
+    estimatedTime: 0,
+    value: 0.0,
   });
 
   const [debouncedInputValues, setDebouncedInputValues] = useState({
@@ -201,30 +275,32 @@ function CreateProject() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   onFocus={openModal}
-                  w={"50%"}
+                  placeholder={"selecionar campo para escolher"}
                 />
 
                 <div className={`modal ${isModalOpen ? "display" : ""}`}>
                   <ul>
-                    {filter.map((proef) => (
+                    {filter.map((tool) => (
                       <li
-                        onClick={() => handleSelectOption(proef)}
-                        key={proef.id}
+                        onClick={() => handleSelectOption(tool)}
+                        key={tool.id}
                       >
-                        {proef.name}
+                        {tool.name}
                       </li>
                     ))}
                   </ul>
-                </div>
 
-                <FilledButton
-                  marginRight={"0px"}
-                  color={Colors.PRIMARY_COLOR}
-                  width={200}
-                  heigth={60}
-                >
-                  {"Adicionar"}
-                </FilledButton>
+                  <AiFillCloseCircle
+                    onClick={() => closeModal()}
+                    size={24}
+                    style={{
+                      position: "absolute",
+                      top: 8,
+                      right: 4,
+                      cursor: "pointer",
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
@@ -241,49 +317,55 @@ function CreateProject() {
               <br />
 
               <div className="lang-program">
-                <div className="qnt-check">
-                  <label>{"Quatidade de Pessoas"} </label>
-                  <br />
-                  <br />
-                  <DivInput style={{ width: "100%", height: "58px" }}>
-                    <Input
-                      style={{ boxSizing: "border-box" }}
-                      w={"58px"}
-                      type="number"
-                      min="0"
-                      max="6"
-                      placeholder="0"
-                      maxLength="99"
-                      name="qntdPeople"
-                      value={inputValues.qntdPeople}
-                      onChange={handleInputChange}
-                    />
-                    <H3Input>{"Pessoas"}</H3Input>
-                  </DivInput>
-                </div>
+                {selectedOption === 1 ? (
+                  <>
+                    <div className="qnt-check">
+                      <label>{"Quatidade de Pessoas"} </label>
+                      <br />
+                      <br />
+                      <DivInput style={{ width: "100%", height: "58px" }}>
+                        <Input
+                          style={{ boxSizing: "border-box" }}
+                          w={"58px"}
+                          type="number"
+                          min="0"
+                          max="6"
+                          placeholder="0"
+                          maxLength="99"
+                          name="qntdPeople"
+                          value={inputValues.qntdPeople}
+                          onChange={handleInputChange}
+                        />
+                        <H3Input>{"Pessoas"}</H3Input>
+                      </DivInput>
+                    </div>
 
-                <div className="qnt-check">
-                  <label>{"Meses Estimados"} </label>
-                  <br />
-                  <br />
-                  <DivInput style={{ width: "100%", height: "58px" }}>
-                    <Input
-                      style={{
-                        "word-break": "break-all",
-                        boxSizing: "border-box",
-                      }}
-                      w={"58px"}
-                      type="number"
-                      min="0"
-                      max="12"
-                      placeholder="0"
-                      name="estimatedTime"
-                      value={inputValues.estimatedTime}
-                      onChange={handleInputChange}
-                    />
-                    <H3Input>{"Meses"}</H3Input>
-                  </DivInput>
-                </div>
+                    <div className="qnt-check">
+                      <label>{"Meses Estimados"} </label>
+                      <br />
+                      <br />
+                      <DivInput style={{ width: "100%", height: "58px" }}>
+                        <Input
+                          style={{
+                            "word-break": "break-all",
+                            boxSizing: "border-box",
+                          }}
+                          w={"58px"}
+                          type="number"
+                          min="0"
+                          max="12"
+                          placeholder="0"
+                          name="estimatedTime"
+                          value={inputValues.estimatedTime}
+                          onChange={handleInputChange}
+                        />
+                        <H3Input>{"Meses"}</H3Input>
+                      </DivInput>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
               <br />
 
@@ -320,6 +402,7 @@ function CreateProject() {
             <CardOverviewOne
               selectedOptions={selectedOptions}
               debouncedInputValues={debouncedInputValues}
+              type={selectedOption}
             />
 
             <br />
@@ -327,23 +410,23 @@ function CreateProject() {
             <br />
 
             <CardHunter>
-              <h3>{debouncedInputValues.nameCompany}</h3>
+              <h3>{infoUser.name}</h3>
               <br />
-              <p>{"Empresa de Freelancer"}</p>
+              <p>{infoUser.sector}</p>
               <br />
               <div className="content-infos-company">
                 <div className="info-company">
-                  <p>{fullname}</p>
+                  <p>{infoUser.user.name}</p>
                   <AiOutlineUser size={24} color={`${Colors.PRIMARY_COLOR}`} />
                 </div>
                 <br />
                 <div className="info-company">
-                  <p>{email}</p>
+                  <p>{infoUser.email}</p>
                   <MdEmail size={24} color={`${Colors.PRIMARY_COLOR}`} />
                 </div>
                 <br />
                 <div className="info-company">
-                  <p>{"+55 (11) 9000-4222"}</p>
+                  <p>{infoUser.user.cellphone}</p>
                   <MdPhoneInTalk size={24} color={`${Colors.PRIMARY_COLOR}`} />
                 </div>
               </div>
@@ -352,12 +435,12 @@ function CreateProject() {
 
           <div className="content-desc">
             <FilledButton
-              marginTop={"48px"}
               marginRight={""}
               color={Colors.PRIMARY_COLOR}
               width={477}
               heigth={60}
               alignSelf={"center"}
+              onClick={() => cadastrar()}
             >
               {"Criar Job"}
             </FilledButton>

@@ -21,7 +21,7 @@ const AuthStyled = {
     padding-top: 91px;
     width: 600px;
     border-radius: 30px;
-       -webkit-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
     box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
   `,
@@ -59,7 +59,7 @@ const AuthStyled = {
     width: 18px;
     height: 19px;
     background: rgba(32, 172, 105, 0.05);
-    border: 1px solid #20AC69;
+    border: 1px solid #20ac69;
   `,
 };
 

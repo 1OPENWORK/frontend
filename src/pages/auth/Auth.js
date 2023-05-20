@@ -5,20 +5,20 @@
 // --------------------------------------------------------
 // IMPORTS
 // --------------------------------------------------------
-import React, { useState } from 'react'
-import { GeneralContainer } from '../../components/UI/generalLayout/Layout.styled'
-import InformationsAuth from './components/Container/Informations'
-import Styled from './Auth.styled'
-import InputForm from '../../components/input/InputForm'
-import { FilledButton } from '../../components/UI/buttons/Button'
-import Colors from '../../constants/Colors'
-import { useDispatch } from 'react-redux'
-import { handleLogin } from '../../store/actions/UserAuth'
-import { changeActiveToken } from '../../store/reducers/AuthSlice'
-import { ToastContainer, toast } from 'react-toastify'
-import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router'
-import { HomeDevPath } from '../../constants/Path'
+import React, { useState } from "react";
+import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
+import InformationsAuth from "./components/Container/Informations";
+import Styled from "./Auth.styled";
+import InputForm from "../../components/input/InputForm";
+import { FilledButton } from "../../components/UI/buttons/Button";
+import Colors from "../../constants/Colors";
+import { useDispatch } from "react-redux";
+import { handleLogin } from "../../store/actions/UserAuth";
+import { changeActiveToken } from "../../store/reducers/AuthSlice";
+import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
+import { HomeDevPath } from "../../constants/Path";
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -34,60 +34,60 @@ function Auth() {
   // --------------------------------------------------------
   // Auth PRIVATE DECLARATIONS
   // --------------------------------------------------------
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   async function handle() {
     try {
       const response = await handleLogin({
         email,
-        senha: password
-      })
+        senha: password,
+      });
       if (response.status === 200) {
-        const token = response.data.token
-        const id = response.data.userId
-        const fullname = response.data.fullname
-        const email = response.data.email
+        const token = response.data.token;
+        const id = response.data.userId;
+        const fullname = response.data.fullname;
+        const email = response.data.email;
 
-        Cookies.set('token', token, { expires: 1 })
-        Cookies.set('id', id, { expires: 1 })
-        Cookies.set('isDev', true, { expires: 1 })
-        Cookies.set('fullname', fullname, { expires: 1 })
-        Cookies.set('email', email, { expires: 1 })
+        Cookies.set("token", token, { expires: 1 });
+        Cookies.set("id", id, { expires: 1 });
+        Cookies.set("isDev", true, { expires: 1 });
+        Cookies.set("fullname", fullname, { expires: 1 });
+        Cookies.set("email", email, { expires: 1 });
 
         dispatch(
           changeActiveToken({
-            token: token
+            token: token,
           })
-        )
+        );
 
-        navigate(HomeDevPath)
+        navigate(HomeDevPath);
 
-        toast.success('Logado com sucesso.', {
-          position: 'top-right',
+        toast.success("Logado com sucesso.", {
+          position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: false,
-          theme: 'light'
-        })
+          theme: "light",
+        });
       }
     } catch (error) {
-      toast.error('Credências incorretas.', {
-        position: 'top-right',
+      toast.error("Credências incorretas.", {
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: false,
-        theme: 'light'
-      })
+        theme: "light",
+      });
     }
   }
 
@@ -103,41 +103,41 @@ function Auth() {
         <Styled.ContainerForm position="center">
           <Styled.Form>
             <Styled.TitleForm style={{ marginBottom: 30 }}>
-              {'Login'}
+              {"Login"}
             </Styled.TitleForm>
             <InputForm
               label="E-mail"
               value={email}
               handle={setEmail}
-              space={'42px'}
+              space={"42px"}
             />
             <InputForm
               label="Senha"
               value={password}
               handle={setPassword}
-              type={'password'}
+              type={"password"}
             />
             <Styled.Row
               style={{
                 marginBottom: 20,
-                marginTop: 10
+                marginTop: 10,
               }}
             >
               <Styled.Label>Não possui conta?</Styled.Label>
-              <Styled.Link onClick={() => navigate('/cadastro')}>
-                {' '}
+              <Styled.Link onClick={() => navigate("/cadastro")}>
+                {" "}
                 Cadastre-se
               </Styled.Link>
             </Styled.Row>
             <Styled.Row>
-              <Styled.CheckBox type={'checkbox'} />
+              <Styled.CheckBox type={"checkbox"} />
               <Styled.Label>Lembrar Senha</Styled.Label>
               <Styled.Link> Esqueci minha senha</Styled.Link>
             </Styled.Row>
             <Styled.Row
               style={{
                 marginTop: 20,
-                marginBottom: 20
+                marginBottom: 20,
               }}
             >
               <FilledButton
@@ -146,14 +146,14 @@ function Auth() {
                 width={190}
                 heigth={60}
               >
-                {' Entrar'}
+                {" Entrar"}
               </FilledButton>
             </Styled.Row>
           </Styled.Form>
         </Styled.ContainerForm>
       </Styled.Container>
     </GeneralContainer>
-  )
+  );
 }
 
-export default Auth
+export default Auth;

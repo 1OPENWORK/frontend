@@ -9,9 +9,9 @@ function SubMenu({ type }) {
     <>
       <Container>
         <div className="containerItemSubMenu">
-          <div class="header">
+          <div className="header">
             <nav aria-label="primaria">
-              <ul class="header-menu cor-0">
+              <ul className="header-menu cor-0">
                 {type === 1 ? (
                   <>
                     <li>

@@ -3,6 +3,7 @@ import Styled from "../../../components/navBar/NavBar.styled";
 import WalletImg from "../../../assets/imgs/wallet.svg";
 import Check from "../../../assets/imgs/check.svg";
 import {
+  LineSubMenu,
   ContainerFinance,
   InputSearch,
   HeaderFinancer,
@@ -60,6 +61,7 @@ const Financeira = () => {
     <>
       <NavBarList />
       <SubMenu />
+      <LineSubMenu />
       <ContainerFinance>
         <HeaderFinancer>
           <InputSearch type="search" placeholder="Digite sua busca" />

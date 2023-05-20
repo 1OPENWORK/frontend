@@ -57,7 +57,7 @@ export const Container = Styled.div`
         content: "";
         position: absolute;
         width: 0px;
-        height: 2px;
+        height: 3px;
         display: block;
         transition: 0.4s;
         background: ${Colors.SECONDARY_COLOR};

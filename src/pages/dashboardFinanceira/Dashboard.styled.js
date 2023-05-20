@@ -5,7 +5,7 @@ export const DashboardContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  border-top: 2px solid rgba(211, 211, 211, 0.65);
+  border-top: 3px solid rgba(211, 211, 211, 0.65);
   font-family: "Nunito";
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -86,7 +86,7 @@ export const GraphicBar = styled.div`
   margin-top: 30px;
 `;
 
-export const GraphicDisk = styled.div`  
+export const GraphicDisk = styled.div`
   width: 95%;
   height: 263px;
   background: rgb(255, 255, 255);
@@ -97,8 +97,8 @@ export const GraphicDisk = styled.div`
 `;
 
 export const GraphicContainer = styled.div`
-  width:100%
-`
+  width: 100%;
+`;
 
 export const ContainerFilter = styled.div`
   margin-top: 50px;

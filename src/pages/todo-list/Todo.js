@@ -1,7 +1,7 @@
-import React from "react";
-import GlobalStyle from "./styles/global";
-import Board from "./components/Board/Board";
-import SidebarProjecteds from "../projects/components/sideBar/SidebarProjecteds";
+import React from 'react'
+import GlobalStyle from './styles/global'
+import Board from './components/Board/Board'
+import SidebarProjecteds from '../projects/components/sideBar/SidebarProjecteds'
 
 function Todo() {
   return (
@@ -11,7 +11,7 @@ function Todo() {
 
       <GlobalStyle />
     </>
-  );
+  )
 }
 
-export default Todo;
+export default Todo

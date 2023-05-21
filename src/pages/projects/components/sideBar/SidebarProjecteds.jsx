@@ -139,19 +139,16 @@ function SidebarProjecteds({ type }) {
           </>
         ) : (
           <>
-            <button
-              type="button"
-              onClick={() => navigate("/projetos-andamentos")}
-            >
-              <RxDashboard size={32} />
-
-              <h2>Projetos</h2>
-            </button>
-            <button type="button">
-              <BsFillClipboard2PlusFill size={32} color={"#20ac51"} />
-
-              <h2 color={"#20ac51"}>Tarefas</h2>
-            </button>
+            <ButtonCompleted
+              type={4}
+              desc={"Projetos"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={5}
+              desc={"Tarefas"}
+            />
           </>
         )}
       </BodyContainerProjecteds>

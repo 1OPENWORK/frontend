@@ -52,7 +52,7 @@ export default function Board({ listId }) {
         {
           id: 2,
           content:
-            'Criar vídeo para o Youtube ensinando a recriar a interface do Pipefy',
+            'Criar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do Pipefy',
           labels: ['#F04D4D'],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie',
           tasks: []
@@ -144,7 +144,20 @@ export default function Board({ listId }) {
           id: 13,
           content:
             'Gravar Aula "Internacionalização de aplicações Node.js, ReactJS e React Native"',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#198754'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#0d6efd'
+          }, {
+            id: 2,
+            title: 'Importante',
+            color: '#F04D4D'
+          }],
           tasks: []
         }
       ]

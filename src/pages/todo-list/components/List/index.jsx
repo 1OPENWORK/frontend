@@ -16,7 +16,20 @@ export default function List({ data, index }) {
       draftData.cards.push({
         id: highestId + 1,
         content: "Novo Card",
-        labels: [],
+        labels: [{
+          id: 1,
+          title: 'Desejável',
+          color: '#0d6efd'
+        }, {
+
+          id: 2,
+          title: 'Importante',
+          color: '#ffc107'
+        }, {
+          id: 3,
+          title: 'Essencial',
+          color: '#F04D4D '
+        }],
         user: null,
         tasks: []
       });

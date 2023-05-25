@@ -29,7 +29,20 @@ export default function Board({ listId }) {
         {
           id: 1,
           content: 'Estudar módulo 01 de NodeJS',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie',
           tasks: [
             {
@@ -53,14 +66,40 @@ export default function Board({ listId }) {
           id: 2,
           content:
             'Criar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do PipefyCriar vídeo para o Youtube ensinando a recriar a interface do Pipefy',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie',
           tasks: []
         },
         {
           id: 3,
           content: 'Estudar módulo 03 de React Native',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Oliver',
           tasks: []
         },
@@ -68,14 +107,40 @@ export default function Board({ listId }) {
           id: 4,
           content:
             'Gravar Aula "NextJS: Utilizando server-side rendering com ReactJS"',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Oliver',
           tasks: []
         },
         {
           id: 5,
           content: 'Gravar testes e deploy ReactJS',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer/svg?seed=Daisy',
           tasks: []
         }
@@ -89,7 +154,20 @@ export default function Board({ listId }) {
         {
           id: 6,
           content: 'Recriando clone do Pipefy',
-          labels: [],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer/svg?seed=Daisy',
           tasks: []
         }
@@ -103,21 +181,60 @@ export default function Board({ listId }) {
         {
           id: 7,
           content: 'Gravar sobre Geolocalização e mapas com React Native',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Jack',
           tasks: []
         },
         {
           id: 8,
           content: 'Gravar testes e deploy ReactJS',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           user: 'https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Jack',
           tasks: []
         },
         {
           id: 9,
           content: 'Ajustes na biblioteca unform',
-          labels: [],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           tasks: []
         }
       ]
@@ -131,13 +248,39 @@ export default function Board({ listId }) {
         {
           id: 10,
           content: 'Gravar aula sobre deploy e CI com React Native',
-          labels: [],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           tasks: []
         },
         {
           id: 12,
           content: 'Gravar testes e deploy ReactJS',
-          labels: ['#F04D4D'],
+          labels: [{
+            id: 1,
+            title: 'Desejável',
+            color: '#0d6efd'
+          }, {
+
+            id: 2,
+            title: 'Importante',
+            color: '#ffc107'
+          }, {
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
+          }],
           tasks: []
         },
         {
@@ -147,16 +290,16 @@ export default function Board({ listId }) {
           labels: [{
             id: 1,
             title: 'Desejável',
-            color: '#198754'
+            color: '#0d6efd'
           }, {
 
             id: 2,
             title: 'Importante',
-            color: '#0d6efd'
+            color: '#ffc107'
           }, {
-            id: 2,
-            title: 'Importante',
-            color: '#F04D4D'
+            id: 3,
+            title: 'Essencial',
+            color: '#F04D4D '
           }],
           tasks: []
         }
@@ -181,22 +324,73 @@ export default function Board({ listId }) {
   //   );
   // }
 
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
+  // const handleDragEnd = (result) => {
+  //   if (!result.destination) return;
+
+  //   const { source, destination } = result;
+  //   const items = Array.from(lists);
+
+  //   // remove o card na origem
+  //   const [removed] = items[source.droppableId - 1].cards.splice(source.index, 1);
+
+  //   // adiciona o card no destino
+  //   items[destination.droppableId - 1].cards.splice(destination.index, 0, {
+  //     ...removed,
+  //     id: `${destination.droppableId}-${removed.id}`,
+  //   });
+
+  //   setLists(items);
+  // };
+
+
+
+  // TRABALHAR COM VÁRIAS LISTAS, REMOVER DA ANTERIOR E ADICIONAR EM UMA NOVA
+
+  // const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    fetchLists();
+  }, []);
+
+  const fetchLists = async () => {
+    // Faça uma chamada à API para obter as listas do servidor
+    const response = await fetch("/api/lists");
+    const data = await response.json();
+    setLists(data);
+  };
+
+  const handleDragEnd = async (result) => {
+    if (!result.destination) {
+      return;
+    }
 
     const { source, destination } = result;
-    const items = Array.from(lists);
 
-    // remove o card na origem
-    const [removed] = items[source.droppableId - 1].cards.splice(source.index, 1);
+    // Encontre a lista de origem e a lista de destino com base nos índices
+    const sourceList = lists.find((list) => list.id.toString() === source.droppableId);
+    const destinationList = lists.find((list) => list.id.toString() === destination.droppableId);
 
-    // adiciona o card no destino
-    items[destination.droppableId - 1].cards.splice(destination.index, 0, {
-      ...removed,
-      id: `${destination.droppableId}-${removed.id}`,
-    });
+    if (sourceList && destinationList) {
+      // Remova o item da lista de origem
+      const movedItem = sourceList.cards.splice(source.index, 1)[0];
 
-    setLists(items);
+      // Insira o item na lista de destino na posição correta
+      destinationList.cards.splice(destination.index, 0, movedItem);
+
+      // Faça uma chamada à API para atualizar a posição do item
+      await fetch(`/api/lists/${sourceList.id}/cards/${movedItem.id}/position?newPosition=${destination.index}`, {
+        method: "PUT",
+      });
+
+
+
+
+      setLists([...lists]); // Atualize o estado das listas para refletir a nova ordem
+
+      console.log("source:" + source)
+      console.log("destination:" + destination)
+      console.log("movedItem:" + movedItem)
+    }
   };
 
 

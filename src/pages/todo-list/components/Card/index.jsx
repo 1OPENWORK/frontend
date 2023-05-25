@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { Container, InputDate, Label } from "./styles";
 import { FiEdit } from "react-icons/fi";
 import { RiAddCircleLine, RiDeleteBin2Fill } from "react-icons/ri";
+import { GiConfirmed } from "react-icons/gi";
+
 
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -31,9 +33,13 @@ export default function Card({ data, index }) {
 
   const [lgShow, setLgShow] = useState(false);
 
-
-  const [tasks, setTasks] = useState([]);
+  const [editedTask, setEditedTask] = useState("");
   const [newTask, setNewTask] = useState("");
+
+  const [tasks, setTasks] = useState([
+
+  ]);
+  const [editIndex, setEditIndex] = useState(-1);
 
   const handleAddTask = () => {
     if (newTask.trim() !== "") {
@@ -42,6 +48,36 @@ export default function Card({ data, index }) {
     }
   };
 
+  const handleEdit = (index) => {
+    setNewTask(tasks[index]); // Atualize o estado newTask
+    setEditIndex(index);
+  };
+
+  const handleSaveOnBlur = () => {
+    if (editedTask !== "") {
+      const newTasks = [...tasks];
+      newTasks[editIndex] = editedTask;
+      setTasks(newTasks);
+    }
+    setEditIndex(-1);
+    setEditedTask("");
+  };
+
+  const handleSaveOnClick = () => {
+    if (newTask.trim() !== "") {
+      const newTasks = [...tasks];
+      newTasks[editIndex] = newTask;
+      setTasks(newTasks);
+    }
+    setEditIndex(-1);
+    setNewTask("");
+  };
+
+  const handleDelete = (index) => {
+    const newTasks = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
 
   const style = {
     font: "inherit",
@@ -52,8 +88,12 @@ export default function Card({ data, index }) {
 
   }
 
+
+
+  // ESCOLHA DA PRIORIDADE
+
   const [checked, setChecked] = useState(false);
-  const [radioValue, setRadioValue] = useState('1');
+  const [radioValue, setRadioValue] = useState('');
 
   const radios = [
     { name: 'Desejável', value: '1' },
@@ -61,6 +101,7 @@ export default function Card({ data, index }) {
     { name: 'Essencial', value: '3' },
   ];
 
+  const selectedLabel = data.labels.find(label => label.id === parseInt(radioValue));
 
 
   // const [{ isDragging }, dragRef] = useDrag({
@@ -126,17 +167,25 @@ export default function Card({ data, index }) {
 
       <Container>
         <header>
-          {data.labels.map((label) => (
-            <Label key={label} color={label}>
-              <p>Essencial</p>
-            </Label>
-          ))}
+
+          {selectedLabel ? (
+
+            <>
+              <Label color={selectedLabel.color}>
+                <p>{selectedLabel.title}</p>
+              </Label>
+            </>
+          ) : ""}
           {!lgShow && (
             <button className="button-edit" onClick={handleEditClick}>
               <FiEdit size={20} />
             </button>
           )}
         </header>
+
+
+
+
 
 
 
@@ -245,20 +294,68 @@ export default function Card({ data, index }) {
               <div className="div-tasks">
                 {tasks.map((task, index) => (
                   <div key={index} style={{ marginBottom: ".5rem" }}>
+                    {editIndex === index ? (
+                      <>
+
+                        <label className="form-control">
+
+                          <input
+                            className="input"
+                            style={{ outline: "none", border: "1px solid red", width: "100%" }}
+                            type="text"
+                            value={newTask}
+                            onChange={(e) => setNewTask(e.target.value)}
+                            onBlur={handleSaveOnBlur}
+                          />
+
+                        </label>
+                      </>
+                    ) : (
+                      <label className="form-control">
+                        <input
+                          className="input"
+                          htmlFor={`task-${index}`}
+                          style={style}
+                          type="checkbox"
+                          name="checkbox"
+                          id={`task-${index}`}
+                        />
+                        <span style={{ marginLeft: ".5rem" }}>{task}</span>
+                      </label>
+                    )}
 
 
-                    <label class="form-control" >
-                      <input className="input" htmlFor={`task-${index}`} style={style} type="checkbox" name="checkbox" id={`task-${index}`} />
-                      <span style={{ marginLeft: ".5rem" }}>{task}</span>
+                    {editIndex === index ? (
+                      <>
+                        <GiConfirmed
+                          size={16}
+                          style={{ position: "absolute", right: "3rem", marginTop: ".1em", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }}
+                          onClick={() => handleSaveOnClick()}
+                        />
+                      </>
 
-                    </label>
+                    ) : (
 
-                    <FiEdit size={16} style={{ position: "absolute", right: "3rem", marginTop: ".1em", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }} />
-                    <RiDeleteBin2Fill size={18} style={{ position: "absolute", right: "1.5rem", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }} />
+                      <>
+                        <FiEdit
+                          size={16}
+                          style={{ position: "absolute", right: "3rem", marginTop: ".1em", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }}
+                          onClick={() => handleEdit(index)}
+                        />
+                      </>
+
+                    )}
+
+
+
+                    <RiDeleteBin2Fill
+                      size={18}
+                      style={{ position: "absolute", right: "1.5rem", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }}
+                      onClick={() => handleDelete(index)}
+                    />
                   </div>
                 ))}
               </div>
-
             </Modal.Body>
             <Modal.Footer >
               <Button variant="danger" >

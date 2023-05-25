@@ -166,8 +166,7 @@ function CreateProject() {
       .then((res) => {
         console.log(res)
         notifySucess()
-        const myTimeout = () =>
-          setTimeout(() => navigate('/projetos-andamentos'), 1000)
+        const myTimeout = () => setTimeout(() => navigate('/jobs'), 1000)
         myTimeout()
       })
       .catch((err) => {

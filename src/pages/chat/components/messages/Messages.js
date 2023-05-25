@@ -79,6 +79,7 @@ const Messages = ({
       </Styled.Container>
 
       <SendMessage
+      
         socket={socket}
         idSender={idSender}
         idReceiver={idReceiver}

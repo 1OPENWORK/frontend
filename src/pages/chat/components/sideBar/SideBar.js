@@ -36,7 +36,7 @@ const SideBar = ({
   setDadosConversa,
   visualized,
   setVisualized,
-  myInformation
+  myInformation,
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
@@ -99,7 +99,7 @@ const SideBar = ({
     socket.emit(
       "listMessagesPerson",
       { otherPeploe: dados.id, myId: websocket.idUser },
-      dados => {
+      (dados) => {
         dispatch(
           changeMessages({
             messages: dados,
@@ -112,7 +112,7 @@ const SideBar = ({
   };
 
   const atualizarVisualized = (idFriend, myId, idSender) => {
-    socket.emit("messagesVisualized", { idFriend, myId }, messagePedentes => {
+    socket.emit("messagesVisualized", { idFriend, myId }, (messagePedentes) => {
       dispatch(
         changeMessagesPendentes({
           messages: messagePedentes,
@@ -128,7 +128,7 @@ const SideBar = ({
   useEffect(() => {
     const idConversationActive = dados.id;
 
-    socket.on("newMessage", dados => {
+    socket.on("newMessage", (dados) => {
       const response = dados;
 
       const idSender = response.dados.idSender;
@@ -189,12 +189,12 @@ const SideBar = ({
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("atualizandoState", dados => {});
+    socket.on("atualizandoState", (dados) => {});
     return () => socket.off("atualizandoState");
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("notifications", dados => {
+    socket.on("notifications", (dados) => {
       dispatch(
         changeNewNotifications({
           newNotifications: dados,
@@ -234,7 +234,7 @@ const SideBar = ({
     socket.emit(
       "listAllNotifications",
       { idUser: websocket.idUser },
-      callback => {
+      (callback) => {
         dispatch(
           changeAllNotifications({
             notifications: callback,
@@ -263,15 +263,15 @@ const SideBar = ({
     }
 
     if (arrayNotify.length > 0) {
-      socket.emit("updateNotifyVisualized", { arrayNotify }, callback => {});
+      socket.emit("updateNotifyVisualized", { arrayNotify }, (callback) => {});
     }
     setTotalNotificationPendentes(0);
   };
 
-  const attQtdNotification = cb => {
+  const attQtdNotification = (cb) => {
     let total = 0;
 
-    cb.forEach(element => {
+    cb.forEach((element) => {
       if (!element.isVisualizado) {
         total++;
       }
@@ -342,12 +342,12 @@ const SideBar = ({
                   objectFit: "cover",
                   marginBottom: "10px",
                 }}
-                src={
-                  myInformation.img
-                }
+                src={myInformation.img}
               />
               <DivOpcaoLateral>
-                <TitleOpcaoMenuLateral>{myInformation.nome}</TitleOpcaoMenuLateral>
+                <TitleOpcaoMenuLateral>
+                  {myInformation.nome}
+                </TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
 
               <DivOpcaoLateral style={{ marginBottom: "10px" }}>
@@ -390,7 +390,11 @@ const SideBar = ({
                 <TitleOpcaoMenuLateral>Notificações</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
-            <OpcaoMenuLateral>
+            <OpcaoMenuLateral
+              onClick={() => {
+                setIndexAbaActive(2);
+              }}
+            >
               <ion-icon
                 name="person-add-outline"
                 style={{
@@ -490,6 +494,24 @@ const SideBar = ({
                   <CardNotification dados={d} socket={socket} key={index} />
                 ))}
               </Styled.ListPersons>
+            </Styled.DivColumn>
+          ) : indexAbaActive === 2 ? (
+            <Styled.DivColumn>
+              <Styled.Header>
+                <Styled.TitleHeader>Fazer uma nova conexão</Styled.TitleHeader>
+                <ion-icon
+                  name="chatbox-ellipses-outline"
+                  style={{ color: Colors.WHITE01, fontSize: 30 }}
+                ></ion-icon>
+              </Styled.Header>
+              <Styled.DivRow>
+                <span style={{
+                fontSize: 40,
+                color: Colors.PRIMARY_COLOR
+              }}>#</span>
+              <Styled.Search placeholder="AAA00" maxLength={5}/>
+              </Styled.DivRow>
+              <Styled.ListPersons></Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 3 ? (
             <Styled.DivColumn>

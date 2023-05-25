@@ -110,10 +110,31 @@ const StyledSideBar = {
     }
   `,
 
-    SubTitle: styled.label`
-      color: #07ea8b;
-    `
+  SubTitle: styled.label`
+    color: #07ea8b;
+  `,
 
+  DivRow: styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  `,
+
+  Search: styled.input`
+    width: 200px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid ${Colors.PRIMARY_COLOR};
+    text-align: center;
+    color: ${Colors.WHITE01};
+    font-size: 22px;
+    &:focus {
+      outline: none;
+    }
+  `,
 };
 
 export const OpcaoMenuLateral = styled.div`
@@ -138,8 +159,6 @@ export const TitleOpcaoMenuLateral = styled.h3`
 
   font-size: 18px;
 `;
-
-
 
 export const DivOpcaoLateral = styled.div`
   display: flex;

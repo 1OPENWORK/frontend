@@ -11,20 +11,31 @@ import Styled from "./Chat.styled";
 import Messages from "./components/messages/Messages";
 import SideBar from "./components/sideBar/SideBar";
 import { getId } from "../../hooks/Cookies";
+import { getS3 } from "../../store/actions/MicroService";
 
 export const Chat = ({ socket }) => {
   const [loading, setLoading] = useState(false);
   const [messageActive, setMessageActive] = useState(false);
   const [visualized, setVisualized] = useState([]);
   const [dadosConversa, setDadosConversa] = useState({});
+  const [tag, setTag] = useState("");
+  const [imagemPerfil, setImagemPerfil] = useState("");
+  const [nome, setNome] = useState("");
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
   const dispatch = useDispatch();
   const id = getId();
 
+  const fetchS3 = async (img) => {
+    const imagemPerfil = await getS3(img);
+
+    setImagemPerfil(imagemPerfil);
+  };
+
   useEffect(() => {
     socket.on("connect", () => {
-      socket.emit("myInformation", { id }, callback => {
+      socket.emit("myInformation", { id }, (callback) => {
+        console.log("🚀 ~ file: Chat.js:32 ~ socket.on ~ callback:", callback);
         const idUser = callback.id;
 
         dispatch(
@@ -63,7 +74,11 @@ export const Chat = ({ socket }) => {
           }
         );
 
-        socket.emit("updateSocketId", { idUser }, user => {});
+        socket.emit("updateSocketId", { idUser }, (user) => {});
+
+        fetchS3(callback.img);
+        setTag(callback.tag);
+        setNome(callback.nome);
       });
     });
   }, []);
@@ -79,6 +94,7 @@ export const Chat = ({ socket }) => {
           setDadosConversa={setDadosConversa}
           visualized={visualized}
           setVisualized={setVisualized}
+          myInformation={{ nome, tag, img: imagemPerfil }}
         />
       </Styled.Div>
       <Styled.Div width={"70%"} style={{ height: "100vh" }}>

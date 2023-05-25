@@ -7,8 +7,9 @@ export const handleImgGroup = async dados => {
   return await postImage(URI + "/newImgGroup", dados);
 };
 
-export const getS3 = async (type, img) => {
-  return await getImagem(URI + "/imagem/" + type + "/" + img);
+export const getS3 = async (img) => {
+  const response = await getImagem(URI + "/imagem/" + img);
+  return URL.createObjectURL(response.data);
 };
 
 export const addNewUser = async dados => {

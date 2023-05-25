@@ -36,6 +36,7 @@ const SideBar = ({
   setDadosConversa,
   visualized,
   setVisualized,
+  myInformation,
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
@@ -98,7 +99,7 @@ const SideBar = ({
     socket.emit(
       "listMessagesPerson",
       { otherPeploe: dados.id, myId: websocket.idUser },
-      dados => {
+      (dados) => {
         dispatch(
           changeMessages({
             messages: dados,
@@ -111,7 +112,7 @@ const SideBar = ({
   };
 
   const atualizarVisualized = (idFriend, myId, idSender) => {
-    socket.emit("messagesVisualized", { idFriend, myId }, messagePedentes => {
+    socket.emit("messagesVisualized", { idFriend, myId }, (messagePedentes) => {
       dispatch(
         changeMessagesPendentes({
           messages: messagePedentes,
@@ -127,7 +128,7 @@ const SideBar = ({
   useEffect(() => {
     const idConversationActive = dados.id;
 
-    socket.on("newMessage", dados => {
+    socket.on("newMessage", (dados) => {
       const response = dados;
 
       const idSender = response.dados.idSender;
@@ -188,12 +189,12 @@ const SideBar = ({
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("atualizandoState", dados => {});
+    socket.on("atualizandoState", (dados) => {});
     return () => socket.off("atualizandoState");
   }, [on, dados]);
 
   useEffect(() => {
-    socket.on("notifications", dados => {
+    socket.on("notifications", (dados) => {
       dispatch(
         changeNewNotifications({
           newNotifications: dados,
@@ -233,7 +234,7 @@ const SideBar = ({
     socket.emit(
       "listAllNotifications",
       { idUser: websocket.idUser },
-      callback => {
+      (callback) => {
         dispatch(
           changeAllNotifications({
             notifications: callback,
@@ -262,15 +263,15 @@ const SideBar = ({
     }
 
     if (arrayNotify.length > 0) {
-      socket.emit("updateNotifyVisualized", { arrayNotify }, callback => {});
+      socket.emit("updateNotifyVisualized", { arrayNotify }, (callback) => {});
     }
     setTotalNotificationPendentes(0);
   };
 
-  const attQtdNotification = cb => {
+  const attQtdNotification = (cb) => {
     let total = 0;
 
-    cb.forEach(element => {
+    cb.forEach((element) => {
       if (!element.isVisualizado) {
         total++;
       }
@@ -335,22 +336,22 @@ const SideBar = ({
             >
               <Styled.Img
                 style={{
-                  width: "60px",
-                  height: "60px",
+                  width: "80px",
+                  height: "80px",
                   borderRadius: "100%",
                   objectFit: "cover",
                   marginBottom: "10px",
                 }}
-                src={
-                  "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                }
+                src={myInformation.img}
               />
               <DivOpcaoLateral>
-                <TitleOpcaoMenuLateral>Jefferson</TitleOpcaoMenuLateral>
+                <TitleOpcaoMenuLateral>
+                  {myInformation.nome}
+                </TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
 
               <DivOpcaoLateral style={{ marginBottom: "10px" }}>
-                <Styled.SubTitle>#00001</Styled.SubTitle>
+                <Styled.SubTitle>#{myInformation.tag}</Styled.SubTitle>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
 
@@ -389,7 +390,11 @@ const SideBar = ({
                 <TitleOpcaoMenuLateral>Notificações</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
-            <OpcaoMenuLateral>
+            <OpcaoMenuLateral
+              onClick={() => {
+                setIndexAbaActive(2);
+              }}
+            >
               <ion-icon
                 name="person-add-outline"
                 style={{
@@ -489,6 +494,24 @@ const SideBar = ({
                   <CardNotification dados={d} socket={socket} key={index} />
                 ))}
               </Styled.ListPersons>
+            </Styled.DivColumn>
+          ) : indexAbaActive === 2 ? (
+            <Styled.DivColumn>
+              <Styled.Header>
+                <Styled.TitleHeader>Fazer uma nova conexão</Styled.TitleHeader>
+                <ion-icon
+                  name="chatbox-ellipses-outline"
+                  style={{ color: Colors.WHITE01, fontSize: 30 }}
+                ></ion-icon>
+              </Styled.Header>
+              <Styled.DivRow>
+                <span style={{
+                fontSize: 40,
+                color: Colors.PRIMARY_COLOR
+              }}>#</span>
+              <Styled.Search placeholder="AAA00" maxLength={5}/>
+              </Styled.DivRow>
+              <Styled.ListPersons></Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 3 ? (
             <Styled.DivColumn>

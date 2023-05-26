@@ -3,46 +3,51 @@ import { ContainerMain, ContainerContent } from "./Projects.styled";
 import CardProject from "./components/cardProject/CardProject";
 import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
 import axios from "axios";
-import Cookies from "js-cookie";
-import { canceledPath } from "../../constants/Path";
-import { Navigate } from "react-router-dom";
+
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { getIsDev } from "../../hooks/Cookies";
 
 function Projects() {
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [noProject, setNoProject] = useState(false);
 
-  const isDev = true;
+  const isDev = getIsDev();
   const id = 2;
 
   const fetchChange = isDev
-    ? `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`
-    : `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`;
+    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/${id}`
+    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/${id}`;
 
   // Exemplo
   //   axios({
   //     method: "get",
-  //     url: "http://bit.ly/2mTM3nY",
+  //     url: "",
   //     responseType: "stream",
   //   }).then(function (response) {
   //     response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
   //   });
 
-  useEffect(() => {
-    async function fetchProjetos() {
-      await axios
-        .get(fetchChange)
-        .then((response) => {
-          if (response.status === 200) {
-            setLoading(false);
-            setProjetos(response.data);
-            console.log(response);
-          }
-        })
-        .catch((error) => {
-          console.log("Deu erro: " + error);
-        });
-    }
+  async function fetchProjetos() {
+    await axios
+      .get(fetchChange)
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setProjetos(response.data);
+          console.log(response);
+        } else if (response.status === 204) {
+          setLoading(false);
+          setNoProject(true);
+          console.log("caiu aqui", response);
+        }
+      })
+      .catch((error) => {
+        console.log("Deu erro: " + error);
+      });
+  }
 
+  useEffect(() => {
     fetchProjetos();
   }, []);
 
@@ -55,6 +60,11 @@ function Projects() {
           {loading ? (
             <div className="loading">
               <h3>Carregando...</h3>
+            </div>
+          ) : noProject ? (
+            <div className="loading">
+              <AiOutlineFundProjectionScreen size={64} />
+              <h3>Sem projetos...</h3>
             </div>
           ) : (
             projetos.map((projeto) => (

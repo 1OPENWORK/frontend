@@ -19,12 +19,15 @@ import { BsFillClipboard2PlusFill } from "react-icons/bs";
 import { useState } from "react";
 
 import ButtonCompleted from "./components/ButtonCompleted";
+import { getIsDev } from "../../../../hooks/Cookies";
 
 function SidebarProjecteds({ type }) {
   const navigate = useNavigate();
 
   const [color, setColor] = useState("#fff");
   const [typeUse, setType] = useState(type);
+
+  const isDev = getIsDev();
 
   const goToHomeDev = () => {
     navigate(HomeDevPath);
@@ -82,11 +85,17 @@ function SidebarProjecteds({ type }) {
               onClick={() => goToCanceled()}
             />
 
-            <button type="button" onClick={() => goToCreateProject()}>
-              <AiFillFolderAdd size={40} className="icon-cancel" />
+            {!isDev ? (
+              <>
+                <button type="button" onClick={() => goToCreateProject()}>
+                  <AiFillFolderAdd size={40} className="icon-cancel" />
 
-              <h2>Criar Projeto</h2>
-            </button>
+                  <h2>Criar Projeto</h2>
+                </button>
+              </>
+            ) : (
+              ""
+            )}
           </>
         ) : type === 2 ? (
           <>
@@ -107,11 +116,17 @@ function SidebarProjecteds({ type }) {
               onClick={() => goToCanceled()}
             />
 
-            <button type="button" onClick={() => goToCreateProject()}>
-              <AiFillFolderAdd size={40} className="icon-cancel" />
+            {!isDev ? (
+              <>
+                <button type="button" onClick={() => goToCreateProject()}>
+                  <AiFillFolderAdd size={40} className="icon-cancel" />
 
-              <h2>Criar Projeto</h2>
-            </button>
+                  <h2>Criar Projeto</h2>
+                </button>
+              </>
+            ) : (
+              ""
+            )}
           </>
         ) : type === 1 ? (
           <>
@@ -131,11 +146,17 @@ function SidebarProjecteds({ type }) {
               desc={"Cancelados"}
               onClick={() => goToCanceled()}
             />
-            <button type="button" onClick={() => goToCreateProject()}>
-              <AiFillFolderAdd size={40} className="icon-cancel" />
+            {!isDev ? (
+              <>
+                <button type="button" onClick={() => goToCreateProject()}>
+                  <AiFillFolderAdd size={40} className="icon-cancel" />
 
-              <h2>Criar Projeto</h2>
-            </button>
+                  <h2>Criar Projeto</h2>
+                </button>
+              </>
+            ) : (
+              ""
+            )}
           </>
         ) : (
           <>

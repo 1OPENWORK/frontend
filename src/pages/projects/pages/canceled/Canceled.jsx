@@ -4,36 +4,42 @@ import { ContainerContent, ContainerMain } from "../../Projects.styled";
 import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+
 
 // import Cookies from "js-cookie";
 function Canceled({ developers }) {
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [noProject, setNoProject] = useState(false);
 
   const isDev = true;
   const id = 1;
 
   const fetchChange = isDev
-    ? `http://localhost:8004/projetos-aceitos/cancelados/desenvolvedor/${id}`
-    : `http://localhost:8004/projetos-aceitos/cancelados/empresa/${id}`;
+    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`
+    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`;
+
+  async function fetchProjetos() {
+    await axios
+      .get(fetchChange)
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setProjetos(response.data);
+          console.log(response);
+        } else if (response.status === 204) {
+          setLoading(false);
+          setNoProject(true);
+          console.log("caiu aqui", response);
+        }
+      })
+      .catch((error) => {
+        console.log("Deu erro: " + error);
+      });
+  }
 
   useEffect(() => {
-    async function fetchProjetos() {
-      await axios
-        .get(fetchChange)
-        .then((response) => {
-          console.log(response);
-
-          if (response.status === 200) {
-            setLoading(false);
-            setProjetos(response.data);
-          }
-        })
-        .catch((error) => {
-          console.log("Deu erro: " + error);
-        });
-    }
-
     fetchProjetos();
   }, []);
   return (
@@ -47,6 +53,11 @@ function Canceled({ developers }) {
             <div className="loading">
               <h3>Carregando...</h3>
             </div>
+          ) : noProject ? (
+            <div className="loading">
+              <AiOutlineFundProjectionScreen size={64} />
+              <h3>Sem projetos...</h3>
+            </div>
           ) : (
             projetos.map((projeto) => (
               <CardProject
@@ -55,7 +66,7 @@ function Canceled({ developers }) {
                 describe={projeto.descriptionProject}
                 progress={projeto.progress}
                 now={projeto.progress}
-                canceled={true}
+                canceled={false}
                 initDate={projeto.beginDate}
                 finishDate={projeto.finishDate}
                 company={projeto.nameCompany}

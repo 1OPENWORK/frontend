@@ -5,6 +5,8 @@ import Styled from "./Portifolio.style";
 import Formulario from "./components/formulario/Formulario";
 import { useState } from "react";
 import Portifolio2 from "./portfolioEt2/PortifolioEt2";
+import About from "./About&Experience/About";
+import PortifolioSobre from "./sobre/PortifolioSobre";
 
 const Portifolio = () => {
   const [abaActive, setAbaActive] = useState(1);
@@ -13,16 +15,20 @@ const Portifolio = () => {
     <>
       <Styled.Container>
         <SideBar tabActive={setAbaActive} />
-
-        <Styled.ContainerInputs>
-          <Styled.TitlePortfolio>Informações pessoais</Styled.TitlePortfolio>
-          <Formulario />
-          <Styled.Divisor />
-          <Styled.TitlePortfolio>Seu cantinho</Styled.TitlePortfolio>
-          <Portifolio2 />
-          <Styled.Divisor />
-          <Portifolio2 />
-        </Styled.ContainerInputs>
+        {abaActive === 1 ? (
+          <Styled.ContainerInputs>
+            <Styled.TitlePortfolio>Informações pessoais</Styled.TitlePortfolio>
+            <Formulario />
+            <Styled.Divisor />
+            <Styled.TitlePortfolio>Seu cantinho</Styled.TitlePortfolio>
+            <Portifolio2 />
+            <Styled.Divisor />
+          </Styled.ContainerInputs>
+        ) : abaActive === 2 ? (
+          <PortifolioSobre />
+        ) : (
+          <></>
+        )}
       </Styled.Container>
     </>
   );

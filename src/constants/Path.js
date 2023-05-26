@@ -12,10 +12,10 @@ const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
 const ProjectsPath = "/projetos";
 const TodoPath = "/gerenciador";
-const PortfolioEt5Path = "/portfolio/sobre-mim"
-const PortfolioEt6Path = "/portfolio/experiencias"
-const PortfolioProjectsPath = "/portfolio/projetos"
-const AvaliarPath = "avaliacoes/avaliar"
+const PortfolioSobreMim = "/portfolio/sobre-mim";
+const PortfolioExperiencia = "/portfolio/experiencias";
+const PortfolioProjectsPath = "/portfolio/projetos";
+const AvaliarPath = "avaliacoes/avaliar";
 module.exports = {
   HomePagePath,
   AuthPath,
@@ -31,8 +31,8 @@ module.exports = {
   PortfolioPath,
   ProjectsPath,
   TodoPath,
-  PortfolioEt5Path,
-  PortfolioEt6Path,
+  PortfolioSobreMim,
+  PortfolioExperiencia,
   PortfolioProjectsPath,
   AvaliarPath,
 };

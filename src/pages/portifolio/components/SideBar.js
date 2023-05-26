@@ -1,22 +1,12 @@
 import React from "react";
 import Styled from "./SideBar.styled";
 import IconPlus from "../../../assets/icons/icon-plus.svg";
-import IconProfile from "../../../assets/icons/icon-profile.svg";
-import IconAbout from "../../../assets/icons/icon-about.svg";
-import IconExperiences from "../../../assets/icons/icon-specialtys.svg";
-import IconProject from "../../../assets/icons/icon-projects.svg";
-import { useNavigate } from "react-router-dom";
-import { MdArrowBack } from "react-icons/md";
+import { MdArrowBack, MdNewspaper } from "react-icons/md";
 import Colors from "../../../constants/Colors";
-import {
-  HomeDevPath,
-  PortfolioEt5Path,
-  PortfolioEt6Path,
-  PortfolioPath,
-  PortfolioProjectsPath,
-} from "../../../constants/Path";
+
 import { useState } from "react";
-import { useEffect } from "react";
+import { BsPersonCircle, BsStarFill } from "react-icons/bs";
+import { AiOutlineProfile } from "react-icons/ai";
 
 const SideBar = ({ tabActive }) => {
   const [tabSelection, setSelection] = useState(1);
@@ -54,7 +44,12 @@ const SideBar = ({ tabActive }) => {
               handleClick(1);
             }}
           >
-            <Styled.IconSideBarOption isImg={true} background={IconProfile} />
+            <Styled.IconSideBarOption>
+              <BsPersonCircle
+                size={35}
+                color={tabSelection === 1 ? Colors.PRIMARY_COLOR : Colors.WHITE}
+              />
+            </Styled.IconSideBarOption>
             <Styled.TextSideBarOption isSelected={tabSelection === 1}>
               Perfil
             </Styled.TextSideBarOption>
@@ -66,10 +61,12 @@ const SideBar = ({ tabActive }) => {
               handleClick(2);
             }}
           >
-            <Styled.IconSideBarOption
-              isImg={true}
-              background={IconAbout}
-            ></Styled.IconSideBarOption>
+            <Styled.IconSideBarOption>
+              <AiOutlineProfile
+                size={35}
+                color={tabSelection === 2 ? Colors.PRIMARY_COLOR : Colors.WHITE}
+              />
+            </Styled.IconSideBarOption>
             <Styled.TextSideBarOption isSelected={tabSelection === 2}>
               Sobre
             </Styled.TextSideBarOption>
@@ -81,10 +78,12 @@ const SideBar = ({ tabActive }) => {
               handleClick(3);
             }}
           >
-            <Styled.IconSideBarOption
-              isImg={true}
-              background={IconExperiences}
-            ></Styled.IconSideBarOption>
+            <Styled.IconSideBarOption>
+              <BsStarFill
+                size={30}
+                color={tabSelection === 3 ? Colors.PRIMARY_COLOR : Colors.WHITE}
+              />
+            </Styled.IconSideBarOption>
             <Styled.TextSideBarOption isSelected={tabSelection === 3}>
               Experiências
             </Styled.TextSideBarOption>
@@ -94,10 +93,12 @@ const SideBar = ({ tabActive }) => {
             isSelected={tabSelection === 4}
             onClick={() => handleClick(4)}
           >
-            <Styled.IconSideBarOption
-              isImg={true}
-              background={IconProject}
-            ></Styled.IconSideBarOption>
+            <Styled.IconSideBarOption>
+              <MdNewspaper
+                size={30}
+                color={tabSelection === 4 ? Colors.PRIMARY_COLOR : Colors.WHITE}
+              />
+            </Styled.IconSideBarOption>
             <Styled.TextSideBarOption isSelected={tabSelection === 4}>
               Projetos
             </Styled.TextSideBarOption>

@@ -45,6 +45,8 @@ import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import { getIsDev } from "./hooks/Cookies";
 import { Ambiente } from "./hooks/Ambiente";
+import { PortfolioSobreMim } from "./constants/Path";
+import { PortfolioExperiencia } from "./constants/Path";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -81,8 +83,8 @@ function App() {
         <Route path={PortfolioPath} element={<Portifolio />} />
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={TodoPath} element={<Todo />} />
-        <Route path={PortfolioEt5Path} element={<PortifolioEt5 />} />
-        <Route path={PortfolioEt6Path} element={<PortifolioEt6 />} />
+        <Route path={PortfolioSobreMim} element={<PortifolioEt5 />} />
+        <Route path={PortfolioExperiencia} element={<PortifolioEt6 />} />
         <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
         <Route path={AvaliarPath} element={<Avaliar />} />
       </Routes>

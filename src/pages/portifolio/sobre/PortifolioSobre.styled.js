@@ -1,32 +1,22 @@
 import styled from "styled-components";
 import Colors from "../../../constants/Colors";
 
-const aboutStyles = {
+const StyledPortifolioSobre = {
   Container: styled.div`
-    width: 90vw;
     height: 100vh;
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    font-family: nunito;
-    border: 1px solid red;
-  `,
-
-  ContainerContent: styled.div`
-    width: 72.3%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-left: 430px;
   `,
 
   Header: styled.div`
     position: relative;
     display: flex;
-    width: 50%;
     height: 90px;
     margin-left: 5rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
   `,
 
   ImgUser: styled.div`
@@ -43,8 +33,6 @@ const aboutStyles = {
   `,
 
   ContainerHeader: styled.div`
-    position: absolute;
-    width: 80%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -95,18 +83,14 @@ const aboutStyles = {
   ContainerData: styled.div`
     position: relative;
     display: flex;
+    flex-direction: column;
+    padding: 40px;
     width: auto;
-    height: 393px;
-    margin-top: 4rem;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    margin-bottom: 2rem;
   `,
 
   ContainerAboutMe: styled.div`
-    position: absolute;
     width: 100%;
-    max-height: 48.6%;
+    height: 250px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -119,29 +103,25 @@ const aboutStyles = {
     line-height: 33px;
   `,
 
-  Content: styled.div`
+  ContentBox: styled.textarea`
     margin-top: 1rem;
     font-style: normal;
     font-weight: 400;
     font-size: 1rem;
     line-height: 148.4%;
+    width: 100%;
+    height: 600px;
+    padding: 10px;
+    border-radius: 8px;
   `,
 
   ContainerWhatLook: styled.div`
-    position: absolute;
     width: 51.7%;
-    max-height: auto;
-    overflow: hidden;
-    margin-top: 13.9rem;
   `,
 
   ContainerPreferences: styled.div`
-    position: absolute;
-    right: 0;
     width: 36.9%;
-    max-height: auto;
     overflow: hidden;
-    margin-top: 13.9rem;
   `,
 
   ContentPreferences: styled.div`
@@ -171,8 +151,16 @@ const aboutStyles = {
     overflow: hidden;
     margin-left: 5rem;
     margin-right: 5rem;
+    margin-bottom: 5rem;
     justify-content: space-between;
+  `,
+
+  DivRow: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
   `,
 };
 
-export default aboutStyles;
+export default StyledPortifolioSobre;

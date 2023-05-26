@@ -120,8 +120,7 @@ const StyleSideBar = {
     font-weight: 900;
     font-size: 1.5rem;
     line-height: 2.063rem;
-    color: ${props =>
-      props.isSelected ? `${Colors.BLACK}` : `${Colors.WHITE}`};
+    color: ${props => (props.isSelected ? Colors.PRIMARY_COLOR : Colors.WHITE)};
   `,
 };
 

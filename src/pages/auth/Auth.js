@@ -100,7 +100,7 @@ function Auth() {
           descricao="Faça login e comece a experiência "
           textButton="Home"
         />
-        <Styled.ContainerForm position="center">
+        <Styled.ContainerForm>
           <Styled.Form>
             <Styled.TitleForm style={{ marginBottom: 30 }}>
               {"Login"}
@@ -117,37 +117,29 @@ function Auth() {
               handle={setPassword}
               type={"password"}
             />
-            <Styled.Row
-              style={{
-                marginBottom: 20,
-                marginTop: 10,
-              }}
-            >
-              <Styled.Label>Não possui conta?</Styled.Label>
-              <Styled.Link onClick={() => navigate("/cadastro")}>
-                {" "}
-                Cadastre-se
-              </Styled.Link>
-            </Styled.Row>
-            <Styled.Row>
-              <Styled.CheckBox type={"checkbox"} />
-              <Styled.Label>Lembrar Senha</Styled.Label>
+            <Styled.Connection>
+              <Styled.RememberPassword>
+                <Styled.CheckBox type={"checkbox"} />
+                <Styled.Label>Lembrar Senha</Styled.Label>
+              </Styled.RememberPassword>
               <Styled.Link> Esqueci minha senha</Styled.Link>
-            </Styled.Row>
-            <Styled.Row
-              style={{
-                marginTop: 20,
-                marginBottom: 20,
-              }}
-            >
+            </Styled.Connection>
+            <Styled.Row>
               <FilledButton
                 onClick={() => handle()}
                 color={Colors.BLACK}
                 width={190}
                 heigth={60}
+                marginTop={"24px"}
               >
                 {" Entrar"}
               </FilledButton>
+            </Styled.Row>
+            <Styled.Row>
+              <Styled.Label>Não possui conta?</Styled.Label>
+              <Styled.Link onClick={() => navigate("/cadastro")}>
+                Cadastre-se
+              </Styled.Link>
             </Styled.Row>
           </Styled.Form>
         </Styled.ContainerForm>

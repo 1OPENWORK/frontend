@@ -15,8 +15,6 @@ import {
   ProjectsPath,
   TodoPath,
   PortfolioPath,
-  PortfolioEt5Path,
-  PortfolioEt6Path,
   PortfolioProjectsPath,
   AvaliarPath,
   ProgressPath,
@@ -67,7 +65,6 @@ function App() {
         })
       );
     });
-  });
   });
 
   return (

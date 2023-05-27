@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import {StyledModal, ModalContent} from './Modal.styled'
+import React, { useState } from "react";
+import {
+  StyledModal,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalClosedButton,
+} from "./Modal.styled";
 
-const CustomModal = ({ isOpen, onClose, children }) => {
+const CustomModal = ({ isOpen, onClose, children, tamanho }) => {
+
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onClose}>
-      <ModalContent>{children}</ModalContent>
+      <ModalContent tamanho={tamanho}>{children}</ModalContent>
     </StyledModal>
   );
-}
+};
 
-export default CustomModal
+export default CustomModal;

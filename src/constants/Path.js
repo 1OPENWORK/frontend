@@ -11,16 +11,16 @@ const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
 const TodoPath = "/gerenciador";
-const PortfolioEt5Path = "/portfolio/sobre-mim";
-const PortfolioEt6Path = "/portfolio/experiencias";
-const PortfolioProjectsPath = "/portfolio/projetos";
+const PortfolioSobreMim = "/portfolio/sobre-mim";;
+const PortfolioExperiencia = "/portfolio/experiencias";;
+const PortfolioProjectsPath = "/portfolio/projetos";;
 const AvaliarPath = "avaliacoes/avaliar";
 const ProgressPath = "/projetos-andamentos";
 const ProjectsPath = "/projetos-concluidos";
 const canceledPath = "/projetos-cancelados";
 const CreateProjectPath = "/cadastrar-projeto";
 const SubmenuPath = "/submenu";
-
+;
 module.exports = {
   HomePagePath,
   AuthPath,
@@ -35,8 +35,8 @@ module.exports = {
   ComunidadePath,
   PortfolioPath,
   TodoPath,
-  PortfolioEt5Path,
-  PortfolioEt6Path,
+  PortfolioSobreMim,
+  PortfolioExperiencia,
   PortfolioProjectsPath,
   AvaliarPath,
   ProgressPath,

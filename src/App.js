@@ -52,6 +52,8 @@ import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 import SubMenu from "./components/subMenu/subMenu";
 import { getIsDev } from "./hooks/Cookies";
 import { Ambiente } from "./hooks/Ambiente";
+import { PortfolioSobreMim } from "./constants/Path";
+import { PortfolioExperiencia } from "./constants/Path";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -65,6 +67,7 @@ function App() {
         })
       );
     });
+  });
   });
 
   return (
@@ -87,8 +90,8 @@ function App() {
         <Route path={ComunidadePath} element={<Comunidade />} />
         <Route path={PortfolioPath} element={<Portifolio />} />
         <Route path={TodoPath} element={<Todo />} />
-        <Route path={PortfolioEt5Path} element={<PortifolioEt5 />} />
-        <Route path={PortfolioEt6Path} element={<PortifolioEt6 />} />
+        <Route path={PortfolioSobreMim} element={<PortifolioEt5 />} />
+        <Route path={PortfolioExperiencia} element={<PortifolioEt6 />} />
         <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
         <Route path={AvaliarPath} element={<Avaliar />} />
         <Route path={ProjectsPath} element={<Projects />} />

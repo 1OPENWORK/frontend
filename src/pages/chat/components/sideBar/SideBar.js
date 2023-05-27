@@ -26,6 +26,7 @@ import ModalNewConversa from "../modal/newConversa/ModalNewConversa";
 import ToastNewMessage from "../messages/components/toastNewMessage/ToastNewMessage";
 import { ToastNewMessageContainer } from "../messages/components/toastNewMessage/ToastNewMessage.styled";
 import { useSpring, animated } from "react-spring";
+import { MdOutlineEditNote } from "react-icons/md";
 
 const SideBar = ({
   socket,
@@ -35,6 +36,7 @@ const SideBar = ({
   setDadosConversa,
   visualized,
   setVisualized,
+  myInformation,
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
@@ -198,6 +200,12 @@ const SideBar = ({
           newNotifications: dados,
         })
       );
+
+      listAllNotifications();
+
+      if (indexAbaActive === 1) {
+        visualizedNotifications();
+      }
     });
 
     return () => socket.off("notifications");
@@ -222,7 +230,7 @@ const SideBar = ({
     setDadosConversa(dados);
   }, [dados]);
 
-  useEffect(() => {
+  const listAllNotifications = () => {
     socket.emit(
       "listAllNotifications",
       { idUser: websocket.idUser },
@@ -237,6 +245,10 @@ const SideBar = ({
         attQtdNotification(callback);
       }
     );
+  };
+
+  useEffect(() => {
+    listAllNotifications();
   }, [dados, indexAbaActive]);
 
   const visualizedNotifications = async () => {
@@ -316,6 +328,34 @@ const SideBar = ({
           <MenuLateral>
             <Styled.Img src={Logo} />
             <OpcaoMenuLateral
+              style={{
+                flexDirection: "column",
+                justifyContent: "start",
+                height: "auto",
+              }}
+            >
+              <Styled.Img
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  borderRadius: "100%",
+                  objectFit: "cover",
+                  marginBottom: "10px",
+                }}
+                src={myInformation.img}
+              />
+              <DivOpcaoLateral>
+                <TitleOpcaoMenuLateral>
+                  {myInformation.nome}
+                </TitleOpcaoMenuLateral>
+              </DivOpcaoLateral>
+
+              <DivOpcaoLateral style={{ marginBottom: "10px" }}>
+                <Styled.SubTitle>#{myInformation.tag}</Styled.SubTitle>
+              </DivOpcaoLateral>
+            </OpcaoMenuLateral>
+
+            <OpcaoMenuLateral
               onClick={() => {
                 setIndexAbaActive(1);
                 visualizedNotifications();
@@ -350,7 +390,11 @@ const SideBar = ({
                 <TitleOpcaoMenuLateral>Notificações</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
-            <OpcaoMenuLateral>
+            <OpcaoMenuLateral
+              onClick={() => {
+                setIndexAbaActive(2);
+              }}
+            >
               <ion-icon
                 name="person-add-outline"
                 style={{
@@ -447,9 +491,27 @@ const SideBar = ({
               <Styled.ListPersons>
                 {/* Colocar os cards de noticações */}
                 {notifications.map((d, index) => (
-                  <CardNotification dados={d} key={index} />
+                  <CardNotification dados={d} socket={socket} key={index} />
                 ))}
               </Styled.ListPersons>
+            </Styled.DivColumn>
+          ) : indexAbaActive === 2 ? (
+            <Styled.DivColumn>
+              <Styled.Header>
+                <Styled.TitleHeader>Fazer uma nova conexão</Styled.TitleHeader>
+                <ion-icon
+                  name="chatbox-ellipses-outline"
+                  style={{ color: Colors.WHITE01, fontSize: 30 }}
+                ></ion-icon>
+              </Styled.Header>
+              <Styled.DivRow>
+                <span style={{
+                fontSize: 40,
+                color: Colors.PRIMARY_COLOR
+              }}>#</span>
+              <Styled.Search placeholder="AAA00" maxLength={5}/>
+              </Styled.DivRow>
+              <Styled.ListPersons></Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 3 ? (
             <Styled.DivColumn>

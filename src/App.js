@@ -50,8 +50,10 @@ import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";
 import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 import SubMenu from "./components/subMenu/subMenu";
+import { getIsDev } from "./hooks/Cookies";
+import { Ambiente } from "./hooks/Ambiente";
 
-const socket = socketIO.connect("http://localhost:3333");
+const socket = socketIO.connect(Ambiente());
 
 function App() {
   const dispatch = useDispatch();

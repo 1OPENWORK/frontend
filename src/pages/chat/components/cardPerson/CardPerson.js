@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectedWebSocket } from "../../../../store/reducers/WebSocketSlice";
 
 import Styled from "./CardPerson.styled";
+import { getS3 } from "../../../../store/actions/MicroService";
 
 const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
   const { websocket } = useSelector(selectedWebSocket);
@@ -13,6 +14,7 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
   const [img, setImg] = useState("");
   const [message, setMessage] = useState("");
   const [create, setCreated] = useState("");
+  const [ultimaMessage, setUltimaMessage] = useState(false);
 
   function listarUltimaMessage() {
     const message = websocket.conversationRecents[0].message;
@@ -56,27 +58,32 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
     }
   }
 
+  const fetchS3 = async (img) => {
+    const imagemPerfil = await getS3(img);
+    setImg(imagemPerfil);
+  };
+
   useEffect(() => {
     const myID = websocket.idUser;
     if (myID === dados.idEnviou) {
       setName(dados.nomeRecebeu);
-      setImg(dados.imagemRecebeu);
-
+      fetchS3(dados.imagemRecebeu);
+      setUltimaMessage(true);
     } else {
       setName(dados.nomeEnviou);
-      setImg(dados.imagemEnviou);
+      fetchS3(dados.imagemEnviou);
+      setUltimaMessage(false);
     }
 
     listarUltimaMessage();
-
   }, [
     dados,
     websocket.conversationRecents,
     websocket.messages,
     websocket.messagesPendentes,
     atualizarUltimaMessage,
-    handleClick,
   ]);
+
 
   return (
     <Styled.Container onClick={() => selectedPerson(dados)}>
@@ -93,8 +100,10 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
             )}
           </Styled.MessageInfo>
         </Styled.Header>
-        <Styled.MessageText isMessagePedente={qtdMessagePendente > 0 ? true : false}>
-          {dados.message ?? message}
+        <Styled.MessageText
+          isMessagePedente={qtdMessagePendente > 0 ? true : false}
+        >
+          {ultimaMessage && <i>Você:</i>} {dados.message ?? message}
         </Styled.MessageText>
       </Styled.CardContent>
     </Styled.Container>

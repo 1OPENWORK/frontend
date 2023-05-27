@@ -5,7 +5,6 @@ import Styled from "./Portifolio.style";
 import Formulario from "./components/formulario/Formulario";
 import { useState } from "react";
 import Portifolio2 from "./portfolioEt2/PortifolioEt2";
-import About from "./About&Experience/About";
 import PortifolioSobre from "./sobre/PortifolioSobre";
 
 const Portifolio = () => {

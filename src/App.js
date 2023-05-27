@@ -37,8 +37,6 @@ import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
 import Comunidade from "./pages/comunidade/Comunidade";
 import Portifolio from "./pages/portifolio/Portifolio";
 import Projects from "./pages/projects/Projects";
-import PortifolioEt5 from "./pages/portifolio/portfolioEt5/PortfolioEt5";
-import PortifolioEt6 from "./pages/portifolio/portfolioEt6/PortfolioEt6";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
 import Avaliar from "./pages/avaliacoes/Avaliar";
 import { useDispatch } from "react-redux";
@@ -87,8 +85,6 @@ function App() {
         <Route path={ComunidadePath} element={<Comunidade />} />
         <Route path={PortfolioPath} element={<Portifolio />} />
         <Route path={TodoPath} element={<Todo />} />
-        <Route path={PortfolioSobreMim} element={<PortifolioEt5 />} />
-        <Route path={PortfolioExperiencia} element={<PortifolioEt6 />} />
         <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
         <Route path={AvaliarPath} element={<Avaliar />} />
         <Route path={ProjectsPath} element={<Projects />} />

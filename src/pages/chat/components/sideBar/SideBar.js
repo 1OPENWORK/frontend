@@ -506,7 +506,7 @@ const SideBar = ({
               </Styled.Header>
               <Styled.DivRow>
                 <span style={{
-                fontSize: 40,
+                fontSize: 40, 
                 color: Colors.PRIMARY_COLOR
               }}>#</span>
               <Styled.Search placeholder="AAA00" maxLength={5}/>

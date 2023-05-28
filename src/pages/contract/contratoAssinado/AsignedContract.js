@@ -34,6 +34,7 @@ const AsignedContract = () => {
               <FilledButton
                 marginLeft={"auto"}
                 marginRight={"auto"}
+                marginTop={"2rem"}
                 color={Colors.BLACK}
                 width={212}
                 heigth={41}

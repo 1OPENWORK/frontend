@@ -20,7 +20,6 @@ import {
   ProgressPath,
   canceledPath,
   CreateProjectPath,
-  SubmenuPath,
   SendContractPath,
   AsignedContractPath,
 } from "./constants/Path";
@@ -95,7 +94,6 @@ function App() {
         <Route path={ProgressPath} element={<Progress />} />
         <Route path={canceledPath} element={<Canceled />} />
         <Route path={CreateProjectPath} element={<CreateProject />} />
-        <Route path={SubmenuPath} element={<SubMenu />} />
         <Route path={SendContractPath} element={<SendContract />} />
         <Route path={AsignedContractPath} element={<AsignedContract />} />
       </Routes>

@@ -6,15 +6,17 @@ import { MdStarBorder, MdStar } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { useEffect } from "react";
 import moment from "moment";
+import { getId } from "../../hooks/Cookies";
 
 const AvaliacaoTeste = ({ type }) => {
-  const URI =
-    process.env.REACT_APP_BACKEND_LOCAL_HOST + "/avaliacoes/desenvolvedor/1";
+  const id = getId();
+  const URI = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/avaliacoes/desenvolvedor/${id}`;
   const [avaliacao, setAvaliacao] = useState([]);
 
   async function handleFetchAvaliacao() {
     const response = await get(URI);
     setAvaliacao(response.data.myAvaliations);
+    console.log(response);
   }
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const AvaliacaoTeste = ({ type }) => {
               >
                 <td>
                   <div className="containerCompany">
-                    <img className="img" src={dados.image} />
+                    <img className="img" src={dados.image} alt="logo" />
                     <div className="profileInformation">
                       <h1>{dados.name}</h1>
                       <div className="grade">

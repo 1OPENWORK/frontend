@@ -13,7 +13,8 @@ export const Container = styled.div`
 
 export const ContainerComponents = styled.div`
   width: 61.2%;
-  margin-left: 5rem;
+  height: 100%;
+  margin-left: 33rem;
   margin-right: 5rem;
   margin-top: 2.5rem;
 `;

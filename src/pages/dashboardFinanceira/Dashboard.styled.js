@@ -10,6 +10,7 @@ export const DashboardContainer = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
+  overflow: hidden;
 `;
 
 export const Cards = styled.div`

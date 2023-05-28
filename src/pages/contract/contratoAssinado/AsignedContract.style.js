@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const ContainerModelContract = styled.div`
   width: 60%;
-  height: 60%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 2.5rem;
@@ -21,6 +21,7 @@ export const ContainerModelContract = styled.div`
   margin-right: auto;
   border-radius: 0.5rem;
   background-color: ${Colors.PRIMARY_COLOR};
+  padding-top: 3rem;
 `;
 
 export const ContainerImgModelContract = styled.img`

@@ -38,7 +38,7 @@ const SendContract = () => {
         <SideBar />
         <ContainerComponents>
           <Header>
-            <Img />
+            <Img src={ImgEnviarProposta} />
             <NameGrade>
               <Name>OpenWork</Name>
               <ContainerGrade>
@@ -104,6 +104,7 @@ const SendContract = () => {
                   <FilledButton
                     color={Colors.BLACK}
                     heigth={41}
+                    width={180}
                     marginTop={"2.5rem"}
                   >
                     Enviar proposta

@@ -20,6 +20,8 @@ const ProjectsPath = "/projetos-concluidos";
 const canceledPath = "/projetos-cancelados";
 const CreateProjectPath = "/cadastrar-projeto";
 const SubmenuPath = "/submenu";
+const SendContractPath = "/enviar-contrato";
+const AsignedContractPath = "assinar-contrato";
 
 module.exports = {
   HomePagePath,
@@ -44,4 +46,6 @@ module.exports = {
   canceledPath,
   CreateProjectPath,
   SubmenuPath,
+  SendContractPath,
+  AsignedContractPath,
 };

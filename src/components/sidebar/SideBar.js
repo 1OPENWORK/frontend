@@ -1,14 +1,19 @@
 import React from "react";
 import Styled from "./SideBar.styled";
-import IconPlus from "../../../assets/icons/icon-plus.svg";
-import IconProfile from "../../../assets/icons/icon-profile.svg";
-import IconAbout from "../../../assets/icons/icon-about.svg";
-import IconExperiences from "../../../assets/icons/icon-specialtys.svg";
-import IconProject from "../../../assets/icons/icon-projects.svg";
+import IconPlus from "../../assets/icons/icon-plus.svg";
+import IconProfile from "../../assets/icons/icon-profile.svg";
+import IconAbout from "../../assets/icons/icon-about.svg";
+import IconExperiences from "../../assets/icons/icon-specialtys.svg";
+import IconProject from "../../assets/icons/icon-projects.svg";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
-import Colors from "../../../constants/Colors";
-import { HomeDevPath, PortfolioEt5Path, PortfolioEt6Path, PortfolioProjectsPath } from "../../../constants/Path";
+import Colors from "../../constants/Colors";
+import {
+  HomeDevPath,
+  PortfolioEt5Path,
+  PortfolioEt6Path,
+  PortfolioProjectsPath,
+} from "../../constants/Path";
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -32,10 +37,7 @@ const SideBar = () => {
 
         <Styled.ContainerSideBarOption>
           <Styled.SideBarOption isSelected={true}>
-            <Styled.IconSideBarOption
-              isImg={true}
-              background={IconProfile}
-            />
+            <Styled.IconSideBarOption isImg={true} background={IconProfile} />
             <Styled.TextSideBarOption isSelected={true}>
               Perfil
             </Styled.TextSideBarOption>
@@ -49,7 +51,7 @@ const SideBar = () => {
             <Styled.TextSideBarOption>Sobre</Styled.TextSideBarOption>
           </Styled.SideBarOption>
 
-          <Styled.SideBarOption  onClick={() => navigate(PortfolioEt6Path)}>
+          <Styled.SideBarOption onClick={() => navigate(PortfolioEt6Path)}>
             <Styled.IconSideBarOption
               isImg={true}
               background={IconExperiences}
@@ -64,7 +66,6 @@ const SideBar = () => {
             ></Styled.IconSideBarOption>
             <Styled.TextSideBarOption>Projetos</Styled.TextSideBarOption>
           </Styled.SideBarOption>
-
         </Styled.ContainerSideBarOption>
       </Styled.Container>
     </>

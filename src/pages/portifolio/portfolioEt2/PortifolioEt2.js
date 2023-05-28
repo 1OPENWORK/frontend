@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../components/SideBar";
+import SideBar from "../../../components/sidebar/SideBar";
 import RegisterEt2 from "../../auth/register/etapas/et2/RegisterEt2";
 import Styled from "../Portifolio.style";
 

@@ -22,7 +22,9 @@ import {
   ProgressPath,
   canceledPath,
   CreateProjectPath,
-  SubmenuPath
+  SubmenuPath,
+  SendContractPath,
+  AsignedContractPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -50,6 +52,8 @@ import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";
 import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 import SubMenu from "./components/subMenu/subMenu";
+import SendContract from "./pages/contract/SendContract";
+import AsignedContract from "./pages/contract/contratoAssinado/AsignedContract";
 
 const socket = socketIO.connect("http://localhost:3333");
 
@@ -94,6 +98,8 @@ function App() {
         <Route path={canceledPath} element={<Canceled />} />
         <Route path={CreateProjectPath} element={<CreateProject />} />
         <Route path={SubmenuPath} element={<SubMenu />} />
+        <Route path={SendContractPath} element={<SendContract />} />
+        <Route path={AsignedContractPath} element={<AsignedContract />} />
       </Routes>
     </Router>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "../../../constants/Colors";
+import Colors from "../../constants/Colors";
 
 const StyleSideBar = {
   Container: styled.div`
@@ -50,8 +50,8 @@ const StyleSideBar = {
     width: 24px;
     height: 24px;
     background-repeat: no-repeat;
-    background-color: ${props => (props.isImg ? "" : props.background)};
-    background-image: url(${props => (props.isImg ? props.background : "")});
+    background-color: ${(props) => (props.isImg ? "" : props.background)};
+    background-image: url(${(props) => (props.isImg ? props.background : "")});
   `,
 
   AddPhotograph: styled.div`
@@ -89,7 +89,8 @@ const StyleSideBar = {
   SideBarOption: styled.div`
     width: 100%;
     height: 104px;
-    background-color: ${props =>props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.PRIMARY_COLOR}`};
+    background-color: ${(props) =>
+      props.isSelected ? `${Colors.WHITE_TEST}` : `${Colors.PRIMARY_COLOR}`};
     display: flex;
     flex-direction: row;
 
@@ -103,8 +104,8 @@ const StyleSideBar = {
     height: 40px;
     margin-left: 5.5rem;
     margin-top: 2rem;
-    background-color: ${props => (props.isImg ? "" : props.background)};
-    background-image: url(${props => (props.isImg ? props.background : "")});
+    background-color: ${(props) => (props.isImg ? "" : props.background)};
+    background-image: url(${(props) => (props.isImg ? props.background : "")});
   `,
 
   TextSideBarOption: styled.div`
@@ -118,7 +119,7 @@ const StyleSideBar = {
     font-weight: 900;
     font-size: 1.5rem;
     line-height: 2.063rem;
-    color: ${props =>
+    color: ${(props) =>
       props.isSelected ? `${Colors.BLACK}` : `${Colors.WHITE}`};
   `,
 };

@@ -17,7 +17,6 @@ const AvaliarTeste = () => {
   const [avaliar, setAvaliar] = useState([]);
   const [avaliacao, setAvaliacao] = useState([]);
   const [avaliacaoAtual, setAvaliacaoAtual] = useState({});
-  const [idProject, setIdProject] = useState();
   const idUser = getId();
 
   async function handleFetchAvaliacao() {
@@ -30,7 +29,7 @@ const AvaliarTeste = () => {
     const URI = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
 
-    if(response.status === 200) handleAvaliacaoAtual();
+    if (response.status === 200) handleAvaliacaoAtual();
 
     // setAvaliar(response);
   }

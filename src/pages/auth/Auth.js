@@ -49,9 +49,12 @@ function Auth() {
       if (response.status === 200) {
         const token = response.data.token;
         const id = response.data.userId;
+        const email = response.data.email;
+        console.log(response.data)
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
+        Cookies.set("email",email );
         Cookies.set("isDev", true, { expires: 1 });
 
         dispatch(

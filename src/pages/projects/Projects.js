@@ -1,7 +1,7 @@
 import React from "react";
 import { ContainerMain, ContainerContent } from "./Projects.styled";
-import CardProject from "./components/cardProject/CardProject";
-import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
+import CardProject from "./components/cardProject/CardProject.jsx";
+import SidebarProjecteds from "./components/sideBar/SidebarProjecteds.jsx";
 
 function Projects() {
   return (

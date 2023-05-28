@@ -1,7 +1,7 @@
 import React from "react";
-import GlobalStyle from "./styles/global";
-import Board from "./components/Board/Board";
-import SidebarProjecteds from "../projects/components/sideBar/SidebarProjecteds";
+import GlobalStyle from "./styles/global.jsx";
+import Board from "./components/Board/Board.jsx";
+import SidebarProjecteds from "../projects/components/sideBar/SidebarProjecteds.jsx";
 
 function Todo() {
   return (

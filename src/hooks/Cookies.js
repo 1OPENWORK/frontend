@@ -12,6 +12,11 @@ export function getId() {
   return Cookies.get("id");
 }
 
+export function getEmail() {
+  return Cookies.get("email");
+}
+
+
 export function deleteId() {
   Cookies.remove("id", { path: "" });
 }

@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import NavBar from "../../components/navBar/NavBar";
 import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
 import Colors from "../../constants/Colors";
+import { post } from "../../services/Generected";
 import {
   Container,
   Aside,
@@ -29,14 +30,30 @@ import {
   PortfolioPath,
 } from "../../constants/Path";
 import CardHelp from "../../components/UI/chatbot/Landbot";
+import { getEmail, getIsDev } from "../../hooks/Cookies.js";
 
 const HomeDev = () => {
   const navigate = useNavigate();
-
   const [showCardHelp, setShowCardHelp] = useState(false);
+
+  console.log(getEmail());
+  console.log(getIsDev());
 
   function handleButtonClick() {
     setShowCardHelp(true);
+    try {
+      const URI =
+        process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/cadastroFila";
+      const dados = {
+        email: getEmail(),
+        tipo: getIsDev() ? "DESENVOLVEDOR" : "EMPRESA",
+      };
+
+      post(URI, dados);
+      console.log("Fila cadastrada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao cadastrar campos:", error);
+    }
   }
 
   const goToPortfolio = () => {

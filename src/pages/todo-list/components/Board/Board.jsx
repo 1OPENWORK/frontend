@@ -4,7 +4,7 @@ import React from "react";
 // import { loadLists } from "../../services/api";
 
 
-import List from "../List";
+import List from "../List/index.jsx";
 
 import { Container, Content } from "./styles";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";

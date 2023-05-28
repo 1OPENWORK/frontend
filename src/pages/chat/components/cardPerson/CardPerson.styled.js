@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Colors from "../../../../constants/Colors";
 
 const StyledCardPerson = {
   Container: styled.div`

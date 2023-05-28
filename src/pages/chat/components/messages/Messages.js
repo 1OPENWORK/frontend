@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,7 +8,6 @@ import BalaoMessage from "./components/balaoMessage/BalaoMessage";
 import SendMessage from "./components/sendMessage/SendMessage";
 import Styled, { IMessageContainer } from "./Messages.styled";
 import MessageDefault from "../../../../assets/imgs/message_default.svg";
-import ToastNewMessage from "./components/toastNewMessage/ToastNewMessage";
 
 const Messages = ({
   socket,

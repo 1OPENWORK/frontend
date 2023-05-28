@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import imgInitial from "../../../../assets/imgs/imageInitial2.svg";
 import {DivHome,ImgHome,ContainerAceptedAll} from '../../Home.styled'
-import {Paragrafo,DivSocialMedia, TitleDivInformationAceptedAll} from "./AceptedAll.styled";
+import {Paragrafo, TitleDivInformationAceptedAll} from "./AceptedAll.styled";
 import Colors from "../../../../constants/Colors";
 import DadosDep from "../../../../constants/json/Informations.json";
 import ArrowNexts from "../../../../components/arrows/ArrowNexts";

@@ -23,9 +23,8 @@ export const Container = styled.div`
     .button-edit {
       background-color: transparent;
       color: #b3b3b3;
-      display: inline-block;
       position: absolute;
-      left: 252px;
+      left:0;
       top: 148px;
     }
   }

@@ -23,6 +23,7 @@ export const Input = styled.input`
 `;
 
 export const DivInput = styled.div`
+  width: ${(props) => (props.w ? props.w : "")};
   background: rgba(32, 172, 105, 0.05);
   border: 1px solid #20ac69;
   border-radius: 12px;

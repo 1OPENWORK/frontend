@@ -10,8 +10,10 @@ import {
 } from "../../../../../store/reducers/RegisterSlice";
 import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
-import { AuthPath } from "../../../../../constants/Path";
+import { AuthPath, HomeDevPath } from "../../../../../constants/Path";
+import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { addNewUser } from "../../../../../store/actions/MicroService";
 
 const RegisterEt6 = ({ checked }) => {
   const { register } = useSelector(selectRegister);
@@ -65,10 +67,27 @@ const RegisterEt6 = ({ checked }) => {
     const response = await post(`${URI}/api/cadastros/dev`, dados);
 
     if (response.status === 201) {
-      navigate(AuthPath);
-    }
+      const id = response.data.userId;
+      const nome = response.data.nome;
 
-    dispatch(changeClearRegister());
+      await addNewUser({ id, nome });
+
+      toast.success("Cadastro realizado.", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+
+      setTimeout(() => {
+        navigate(AuthPath);
+        dispatch(changeClearRegister());
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -78,6 +97,7 @@ const RegisterEt6 = ({ checked }) => {
   return (
     <>
       <Container>
+        <ToastContainer />
         <DivFlowScroll>
           {itens.map((dados, index) => (
             <Item

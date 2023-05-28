@@ -3,8 +3,9 @@ import Colors from "../../constants/Colors";
 
 const StyleSideBar = {
   Container: styled.div`
-    width: 425px;
-    height: 90vh;
+    position: fixed;
+    min-width: 425px;
+    min-height: 100vh;
     background-color: ${Colors.PRIMARY_COLOR};
     display: flex;
     overflow: hidden;
@@ -120,7 +121,7 @@ const StyleSideBar = {
     font-size: 1.5rem;
     line-height: 2.063rem;
     color: ${(props) =>
-      props.isSelected ? `${Colors.BLACK}` : `${Colors.WHITE}`};
+      props.isSelected ? Colors.PRIMARY_COLOR : Colors.WHITE};
   `,
 };
 

@@ -8,6 +8,7 @@ import SendMessage from "./components/sendMessage/SendMessage";
 import Styled, { IMessageContainer } from "./Messages.styled";
 import MessageDefault from "../../../../assets/imgs/message_default.svg";
 import ToastNewMessage from "./components/toastNewMessage/ToastNewMessage";
+import { getS3 } from "../../../../store/actions/MicroService";
 
 const Messages = ({
   socket,
@@ -21,14 +22,23 @@ const Messages = ({
   const [idSender, setIdSender] = useState("");
   const [idReceiver, setIdReceiver] = useState("");
   const [messages, setMessages] = useState([]);
-
-  
+  const [imgPerfil, setImgPerfil] = useState("");
 
   useEffect(() => {
     setIdSender(websocket.idUser);
     setIdReceiver(websocket.conversationActive.id);
     setMessages(websocket.messages);
   }, [websocket, websocket.messages]);
+
+  const fetchS3 = async () => {
+    const response = await getS3(dadosConversa.img);
+
+    setImgPerfil(response);
+  };
+
+  useEffect(() => {
+    fetchS3();
+  }, [dadosConversa]);
 
   return (
     <React.Fragment>
@@ -40,7 +50,7 @@ const Messages = ({
             {messageSeleted ? (
               <Styled.Reverce>
                 <Styled.Header>
-                  <Avatar src={dadosConversa.img} />
+                  <Avatar src={imgPerfil} />
                   <Styled.Divisor>{dadosConversa.nome}</Styled.Divisor>
                 </Styled.Header>
                 {messages.map((dados, index) => {
@@ -62,7 +72,6 @@ const Messages = ({
             ) : (
               <Styled.ContainerNotSelected>
                 <img src={MessageDefault} />
-
               </Styled.ContainerNotSelected>
             )}
           </React.Fragment>
@@ -70,6 +79,7 @@ const Messages = ({
       </Styled.Container>
 
       <SendMessage
+      
         socket={socket}
         idSender={idSender}
         idReceiver={idReceiver}

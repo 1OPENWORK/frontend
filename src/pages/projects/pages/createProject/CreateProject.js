@@ -41,7 +41,6 @@ function CreateProject() {
   const listar = async () => {
     const dados = await handleProeficiency();
     setProef(dados.data);
-    console.log(dados.data);
   };
 
   useEffect(() => {

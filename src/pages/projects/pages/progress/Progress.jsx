@@ -12,7 +12,9 @@ const Progress = ({ developers }) => {
   useEffect(() => {
     async function fetchProjetos() {
       await axios
-        .get("http://localhost:8004/api/projetos-aceitos/assinados")
+        .get(
+          `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-aceitos/assinados`
+        )
         .then((response) => {
           setProjetos(response.data);
           console.log(response.data);

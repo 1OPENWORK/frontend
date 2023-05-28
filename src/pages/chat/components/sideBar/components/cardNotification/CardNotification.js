@@ -6,14 +6,14 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import CardGroup from "./components/cardGroup/CardGroup";
 
-const CardNotification = ({ dados }) => {
+const CardNotification = ({ dados, socket }) => {
   const [img, setImage] = useState("");
 
   const fetchImage = async () => {
     if (dados.type === "GROUP") {
-      const imagem = await getS3("perfil", dados.img);
+      const imagem = await getS3(dados.img);
 
-      setImage(URL.createObjectURL(imagem.data));
+      setImage(imagem);
     }
   };
 
@@ -23,7 +23,9 @@ const CardNotification = ({ dados }) => {
 
   return (
     <Styled.Container>
-      {dados.type === "GROUP" && <CardGroup dados={dados} img={img} />}
+      {dados.type === "GROUP" && (
+        <CardGroup dados={dados} img={img} socket={socket} />
+      )}
     </Styled.Container>
   );
 };

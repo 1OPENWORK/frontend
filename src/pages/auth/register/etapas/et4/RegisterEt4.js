@@ -11,7 +11,6 @@ import Colors from "../../../../../constants/Colors";
 const RegisterEt4 = () => {
   const [proefiency, setProeficiency] = useState([]);
   const dispatch = useDispatch();
-  const [list, setList] = useState([]);
   const [arrayTools, setTools] = useState([]);
 
   const handleRemoveItemList = React.useCallback((proefiency) => {

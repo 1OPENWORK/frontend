@@ -16,17 +16,14 @@ import {
 } from "./Dashboard.styled";
 import Money from "../../assets/imgs/money-dashboard.svg";
 import Job from "../../assets/imgs/job-dashboard.svg";
-import Chart from "../../assets/imgs/NBcharts-hColumnCharts.svg";
 import Event from "../../assets/imgs/events-calendar-dashboard.svg";
 import Styled from "../../components/navBar/NavBar.styled";
 import BarChart from "../../components/charts/BarChart";
 import SemiCircleDonutChart from "../../components/charts/SemiCircleDonutChart";
-import List from "../../components/list/List";
 
 const Dashboard = () => {
   return (
     <>
-    <List type={3} />
       <DashboardContainer>
         <Cards>
           <ContainerCards>

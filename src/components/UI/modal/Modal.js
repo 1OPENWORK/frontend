@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {StyledModal, ModalContent} from './Modal.styled'
 
 const CustomModal = ({ isOpen, onClose, children }) => {

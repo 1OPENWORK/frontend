@@ -61,6 +61,7 @@ export const Chat = ({ socket }) => {
     });
 
     socket.emit("updateSocketId", { idUser: id }, (user) => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

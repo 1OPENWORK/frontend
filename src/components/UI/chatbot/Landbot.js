@@ -6,11 +6,11 @@ export default function CardHelp() {
 
   function abrirLandbot() {
     // eslint-disable-next-line no-undef
-    const myLandbot = new Landbot.Container({
-      container: "#card_help",
-      configUrl:
-        "https://storage.googleapis.com/landbot.online/v3/H-1579790-8D5OJF9T64WSD265/index.json",
-    });
+    // const myLandbot = new Landbot.Container({
+    //   container: "#card_help",
+    //   configUrl:
+    //     "https://storage.googleapis.com/landbot.online/v3/H-1579790-8D5OJF9T64WSD265/index.json",
+    // });
 
   }
 

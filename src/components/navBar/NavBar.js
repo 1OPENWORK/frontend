@@ -5,14 +5,13 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useState } from "react";
+import React from "react";
 import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
 import { useNavigate } from "react-router-dom";
 import { deleteId, deleteIsDev, deleteToken } from "../../hooks/Cookies";
-import Cookies from "js-cookie";
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -33,7 +32,6 @@ const NavBar = ({ nav }) => {
 
   // --------------------------------------------------------
   const navigate = useNavigate();
-  const [type] = useState("logado");
 
   const deslogar = () => {
     deleteToken();

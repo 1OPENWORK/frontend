@@ -2,7 +2,6 @@ import React from "react";
 import Styled from "./ToastNewMessage.styled";
 import { Avatar } from "@mui/material";
 import { Badge } from "react-bootstrap";
-import Colors from "../../../../../../constants/Colors";
 const ToastNewMessage = ({dados}) => {
   return (
       <Styled.Item>

@@ -3,7 +3,6 @@ import Styled from "./CardNotification.styled";
 import { useState } from "react";
 import { getS3 } from "../../../../../../store/actions/MicroService";
 import { useEffect } from "react";
-import styled from "styled-components";
 import CardGroup from "./components/cardGroup/CardGroup";
 
 const CardNotification = ({ dados }) => {
@@ -19,6 +18,7 @@ const CardNotification = ({ dados }) => {
 
   useEffect(() => {
     fetchImage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

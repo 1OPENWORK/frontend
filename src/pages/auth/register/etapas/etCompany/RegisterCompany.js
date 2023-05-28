@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
-import { object, string, ref } from "yup";
+import { object, string } from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
@@ -28,7 +28,7 @@ const RegisterCompany = () => {
   const [email, setEmail] = useState("");
   const [setor, setSetor] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [isNext, setIsNext] = useState(false);
+  const [isNext] = useState(false);
   const [verified, setVerified] = useState(false);
 
   const validRegister = object({

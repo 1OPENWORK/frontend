@@ -20,6 +20,7 @@ const CardConexao = ({
 
   useEffect(() => {
     setSelecionado(participants.some(d => d.id === dados.id));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleUser]);
 
   return (

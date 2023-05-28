@@ -20,6 +20,7 @@ const Item = ({ dados, handleProeficiencia }) => {
     if (anos !== 0 && anos > 0) {
       handleEvent();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [combox, anos]);
 
   return (

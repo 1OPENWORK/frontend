@@ -5,8 +5,7 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
+import React from "react";
 import NavBar from "../navBar/NavBar";
 import Styled, {
   BackgroundNavBar,

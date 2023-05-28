@@ -2,7 +2,6 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import Styled from "./BalaoMessage.styled";
 import "moment/locale/pt-br";
-import { Avatar } from "@mui/material";
 const BalaoMessage = ({ receiver, dados }) => {
   const [time, setTime] = useState("");
 

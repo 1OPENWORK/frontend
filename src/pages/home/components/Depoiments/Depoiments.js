@@ -5,12 +5,10 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import { TitleLarge } from "../../../../components/UI/generalLayout/Layout.styled";
+import React, { useState } from "react";
 import Colors from "../../../../constants/Colors";
 import { TitleDivInformation } from "../../Home.styled";
 import {ContainerDepoiments, ContainerImags, Paragrafo} from "./Depoiments.styled";
-import ImagePerson from "../../../../assets/imgs/imagePerson.svg";
 import CardPerson from "./components/CardPerson/CardPerson";
 import DadosDep from "../../../../constants/json/Informations.json";
 // --------------------------------------------------------
@@ -31,6 +29,7 @@ import DadosDep from "../../../../constants/json/Informations.json";
  * @param props The component props.
  * @returns The component JSX.
  */
+// eslint-disable-next-line no-empty-pattern
 const Depoiments = ({}) => {
   // --------------------------------------------------------
   // Depoiments PRIVATE DECLARATIONS

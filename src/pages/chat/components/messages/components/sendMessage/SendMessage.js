@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Styled from "./SendMessage.styled";
-import SvgIcon from "@mui/material/SvgIcon";
 import Colors from "../../../../../../constants/Colors";
 import {
   changeConversationRecentes,
   changeMessages,
-  selectedWebSocket,
 } from "../../../../../../store/reducers/WebSocketSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 
 const SendMessage = ({
@@ -69,6 +67,7 @@ const SendMessage = ({
         );
       }
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateMessage, visualized]);
 
   useEffect(() => {
@@ -77,6 +76,7 @@ const SendMessage = ({
         conversations: messagesRecentes,
       })
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messagesRecentes]);
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export default function Card({ data, index }) {
 
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar se o modo de edição está ativado
   const [newContent, setNewContent] = useState(data.content);
-  const [newDescribe, setNewDescribe] = useState(data.describe); // Estado
+  const [setNewDescribe] = useState(data.describe); // Estado
   // Estado
   const [tasks, setTasks] = useState(data.tasks);
 

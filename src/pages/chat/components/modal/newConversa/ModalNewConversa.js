@@ -1,11 +1,9 @@
-import { Avatar, AvatarGroup } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import ImageCircule from "../../messages/components/ImageCircule/ImageCircule";
 import Styled from "./ModalNewConversa.styled";
 import { useSelector } from "react-redux";
 import { selectedWebSocket } from "../../../../../store/reducers/WebSocketSlice";
-import { handleImgGroup } from "../../../../../store/actions/MicroService";
 
 const ModalNewConversa = ({ show, handleClick, handleConversation }) => {
   const { websocket } = useSelector(selectedWebSocket);

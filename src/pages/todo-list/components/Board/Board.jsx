@@ -8,7 +8,7 @@ import List from "../List";
 
 import { Container, Content } from "./styles";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 

@@ -5,11 +5,8 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
-import Styled from "./CardList.styled";
-import logo from "../../assets/icons/logoIcon.svg";
-import stars from "../../assets/imgs/stars.svg";
+import React from "react";
+
 
 
 // -----------------------------------------------------

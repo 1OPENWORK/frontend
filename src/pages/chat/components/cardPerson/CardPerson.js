@@ -69,6 +69,7 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
 
     listarUltimaMessage();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     dados,
     websocket.conversationRecents,

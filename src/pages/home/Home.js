@@ -8,7 +8,7 @@
 import React from "react";
 import NavBar from "../../components/navBar/NavBar";
 import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
-import { ContainerAceptedAll, ContainerBodyMetricaHome, DivHome, DivUpInformation, HomeText, HomeTextLink, ImgHome, TitleDivInformation,} from "./Home.styled";
+import { ContainerBodyMetricaHome, DivUpInformation, HomeText, HomeTextLink, TitleDivInformation,} from "./Home.styled";
 import ImgBanner from "../../assets/imgs/imageInitial.svg";
 import Colors from "../../constants/Colors";
 import HomeButton from "./components/HomeButton/HomeButton";

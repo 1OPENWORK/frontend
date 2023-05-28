@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
-import { object, string, ref } from "yup";
+import { object, string } from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
 import { get } from "../../../../../services/Generected";
-import axios from "axios";
+
 import {
   changeEtapa2,
   changeEtapaAll,
@@ -25,8 +25,9 @@ const RegisterEt2 = () => {
   const [complemento, setComplemento] = useState("");
 
   const [isNext, setIsNext] = useState(false);
-  const [verified, setVerified] = useState(false);
+  const [setVerified] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function searchCEP() {
     if (cep.length > 7) {
       const dados = await get(`http://viacep.com.br/ws/${cep}/json/`);
@@ -87,7 +88,7 @@ const RegisterEt2 = () => {
 
   useEffect(() => {
     searchCEP();
-  }, [cep]);
+  }, [cep, searchCEP]);
 
   function nextEtapa() {
     dispatch(

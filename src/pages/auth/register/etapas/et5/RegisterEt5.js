@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "./RegisterEt5.styled";
@@ -45,6 +46,7 @@ const RegisterEt5 = () => {
 
   useEffect(() => {
     setTools(register.etapa4);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filteredTools = tools.filter((tool) =>

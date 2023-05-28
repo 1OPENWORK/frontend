@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import styled from "./Jobs.styled";
+import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import List from "../../components/list/List";
 

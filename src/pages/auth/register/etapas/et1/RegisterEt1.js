@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
 import { object, string, ref } from "yup";
@@ -12,7 +12,6 @@ import {
   changeEtapaAll,
 } from "../../../../../store/reducers/RegisterSlice";
 import InputMask from "react-input-mask";
-import styled from "styled-components";
 import { cpf as validateCpf } from "cpf-cnpj-validator";
 import { cleanMask } from "../../../../../helpers/HelperFunctions";
 
@@ -81,7 +80,7 @@ const RegisterEt1 = () => {
     }
   }
 
-  const StyledInputMask = styled(InputMask)``;
+  
 
   function nextEtapa() {
     dispatch(

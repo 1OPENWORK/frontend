@@ -1,4 +1,4 @@
-import { Avatar, Badge, CircularProgress } from "@mui/material";
+import { Badge, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -37,7 +37,7 @@ const SideBar = ({
   setVisualized,
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
-  const [friends, setFriends] = useState([]);
+  const [ setFriends] = useState([]);
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
   const [indexAbaActive, setIndexAbaActive] = useState(3);
@@ -51,7 +51,7 @@ const SideBar = ({
   const [show, setShowModal] = useState(false);
   const [showModalNewConversa, setShowModalNewConversa] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [on, setOn] = useState([]);
+  const [on] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -63,6 +63,7 @@ const SideBar = ({
     });
 
     setConversationsRecentes(descendingList);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [websocket, dados]);
 
   const handle = (dados, index, isSide) => {
@@ -184,11 +185,13 @@ const SideBar = ({
     });
 
     return () => socket.off("newMessage");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [on, dados]);
 
   useEffect(() => {
     socket.on("atualizandoState", (dados) => {});
     return () => socket.off("atualizandoState");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [on, dados]);
 
   useEffect(() => {
@@ -201,6 +204,7 @@ const SideBar = ({
     });
 
     return () => socket.off("notifications");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [on, dados]);
 
   useEffect(() => {
@@ -220,6 +224,7 @@ const SideBar = ({
   useEffect(() => {
     setVisualized(Math.random() * 100 + 1 - 1);
     setDadosConversa(dados);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dados]);
 
   useEffect(() => {
@@ -237,6 +242,7 @@ const SideBar = ({
         attQtdNotification(callback);
       }
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dados, indexAbaActive]);
 
   const visualizedNotifications = async () => {
@@ -290,6 +296,7 @@ const SideBar = ({
       }, 3000);
       return () => clearTimeout(timeout);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toastNewMessage]);
 
   return (

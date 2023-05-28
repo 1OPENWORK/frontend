@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Modal from 'react-modal';
 import List from "../../../components/list/List";
 import NavBarList from "../../../components/navBarList/NavBarList";
 import Styled from "../../../components/navBar/NavBar.styled";

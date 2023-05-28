@@ -4,9 +4,9 @@ import {TableTag} from "./tag.styled";
 const Tag = ({ status, statusColor }) => {
   return (
     <TableTag status={statusColor}>
-      {status == "open"
+      {status === "open"
         ? "Aberto"
-        : status == "progress"
+        : status === "progress"
         ? "Em Progresso"
         : "Fechado"}
     </TableTag>

@@ -7,6 +7,7 @@ const BarProgress = ({ atualEtapa, qtdMax }) => {
   useEffect(() => {
     const divisao = 100 / qtdMax;
     setPorcent(parseInt(divisao * atualEtapa));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [atualEtapa]);
 
   return (

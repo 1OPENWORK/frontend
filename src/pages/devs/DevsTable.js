@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "../avaliacoes/Table.styled";
@@ -29,6 +30,7 @@ const Desenvolvedores = () => {
 
   useEffect(() => {
     handleFetchDesenvolvedores();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

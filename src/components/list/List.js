@@ -17,7 +17,6 @@ import {
 
 import ListAvaliacao from "./listAvaliar/ListAvaliar";
 import ModalDev from "../../components/UI/modal/modal-desenvolvedores/ModalDev";
-import Modal from "react-modal";
 import CustomModal from "../../components/UI/modal/Modal";
 import {
   ModalHeader,
@@ -153,9 +152,9 @@ const List = ({ type }) => {
         </ModalHeader>
         <ModalDev
           list={
-            type == 1
+            type === 1
               ? desenvolvedoresList
-              : type == 2
+              : type === 2
               ? avaliacoesList
               : jobsList
           }

@@ -10,6 +10,7 @@ import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
 
 const Portifolio2 = () => {
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
 
   const [cep, setCep] = useState("");
@@ -20,8 +21,6 @@ const Portifolio2 = () => {
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
 
-  const [isNext, setIsNext] = useState(false);
-  const [verified, setVerified] = useState(false);
 
   async function searchCEP() {
     if (cep.length > 7) {
@@ -45,6 +44,7 @@ const Portifolio2 = () => {
     cep: string().required("Preencha o campo CEP."),
   });
 
+  // eslint-disable-next-line no-unused-vars
   async function handleForm() {
     const dados = {
       complemento,
@@ -74,6 +74,7 @@ const Portifolio2 = () => {
 
   useEffect(() => {
     searchCEP();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cep]);
 
   return (

@@ -3,11 +3,10 @@ import { Container } from "./CardOverviewOne.styled";
 import { HiUserGroup } from "react-icons/hi";
 import Colors from "../../../../../../constants/Colors";
 import moment from "moment";
-import { NumericFormat } from "react-number-format";
 
 function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
-  const [startDate, setStartDate] = useState(moment()); // Data inicial, pode ser atualizada conforme necessário
-  const [durationInMonths, setDurationInMonths] = useState(
+  const [startDate ] = useState(moment()); // Data inicial, pode ser atualizada conforme necessário
+  const [durationInMonths] = useState(
     debouncedInputValues.estimatedTime
   ); // Duração em meses, pode ser atualizada conforme necessário
   const [endDate, setEndDate] = useState(null); // Data final calculada

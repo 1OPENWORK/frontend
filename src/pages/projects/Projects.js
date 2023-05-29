@@ -3,9 +3,6 @@ import { ContainerMain, ContainerContent } from "./Projects.styled";
 import CardProject from "./components/cardProject/CardProject";
 import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
 import axios from "axios";
-import Cookies from "js-cookie";
-import { canceledPath } from "../../constants/Path";
-import { Navigate } from "react-router-dom";
 
 function Projects() {
   const [projetos, setProjetos] = useState([]);
@@ -43,6 +40,7 @@ function Projects() {
     }
 
     fetchProjetos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

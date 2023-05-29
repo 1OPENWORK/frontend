@@ -9,6 +9,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv(),
+    // eslint-disable-next-line no-undef
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),

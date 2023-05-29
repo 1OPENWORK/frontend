@@ -17,6 +17,7 @@ const JobsTeste = ({ type }) => {
 
   useEffect(() => {
     handleFetchJobs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -42,7 +43,7 @@ const JobsTeste = ({ type }) => {
               >
                 <td>
                   <div className="containerCompany">
-                    <img className="img" src={dados.imageCompany} />
+                    <img className="img" src={dados.imageCompany} alt="logo" />
                     <div className="profileInformation">
                       <h1>{dados.nameCompany}</h1>
                       <div className="grade">

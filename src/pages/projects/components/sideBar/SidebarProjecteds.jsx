@@ -1,9 +1,7 @@
 import React from "react";
 
 import { BodyContainerProjecteds, Container } from "./SidebarProjecteds.styled";
-import { MdOutlineRunCircle } from "react-icons/md";
-import { AiOutlineCheckCircle, AiFillFolderAdd } from "react-icons/ai";
-import { TiCancel } from "react-icons/ti";
+import {  AiFillFolderAdd } from "react-icons/ai";
 import { MdArrowBack } from "react-icons/md";
 import Colors from "../../../../constants/Colors";
 import { useNavigate } from "react-router";
@@ -23,8 +21,7 @@ import ButtonCompleted from "./components/ButtonCompleted";
 function SidebarProjecteds({ type }) {
   const navigate = useNavigate();
 
-  const [color, setColor] = useState("#fff");
-  const [typeUse, setType] = useState(type);
+  const [setType] = useState(type);
 
   const goToHomeDev = () => {
     navigate(HomeDevPath);

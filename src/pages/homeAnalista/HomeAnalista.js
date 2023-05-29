@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import Styled from "./HomeAnalista.styled";
 import { FilledButton } from "../../components/UI/buttons/Button";
@@ -8,7 +9,6 @@ import emailjs from "@emailjs/browser";
 
 const HomeAnalista = () => {
   const navigate = useNavigate();
-  const [type] = useState("logado");
   const [assuntoGet, setAssunto] = useState("");
   const [descricaoGet, setDescricao] = useState("");
   const [fila, setFila] = useState([]);
@@ -122,6 +122,7 @@ const HomeAnalista = () => {
 
   const [highlightedItem, setHighlightedItem] = useState(null);
 
+  // eslint-disable-next-line no-unused-vars
   const handleItemClick = (item) => {
     setHighlightedItem(item);
   };

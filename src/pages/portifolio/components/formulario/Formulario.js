@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Styled from "./Formulario.styled";
 import { object, string, ref } from "yup";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,16 +9,15 @@ import InputForm from "../../../../components/input/InputForm";
 import { cleanMask } from "../../../../helpers/HelperFunctions";
 import { FilledButton } from "../../../../components/UI/buttons/Button";
 import Colors from "../../../../constants/Colors";
-import { get } from "react-hook-form";
 
 const Formulario = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [cpfOrCnpj, setCpfOrCnpj] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmed, setPasswordConfirmed] = useState("");
-  const [isNext, setIsNext] = useState(false);
+  const [password] = useState("");
+  const [passwordConfirmed] = useState("");
+  const [setIsNext] = useState(false);
   const [verified, setVerified] = useState(false);
 
   const validRegister = object({
@@ -39,6 +38,7 @@ const Formulario = () => {
     fullname: string().required("Preencha o campo nome."),
   });
 
+  // eslint-disable-next-line no-unused-vars
   async function handleForm() {
     const dados = {
       comfirmed_password: passwordConfirmed,
@@ -68,9 +68,6 @@ const Formulario = () => {
     }
   }
 
-  const fetchInformation = async () => {
-    const information = await get("");
-  };
 
   return (
     <Styled.Form>

@@ -17,7 +17,6 @@ import { MdEmail, MdPhoneInTalk } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import Cookies from "js-cookie";
 import { handleProeficiency } from "../../../../store/actions/Proeficiency";
-import { Filter } from "../../../dashboardFinanceira/Dashboard.styled";
 
 function CreateProject() {
   const navigate = useNavigate();

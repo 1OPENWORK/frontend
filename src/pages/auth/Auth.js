@@ -13,12 +13,17 @@ import InputForm from "../../components/input/InputForm";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import Colors from "../../constants/Colors";
 import { useDispatch } from "react-redux";
-import { handleLogin } from "../../store/actions/UserAuth";
+import {
+  handleInformationsUser,
+  handleLogin,
+} from "../../store/actions/UserAuth";
 import { changeActiveToken } from "../../store/reducers/AuthSlice";
 import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { HomeDevPath } from "../../constants/Path";
+import axios from "axios";
+import { changeSave } from "../../store/reducers/PerfilSlice";
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -57,6 +62,16 @@ function Auth() {
         Cookies.set("isDev", true, { expires: 1 });
         Cookies.set("fullname", fullname, { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
+
+        const { data } = await handleInformationsUser(id);
+
+        dispatch(
+          changeSave({
+            perfil: data.perfil,
+            address: data.address,
+            tools: data.tools,
+          })
+        );
 
         dispatch(
           changeActiveToken({

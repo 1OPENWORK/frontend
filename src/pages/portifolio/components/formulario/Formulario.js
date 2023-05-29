@@ -10,47 +10,56 @@ import { cleanMask } from "../../../../helpers/HelperFunctions";
 import { FilledButton } from "../../../../components/UI/buttons/Button";
 import Colors from "../../../../constants/Colors";
 import { get } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
+import PortifolioService from "../../service/PortifolioService";
+import { selectedAuth } from "../../../../store/reducers/AuthSlice";
 
 const Formulario = () => {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
-  const [cpfOrCnpj, setCpfOrCnpj] = useState("");
+  const { dadosPerfil } = useSelector(selectedPerfil);
+  const { auth } = useSelector(selectedAuth);
+
+  const [dadosPessoais] = useState(dadosPerfil.perfil);
+  const [nome, setNome] = useState(dadosPessoais.name);
+  const [email, setEmail] = useState(dadosPessoais.email);
+  const [tel, setTel] = useState(dadosPessoais.cellphone);
+  const [cpfOrCnpj, setCpfOrCnpj] = useState(dadosPessoais.cpfCnpj);
   const [password, setPassword] = useState("");
-  const [passwordConfirmed, setPasswordConfirmed] = useState("");
+
   const [isNext, setIsNext] = useState(false);
   const [verified, setVerified] = useState(false);
 
   const validRegister = object({
-    comfirmed_password: string()
-      .required("Preencha o campo confirmar senha.")
-      .oneOf([ref("password")], "Senhas diferentes"),
     password: string()
       .required("Preencha o campo senha.")
       .min(8, "A senha deve ter pelo menos 8 caracteres"),
-    cfp_cnpj: string()
+    cpfCnpj: string()
       .required("Preencha o campo CPF.")
       .min(11, "O CPF deve ter pelo menos 11 caracteres")
-      .test("valid-cpf", "CPF inválido", value => validateCpf.isValid(value)),
-    tel: string().required("Preencha o campo telefone."),
+      .test("valid-cpf", "CPF inválido", (value) => validateCpf.isValid(value)),
+    cellphone: string().required("Preencha o campo telefone."),
     email: string()
       .email("E-mail inválido")
       .required("Preencha o campo Email."),
-    fullname: string().required("Preencha o campo nome."),
+    name: string().required("Preencha o campo nome."),
   });
 
-  async function handleForm() {
+  async function handleUpdate() {
     const dados = {
-      comfirmed_password: passwordConfirmed,
-      password: password,
-      cfp_cnpj: cleanMask(cpfOrCnpj),
-      tel: tel,
+      cpfCnpj: cleanMask(cpfOrCnpj),
+      cellphone: tel,
       email: email,
-      fullname: nome,
+      name: nome,
+      password: password,
     };
 
     try {
       await validRegister.validate(dados);
+
+      await PortifolioService.updade(dadosPessoais.id, dados, auth.token);
+
+      // Atualizar os dados do redux
+
 
       setVerified(true);
       setIsNext(true);
@@ -67,10 +76,6 @@ const Formulario = () => {
       });
     }
   }
-
-  const fetchInformation = async () => {
-    const information = await get("");
-  };
 
   return (
     <Styled.Form>
@@ -99,8 +104,8 @@ const Formulario = () => {
             className="InputMask"
             mask="(99) 99999-9999"
             value={tel}
-            onChange={e => setTel(e.target.value)}
-            onKeyPress={event => {
+            onChange={(e) => setTel(e.target.value)}
+            onKeyPress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
               }
@@ -115,8 +120,8 @@ const Formulario = () => {
             className="InputMask2"
             mask="999.999.999-99"
             value={cpfOrCnpj}
-            onChange={e => setCpfOrCnpj(e.target.value)}
-            onKeyPress={event => {
+            onChange={(e) => setCpfOrCnpj(e.target.value)}
+            onKeyPress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
               }
@@ -126,10 +131,24 @@ const Formulario = () => {
         </Styled.Column>
       </Styled.Row>
 
-      <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
+      <Styled.Divisor
+        style={{
+          width: "770px",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <InputForm
+          label="Digite sua senha"
+          value={password}
+          handle={setPassword}
+          space={"1.25rem"}
+          type={"password"}
+          disabled={verified}
+        />
         <FilledButton
-          onClick={() => ""}
-          marginRight={"0px"}
+          onClick={handleUpdate}
+          marginTop={"20px"}
           color={Colors.PRIMARY_COLOR}
           width={190}
           heigth={60}

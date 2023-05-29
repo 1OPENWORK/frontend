@@ -27,7 +27,6 @@ const StyledFormulario = {
 
   Form: styled.div`
     display: flex;
-    align-items: center;
     flex-direction: column;
     justify-content: center;
     border-radius: 30px;

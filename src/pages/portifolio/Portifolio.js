@@ -4,8 +4,11 @@ import RegisterEt1 from "../auth/register/etapas/et1/RegisterEt1";
 import Styled from "./Portifolio.style";
 import Formulario from "./components/formulario/Formulario";
 import { useState } from "react";
-import Portifolio2 from "./portfolioEt2/PortifolioEt2";
 import PortifolioSobre from "./sobre/PortifolioSobre";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
+import { useEffect } from "react";
+import Address from "./address/Address";
 
 const Portifolio = () => {
   const [abaActive, setAbaActive] = useState(1);
@@ -20,7 +23,7 @@ const Portifolio = () => {
             <Formulario />
             <Styled.Divisor />
             <Styled.TitlePortfolio>Seu cantinho</Styled.TitlePortfolio>
-            <Portifolio2 />
+            <Address />
             <Styled.Divisor />
           </Styled.ContainerInputs>
         ) : abaActive === 2 ? (

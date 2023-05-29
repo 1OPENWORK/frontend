@@ -5,11 +5,13 @@ import thunk from "redux-thunk";
 import AuthSlice from "./reducers/AuthSlice";
 import RegisterSlice from "./reducers/RegisterSlice";
 import WebSocketSlice from "./reducers/WebSocketSlice";
+import PerfilSlice from "./reducers/PerfilSlice";
 
 const reducers = combineReducers({
   register: RegisterSlice,
   auth: AuthSlice,
-  websocket: WebSocketSlice
+  websocket: WebSocketSlice,
+  dadosPerfil: PerfilSlice
 });
 
 const persistConfig = {

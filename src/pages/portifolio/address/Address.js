@@ -8,20 +8,22 @@ import { ToastContainer, toast } from "react-toastify";
 import InputForm from "../../../components/input/InputForm";
 import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../../store/reducers/PerfilSlice";
 
-const Portifolio2 = () => {
-  const dispatch = useDispatch();
+const Address = () => {
+  const { dadosPerfil } = useSelector(selectedPerfil);
+  const [dadosAddress] = useState(dadosPerfil.address);
 
-  const [cep, setCep] = useState("");
-  const [estado, setEstado] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [rua, setRua] = useState("");
-  const [numero, setNumero] = useState("");
-  const [complemento, setComplemento] = useState("");
+  const [cep, setCep] = useState(dadosAddress.zipcode);
+  const [estado, setEstado] = useState(dadosAddress.state);
+  const [cidade, setCidade] = useState(dadosAddress.city);
+  const [bairro, setBairro] = useState(dadosAddress.district);
+  const [rua, setRua] = useState(dadosAddress.address);
+  const [numero, setNumero] = useState(dadosAddress.number);
+  const [complemento, setComplemento] = useState(dadosAddress.complement);
 
-  const [isNext, setIsNext] = useState(false);
-  const [verified, setVerified] = useState(false);
+
 
   async function searchCEP() {
     if (cep.length > 7) {
@@ -146,4 +148,4 @@ const Portifolio2 = () => {
   );
 };
 
-export default Portifolio2;
+export default Address;

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 import { useEffect } from "react";
 import Address from "./address/Address";
+import { ToastContainer } from "react-toastify";
 
 const Portifolio = () => {
   const [abaActive, setAbaActive] = useState(1);
@@ -17,6 +18,7 @@ const Portifolio = () => {
     <>
       <Styled.Container>
         <SideBar tabActive={setAbaActive} />
+        <ToastContainer />
         {abaActive === 1 ? (
           <Styled.ContainerInputs>
             <Styled.TitlePortfolio>Informações pessoais</Styled.TitlePortfolio>

@@ -10,12 +10,18 @@ import { cleanMask } from "../../../../helpers/HelperFunctions";
 import { FilledButton } from "../../../../components/UI/buttons/Button";
 import Colors from "../../../../constants/Colors";
 import { get } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
+import {
+  changeUpdatePerfil,
+  selectedPerfil,
+} from "../../../../store/reducers/PerfilSlice";
 import PortifolioService from "../../service/PortifolioService";
 import { selectedAuth } from "../../../../store/reducers/AuthSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Formulario = () => {
+  const dispatch = useDispatch();
+
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { auth } = useSelector(selectedAuth);
 
@@ -25,9 +31,6 @@ const Formulario = () => {
   const [tel, setTel] = useState(dadosPessoais.cellphone);
   const [cpfOrCnpj, setCpfOrCnpj] = useState(dadosPessoais.cpfCnpj);
   const [password, setPassword] = useState("");
-
-  const [isNext, setIsNext] = useState(false);
-  const [verified, setVerified] = useState(false);
 
   const validRegister = object({
     password: string()
@@ -56,13 +59,32 @@ const Formulario = () => {
     try {
       await validRegister.validate(dados);
 
-      await PortifolioService.updade(dadosPessoais.id, dados, auth.token);
+      const response = await PortifolioService.updade(
+        dadosPessoais.id,
+        dados,
+        auth.token
+      );
 
-      // Atualizar os dados do redux
+      if (response.status === 200) {
+        dispatch(
+          changeUpdatePerfil({
+            perfil: {id: dadosPessoais.id, ...dados},
+          })
+        );
 
+        toast.success("Infomações atualizadas com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
 
-      setVerified(true);
-      setIsNext(true);
+        setPassword("")
+      }
     } catch (err) {
       toast.error(err.errors[0], {
         position: "top-right",
@@ -79,22 +101,20 @@ const Formulario = () => {
 
   return (
     <Styled.Form>
-      <ToastContainer />
       <Styled.Row>
+
         <InputForm
           label="Nome Completo"
           value={nome}
           handle={setNome}
           space={"1.25rem"}
           mr={"1.25rem"}
-          disabled={verified}
         />
         <InputForm
           label="Email"
           value={email}
           handle={setEmail}
           space={"1.25rem"}
-          disabled={verified}
         />
       </Styled.Row>
       <Styled.Row>
@@ -110,7 +130,6 @@ const Formulario = () => {
                 event.preventDefault();
               }
             }}
-            disabled={verified}
           />
         </Styled.Column>
 
@@ -144,7 +163,6 @@ const Formulario = () => {
           handle={setPassword}
           space={"1.25rem"}
           type={"password"}
-          disabled={verified}
         />
         <FilledButton
           onClick={handleUpdate}

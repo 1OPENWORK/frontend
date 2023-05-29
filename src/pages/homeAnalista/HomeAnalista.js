@@ -5,6 +5,7 @@ import { deleteId, deleteIsDev, deleteToken } from "../../hooks/Cookies";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../services/Generected";
 import emailjs from "@emailjs/browser";
+import axios from "axios";
 
 const HomeAnalista = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const HomeAnalista = () => {
       try {
         const URI =
           process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/obterFila";
-        const response = await fetch(URI);
+        const response = await axios.get(URI);
         const dados = await response.text();
 
         if (dados) {

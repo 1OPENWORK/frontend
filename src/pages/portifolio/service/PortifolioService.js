@@ -1,21 +1,16 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectedAuth } from "../../../store/reducers/AuthSlice";
+import { AmbienteBackend } from "../../../hooks/Ambiente";
+
+const URI = AmbienteBackend();
 
 const updade = async (id, dados, token) => {
+  const response = await axios.put(`${URI}/api/usuarios/${id}`, dados, {
+    Authorization: `Bearer ${token}`,
+  });
 
-  const response = await axios.put(
-    `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/usuarios/${id}`,
-    dados,
-    {
-      Authorization: `Bearer ${token}`,
-    }
-  );
-
-  console.log(
-    "🚀 ~ file: PortifolioService.js:7 ~ updade ~ response:",
-    response
-  );
+  return response
 };
 
 const PortifolioService = {

@@ -60,6 +60,11 @@ const Address = () => {
 
     try {
       await validRegister.validate(dados);
+
+      // Atualizar
+
+
+
     } catch (err) {
       toast.error(err.errors[0], {
         position: "top-right",
@@ -80,7 +85,6 @@ const Address = () => {
 
   return (
     <Styled.Form>
-      <ToastContainer />
       <Styled.Row>
         <InputForm
           label="CEP"

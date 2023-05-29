@@ -14,8 +14,7 @@ import {
   ProjectsPath,
   canceledPath,
 } from "../../../../constants/Path";
-import { RxDashboard } from "react-icons/rx";
-import { BsFillClipboard2PlusFill } from "react-icons/bs";
+
 import { useState } from "react";
 
 import ButtonCompleted from "./components/ButtonCompleted";
@@ -24,10 +23,10 @@ import { getIsDev } from "../../../../hooks/Cookies";
 function SidebarProjecteds({ type }) {
   const navigate = useNavigate();
 
+  const isDev = getIsDev();
+
   const [color, setColor] = useState("#fff");
   const [typeUse, setType] = useState(type);
-
-  const isDev = getIsDev();
 
   const goToHomeDev = () => {
     navigate(HomeDevPath);
@@ -36,16 +35,23 @@ function SidebarProjecteds({ type }) {
   const goToProgress = () => {
     navigate(ProgressPath);
     setType(1);
+    console.log(typeof isDev)
   };
   const goToCompleted = () => {
     navigate(ProjectsPath);
     setType(2);
+    console.log(typeof isDev)
+
+
   };
 
   const goToCanceled = () => {
     navigate(canceledPath);
     setType(3);
+    console.log(typeof isDev)
   };
+
+
 
   const goToCreateProject = () => {
     navigate(CreateProjectPath);
@@ -85,17 +91,15 @@ function SidebarProjecteds({ type }) {
               onClick={() => goToCanceled()}
             />
 
-            {!isDev ? (
+            {isDev === "false" && (
               <>
                 <button type="button" onClick={() => goToCreateProject()}>
                   <AiFillFolderAdd size={40} className="icon-cancel" />
-
                   <h2>Criar Projeto</h2>
                 </button>
               </>
-            ) : (
-              ""
             )}
+
           </>
         ) : type === 2 ? (
           <>
@@ -116,7 +120,7 @@ function SidebarProjecteds({ type }) {
               onClick={() => goToCanceled()}
             />
 
-            {!isDev ? (
+            {isDev === "false" && (
               <>
                 <button type="button" onClick={() => goToCreateProject()}>
                   <AiFillFolderAdd size={40} className="icon-cancel" />
@@ -124,8 +128,6 @@ function SidebarProjecteds({ type }) {
                   <h2>Criar Projeto</h2>
                 </button>
               </>
-            ) : (
-              ""
             )}
           </>
         ) : type === 1 ? (
@@ -146,7 +148,7 @@ function SidebarProjecteds({ type }) {
               desc={"Cancelados"}
               onClick={() => goToCanceled()}
             />
-            {!isDev ? (
+            {isDev === "false" && (
               <>
                 <button type="button" onClick={() => goToCreateProject()}>
                   <AiFillFolderAdd size={40} className="icon-cancel" />
@@ -154,8 +156,6 @@ function SidebarProjecteds({ type }) {
                   <h2>Criar Projeto</h2>
                 </button>
               </>
-            ) : (
-              ""
             )}
           </>
         ) : (

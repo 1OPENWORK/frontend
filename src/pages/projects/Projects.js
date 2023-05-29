@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { ContainerMain, ContainerContent } from "./Projects.styled";
-import CardProject from "./components/cardProject/CardProject";
-import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
-import axios from "axios";
+import React, { useState, useEffect } from 'react'
+import { ContainerMain, ContainerContent } from './Projects.styled'
+import CardProject from './components/cardProject/CardProject'
+import SidebarProjecteds from './components/sideBar/SidebarProjecteds'
+import axios from 'axios'
 
-import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { getIsDev } from "../../hooks/Cookies";
+import { AiOutlineFundProjectionScreen } from 'react-icons/ai'
+import { getId, getIsDev } from '../../hooks/Cookies'
 
 function Projects() {
-  const [projetos, setProjetos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [noProject, setNoProject] = useState(false);
+  const [projetos, setProjetos] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [noProject, setNoProject] = useState(false)
 
-  const isDev = getIsDev();
-  const id = 2;
+  const isDev = getIsDev()
+  const id = getId()
 
-  const fetchChange = isDev
-    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/${id}`
-    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/${id}`;
+  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/${id}`
+  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/${id}`
 
   // Exemplo
   //   axios({
@@ -30,26 +29,28 @@ function Projects() {
 
   async function fetchProjetos() {
     await axios
-      .get(fetchChange)
+      .get(isDev === 'true' ? fetchDev : fetchCompany)
       .then((response) => {
         if (response.status === 200) {
-          setLoading(false);
-          setProjetos(response.data);
-          console.log(response);
+          setLoading(false)
+          setProjetos(response.data)
+          console.log(response)
         } else if (response.status === 204) {
-          setLoading(false);
-          setNoProject(true);
-          console.log("caiu aqui", response);
+          setLoading(false)
+          setNoProject(true)
+          console.log('caiu aqui', response)
         }
       })
       .catch((error) => {
-        console.log("Deu erro: " + error);
-      });
+        setLoading(false)
+        setNoProject(true)
+        console.log('Deu erro: ' + error)
+      })
   }
 
   useEffect(() => {
-    fetchProjetos();
-  }, []);
+    fetchProjetos()
+  }, [])
 
   return (
     <>
@@ -86,7 +87,7 @@ function Projects() {
         </ContainerContent>
       </ContainerMain>
     </>
-  );
+  )
 }
 
-export default Projects;
+export default Projects

@@ -5,6 +5,7 @@ import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { getId, getIsDev } from "../../../../hooks/Cookies";
 
 
 // import Cookies from "js-cookie";
@@ -13,16 +14,18 @@ function Canceled({ developers }) {
   const [loading, setLoading] = useState(true);
   const [noProject, setNoProject] = useState(false);
 
-  const isDev = true;
-  const id = 1;
+  const isDev = getIsDev();
+  const id = getId();
 
-  const fetchChange = isDev
-    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`
-    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`;
+  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`
+  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`
+
+
+
 
   async function fetchProjetos() {
     await axios
-      .get(fetchChange)
+      .get(isDev === "true" ? fetchDev : fetchCompany)
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);

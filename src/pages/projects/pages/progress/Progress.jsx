@@ -16,17 +16,20 @@ const Progress = ({ developers }) => {
   const id = getId();
   const token = getToken();
 
-  const fetchChange = isDev
-    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-aceitos/andamento/desenvolvedor/${id}`
-    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-aceitos/andamento/empresa/${id}}`;
+  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/andamentos/empresa/${id}`
+  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/andamentos/desenvolvedor/${id}`
+
+
 
   async function fetchProjetos() {
     await axios
-      .get(fetchChange, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(isDev === "true" ? fetchDev : fetchCompany
+        , {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
@@ -39,7 +42,11 @@ const Progress = ({ developers }) => {
         }
       })
       .catch((error) => {
+
+        setLoading(false);
+        setNoProject(true);
         console.log("Deu erro: " + error);
+
       });
   }
 

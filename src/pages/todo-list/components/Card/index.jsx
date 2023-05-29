@@ -27,8 +27,8 @@ export default function Card({ data, index }) {
   // const { move } = useContext(BoardContext);
 
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar se o modo de edição está ativado
-  const [newContent, setNewContent] = useState(data.content);
-  const [newDescribe, setNewDescribe] = useState(data.describe); // Estado
+  // const [newContent, setNewContent] = useState(data.cardList.content);
+  // const [newDescribe, setNewDescribe] = useState(data.cardList.describe); // Estado
   // Estado
 
   const [lgShow, setLgShow] = useState(false);
@@ -36,9 +36,7 @@ export default function Card({ data, index }) {
   const [editedTask, setEditedTask] = useState("");
   const [newTask, setNewTask] = useState("");
 
-  const [tasks, setTasks] = useState([
-
-  ]);
+  const [tasks, setTasks] = useState(data.tasks);
   const [editIndex, setEditIndex] = useState(-1);
 
   const handleAddTask = () => {
@@ -88,6 +86,26 @@ export default function Card({ data, index }) {
 
   }
 
+  // const handleDateChange = (date) => {
+  //   // Atualize o estado com a nova data selecionada
+  //   const updatedCard = { ...data.cardList, date };
+  //   setData({ ...data, cardList: updatedCard });
+  // };
+
+  // const handleClearDate = () => {
+  //   // Limpe a data selecionada definindo-a como vazia
+  //   const updatedCard = { ...data.cardList, date: "" };
+  //   setData({ ...data, cardList: updatedCard });
+  // };
+
+  // const handlePriorityChange = (value) => {
+  //   // Atualize a prioridade do card
+  //   const updatedCard = { ...data.cardList, label: value };
+  //   setData({ ...data, cardList: updatedCard });
+  // };
+
+
+
 
 
   // ESCOLHA DA PRIORIDADE
@@ -101,7 +119,8 @@ export default function Card({ data, index }) {
     { name: 'Essencial', value: '3' },
   ];
 
-  const selectedLabel = data.labels.find(label => label.id === parseInt(radioValue));
+  const selectedLabel = radios.find((radio) => radio.value === data.label);
+
 
 
   // const [{ isDragging }, dragRef] = useDrag({
@@ -168,14 +187,14 @@ export default function Card({ data, index }) {
       <Container>
         <header>
 
-          {selectedLabel ? (
+          {selectedLabel && (
 
             <>
               <Label color={selectedLabel.color}>
                 <p>{selectedLabel.title}</p>
               </Label>
             </>
-          ) : ""}
+          )}
           {!lgShow && (
             <button className="button-edit" onClick={handleEditClick}>
               <FiEdit size={20} />
@@ -201,7 +220,7 @@ export default function Card({ data, index }) {
 
 
         <footer className="footer">
-          {data.user && <img src={data.user} alt="" />}
+
         </footer>
 
         <Modal
@@ -222,11 +241,11 @@ export default function Card({ data, index }) {
               <h3>Título</h3>
               <br />
               <p>Atribuições</p>
-              <div className="add-user">
+              {/* <div className="add-user">
                 {data.user && <img style={{ height: "24px", width: "24px", borderRadius: "50%" }} src={data.user} alt="" />}
                 <RiAddCircleLine size={14} style={{ marginLeft: ".5rem", cursor: "pointer" }} />
 
-              </div>
+              </div> */}
 
               <br />
               <br />
@@ -292,7 +311,7 @@ export default function Card({ data, index }) {
 
               <br />
               <div className="div-tasks">
-                {tasks.map((task, index) => (
+                {tasks?.map((task, index) => (
                   <div key={index} style={{ marginBottom: ".5rem" }}>
                     {editIndex === index ? (
                       <>

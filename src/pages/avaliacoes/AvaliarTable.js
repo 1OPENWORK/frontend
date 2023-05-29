@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./Table.styled";
@@ -45,6 +46,7 @@ const AvaliarTeste = () => {
 
   useEffect(() => {
     handleFetchAvaliacao();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -21,6 +21,7 @@ const AvaliacaoTeste = ({ type }) => {
 
   useEffect(() => {
     handleFetchAvaliacao();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -6,44 +6,80 @@ import {
   DivFooterCard,
   TitleImg,
   UserImg,
-  ConfigImg,
   DivData,
   AlertData,
   BtnReset,
-  DivConfig,
-  Ul,
-  Li,
 } from "./CardProject.styled";
 import { Logo } from "../sideBar/SidebarProjecteds.styled";
-import LogoLink from "../sideBar/img/logo.svg";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import PointLink from "../../assets/pontis-config.png";
 import { useNavigate } from "react-router-dom";
 
-function CardProject() {
-  const now = 100;
+import { SlOptions } from "react-icons/sl";
+import { GrConfigure } from "react-icons/gr";
+
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+
+import { usePopper } from "react-popper";
+import moment from "moment";
+
+function CardProject({
+  developers,
+  canceled,
+  title,
+  describe,
+  progress,
+  finishDate,
+  initDate,
+  company,
+  logoCompany,
+}) {
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const numDevelopers = developers.length;
+
+  const [hovered, setHovered] = useState(false);
+
+  // eslint-disable-next-line no-undef
+  const referenceElement = useRef(null);
+  // eslint-disable-next-line no-undef
+  const popperElement = useRef(null);
+
+
+
+
+
 
   const clickNavigate = () => {
     setClicked(true);
     navigate("/gerenciador");
   };
 
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: "bottom",
+    modifiers: [
+      {
+        name: "offset",
+        options: {
+          offset: [0, 8],
+        },
+      },
+    ],
+  });
+
   return (
     <>
-      <DivCard>
+      <DivCard canceled={canceled}>
         <DivLeft>
           <div className="div-pro">
-            <Logo height={"32px"} src={LogoLink} />
-            <h2>Open Work</h2>
+            <Logo height={"32px"} src={logoCompany} />
+            <h2>{company}</h2>
           </div>
-          <h2>Sistema Freelancer</h2>
-          <p>
-            Criar plataforma freelancer do zero, backend, frontend, bd conectado
-            na nuvem, e aplicação mobile.
-          </p>
+          <h2>{title}</h2>
+          <p>{describe}</p>
         </DivLeft>
 
         <DivRight>
@@ -52,29 +88,127 @@ function CardProject() {
               <h2>Progresso</h2>
               <ProgressBar
                 max={"100"}
+                now={progress}
+                label={`${progress}%`}
                 variant={"success"}
-                now={now}
-                label={`${now}%`}
               />
             </div>
 
             <div className="div-user-config">
-              <UserImg>
-                <TitleImg>{"T"}</TitleImg>
-              </UserImg>
+              <div
+                className="div-developers"
+                ref={referenceElement}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
 
-              <ConfigImg onClick={() => setOpen(!open)} src={PointLink} />
+              >
+                {hovered ? (
+                  <div
+                    ref={popperElement}
+                    style={styles.popper}
+                    {...attributes.popper}
 
-              {open && (
+                  >
+                    <div style={{ backgroundColor: "white" }}>
+                      {developers.slice(0).map((developer) => (
+                        <>
+                          <UserImg
+                            style={{ zIndex: "5" }}
+                            ref={popperElement}
+                            width="24px"
+                            height="24px"
+                            key={developer.id}
+                            imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie"
+
+                          >
+                            <TitleImg></TitleImg>
+                          </UserImg>
+                          <p >{developer.nameUser}</p>
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {developers.map((developer) => (
+                      <div
+                        key={developer.id}
+                        className={`developer-card ${numDevelopers > 2 ? "card-block" : ""
+                          }`}
+                      >
+                        <UserImg imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie">
+                          <TitleImg></TitleImg>
+                        </UserImg>
+                      </div>
+                    ))}
+                  </>
+                )}
+
+                <div
+                  className={`dev-apos ${numDevelopers > 2 ? "display" : ""}`}
+                >
+                  <SlOptions size={16} />
+                </div>
+              </div>
+
+              {/* {open && (
                 <DivConfig>
                   <Ul>
                     <Li>Editar</Li>
                     <Li>Finalizar</Li>
-
                     <Li>Deletar</Li>
                   </Ul>
                 </DivConfig>
               )}
+
+              <GrSettingsOption
+                color={"#e5e5e5"}
+                className="btn-config"
+                size={18}
+                onClick={() => setOpen(!open)}
+              /> */}
+
+              <div>
+                <DropdownButton
+                  id="dropdown-toggle"
+                  as={ButtonGroup}
+                  size="sm"
+                  variant=""
+                  style={{ backgroundColor: "transparent", outline: "none" }}
+                  title={
+                    <GrConfigure
+                      size={24}
+                      alt="Botão de configurações (mais)"
+                    />
+                  }
+                >
+                  <Dropdown.Item
+                    as="button"
+                    className="highlight-dropdown-item"
+                    eventKey="1"
+                    onClick={() => alert("Editando...")}
+                  >
+                    Editar
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    className="highlight-dropdown-item"
+                    eventKey="2"
+                    onClick={() => alert("Finalizando...")} //exemplo para fazer o modal quando clicar em cada uma das opções dropdown.item
+                  >
+                    Finalizar
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    as="button"
+                    className="highlight-dropdown-item"
+                    eventKey="3"
+                    onClick={() => alert("Deletando...")}
+                  >
+                    Deletar
+                  </Dropdown.Item>
+                </DropdownButton>
+              </div>
             </div>
           </div>
 
@@ -82,11 +216,11 @@ function CardProject() {
             <div className="div-row">
               <DivData>
                 <h2>Data Início</h2>
-                <h3>01/02/2023</h3>
+                <h3>{moment(initDate).format("DD/MM/YYYY")}</h3>
               </DivData>
               <DivData>
                 <h2>Fim estimado</h2>
-                <h3>31/12/2023</h3>
+                <h3>{moment(finishDate).format("DD/MM/YYYY")}</h3>
               </DivData>
             </div>
             <div className="div-row-re">

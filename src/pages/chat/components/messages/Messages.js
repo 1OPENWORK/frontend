@@ -21,14 +21,25 @@ const Messages = ({
   const [idSender, setIdSender] = useState("");
   const [idReceiver, setIdReceiver] = useState("");
   const [messages, setMessages] = useState([]);
-
-  
+  const [imgPerfil, setImgPerfil] = useState("");
 
   useEffect(() => {
     setIdSender(websocket.idUser);
     setIdReceiver(websocket.conversationActive.id);
     setMessages(websocket.messages);
   }, [websocket, websocket.messages]);
+
+  const fetchS3 = async () => {
+    // eslint-disable-next-line no-undef
+    const response = await getS3(dadosConversa.img);
+
+    setImgPerfil(response);
+  };
+
+  useEffect(() => {
+    fetchS3();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dadosConversa]);
 
   return (
     <React.Fragment>
@@ -40,7 +51,7 @@ const Messages = ({
             {messageSeleted ? (
               <Styled.Reverce>
                 <Styled.Header>
-                  <Avatar src={dadosConversa.img} />
+                  <Avatar src={imgPerfil} />
                   <Styled.Divisor>{dadosConversa.nome}</Styled.Divisor>
                 </Styled.Header>
                 {messages.map((dados, index) => {
@@ -62,7 +73,6 @@ const Messages = ({
             ) : (
               <Styled.ContainerNotSelected>
                 <img src={MessageDefault} />
-
               </Styled.ContainerNotSelected>
             )}
           </React.Fragment>
@@ -70,6 +80,7 @@ const Messages = ({
       </Styled.Container>
 
       <SendMessage
+      
         socket={socket}
         idSender={idSender}
         idReceiver={idReceiver}

@@ -20,6 +20,8 @@ import Depoiments from "./components/Depoiments/Depoiments";
 import BePartToo from "./components/BePartToo/BePartToo";
 import Footer from "./components/Footer/Footer";
 import AceptedAll from "./components/AceptedAll/AceptedAll";
+import { useNavigate } from "react-router-dom";
+import { AuthPath, RegisterPath } from "../../constants/Path";
 
 // --------------------------------------------------------
 // Home INTERFACE
@@ -37,6 +39,16 @@ const Home = () => {
   // Home PRIVATE DECLARATIONS
   // --------------------------------------------------------
 
+  const navigate = useNavigate();
+
+  const goToAuth = () => {
+    navigate(AuthPath);
+  };
+
+  const goToRegister = () => {
+    navigate(RegisterPath);
+  };
+
   return (
     <GeneralContainer>
       <NavBar />
@@ -46,10 +58,14 @@ const Home = () => {
           background={Colors.PRIMARY_COLOR}
           directionColumn={true}
           center={true}
-          padding={"50px"}>
-
-          <TitleDivInformation> {"Tenha a liberdade de trabalhar de qualquer lugar, com o seu próprio horário de serviço"} </TitleDivInformation>
-          <HomeButton title="Saiba mais" />
+          padding={"50px"}
+        >
+          <TitleDivInformation>
+            {
+              "Tenha a liberdade de trabalhar de qualquer lugar, com o seu próprio horário de serviço"
+            }
+          </TitleDivInformation>
+          <HomeButton title="Saiba mais" onClick={() => goToAuth()} />
 
           <div
             style={{
@@ -60,7 +76,9 @@ const Home = () => {
             }}
           >
             <HomeText>Você está querendo contratar? </HomeText>
-            <HomeTextLink>Contrate desenvolvedores</HomeTextLink>
+            <HomeTextLink onClick={() => goToRegister()}>
+              Contrate desenvolvedores
+            </HomeTextLink>
           </div>
         </DivUpInformation>
         <DivUpInformation

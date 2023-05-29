@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import {
   changeConversationRecentes,
   changeFriends,
@@ -10,60 +9,81 @@ import {
 import Styled from "./Chat.styled";
 import Messages from "./components/messages/Messages";
 import SideBar from "./components/sideBar/SideBar";
+import { getId } from "../../hooks/Cookies";
+import { getS3 } from "../../store/actions/MicroService";
 
 export const Chat = ({ socket }) => {
   const [loading, setLoading] = useState(false);
   const [messageActive, setMessageActive] = useState(false);
   const [visualized, setVisualized] = useState([]);
   const [dadosConversa, setDadosConversa] = useState({});
+  const [tag, setTag] = useState("");
+  const [imagemPerfil, setImagemPerfil] = useState("");
+  const [nome, setNome] = useState("");
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const id = getId();
+
+  const fetchS3 = async (img) => {
+    const imagemPerfil = await getS3(img);
+
+    setImagemPerfil(imagemPerfil);
+  };
 
   useEffect(() => {
-    dispatch(
-      changeIdUser({
-        id: id,
-      })
-    );
-
     socket.on("connect", () => {
-      socket.emit(
-        "allFriends",
-        { idUser: id },
-        (friends, listConversationsRecentes, messagePedentes) => {
-          let messagesPendentes = [];
+      socket.emit("myInformation", { id }, (callback) => {
+        console.log("🚀 ~ file: Chat.js:32 ~ socket.on ~ callback:", callback);
+        const idUser = callback.id;
 
-          for (const item of messagePedentes) {
-            messagesPendentes.push(item);
+        dispatch(
+          changeIdUser({
+            id: idUser,
+          })
+        );
+
+        socket.emit(
+          "allFriends",
+          { idUser },
+          (friends, listConversationsRecentes, messagePedentes) => {
+            let messagesPendentes = [];
+
+            for (const item of messagePedentes) {
+              messagesPendentes.push(item);
+            }
+
+            dispatch(
+              changeMessagesPendentes({
+                messages: messagesPendentes,
+              })
+            );
+
+            dispatch(
+              changeFriends({
+                friends,
+              })
+            );
+
+            dispatch(
+              changeConversationRecentes({
+                conversations: listConversationsRecentes,
+              })
+            );
           }
+        );
 
-          dispatch(
-            changeMessagesPendentes({
-              messages: messagesPendentes,
-            })
-          );
+        socket.emit("updateSocketId", { idUser }, (user) => {});
 
-          dispatch(
-            changeFriends({
-              friends,
-            })
-          );
-
-          dispatch(
-            changeConversationRecentes({
-              conversations: listConversationsRecentes,
-            })
-          );
-        }
-      );
+        fetchS3(callback.img);
+        setTag(callback.tag);
+        setNome(callback.nome);
+      });
     });
 
     socket.emit("updateSocketId", { idUser: id }, (user) => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return (
     <Styled.Container>
@@ -76,6 +96,7 @@ export const Chat = ({ socket }) => {
           setDadosConversa={setDadosConversa}
           visualized={visualized}
           setVisualized={setVisualized}
+          myInformation={{ nome, tag, img: imagemPerfil }}
         />
       </Styled.Div>
       <Styled.Div width={"70%"} style={{ height: "100vh" }}>

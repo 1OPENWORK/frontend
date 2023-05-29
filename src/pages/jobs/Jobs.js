@@ -1,6 +1,7 @@
 import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
-import List from "../../components/list/List";
+import JobsTable from "./JobsTable";
+import SubMenu from "../../components/subMenu/subMenu";
 
 // --------------------------------------------------------
 // Jobs INTERFACE
@@ -17,7 +18,8 @@ const Jobs = () => {
   return (
     <>
       <NavBarList type={3} />
-      <List />
+      <SubMenu type={2} />
+      <JobsTable />
     </>
   );
 };

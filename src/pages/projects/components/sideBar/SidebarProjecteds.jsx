@@ -2,19 +2,50 @@ import React from "react";
 
 import { BodyContainerProjecteds, Container } from "./SidebarProjecteds.styled";
 import { MdOutlineRunCircle } from "react-icons/md";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiFillFolderAdd } from "react-icons/ai";
 import { TiCancel } from "react-icons/ti";
 import { MdArrowBack } from "react-icons/md";
 import Colors from "../../../../constants/Colors";
 import { useNavigate } from "react-router";
-import { HomeDevPath } from "../../../../constants/Path";
+import {
+  HomeDevPath,
+  CreateProjectPath,
+  ProgressPath,
+  ProjectsPath,
+  canceledPath,
+} from "../../../../constants/Path";
 import { RxDashboard } from "react-icons/rx";
 import { BsFillClipboard2PlusFill } from "react-icons/bs";
+import { useState } from "react";
+
+import ButtonCompleted from "./components/ButtonCompleted";
+
 function SidebarProjecteds({ type }) {
   const navigate = useNavigate();
 
+  const [color, setColor] = useState("#fff");
+  const [typeUse, setType] = useState(type);
+
   const goToHomeDev = () => {
     navigate(HomeDevPath);
+  };
+
+  const goToProgress = () => {
+    navigate(ProgressPath);
+    setType(1);
+  };
+  const goToCompleted = () => {
+    navigate(ProjectsPath);
+    setType(2);
+  };
+
+  const goToCanceled = () => {
+    navigate(canceledPath);
+    setType(3);
+  };
+
+  const goToCreateProject = () => {
+    navigate(CreateProjectPath);
   };
 
   return (
@@ -28,30 +59,90 @@ function SidebarProjecteds({ type }) {
           marginTop: "1rem",
           cursor: "pointer",
         }}
-        color={Colors.SECONDARY_COLOR}
+        color={Colors.WHITE}
+        active={Colors.SECONDARY_COLOR}
       />
       <BodyContainerProjecteds>
-        {type === 1 ? (
+        {type === 3 ? (
           <>
-            <button type="button">
-              <MdOutlineRunCircle size={40} />
+            <ButtonCompleted
+              type={1}
+              desc={"Andamento"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              type={2}
+              desc={"Concluídos"}
+              onClick={() => goToCompleted()}
+            />
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={3}
+              desc={"Cancelados"}
+              onClick={() => goToCanceled()}
+            />
 
-              <h2>Andamento</h2>
+            <button type="button" onClick={() => goToCreateProject()}>
+              <AiFillFolderAdd size={40} className="icon-cancel" />
+
+              <h2>Criar Projeto</h2>
             </button>
-            <button type="button">
-              <AiOutlineCheckCircle size={40} color={"#20ac51"} />
+          </>
+        ) : type === 2 ? (
+          <>
+            <ButtonCompleted
+              type={1}
+              desc={"Andamento"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={2}
+              desc={"Concluídos"}
+              onClick={() => goToCompleted()}
+            />
+            <ButtonCompleted
+              type={3}
+              desc={"Cancelados"}
+              onClick={() => goToCanceled()}
+            />
 
-              <h2 color={"#20ac51"}>Concluídos</h2>
+            <button type="button" onClick={() => goToCreateProject()}>
+              <AiFillFolderAdd size={40} className="icon-cancel" />
+
+              <h2>Criar Projeto</h2>
             </button>
-            <button type="button">
-              <TiCancel size={40} className="icon-cancel" />
+          </>
+        ) : type === 1 ? (
+          <>
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={1}
+              desc={"Andamento"}
+              onClick={() => goToProgress()}
+            />
+            <ButtonCompleted
+              type={2}
+              desc={"Concluídos"}
+              onClick={() => goToCompleted()}
+            />
+            <ButtonCompleted
+              type={3}
+              desc={"Cancelados"}
+              onClick={() => goToCanceled()}
+            />
+            <button type="button" onClick={() => goToCreateProject()}>
+              <AiFillFolderAdd size={40} className="icon-cancel" />
 
-              <h2>Cancelados</h2>
+              <h2>Criar Projeto</h2>
             </button>
           </>
         ) : (
           <>
-            <button type="button" onClick={() => navigate("/projetos")}>
+            <button
+              type="button"
+              onClick={() => navigate("/projetos-andamentos")}
+            >
               <RxDashboard size={32} />
 
               <h2>Projetos</h2>

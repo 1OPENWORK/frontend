@@ -33,11 +33,10 @@ const SideBar = ({
   handleMessageActive,
   atualizarUltimaMessage,
   setDadosConversa,
-  visualized,
   setVisualized,
 }) => {
   const { websocket } = useSelector(selectedWebSocket);
-  const [ setFriends] = useState([]);
+  const [setFriends] = useState([]);
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
   const [indexAbaActive, setIndexAbaActive] = useState(3);

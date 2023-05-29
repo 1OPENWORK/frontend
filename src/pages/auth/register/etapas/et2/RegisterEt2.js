@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
 import { get } from "../../../../../services/Generected";
-
 import {
   changeEtapa2,
   changeEtapaAll,
@@ -153,10 +152,7 @@ const RegisterEt2 = () => {
         space={"20px"}
         width={"770px"}
       />
-      <Styled.Divisor
-        align={"flex-end"}
-        style={{ width: "770px" }}
-      >
+      <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
         {!isNext ? (
           <FilledButton
             onClick={handleForm}

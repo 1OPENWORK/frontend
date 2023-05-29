@@ -22,6 +22,7 @@ import React from "react";
  * @param props The component props.
  * @returns The component JSX.
  */
+// eslint-disable-next-line no-empty-pattern
 const CardList = ({}) => {
   return (
     <>

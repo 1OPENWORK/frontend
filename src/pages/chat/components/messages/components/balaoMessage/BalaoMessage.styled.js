@@ -5,6 +5,7 @@ const StyledBalaoMessage = {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 150px;
   `,
 
   Message: styled.div``,

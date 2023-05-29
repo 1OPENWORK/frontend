@@ -6,11 +6,7 @@ const StyledContainerInformarion = {
     width: 37%;
     height: 100vh;
     background-color: ${Colors.PRIMARY_COLOR};
-    border-radius: 0px 30px 30px 0px;
     color: white;
-    -webkit-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
-    box-shadow: 9px 5px 22px -9px rgba(0, 0, 0, 0.5);
     font-family: nunito;
   `,
 
@@ -64,7 +60,7 @@ const StyledContainerInformarion = {
     color: ${Colors.WHITE};
 
     &:hover {
-      color: ${Colors.BLACK};
+      color: ${Colors.SECONDARY_COLOR};
     }
   `,
 };

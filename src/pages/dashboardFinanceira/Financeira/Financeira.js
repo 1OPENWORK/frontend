@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import List from "../../../components/list/List";
-import NavBarList from "../../../components/navBarList/NavBarList";
 import Styled from "../../../components/navBar/NavBar.styled";
 import WalletImg from "../../../assets/imgs/wallet.svg";
 import Check from "../../../assets/imgs/check.svg";
 import {
+  LineSubMenu,
   ContainerFinance,
   InputSearch,
   HeaderFinancer,
@@ -32,21 +31,22 @@ import {
   InicioLabel,
   EtapaLabelDot,
   EtapaValueDot,
-  VerticalLineFinal
+  VerticalLineFinal,
 } from "./Financeira.styled";
-import Tag from '../../../components/UI/tag/tag'
-import CustomModal from '../../../components/UI/modal/Modal'
+import Tag from "../../../components/UI/tag/tag";
+import CustomModal from "../../../components/UI/modal/Modal";
+import SubMenu from "../../../components/subMenu/subMenu";
+import NavBarList from "../../../components/navBarList/NavBarList";
 
 const Financeira = () => {
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const etapas = [
-    { label: 'Etapa 1', completed: true, value: 'R$ 300' },
-    { label: 'Etapa 2', completed: true, value: 'R$ 300' },
-    { label: 'Etapa 3', completed: true, value: 'R$ 300' },
-    { label: 'Etapa 4', completed: true, value: 'R$ 300' },
-    { label: 'Etapa 5', completed: false, value: 'R$ 300' },
+    { label: "Etapa 1", completed: true, value: "R$ 300" },
+    { label: "Etapa 2", completed: true, value: "R$ 300" },
+    { label: "Etapa 3", completed: true, value: "R$ 300" },
+    { label: "Etapa 4", completed: true, value: "R$ 300" },
+    { label: "Etapa 5", completed: false, value: "R$ 300" },
   ];
 
   function handleCellClick() {
@@ -60,7 +60,8 @@ const Financeira = () => {
   return (
     <>
       <NavBarList />
-      <List type={3} />
+      <SubMenu />
+      <LineSubMenu />
       <ContainerFinance>
         <HeaderFinancer>
           <InputSearch type="search" placeholder="Digite sua busca" />
@@ -156,11 +157,19 @@ const Financeira = () => {
 
               {etapas.map((etapa, index) => (
                 <>
-                  <EtapaLabelDot number={index + 1} >Sprint {index + 1}</EtapaLabelDot>
-                  <EtapaDot key={index} number={index + 1} completed={etapa.completed}>
+                  <EtapaLabelDot number={index + 1}>
+                    Sprint {index + 1}
+                  </EtapaLabelDot>
+                  <EtapaDot
+                    key={index}
+                    number={index + 1}
+                    completed={etapa.completed}
+                  >
                     {etapa.completed && <Styled.LogoImg src={Check} />}
                   </EtapaDot>
-                  <EtapaValueDot number={index + 1} completed={etapa.completed}>{etapa.value}</EtapaValueDot>
+                  <EtapaValueDot number={index + 1} completed={etapa.completed}>
+                    {etapa.value}
+                  </EtapaValueDot>
                 </>
               ))}
               <VerticalLineFinal />

@@ -15,15 +15,6 @@ const BalaoMessage = ({ receiver, dados }) => {
         <Styled.Message>{dados.message}</Styled.Message>
         <Styled.ContainerFooter>
           <Styled.Time>{time}</Styled.Time>
-          {!receiver && (
-            <ion-icon
-              name={
-                dados.visualizado === 1
-                  ? "checkmark-done-outline"
-                  : "checkmark-outline"
-              }
-            ></ion-icon>
-          )}
         </Styled.ContainerFooter>
       </Styled.BodyMessage>
     </p>

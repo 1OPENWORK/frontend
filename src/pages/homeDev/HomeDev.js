@@ -1,7 +1,8 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import NavBar from "../../components/navBar/NavBar";
 import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
 import Colors from "../../constants/Colors";
+import { post } from "../../services/Generected";
 import {
   Container,
   Aside,
@@ -25,24 +26,35 @@ import { useNavigate } from "react-router";
 import {
   AvaliacoesPath,
   ComunidadePath,
-  DevsPath,
   JobsPath,
   PortfolioPath,
 } from "../../constants/Path";
-import CardHelp from '../../components/UI/chatbot/Landbot'
+import CardHelp from "../../components/UI/chatbot/Landbot";
+import { getEmail, getIsDev } from "../../hooks/Cookies.js";
 
 const HomeDev = () => {
   const navigate = useNavigate();
-
   const [showCardHelp, setShowCardHelp] = useState(false);
+
+  console.log(getEmail());
+  console.log(getIsDev());
 
   function handleButtonClick() {
     setShowCardHelp(true);
-  }
+    try {
+      const URI =
+        process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/cadastroFila";
+      const dados = {
+        email: getEmail(),
+        tipo: getIsDev() ? "DESENVOLVEDOR" : "EMPRESA",
+      };
 
-  // useScript(
-  //   "https://static.zdassets.com/ekr/snippet.js?key=f2ba511b-7b3f-4227-9be2-de2152e5677e"
-  // )
+      post(URI, dados);
+      console.log("Fila cadastrada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao cadastrar campos:", error);
+    }
+  }
 
   const goToPortfolio = () => {
     navigate(PortfolioPath);
@@ -107,10 +119,10 @@ const HomeDev = () => {
             <Card onClick={() => goToComunidade()}>
               <CardImg src={imgCard} />
               <FlexCard>
-                <TitleCard>{"Comunidade"}</TitleCard>
+                <TitleCard>{"Chat"}</TitleCard>
                 <DescPara>
                   {
-                    "Aqui é onde todos os desenvolvedores cadastrados em nosso site estão. Também é possível acessar o seu portfólio"
+                    "Acesse nosso chat para ter interações tanto com empresas tanto com outros devs do nosso site"
                   }
                 </DescPara>
               </FlexCard>
@@ -118,9 +130,8 @@ const HomeDev = () => {
           </Aside>
 
           <Article>
- 
             <ChatBot>
-            {showCardHelp && <CardHelp />}
+              {showCardHelp && <CardHelp />}
               <BootImg src={imgBot} />
               <TitleCard color={Colors.WHITE}>{"ChatBot"}</TitleCard>
               <DescParaBot>
@@ -128,24 +139,16 @@ const HomeDev = () => {
                   "Como podemos te ajudar? Tire suas dúvidas com o nosso bot virtual"
                 }
               </DescParaBot>
-            
-              <GenericSolidButton onClick={handleButtonClick}>Iniciar</GenericSolidButton>
-             
-              
+
+              <GenericSolidButton onClick={handleButtonClick}>
+                Iniciar
+              </GenericSolidButton>
+
               <ChatbotDiv> </ChatbotDiv>
-             
             </ChatBot>
-
-      
-
-            
           </Article>
-     
-          
         </Container>
       </GeneralContainer>
-     
-      
     </>
   );
 };

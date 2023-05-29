@@ -1,8 +1,19 @@
 import React from "react";
 import Styled from "./SideBar.styled";
-import IconPlus from "../../../assets/icons/icon-plus.svg";
+import IconPlus from "../../assets/icons/icon-plus.svg";
+import IconProfile from "../../assets/icons/icon-profile.svg";
+import IconAbout from "../../assets/icons/icon-about.svg";
+import IconExperiences from "../../assets/icons/icon-specialtys.svg";
+import IconProject from "../../assets/icons/icon-projects.svg";
+import { useNavigate } from "react-router-dom";
 import { MdArrowBack, MdNewspaper } from "react-icons/md";
-import Colors from "../../../constants/Colors";
+import Colors from "../../constants/Colors";
+import {
+  HomeDevPath,
+  PortfolioEt5Path,
+  PortfolioEt6Path,
+  PortfolioProjectsPath,
+} from "../../constants/Path";
 
 import { useState } from "react";
 import { BsPersonCircle, BsStarFill } from "react-icons/bs";
@@ -11,7 +22,7 @@ import { AiOutlineProfile } from "react-icons/ai";
 const SideBar = ({ tabActive }) => {
   const [tabSelection, setSelection] = useState(1);
 
-  const handleClick = value => {
+  const handleClick = (value) => {
     setSelection(value);
     tabActive(value);
   };

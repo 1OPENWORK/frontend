@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { ContainerMain, ContainerContent } from './Projects.styled'
-import CardProject from './components/cardProject/CardProject'
-import SidebarProjecteds from './components/sideBar/SidebarProjecteds'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import { ContainerMain, ContainerContent } from "./Projects.styled";
+import CardProject from "./components/cardProject/CardProject";
+import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
+import axios from "axios";
 
-import { AiOutlineFundProjectionScreen } from 'react-icons/ai'
-import { getId, getIsDev } from '../../hooks/Cookies'
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { getId, getIsDev } from "../../hooks/Cookies";
 
 function Projects() {
-  const [projetos, setProjetos] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [noProject, setNoProject] = useState(false)
+  const [projetos, setProjetos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [noProject, setNoProject] = useState(false);
 
-  const isDev = getIsDev()
-  const id = getId()
+  const isDev = getIsDev();
+  const id = getId();
 
-  const fetchChange = isDev
-    ? `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`
-    : `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`
+  const fetchDev = `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`;
+  const fetchCompany = `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`;
 
   // Exemplo
   //   axios({
@@ -30,28 +29,28 @@ function Projects() {
 
   async function fetchProjetos() {
     await axios
-      .get(isDev === 'true' ? fetchDev : fetchCompany)
+      .get(isDev === "true" ? fetchDev : fetchCompany)
       .then((response) => {
         if (response.status === 200) {
-          setLoading(false)
-          setProjetos(response.data)
-          console.log(response)
+          setLoading(false);
+          setProjetos(response.data);
+          console.log(response);
         } else if (response.status === 204) {
-          setLoading(false)
-          setNoProject(true)
-          console.log('caiu aqui', response)
+          setLoading(false);
+          setNoProject(true);
+          console.log("caiu aqui", response);
         }
       })
       .catch((error) => {
-        setLoading(false)
-        setNoProject(true)
-        console.log('Deu erro: ' + error)
-      })
+        setLoading(false);
+        setNoProject(true);
+        console.log("Deu erro: " + error);
+      });
   }
 
   useEffect(() => {
-    fetchProjetos()
-  }, [])
+    fetchProjetos();
+  }, []);
 
   return (
     <>

@@ -7,11 +7,11 @@ import {
   ModalClosedButton,
 } from "./Modal.styled";
 
-const CustomModal = ({ isOpen, onClose, children, tamanho }) => {
+const CustomModal = ({ isOpen, onClose, children, tamanho, altura }) => {
 
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onClose}>
-      <ModalContent tamanho={tamanho}>{children}</ModalContent>
+      <ModalContent tamanho={tamanho} altura={altura}>{children}</ModalContent>
     </StyledModal>
   );
 };

@@ -157,7 +157,24 @@ const StyledPortifolioSobre = {
     margin-left: 2.5rem;
     margin-bottom: 5rem;
     justify-content: space-between;
-  `,
+    `,
+
+    ButtonInfoDiv : styled.div`
+        display:flex;
+        align-items:center;
+    `,
+
+    Info : styled.p`
+        cursor:pointer;
+        margin-left:${props => props.tamanho ? props.tamanho : "0"}; 
+    `,
+
+    InfoText : styled.p`
+        padding-inline: 20px;
+        text-align: justify;
+    `,
+
+
 
   DivRow: styled.div`
     display: flex;

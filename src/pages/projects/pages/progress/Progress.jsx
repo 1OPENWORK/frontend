@@ -84,6 +84,7 @@ const Progress = ({ developers }) => {
                 company={projeto.nameCompany}
                 logoCompany={projeto.imageCompany}
                 developers={projeto.developers}
+                isDev={isDev}
               />
             ))
           )}

@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { getId, getIsDev } from "../../../../hooks/Cookies";
 
-
 // import Cookies from "js-cookie";
 function Canceled({ developers }) {
   const [projetos, setProjetos] = useState([]);
@@ -17,11 +16,8 @@ function Canceled({ developers }) {
   const isDev = getIsDev();
   const id = getId();
 
-  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`
-  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`
-
-
-
+  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`;
+  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`;
 
   async function fetchProjetos() {
     await axios
@@ -69,12 +65,13 @@ function Canceled({ developers }) {
                 describe={projeto.descriptionProject}
                 progress={projeto.progress}
                 now={projeto.progress}
-                canceled={false}
+                canceled={true}
                 initDate={projeto.beginDate}
                 finishDate={projeto.finishDate}
                 company={projeto.nameCompany}
                 logoCompany={projeto.imageCompany}
                 developers={projeto.developers}
+                isDev={isDev}
               />
             ))
           )}

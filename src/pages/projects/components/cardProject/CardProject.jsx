@@ -36,7 +36,7 @@ function CardProject({
   initDate,
   company,
   logoCompany,
-  isDev
+  isDev,
 }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -74,7 +74,9 @@ function CardProject({
             <h2>{company}</h2>
           </div>
           <h2>{title}</h2>
-          <p style={{ maxWidth: "200px", wordBreak: "break-all" }}>{describe}</p>
+          <p style={{ maxWidth: "200px", wordBreak: "break-all" }}>
+            {describe}
+          </p>
         </DivLeft>
 
         <DivRight>
@@ -129,7 +131,9 @@ function CardProject({
                             >
                               <TitleImg></TitleImg>
                             </UserImg>
-                            <p style={{ fontSize: "1.25rem" }}>{developer.nameUser}</p>
+                            <p style={{ fontSize: "1.25rem" }}>
+                              {developer.nameUser}
+                            </p>
                           </div>
                         </>
                       ))}
@@ -140,8 +144,9 @@ function CardProject({
                     {developers.map((developer) => (
                       <div
                         key={developer.id}
-                        className={`developer-card ${numDevelopers > 2 ? "card-block" : ""
-                          }`}
+                        className={`developer-card ${
+                          numDevelopers > 2 ? "card-block" : ""
+                        }`}
                       >
                         <UserImg imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie">
                           <TitleImg></TitleImg>
@@ -152,8 +157,9 @@ function CardProject({
                 )}
 
                 <div
-                  className={`dev-apos ${numDevelopers > 2 && !hovered ? "display" : ""
-                    }`}
+                  className={`dev-apos ${
+                    numDevelopers > 2 && !hovered ? "display" : ""
+                  }`}
                 >
                   <SlOptions size={16} />
                 </div>
@@ -176,54 +182,46 @@ function CardProject({
                 onClick={() => setOpen(!open)}
               /> */}
 
-              {
-                isDev === "false" && (
-                  <>
-
-                    <div style={{ zIndex: 5 }}>
-                      <DropdownButton
-                        id="dropdown-toggle"
-                        as={ButtonGroup}
-                        size="sm"
-                        variant=""
-                        style={{ backgroundColor: "transparent", outline: "none" }}
-                        title={
-                          <GrConfigure
-                            size={24}
-                            alt="Botão de configurações (mais)"
-                          />
-                        }
+              {isDev === "false" && (
+                <>
+                  <div style={{ zIndex: 5 }}>
+                    <DropdownButton
+                      id="dropdown-toggle"
+                      as={ButtonGroup}
+                      size="sm"
+                      variant=""
+                      style={{
+                        backgroundColor: "transparent",
+                        outline: "none",
+                      }}
+                      title={
+                        <GrConfigure
+                          size={24}
+                          alt="Botão de configurações (mais)"
+                        />
+                      }
+                    >
+                      <Dropdown.Item
+                        as="button"
+                        className="highlight-dropdown-item"
+                        eventKey="2"
+                        onClick={() => alert("Finalizando...")} //exemplo para fazer o modal quando clicar em cada uma das opções dropdown.item
                       >
-                        <Dropdown.Item
-                          as="button"
-                          className="highlight-dropdown-item"
-                          eventKey="1"
-                          onClick={() => alert("Editando...")}
-                        >
-                          Editar
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          as="button"
-                          className="highlight-dropdown-item"
-                          eventKey="2"
-                          onClick={() => alert("Finalizando...")} //exemplo para fazer o modal quando clicar em cada uma das opções dropdown.item
-                        >
-                          Finalizar
-                        </Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item
-                          as="button"
-                          className="highlight-dropdown-item"
-                          eventKey="3"
-                          onClick={() => alert("Deletando...")}
-                        >
-                          Deletar
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </div>
-                  </>
-                )
-              }
+                        Finalizar
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item
+                        as="button"
+                        className="highlight-dropdown-item"
+                        eventKey="3"
+                        onClick={() => alert("Deletando...")}
+                      >
+                        Cancelar
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -252,7 +250,7 @@ function CardProject({
             </div>
           </DivFooterCard>
         </DivRight>
-      </DivCard >
+      </DivCard>
     </>
   );
 }

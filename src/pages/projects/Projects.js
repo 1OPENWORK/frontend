@@ -15,8 +15,8 @@ function Projects() {
   const isDev = getIsDev()
   const id = getId()
 
-  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/${id}`
-  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/${id}`
+  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/1`
+  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/3`
 
   // Exemplo
   //   axios({
@@ -73,14 +73,15 @@ function Projects() {
                 key={projeto.id}
                 title={projeto.titleProject}
                 describe={projeto.descriptionProject}
-                progress={projeto.progress}
-                now={projeto.progress}
+                progress={100}
+                now={100}
                 canceled={false}
                 initDate={projeto.beginDate}
                 finishDate={projeto.finishDate}
                 company={projeto.nameCompany}
                 logoCompany={projeto.imageCompany}
                 developers={projeto.developers}
+                isDev={isDev}
               />
             ))
           )}

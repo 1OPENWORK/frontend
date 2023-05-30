@@ -13,7 +13,7 @@ import { getToken } from "../../../../hooks/Cookies";
 export default function Board() {
   const [lists, setLists] = useState([]);
 
-  const fetchLists = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-grandes/10`;
+  const fetchLists = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-grandes/9`;
 
   const token = getToken();
 

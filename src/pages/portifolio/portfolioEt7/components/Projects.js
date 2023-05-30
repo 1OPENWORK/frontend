@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import Styled from "./Projects.style";
 import { MdAdd, MdStarBorder } from "react-icons/md";
 import Colors from "../../../../constants/Colors";
-import SideBar from "../../components/SideBar";
+import SideBar from "../../../../components/sidebar/SideBar";
 import ImageDev from "../../../../assets/imgs/imageInitial.svg";
 import { FilledButton } from "../../../../components/UI/buttons/Button";
 import { useNavigate } from "react-router-dom";

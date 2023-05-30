@@ -39,7 +39,6 @@ import {
 import Tag from "../../../components/UI/tag/tag";
 import CustomModal from "../../../components/UI/modal/Modal";
 import SubMenu from "../../../components/subMenu/subMenu";
-import NavBarList from "../../../components/navBarList/NavBarList";
 import {
   handleDashboard,
   handleFinanceTable,

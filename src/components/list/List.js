@@ -6,7 +6,7 @@
 // GENERAL
 // --------------------------------------------------------
 import { React, useState } from "react";
-import Styled from "./List.styled";
+import Styled from "./CardList.styled";
 import ListJobs from "./ListJobs";
 import { useNavigate } from "react-router-dom";
 import {

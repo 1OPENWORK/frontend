@@ -7,7 +7,7 @@ const StyledCardList = {
     height: auto;
   `,
   cardJobs: styled.div`
-    background-color: ${Colors.white2};
+    background-color: ${Colors.WHITE02};
     height: 16vh;
     display: flex;
     align-items: center;

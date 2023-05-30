@@ -16,6 +16,15 @@ import {
 import ImgContratoModelo from "../../../assets/imgs/img-contrato-modelo.svg";
 import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
+import { AmbienteBackend } from "../../../hooks/Ambiente";
+import axios from "axios";
+
+const ModeloContrado = async () => {
+  const response = await axios.get(AmbienteBackend() + `/fileS3/download/${"contrato-prestacao 3.pdf"}`, {
+  });
+
+  return response;
+};
 
 const AsignedContract = () => {
   return (
@@ -38,6 +47,7 @@ const AsignedContract = () => {
                 color={Colors.BLACK}
                 width={212}
                 heigth={41}
+                onClick={ModeloContrado()}
               >
                 Contrato modelo
               </FilledButton>

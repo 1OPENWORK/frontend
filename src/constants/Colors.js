@@ -1,5 +1,5 @@
-const PRIMARY_COLOR = "#20AC69";
-const SECONDARY_COLOR = "#4DFF7E";
+const PRIMARY_COLOR = "#20ac69";
+const SECONDARY_COLOR = "#4dff7e";
 const WHITE = "#fff";
 const WHITE01 = "#e8e8e8";
 const WHITE02 = "#495057";
@@ -14,7 +14,8 @@ const LIGHT_GREY = "cfcfcf";
 const GREEN = "#1b4332";
 const WHITE_TEST = "#f5f5f5";
 const GRAY = "#d9d9d9";
-const GRAY_EA = "EAEAEA";
+const GRAY_EA = "#eaeaea";
+const RED_ERROR = "#fd6868";
 
 // eslint-disable-next-line
 export default {
@@ -35,4 +36,5 @@ export default {
   WHITE_TEST,
   GRAY,
   GRAY_EA,
+  RED_ERROR,
 };

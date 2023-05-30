@@ -30,6 +30,20 @@ import { MdStarBorder } from "react-icons/md";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import ImgEnviarProposta from "../../assets/imgs/img-enviar-proposta.svg";
 import Colors from "../../constants/Colors";
+import { post } from "../../services/Generected";
+import { AmbienteBackend } from "../../hooks/Ambiente";
+import {  getId  } from "../../hooks/Cookies";
+//trazer id da empresa e colocar no lugar do getID, precisa tbm arrumar o endPoint para passar o id do dev
+const id = getId()
+function SendProposta() {
+  try {
+const URI = AmbienteBackend() + `/api/propostas/desenvolvedor/proposta/${id}`;
+    post(URI, id);
+  } catch (error) {
+    console.error("Erro ao cadastrar campos:", error);
+  }
+}
+
 
 const SendContract = () => {
   return (
@@ -106,6 +120,7 @@ const SendContract = () => {
                     heigth={41}
                     width={180}
                     marginTop={"2.5rem"}
+                    onClick={SendProposta()}
                   >
                     Enviar proposta
                   </FilledButton>

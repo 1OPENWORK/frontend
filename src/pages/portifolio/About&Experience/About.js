@@ -1,5 +1,5 @@
-import React from "react";
-import SideBar from "../../../components/sidebar/SideBar";
+import { React, useState } from "react";
+import SideBar from "../components/SideBar";
 import Styled from "./About.style";
 import { MdAdd } from "react-icons/md";
 import { MdStarBorder } from "react-icons/md";
@@ -11,9 +11,43 @@ import {
   PortfolioEt6Path,
   PortfolioProjectsPath,
 } from "../../../constants/Path";
+import CustomModal from "../../../components/UI/modal/Modal";
+import {
+  ModalHeader,
+  ModalTitle,
+  ModalClosedButton,
+} from "../../../components/UI/modal/Modal.styled";
+import Info from "../../../assets/icons/info.svg";
 
 function About({ isAbout }) {
   const navigate = useNavigate();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpenProject, setmodalIsOpenProject] = useState(false);
+  const [modalIsOpenExp, setmodalIsOpenExp] = useState(false);
+
+  function handleCellClick() {
+    setModalIsOpen(true);
+  }
+
+  function handleCloseModal() {
+    setModalIsOpen(false);
+  }
+
+  function handleCellClickProject() {
+    setmodalIsOpenProject(true);
+  }
+
+  function handleCloseModalProject() {
+    setmodalIsOpenProject(false);
+  }
+
+  function handleCellClickExperience() {
+    setmodalIsOpenExp(true);
+  }
+
+  function handleCloseModalExperience() {
+    setmodalIsOpenExp(false);
+  }
 
   return (
     <Styled.Container>
@@ -104,14 +138,19 @@ function About({ isAbout }) {
             </Styled.ContainerData>
 
             <Styled.ContainerButtons>
-              <FilledButton
-                marginLeft={"0px"}
-                color={Colors.BLACK}
-                width={190}
-                heigth={60}
-              >
-                Alterar dados
-              </FilledButton>
+              <Styled.ButtonInfoDiv>
+                <FilledButton
+                  marginLeft={"0px"}
+                  color={Colors.BLACK}
+                  width={190}
+                  heigth={60}
+                >
+                  Alterar dados
+                </FilledButton>
+                <Styled.Info onClick={handleCellClick}>
+                  <img src={Info}></img>
+                </Styled.Info>
+              </Styled.ButtonInfoDiv>
 
               <FilledButton
                 marginRight={"0px"}
@@ -151,7 +190,15 @@ function About({ isAbout }) {
 
             <Styled.ContainerData>
               <Styled.ContainerAboutMe>
-                <Styled.Title>Experiência</Styled.Title>
+                <Styled.ButtonInfoDiv>
+                  <Styled.Title>Experiência</Styled.Title>
+                  <Styled.Info
+                    onClick={handleCellClickExperience}
+                    tamanho={"20px"}
+                  >
+                    <img src={Info}></img>
+                  </Styled.Info>
+                </Styled.ButtonInfoDiv>
                 <Styled.Content>
                   Primeiro passos. Cadastre informações pessoais para
                   conhecermos você melhor, Primeiro passos. Cadastre informações
@@ -212,28 +259,96 @@ function About({ isAbout }) {
             </Styled.ContainerData>
 
             <Styled.ContainerButtons>
-              <FilledButton
-                marginLeft={"0px"}
-                color={Colors.BLACK}
-                width={190}
-                heigth={60}
-              >
-                Alterar dados
-              </FilledButton>
-
-              <FilledButton
-                marginRight={"0px"}
-                color={Colors.PRIMARY_COLOR}
-                width={190}
-                heigth={60}
-                onClick={() => navigate(PortfolioProjectsPath)}
-              >
-                Próximo
-              </FilledButton>
+              <Styled.ButtonInfoDiv>
+                <FilledButton
+                  marginLeft={"0px"}
+                  color={Colors.BLACK}
+                  width={190}
+                  heigth={60}
+                >
+                  Alterar dados
+                </FilledButton>
+                <Styled.Info onClick={handleCellClick}>
+                  <img src={Info}></img>
+                </Styled.Info>
+              </Styled.ButtonInfoDiv>
+              <Styled.ButtonInfoDiv>
+                <FilledButton
+                  marginRight={"0px"}
+                  color={Colors.PRIMARY_COLOR}
+                  width={190}
+                  heigth={60}
+                  onClick={() => navigate(PortfolioProjectsPath)}
+                >
+                  Projetos
+                </FilledButton>
+                <Styled.Info onClick={handleCellClickProject} tamanho={"20px"}>
+                  <img src={Info}></img>
+                </Styled.Info>
+              </Styled.ButtonInfoDiv>
             </Styled.ContainerButtons>
           </Styled.ContainerContent>
         </>
       )}
+
+      <CustomModal
+        isOpen={modalIsOpen}
+        onClose={handleCloseModal}
+        tamanho={"545px"}
+        altura={"230px"}
+      >
+        <ModalHeader>
+          <ModalTitle>Alterar Dados</ModalTitle>
+          <ModalClosedButton onClick={handleCloseModal}>x</ModalClosedButton>
+        </ModalHeader>
+        <Styled.InfoText>
+          O botão de alterar dados é como uma varinha mágica que lhe dá o poder
+          de atualizar e modificar as informações sobre você. Quando você clica
+          nesse botão, uma nova janela aparece na tela, onde você pode
+          adicionar, editar ou corrigir os detalhes que deseja compartilhar com
+          os outros.
+        </Styled.InfoText>
+      </CustomModal>
+
+      <CustomModal
+        isOpen={modalIsOpenProject}
+        onClose={handleCloseModalProject}
+        tamanho={"545px"}
+        altura={"230px"}
+      >
+        <ModalHeader>
+          <ModalTitle>Projetos</ModalTitle>
+          <ModalClosedButton onClick={handleCloseModalProject}>
+            x
+          </ModalClosedButton>
+        </ModalHeader>
+        <Styled.InfoText>
+          O botão de Projetos é como um portal mágico que revela os trabalhos
+          incríveis que você realizou ou está realizando. Ao clicar nesse botão,
+          uma janela se abre, revelando uma galeria de projetos que você deseja
+          compartilhar com o mundo.
+        </Styled.InfoText>
+      </CustomModal>
+
+      <CustomModal
+        isOpen={modalIsOpenExp}
+        onClose={handleCloseModalExperience}
+        tamanho={"545px"}
+        altura={"230px"}
+      >
+        <ModalHeader>
+          <ModalTitle>Experiência</ModalTitle>
+          <ModalClosedButton onClick={handleCloseModalExperience}>
+            x
+          </ModalClosedButton>
+        </ModalHeader>
+        <Styled.InfoText>
+          Suas experiências são como uma carta pessoal escrita especialmente para quem quer te conhecer.
+          Nesse bloco, compartilhe histórias emocionantes e valiosas sobre sua
+          trajetória profissional e pessoal, revelando momentos marcantes e
+          aprendizados ao longo do caminho.
+        </Styled.InfoText>
+      </CustomModal>
     </Styled.Container>
   );
 }

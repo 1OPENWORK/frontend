@@ -40,7 +40,7 @@ const RegisterEt4 = () => {
 
   const listar = async () => {
     const dados = await handleProeficiency();
-    setProeficiency(dados.data);
+    setProeficiency(dados.data)
   };
 
   const handleSubmitReducer = () => {

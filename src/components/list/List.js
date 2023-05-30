@@ -24,6 +24,7 @@ import {
   ModalTitle,
   ModalClosedButton,
 } from "../../components/UI/modal/Modal.styled.js";
+import ModalStatus from "../UI/modal/modal-status/ModalStatus";
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -41,6 +42,7 @@ const List = ({ type }) => {
   const navigate = useNavigate();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalStatusIsOpen, setmodalStatusIsOpen] = useState(false);
 
   const desenvolvedoresList = [
     { label: "Nome", value: "Nome" },
@@ -67,6 +69,14 @@ const List = ({ type }) => {
 
   function handleCloseModal() {
     setModalIsOpen(false);
+  }
+
+  function handleOpenModalStatus() {
+    setmodalStatusIsOpen(true);
+  }
+
+  function handleCloseModalStatus() {
+    setmodalStatusIsOpen(false);
   }
 
   return (
@@ -161,6 +171,20 @@ const List = ({ type }) => {
           }
         />
       </CustomModal>
+
+      <CustomModal
+        isOpen={modalStatusIsOpen}
+        onClose={handleCloseModalStatus}
+        tamanho={"545px"}
+        altura={"250px"}
+        children={
+          <ModalStatus
+            status={"success"}
+            texto={"Acerto em bla bla bla"}
+            onClose={handleCloseModalStatus}
+          />
+        }
+      ></CustomModal>
     </>
   );
 };

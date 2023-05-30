@@ -8,7 +8,7 @@ export const handleLogin = async (body) => {
 };
 
 export const handleInformationsUser = async (id) => {
-  return await get(`${URI}/api/usuarios/perfil/` + id);
+  return await get(`${URI}/api/usuarios/perfil/${id}`);
 };
 
 

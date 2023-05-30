@@ -3,9 +3,7 @@ import { ContainerMain, ContainerContent } from "./Projects.styled";
 import CardProject from "./components/cardProject/CardProject";
 import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
 import axios from "axios";
-import Cookies from "js-cookie";
-import { canceledPath } from "../../constants/Path";
-import { Navigate } from "react-router-dom";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 
 function Projects() {
   const [projetos, setProjetos] = useState([]);
@@ -15,8 +13,8 @@ function Projects() {
   const id = 1;
 
   const fetchChange = isDev
-    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/${id}`
-    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/${id}`;
+    ? AmbienteBackend() + `/projetos-aceitos/completos/desenvolvedor/${id}`
+    : AmbienteBackend() + `/projetos-aceitos/completos/empresa/${id}`;
 
   // Exemplo
   //   axios({
@@ -43,6 +41,7 @@ function Projects() {
     }
 
     fetchProjetos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

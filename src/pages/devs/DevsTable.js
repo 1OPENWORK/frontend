@@ -4,6 +4,7 @@ import "../avaliacoes/Table.styled";
 import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -17,8 +18,7 @@ import { get } from "../../services/Generected";
  */
 
 const Desenvolvedores = () => {
-  const URI =
-    process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/usuarios/desenvolvedores";
+  const URI = AmbienteBackend() + +"/api/usuarios/desenvolvedores";
 
   const [devs, setDevs] = useState([]);
 
@@ -29,6 +29,7 @@ const Desenvolvedores = () => {
 
   useEffect(() => {
     handleFetchDesenvolvedores();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -52,7 +53,11 @@ const Desenvolvedores = () => {
               >
                 <td>
                   <div className="containerCompany">
-                    <img className="img" src={dados.image} />
+                    <img
+                      className="img"
+                      src={dados.image}
+                      alt="imagem usuário"
+                    />
                     <div className="profileInformation">
                       <h1>{dados.name}</h1>
                       <div className="grade">

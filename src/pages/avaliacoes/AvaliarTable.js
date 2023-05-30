@@ -10,14 +10,14 @@ import { get, post } from "../../services/Generected";
 import { useEffect } from "react";
 import moment from "moment";
 import { getId } from "../../hooks/Cookies";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 
 const AvaliarTeste = () => {
-  const URIGet =
-    process.env.REACT_APP_BACKEND_LOCAL_HOST + "/avaliacoes/desenvolvedor/3";
-  const [avaliar, setAvaliar] = useState([]);
+  const [avaliar, setAvaliar] = useState();
   const [avaliacao, setAvaliacao] = useState([]);
   const [avaliacaoAtual, setAvaliacaoAtual] = useState({});
   const idUser = getId();
+  const URIGet = AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`;
 
   async function handleFetchAvaliacao() {
     const response = await get(URIGet);
@@ -26,12 +26,13 @@ const AvaliarTeste = () => {
 
   async function handleFetchAvaliar(id) {
     console.log(avaliar);
-    const URI = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
+    const URI =
+      AmbienteBackend() +
+      `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
 
-    if (response.status === 200) handleAvaliacaoAtual();
-
-    // setAvaliar(response);
+    if (response.status === 201) handleAvaliacaoAtual();
+    setAvaliar(response);
   }
 
   function handleAvaliacaoAtual(itemId, index) {
@@ -45,6 +46,7 @@ const AvaliarTeste = () => {
 
   useEffect(() => {
     handleFetchAvaliacao();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -70,7 +72,7 @@ const AvaliarTeste = () => {
                 >
                   <td>
                     <div className="containerCompany">
-                      <img className="img" src={dados.image} />
+                      <img className="img" src={dados.image} alt="logo" />
                       <div className="profileInformation">
                         <h1>{dados.name}</h1>
                         <div className="grade">

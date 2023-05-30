@@ -31,6 +31,7 @@ import {
 } from "../../constants/Path";
 import CardHelp from "../../components/UI/chatbot/Landbot";
 import { getEmail, getIsDev } from "../../hooks/Cookies.js";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 
 const HomeDev = () => {
   const navigate = useNavigate();
@@ -42,8 +43,7 @@ const HomeDev = () => {
   function handleButtonClick() {
     setShowCardHelp(true);
     try {
-      const URI =
-        process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/cadastroFila";
+      const URI = AmbienteBackend() + "/api/queue/cadastroFila";
       const dados = {
         email: getEmail(),
         tipo: getIsDev() ? "DESENVOLVEDOR" : "EMPRESA",

@@ -7,10 +7,11 @@ import { get } from "../../services/Generected";
 import { useEffect } from "react";
 import moment from "moment";
 import { getId } from "../../hooks/Cookies";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 
 const AvaliacaoTeste = ({ type }) => {
   const id = getId();
-  const URI = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/avaliacoes/desenvolvedor/${id}`;
+  const URI = AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`;
   const [avaliacao, setAvaliacao] = useState([]);
 
   async function handleFetchAvaliacao() {
@@ -21,6 +22,7 @@ const AvaliacaoTeste = ({ type }) => {
 
   useEffect(() => {
     handleFetchAvaliacao();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -63,11 +65,15 @@ const AvaliacaoTeste = ({ type }) => {
                 <td>
                   <div className="evaluate">
                     <div className="stars">
-                      <MdStar size={24} />
-                      <MdStar size={24} />
-                      <MdStarBorder size={24} />
-                      <MdStarBorder size={24} />
-                      <MdStarBorder size={24} />
+                      {[...Array(5)].map((_, index) => (
+                        <span key={index}>
+                          {index < dados.myGrade ? (
+                            <MdStar color="yellow" size={24} />
+                          ) : (
+                            <MdStar color="gray" size={24} />
+                          )}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </td>

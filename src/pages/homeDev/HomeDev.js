@@ -37,9 +37,6 @@ const HomeDev = () => {
   const navigate = useNavigate();
   const [showCardHelp, setShowCardHelp] = useState(false);
 
-  console.log(getEmail());
-  console.log(getIsDev());
-
   function handleButtonClick() {
     setShowCardHelp(true);
     try {
@@ -50,7 +47,6 @@ const HomeDev = () => {
       };
 
       post(URI, dados);
-      console.log("Fila cadastrada com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar campos:", error);
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import moment from "moment";
 import {
   DivCard,
@@ -23,7 +23,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { usePopper } from "react-popper";
-import Cookies from 'js-cookie';
+import { TodoPath } from "../../../../constants/Path"
 
 function CardProject({
   developers,
@@ -37,7 +37,6 @@ function CardProject({
   logoCompany,
 }) {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const numDevelopers = developers.length;
 
@@ -53,7 +52,7 @@ function CardProject({
 
   const clickNavigate = () => {
     setClicked(true);
-    navigate("/gerenciador");
+    navigate(TodoPath);
   };
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {

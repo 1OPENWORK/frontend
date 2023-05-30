@@ -25,7 +25,6 @@ const AvaliarTeste = () => {
   }
 
   async function handleFetchAvaliar(id) {
-    console.log(avaliar);
     const URI =
       AmbienteBackend() +
       `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;

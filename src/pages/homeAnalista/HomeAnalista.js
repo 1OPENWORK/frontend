@@ -56,11 +56,6 @@ const HomeAnalista = () => {
       )
       .then(
         (response) => {
-          console.log(
-            "Email enviado com sucesso!",
-            response.status,
-            response.text
-          );
           setAssunto("");
           setDescricao("");
         },
@@ -81,7 +76,6 @@ const HomeAnalista = () => {
 
       // Enviar o email com o assunto e descrição
       enviarEmail(assuntoEmail, descricaoEmail);
-      console.log("Email enviado com sucesso!");
     } catch (error) {
       console.error("Erro ao enviar o email:", error);
     }
@@ -96,7 +90,6 @@ const HomeAnalista = () => {
       };
 
       await post(URI, dados);
-      console.log("Pilha cadastrada com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar na pilha:", error);
     }
@@ -151,8 +144,8 @@ const HomeAnalista = () => {
         );
 
         if (response.ok) {
+          // eslint-disable-next-line no-unused-vars
           const valorTopo = await response.text();
-          console.log("Elemento excluído:", valorTopo);
         } else {
           console.error("Não foi possível excluir o elemento da fila.");
         }

@@ -17,7 +17,6 @@ const AvaliacaoTeste = ({ type }) => {
   async function handleFetchAvaliacao() {
     const response = await get(URI);
     setAvaliacao(response.data.myAvaliations);
-    console.log(response);
   }
 
   useEffect(() => {

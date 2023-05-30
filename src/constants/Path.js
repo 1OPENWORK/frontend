@@ -1,28 +1,28 @@
 const HomePagePath = "/";
-const AuthPath = "/login";
+const AuthPath = "/entrar";
 const ChatPath = "/chat";
 const RegisterPath = "/cadastro";
 const JobsPath = "/jobs";
-const HomeAnalistaPath = "/homeAnalista";
-const HomeDevPath = "/desenvolvedor";
+const HomeAnalistaPath = "/home-analista";
+const HomeDevPath = "/home-dev";
 const DevsPath = "/desenvolvedores";
 const AvaliacoesPath = "/avaliacoes";
 const DashboardFinanceiraPath = "/dashboard";
 const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
-const TodoPath = "/gerenciador";
+const TodoPath = "/gerenciador-tarefas";
 const PortfolioSobreMim = "/portfolio/sobre-mim";
 const PortfolioExperiencia = "/portfolio/experiencias";
 const PortfolioProjectsPath = "/portfolio/projetos";
-const AvaliarPath = "avaliacoes/avaliar";
-const IndexPath = "/videoConferencia";
+const AvaliarPath = "/avaliacoes/avaliar";
+const IndexPath = "/video-conferencia";
 const ProgressPath = "/projetos-andamentos";
 const ProjectsPath = "/projetos-concluidos";
 const canceledPath = "/projetos-cancelados";
 const CreateProjectPath = "/cadastrar-projeto";
 const SendContractPath = "/enviar-contrato";
-const AsignedContractPath = "assinar-contrato";
+const AsignedContractPath = "/assinar-contrato";
 
 module.exports = {
   HomePagePath,

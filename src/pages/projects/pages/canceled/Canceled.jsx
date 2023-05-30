@@ -23,7 +23,6 @@ function Canceled({ developers }) {
       await axios
         .get(fetchChange)
         .then((response) => {
-          console.log(response);
 
           if (response.status === 200) {
             setLoading(false);
@@ -31,7 +30,6 @@ function Canceled({ developers }) {
           }
         })
         .catch((error) => {
-          console.log("Deu erro: " + error);
         });
     }
 

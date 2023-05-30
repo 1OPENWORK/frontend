@@ -16,11 +16,9 @@ const Progress = ({ developers }) => {
         .get(AmbienteBackend() + `/api/projetos-aceitos/assinados`)
         .then((response) => {
           setProjetos(response.data);
-          console.log(response.data);
           setLoading(false);
         })
         .catch((error) => {
-          console.log("Deu erro: " + error);
         });
     }
 

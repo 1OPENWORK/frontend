@@ -1,4 +1,4 @@
-import{ React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import {
   DashboardContainer,
   ContainerCards,
@@ -20,23 +20,25 @@ import Event from "../../assets/imgs/events-calendar-dashboard.svg";
 import Styled from "../../components/navBar/NavBar.styled";
 import BarChart from "../../components/charts/BarChart";
 import SemiCircleDonutChart from "../../components/charts/SemiCircleDonutChart";
-import List from "../../components/list/List";
-import { handleDashboard, handleFinanceTable } from "../../store/actions/Dashboard";
+import {
+  handleDashboard,
+  handleFinanceTable,
+} from "../../store/actions/Dashboard";
 import Cookies from "js-cookie";
 
 const Dashboard = () => {
-
   const [totalMes, settotalMes] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [quantidadeJobs, setquantidadeJobs] = useState("");
   const [tabelas, settabelas] = useState([]);
 
   async function getDashboard() {
     try {
       const response = await handleDashboard();
-      settotalMes(response.data.totalMes)
-      setquantidadeJobs(response.data.quantidadeJobs)
-    }catch{
-      console.log("error")
+      settotalMes(response.data.totalMes);
+      setquantidadeJobs(response.data.quantidadeJobs);
+    } catch {
+      console.log("error");
     }
   }
 
@@ -49,12 +51,11 @@ const Dashboard = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getTableFinance();
-  }, [])
+  }, []);
 
-
-  getDashboard()
+  getDashboard();
 
   return (
     <>
@@ -77,7 +78,7 @@ const Dashboard = () => {
               </div>
               <ContentCard>
                 <Paragraph>Quantidade de Jobs</Paragraph>
-                <h2>  {tabelas.length} Jobs</h2>
+                <h2> {tabelas.length} Jobs</h2>
               </ContentCard>
             </ContainerCard>
           </ContainerCards>

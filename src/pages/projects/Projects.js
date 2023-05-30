@@ -31,12 +31,10 @@ function Projects() {
         .get(fetchChange)
         .then((response) => {
           setProjetos(response.data);
-          console.log(response);
 
           setLoading(false);
         })
         .catch((error) => {
-          console.log("Deu erro: " + error);
         });
     }
 

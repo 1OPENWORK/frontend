@@ -25,6 +25,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 function CreateProject() {
   const navigate = useNavigate();
@@ -43,11 +44,12 @@ function CreateProject() {
 
   const fetchChange =
     selectedOption === 1
-      ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST_DEVELOPEING}/api/projetos-grandes`
-      : `${process.env.REACT_APP_BACKEND_LOCAL_HOST_DEVELOPEING}/api/projetos-pequenos`;
+      ? AmbienteBackend() + `/api/projetos-grandes`
+      : AmbienteBackend() + `/api/projetos-pequenos`;
 
   useEffect(() => {
     listar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
   const openModal = () => {
@@ -74,19 +76,6 @@ function CreateProject() {
       theme: "light",
     });
   };
-
-  // const notifyError = () => {
-  //   toast.error("Algo está errado com cadastro", {
-  //     position: "top-left",
-  //     autoClose: 2500,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //   });
-  // };
 
   const notifyInfo = () => {
     toast.info("Ferramenta já adicionada", {
@@ -125,7 +114,7 @@ function CreateProject() {
   async function fetchUser() {
     await axios
       .get(
-        `${process.env.REACT_APP_BACKEND_LOCAL_HOST_DEVELOPEING}/api/empresas/${idCompany}`
+        AmbienteBackend() + `/api/empresas/${idCompany}`
       )
       .then((response) => {
         setInfoUser(response.data);
@@ -138,6 +127,7 @@ function CreateProject() {
 
   useEffect(() => {
     fetchUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //cadastro projetos - POST

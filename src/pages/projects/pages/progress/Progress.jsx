@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { getId, getIsDev, getToken } from "../../../../hooks/Cookies";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const Progress = ({ developers }) => {
   const [projetos, setProjetos] = useState([]);
@@ -16,8 +17,8 @@ const Progress = ({ developers }) => {
   const id = getId();
   const token = getToken();
 
-  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/andamentos/empresa/${id}`
-  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/andamentos/desenvolvedor/${id}`
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/andamentos/empresa/${id}`
+  const fetchDev = AmbienteBackend() + `/projetos-aceitos/andamentos/desenvolvedor/${id}`
 
 
 
@@ -52,6 +53,7 @@ const Progress = ({ developers }) => {
 
   useEffect(() => {
     fetchProjetos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

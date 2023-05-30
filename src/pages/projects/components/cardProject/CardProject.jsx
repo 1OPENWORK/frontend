@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import moment from "moment";
 import {
   DivCard,
@@ -23,8 +23,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { usePopper } from "react-popper";
-import Cookies from "js-cookie";
 import Colors from "../../../../constants/Colors";
+import { TodoPath } from "../../../../constants/Path"
 
 function CardProject({
   developers,
@@ -39,7 +39,6 @@ function CardProject({
   isDev,
 }) {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const numDevelopers = developers.length;
 
@@ -50,7 +49,7 @@ function CardProject({
 
   const clickNavigate = () => {
     setClicked(true);
-    navigate("/gerenciador");
+    navigate(TodoPath);
   };
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -165,23 +164,6 @@ function CardProject({
                 </div>
               </div>
 
-              {/* {open && (
-                <DivConfig>
-                  <Ul>
-                    <Li>Editar</Li>
-                    <Li>Finalizar</Li>
-                    <Li>Deletar</Li>
-                  </Ul>
-                </DivConfig>
-              )}
-
-              <GrSettingsOption
-                color={"#e5e5e5"}
-                className="btn-config"
-                size={18}
-                onClick={() => setOpen(!open)}
-              /> */}
-
               {isDev === "false" && (
                 <>
                   <div style={{ zIndex: 5 }}>
@@ -205,7 +187,7 @@ function CardProject({
                         as="button"
                         className="highlight-dropdown-item"
                         eventKey="2"
-                        onClick={() => alert("Finalizando...")} //exemplo para fazer o modal quando clicar em cada uma das opções dropdown.item
+                        onClick={() => alert("Finalizando...")}
                       >
                         Finalizar
                       </Dropdown.Item>

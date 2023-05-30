@@ -1,9 +1,7 @@
 import React from "react";
 
 import { BodyContainerProjecteds, Container } from "./SidebarProjecteds.styled";
-import { MdOutlineRunCircle } from "react-icons/md";
-import { AiOutlineCheckCircle, AiFillFolderAdd } from "react-icons/ai";
-import { TiCancel } from "react-icons/ti";
+import { AiFillFolderAdd } from "react-icons/ai";
 import { MdArrowBack } from "react-icons/md";
 import Colors from "../../../../constants/Colors";
 import { useNavigate } from "react-router";
@@ -25,7 +23,7 @@ function SidebarProjecteds({ type }) {
 
   const isDev = getIsDev();
 
-  const [color, setColor] = useState("#fff");
+  // eslint-disable-next-line no-unused-vars
   const [typeUse, setType] = useState(type);
 
   const goToHomeDev = () => {

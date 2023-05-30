@@ -5,7 +5,6 @@ const Container = styled.div`
   justify-content: space-around;
   height: 100vh;
   font-family: nunito;
-
 `;
 
 const ContainerLeft = styled.div`
@@ -26,7 +25,6 @@ const ContainerRight = styled.div`
   flex-direction: column;
   background-color: "#F5F5F5";
   padding: 3%;
-  
 `;
 
 const ContainerTitle = styled.div`
@@ -65,7 +63,7 @@ const InputMore = styled.textarea`
   color: white;
 `;
 
-const buttonLeft = styled.button`
+const ButtonLeft = styled.button`
   background: ${(props) => (props.primary ? "#FFFFFF" : "#20AC69")};
   border-radius: 8px;
   font-family: "Nunito";
@@ -118,8 +116,7 @@ const ContainerRole = styled.div`
   margin-bottom: 10%;
 `;
 
-
-const textRole1 = styled.div`
+const TextRole1 = styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 900;
@@ -129,7 +126,7 @@ const textRole1 = styled.div`
   color: #20ac69;
 `;
 
-const textRole2 = styled.div`
+const TextRole2 = styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 900;
@@ -138,7 +135,6 @@ const textRole2 = styled.div`
   text-align: center;
   color: #20ac69;
 `;
-
 
 const ContainerTableRole = styled.div`
   width: 80%;
@@ -162,13 +158,12 @@ const ContainerTable = styled.div`
   margin-bottom: 1vh;
   min-height: 12vh; /* Define uma altura mínima */
   &.highlighted {
-    background-color: #F34B4B;
+    background-color: #f34b4b;
     /* Outros estilos para o elemento destacado */
   }
 `;
 
-
-const textTable1 = styled.div`
+const TextTable1 = styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 900;
@@ -178,7 +173,7 @@ const textTable1 = styled.div`
   color: #161616;
 `;
 
-const textTable2 = styled.div`
+const TextTable2 = styled.div`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 900;
@@ -197,19 +192,19 @@ const StyledHomeAnalista = {
   ContainerTitle,
   ContainerLeft,
   ContainerRight,
-  inputText,
+  InputText: inputText,
   Input,
   InputMore,
   H1,
-  buttonLeft,
+  ButtonLeft,
   ContainerTitle2,
   ContainerText2,
   ContainerRole,
-  textRole1,
-  textRole2,
+  TextRole1,
+  TextRole2,
   ContainerTable,
-  textTable1,
-  textTable2,
+  TextTable1,
+  TextTable2,
   ContainerTableRole,
   ExcluirText,
 };

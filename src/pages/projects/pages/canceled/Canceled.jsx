@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { getId, getIsDev } from "../../../../hooks/Cookies";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 // import Cookies from "js-cookie";
 function Canceled({ developers }) {
@@ -16,8 +17,8 @@ function Canceled({ developers }) {
   const isDev = getIsDev();
   const id = getId();
 
-  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`;
-  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`;
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/cancelados/empresa/${id}`;
+  const fetchDev = AmbienteBackend() + `/projetos-aceitos/cancelados/desenvolvedor/${id}`;
 
   async function fetchProjetos() {
     await axios
@@ -40,6 +41,7 @@ function Canceled({ developers }) {
 
   useEffect(() => {
     fetchProjetos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

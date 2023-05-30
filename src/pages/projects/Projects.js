@@ -3,7 +3,7 @@ import { ContainerMain, ContainerContent } from "./Projects.styled";
 import CardProject from "./components/cardProject/CardProject";
 import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
 import axios from "axios";
-
+import { AmbienteBackend } from "../../hooks/Ambiente";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { getId, getIsDev } from "../../hooks/Cookies";
 
@@ -15,17 +15,8 @@ function Projects() {
   const isDev = getIsDev();
   const id = getId();
 
-  const fetchDev = `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`;
-  const fetchCompany = `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`;
-
-  // Exemplo
-  //   axios({
-  //     method: "get",
-  //     url: "",
-  //     responseType: "stream",
-  //   }).then(function (response) {
-  //     response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
-  //   });
+  const fetchDev =  AmbienteBackend() + `/projetos-aceitos/completos/desenvolvedor/${id}`
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/completos/empresa/${id}`;
 
   async function fetchProjetos() {
     await axios
@@ -34,22 +25,20 @@ function Projects() {
         if (response.status === 200) {
           setLoading(false);
           setProjetos(response.data);
-          console.log(response);
         } else if (response.status === 204) {
           setLoading(false);
           setNoProject(true);
-          console.log("caiu aqui", response);
         }
       })
       .catch((error) => {
         setLoading(false);
         setNoProject(true);
-        console.log("Deu erro: " + error);
       });
   }
 
   useEffect(() => {
     fetchProjetos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

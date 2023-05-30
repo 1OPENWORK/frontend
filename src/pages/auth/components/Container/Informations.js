@@ -10,6 +10,7 @@ import Styled from "./Informations.styled";
 import Logo from "../../../../assets/imgs/logo.svg";
 import ArrowLeftWhite from "../../../../assets/icons/iconWhiteArrowLeft.svg";
 import { useNavigate } from "react-router-dom";
+import { HomePagePath } from "../../../../constants/Path"
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -71,16 +72,16 @@ const InformationsAuth = ({
             }}
           >
             {isRegister ?  <Styled.DivHomeBack>
-              <Styled.BtnRetorno onClick={() => navigate("/")}>
+              <Styled.BtnRetorno onClick={() => navigate(HomePagePath)}>
                 <img src={ArrowLeftWhite} alt="" />
                 {textButton}
               </Styled.BtnRetorno>
-              <Styled.BtnRetorno onClick={() => navigate("/")}>
+              <Styled.BtnRetorno onClick={() => navigate(HomePagePath)}>
                 <img src={ArrowLeftWhite} alt="" />
                 {textButtonVoltar}
               </Styled.BtnRetorno>
             </Styled.DivHomeBack> : <Styled.DivHomeBack>
-              <Styled.BtnRetorno onClick={() => navigate("/")}>
+              <Styled.BtnRetorno onClick={() => navigate(HomePagePath)}>
                 <img src={ArrowLeftWhite} alt="" />
                 {textButton}
               </Styled.BtnRetorno>

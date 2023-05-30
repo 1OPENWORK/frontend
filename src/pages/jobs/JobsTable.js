@@ -4,9 +4,10 @@ import "../avaliacoes/Table.styled";
 import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 
-const JobsTeste = ({ type }) => {
-  const URI = process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/projetos";
+const JobsTeste = () => {
+  const URI = AmbienteBackend() + "/api/projetos";
 
   const [devs, setDevs] = useState([]);
 
@@ -17,6 +18,7 @@ const JobsTeste = ({ type }) => {
 
   useEffect(() => {
     handleFetchJobs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -42,7 +44,7 @@ const JobsTeste = ({ type }) => {
               >
                 <td>
                   <div className="containerCompany">
-                    <img className="img" src={dados.imageCompany} />
+                    <img className="img" src={dados.imageCompany} alt="logo" />
                     <div className="profileInformation">
                       <h1>{dados.nameCompany}</h1>
                       <div className="grade">

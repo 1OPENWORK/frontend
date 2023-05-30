@@ -4,6 +4,7 @@ import { ContainerContent, ContainerMain } from "../../Projects.styled";
 import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 // import Cookies from "js-cookie";
 function Canceled({ developers }) {
@@ -14,15 +15,14 @@ function Canceled({ developers }) {
   const id = 1;
 
   const fetchChange = isDev
-    ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/desenvolvedor/${id}`
-    : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/cancelados/empresa/${id}`;
+    ? AmbienteBackend() + `/projetos-aceitos/cancelados/desenvolvedor/${id}`
+    : AmbienteBackend() + `/projetos-aceitos/cancelados/empresa/${id}`;
 
   useEffect(() => {
     async function fetchProjetos() {
       await axios
         .get(fetchChange)
         .then((response) => {
-          console.log(response);
 
           if (response.status === 200) {
             setLoading(false);
@@ -30,11 +30,11 @@ function Canceled({ developers }) {
           }
         })
         .catch((error) => {
-          console.log("Deu erro: " + error);
         });
     }
 
     fetchProjetos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

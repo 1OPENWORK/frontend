@@ -22,7 +22,6 @@ import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { HomeDevPath } from "../../constants/Path";
-import axios from "axios";
 import { changeSave } from "../../store/reducers/PerfilSlice";
 // --------------------------------------------------------
 // Auth INTERFACE

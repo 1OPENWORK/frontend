@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
-import List from "../../../components/list/List";
 import NavBarList from "../../../components/navBarList/NavBarList";
 import Styled from "../../../components/navBar/NavBar.styled";
 import WalletImg from "../../../assets/imgs/wallet.svg";
@@ -18,7 +16,6 @@ import {
   TableHeadTh,
   TableHeadThFirst,
   TableHeadThLast,
-  TableBodyTr,
   TableBodyTd,
   ModalHeader,
   ModalClosedButton,
@@ -43,7 +40,6 @@ import {
   handleDashboard,
   handleFinanceTable,
 } from "../../../store/actions/Dashboard";
-import axios from "axios";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
 
@@ -62,7 +58,6 @@ const Financeira = () => {
   const [totalMes, settotalMes] = useState("");
   const [tabelas, settabelas] = useState([]);
 
-
   async function getTableFinance() {
     try {
       const response = await handleFinanceTable(Cookies.get("id"));
@@ -72,10 +67,9 @@ const Financeira = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getTableFinance();
-  }, [])
-
+  }, []);
 
   async function getDashboard() {
     try {
@@ -87,7 +81,6 @@ const Financeira = () => {
   }
 
   getDashboard();
-
 
   const handleCellClick = (projeto) => {
     setProjetoSelecionado(projeto);

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
-import { object, string, ref } from "yup";
+import { object, string } from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
@@ -29,7 +29,6 @@ const RegisterCompany = () => {
   const [email, setEmail] = useState("");
   const [setor, setSetor] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [isNext, setIsNext] = useState(false);
   const [verified, setVerified] = useState(false);
 
   const validRegister = object({
@@ -94,6 +93,7 @@ const RegisterCompany = () => {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   function nextEtapa() {
     dispatch(
       changeEtapaAll({
@@ -138,8 +138,8 @@ const RegisterCompany = () => {
             className="InputMask2"
             mask="99.999.999/9999-99"
             value={cnpj}
-            onChange={e => setCnpj(e.target.value)}
-            onKeyPress={event => {
+            onChange={(e) => setCnpj(e.target.value)}
+            onKeyPress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
               }
@@ -150,16 +150,14 @@ const RegisterCompany = () => {
       </Styled.Row>
 
       <Styled.Divisor align={"flex-end"} style={{ width: "48.125rem" }}>
-    
-          <FilledButton
-            onClick={handleForm}
-            color={Colors.SECONDARY_COLOR}
-            width={190}
-            heigth={60}
-          >
-            {"Cadastrar"}
-          </FilledButton>
-     
+        <FilledButton
+          onClick={handleForm}
+          color={Colors.SECONDARY_COLOR}
+          width={190}
+          heigth={60}
+        >
+          {"Cadastrar"}
+        </FilledButton>
       </Styled.Divisor>
     </Styled.Form>
   );

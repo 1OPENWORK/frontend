@@ -4,6 +4,7 @@ import { ContainerContent, ContainerMain } from "../../Projects.styled";
 import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const Progress = ({ developers }) => {
   const [projetos, setProjetos] = useState([]);
@@ -12,16 +13,12 @@ const Progress = ({ developers }) => {
   useEffect(() => {
     async function fetchProjetos() {
       await axios
-        .get(
-          `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-aceitos/assinados`
-        )
+        .get(AmbienteBackend() + `/api/projetos-aceitos/assinados`)
         .then((response) => {
           setProjetos(response.data);
-          console.log(response.data);
           setLoading(false);
         })
         .catch((error) => {
-          console.log("Deu erro: " + error);
         });
     }
 

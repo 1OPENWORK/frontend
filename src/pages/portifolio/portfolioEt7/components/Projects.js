@@ -90,7 +90,7 @@ function Projects() {
                 Alterar dados
               </FilledButton>
               <Styled.Info onClick={handleCellClick}>
-                <img src={Info}></img>
+                <img src={Info} alt="info"></img>
               </Styled.Info>
             </Styled.ButtonInfoDiv>
             <Styled.ButtonInfoDiv>
@@ -104,7 +104,7 @@ function Projects() {
                 Experiências
               </FilledButton>
               <Styled.Info onClick={handleCellClickExperience} tamanho={"20px"}>
-                <img src={Info}></img>
+                <img src={Info} alt="info"></img>
               </Styled.Info>
             </Styled.ButtonInfoDiv>
           </Styled.ContainerButtons>

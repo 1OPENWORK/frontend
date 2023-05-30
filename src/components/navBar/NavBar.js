@@ -5,14 +5,14 @@
 // --------------------------------------------------------
 // GENERAL
 // --------------------------------------------------------
-import React, { useState } from "react";
+import React from "react";
 import Colors from "../../constants/Colors";
 import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
 import { useNavigate } from "react-router-dom";
 import { deleteId, deleteIsDev, deleteToken } from "../../hooks/Cookies";
-import Cookies from "js-cookie";
+import { HomeDevPath, ProgressPath, ComunidadePath, DashboardFinanceiraPath, HomePagePath, AuthPath, RegisterPath } from "../../constants/Path"
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -33,13 +33,12 @@ const NavBar = ({ nav }) => {
 
   // --------------------------------------------------------
   const navigate = useNavigate();
-  const [type] = useState("logado");
 
   const deslogar = () => {
     deleteToken();
     deleteId();
     deleteIsDev();
-    navigate("/login");
+    navigate(AuthPath);
   };
 
   // --------------------------------------------------------
@@ -52,22 +51,22 @@ const NavBar = ({ nav }) => {
           <Styled.Divisor>
             <Styled.LogoImg
               src={Logo}
-              onClick={() => navigate("/desenvolvedor")}
+              onClick={() => navigate(HomeDevPath)}
             />
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar onClick={() => navigate("/projetos-andamentos")} size={24}>
+            <Styled.TitleNavBar onClick={() => navigate(ProgressPath)} size={24}>
               {"Projetos"}
             </Styled.TitleNavBar>
             <Styled.TitleNavBar
-              onClick={() => navigate("/comunidade")}
+              onClick={() => navigate(ComunidadePath)}
               size={24}
             >
               {"Comunidade"}
             </Styled.TitleNavBar>
             <Styled.TitleNavBar
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate(DashboardFinanceiraPath)}
               size={24}
             >
               {"Financeiro"}
@@ -90,11 +89,11 @@ const NavBar = ({ nav }) => {
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar onClick={() => navigate("/projetos")} size={24}>
+            <Styled.TitleNavBar onClick={() => navigate(ProgressPath)} size={24}>
               {"Projetos"}
             </Styled.TitleNavBar>
             <Styled.TitleNavBar
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate(DashboardFinanceiraPath)}
               size={24}
             >
               {"Financeiro"}
@@ -113,7 +112,7 @@ const NavBar = ({ nav }) => {
       ) : (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} onClick={() => navigate("/")} />
+            <Styled.LogoImg src={Logo} onClick={() => navigate(HomePagePath)} />
             <Styled.TitleNavBarLogo size={32}>
               {"Open Work"}
             </Styled.TitleNavBarLogo>
@@ -126,7 +125,7 @@ const NavBar = ({ nav }) => {
             <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
             <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
             <FilledButton
-              onClick={() => navigate("/login")}
+              onClick={() => navigate(AuthPath)}
               color={Colors.BLACK}
               width={190}
               heigth={60}
@@ -135,7 +134,7 @@ const NavBar = ({ nav }) => {
               {"Entrar"}
             </FilledButton>
             <FilledButton
-              onClick={() => navigate("/cadastro")}
+              onClick={() => navigate(RegisterPath)}
               color={Colors.SECONDARY_COLOR}
               width={190}
               heigth={60}

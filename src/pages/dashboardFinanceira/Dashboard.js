@@ -1,4 +1,4 @@
-import React from "react";
+import{ React, useState, useEffect} from "react";
 import {
   DashboardContainer,
   ContainerCards,
@@ -22,8 +22,41 @@ import Styled from "../../components/navBar/NavBar.styled";
 import BarChart from "../../components/charts/BarChart";
 import SemiCircleDonutChart from "../../components/charts/SemiCircleDonutChart";
 import List from "../../components/list/List";
+import { handleDashboard, handleFinanceTable } from "../../store/actions/Dashboard";
+import Cookies from "js-cookie";
 
 const Dashboard = () => {
+
+  const [totalMes, settotalMes] = useState("");
+  const [quantidadeJobs, setquantidadeJobs] = useState("");
+  const [tabelas, settabelas] = useState([]);
+
+  async function getDashboard() {
+    try {
+      const response = await handleDashboard();
+      settotalMes(response.data.totalMes)
+      setquantidadeJobs(response.data.quantidadeJobs)
+    }catch{
+      console.log("error")
+    }
+  }
+
+  async function getTableFinance() {
+    try {
+      const response = await handleFinanceTable(Cookies.get("id"));
+      settabelas(response.data);
+    } catch {
+      console.log("error");
+    }
+  }
+
+  useEffect(()=>{
+    getTableFinance();
+  }, [])
+
+
+  getDashboard()
+
   return (
     <>
     <List type={3} />
@@ -36,7 +69,7 @@ const Dashboard = () => {
               </div>
               <ContentCard>
                 <Paragraph>Total a receber no mês </Paragraph>
-                <h2>R$4000,00</h2>
+                <h2>R${totalMes}</h2>
               </ContentCard>
             </ContainerCard>
 
@@ -46,7 +79,7 @@ const Dashboard = () => {
               </div>
               <ContentCard>
                 <Paragraph>Quantidade de Jobs</Paragraph>
-                <h2>3 Jobs</h2>
+                <h2>  {tabelas.length} Jobs</h2>
               </ContentCard>
             </ContainerCard>
           </ContainerCards>

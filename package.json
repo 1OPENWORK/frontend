@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@100mslive/react-sdk": "^0.3.0",
     "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mercadopago/sdk-react": "^0.0.10",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.12",
     "@reduxjs/toolkit": "^1.9.3",
     "@syncfusion/ej2-react-dropdowns": "^21.1.37",
@@ -20,6 +23,7 @@
     "dotenv": "^16.0.3",
     "highcharts": "^10.3.3",
     "highcharts-react-official": "^3.2.0",
+    "hls.js": "^1.2.1",
     "ionicons": "^7.0.0",
     "js-cookie": "^3.0.5",
     "moment": "^2.29.4",
@@ -46,10 +50,7 @@
     "styled-components": "^5.3.8",
     "testing-library": "0.0.2",
     "web-vitals": "^2.1.4",
-    "yup": "^1.0.2",
-    "@100mslive/react-sdk": "^0.3.0",
-    "@mui/icons-material": "^5.11.16",
-    "hls.js": "^1.2.1"
+    "yup": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

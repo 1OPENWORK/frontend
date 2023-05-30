@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Styled from "./Formulario.styled";
-import { object, string, ref } from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { object, string } from "yup";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputMask from "react-input-mask";
 import { cpf as validateCpf } from "cpf-cnpj-validator";
@@ -9,7 +9,6 @@ import InputForm from "../../../../components/input/InputForm";
 import { cleanMask } from "../../../../helpers/HelperFunctions";
 import { FilledButton } from "../../../../components/UI/buttons/Button";
 import Colors from "../../../../constants/Colors";
-import { get } from "react-hook-form";
 import {
   changeUpdatePerfil,
   selectedPerfil,
@@ -68,7 +67,7 @@ const Formulario = () => {
       if (response.status === 200) {
         dispatch(
           changeUpdatePerfil({
-            perfil: {id: dadosPessoais.id, ...dados},
+            perfil: { id: dadosPessoais.id, ...dados },
           })
         );
 
@@ -82,8 +81,6 @@ const Formulario = () => {
           progress: false,
           theme: "light",
         });
-
-        setPassword("")
       }
     } catch (err) {
       toast.error(err.errors[0], {
@@ -97,12 +94,12 @@ const Formulario = () => {
         theme: "light",
       });
     }
+    setPassword("");
   }
 
   return (
     <Styled.Form>
       <Styled.Row>
-
         <InputForm
           label="Nome Completo"
           value={nome}

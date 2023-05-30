@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "../../../constants/Colors";
 
-const StyledPortifolioSobre = {
+const StyledExperiencia = {
   Container: styled.div`
     height: 100vh;
     width: 100%;
@@ -110,7 +110,7 @@ const StyledPortifolioSobre = {
     font-size: 1rem;
     line-height: 148.4%;
     width: 100%;
-    height: 600px;
+    height: 250px;
     padding: 10px;
     border-radius: 8px;
 
@@ -120,7 +120,7 @@ const StyledPortifolioSobre = {
   `,
 
   ContainerWhatLook: styled.div`
-    width: 51.7%;
+  width: 100%;
   `,
 
   ContainerPreferences: styled.div`
@@ -154,7 +154,7 @@ const StyledPortifolioSobre = {
     height: 60px;
     flex-direction: row;
     overflow: hidden;
-    margin-left: 2.5rem;
+    margin-left: 1rem;
     margin-bottom: 5rem;
     justify-content: space-between;
   `,
@@ -167,4 +167,4 @@ const StyledPortifolioSobre = {
   `,
 };
 
-export default StyledPortifolioSobre;
+export default StyledExperiencia;

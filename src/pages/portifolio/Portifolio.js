@@ -1,18 +1,18 @@
 import React from "react";
 import SideBar from "../../components/sidebar/SideBar";
-import RegisterEt1 from "../auth/register/etapas/et1/RegisterEt1";
 import Styled from "./Portifolio.style";
 import Formulario from "./components/formulario/Formulario";
 import { useState } from "react";
 import PortifolioSobre from "./sobre/PortifolioSobre";
-import { useSelector } from "react-redux";
-import { selectedPerfil } from "../../store/reducers/PerfilSlice";
-import { useEffect } from "react";
+
 import Address from "./address/Address";
 import { ToastContainer } from "react-toastify";
+import Experiencia from "./experiencia/Experiencia";
 
 const Portifolio = () => {
   const [abaActive, setAbaActive] = useState(1);
+
+
 
   return (
     <>
@@ -30,6 +30,8 @@ const Portifolio = () => {
           </Styled.ContainerInputs>
         ) : abaActive === 2 ? (
           <PortifolioSobre />
+        ) : abaActive === 3 ? (
+          <Experiencia />
         ) : (
           <></>
         )}

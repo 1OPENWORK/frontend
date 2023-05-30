@@ -19,13 +19,20 @@ export const slicePerfil = createSlice({
 
     changeUpdatePerfil(state, { payload }) {
       return {
-        ...state, perfil: payload.perfil,
-      }
+        ...state,
+        perfil: payload.perfil,
+      };
+    },
 
-    }
+    changeUpdateAddress(state, { payload }) {
+      return {
+        ...state,
+        address: payload.address,
+      };
+    },
   },
 });
 
-export const { changeSave, changeUpdatePerfil } = slicePerfil.actions;
+export const { changeSave, changeUpdatePerfil, changeUpdateAddress } = slicePerfil.actions;
 export const selectedPerfil = (state) => state;
 export default slicePerfil.reducer;

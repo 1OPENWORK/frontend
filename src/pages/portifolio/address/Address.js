@@ -9,62 +9,89 @@ import InputForm from "../../../components/input/InputForm";
 import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
 import { useSelector } from "react-redux";
-import { selectedPerfil } from "../../../store/reducers/PerfilSlice";
+import {
+  changeUpdateAddress,
+  selectedPerfil,
+} from "../../../store/reducers/PerfilSlice";
+import PortifolioService from "../service/PortifolioService";
+import { selectedAuth } from "../../../store/reducers/AuthSlice";
 
 const Address = () => {
+  const { auth } = useSelector(selectedAuth);
   const { dadosPerfil } = useSelector(selectedPerfil);
   const [dadosAddress] = useState(dadosPerfil.address);
 
-  const [cep, setCep] = useState(dadosAddress.zipcode);
-  const [estado, setEstado] = useState(dadosAddress.state);
-  const [cidade, setCidade] = useState(dadosAddress.city);
-  const [bairro, setBairro] = useState(dadosAddress.district);
-  const [rua, setRua] = useState(dadosAddress.address);
-  const [numero, setNumero] = useState(dadosAddress.number);
-  const [complemento, setComplemento] = useState(dadosAddress.complement);
+  const dispatch = useDispatch();
 
+  const [zipcode, setZipcode] = useState(dadosAddress.zipcode);
+  const [state, setState] = useState(dadosAddress.state);
+  const [city, setCity] = useState(dadosAddress.city);
+  const [district, setDistrict] = useState(dadosAddress.district);
+  const [address, setAddress] = useState(dadosAddress.address);
+  const [number, setNumber] = useState(dadosAddress.number);
+  const [complement, setComplement] = useState(dadosAddress.complement);
 
+  async function searchZipcode() {
+    if (zipcode.length > 7) {
+      const dados = await get(`http://viacep.com.br/ws/${zipcode}/json/`);
 
-  async function searchCEP() {
-    if (cep.length > 7) {
-      const dados = await get(`http://viacep.com.br/ws/${cep}/json/`);
-
-      setCep(dados.data.cep);
-      setRua(dados.data.logradouro);
-      setEstado(dados.data.uf);
-      setBairro(dados.data.bairro);
-      setCidade(dados.data.localidade);
+      setZipcode(dados.data.cep);
+      setAddress(dados.data.logradouro);
+      setState(dados.data.uf);
+      setDistrict(dados.data.bairro);
+      setCity(dados.data.localidade);
     }
   }
 
   const validRegister = object({
-    complemento: string().notRequired(),
-    numero: string().required("Preencha o campo numero."),
-    rua: string().required("Preencha o campo rua."),
-    bairro: string().required("Preencha o campo bairro."),
-    cidade: string().required("Preencha o campo cidade."),
-    estado: string().required("Preencha o campo estado."),
-    cep: string().required("Preencha o campo CEP."),
+    complement: string().notRequired(),
+    number: string().required("Preencha o campo número."),
+    address: string().required("Preencha o campo rua."),
+    district: string().required("Preencha o campo bairro."),
+    city: string().required("Preencha o campo cidade."),
+    state: string().required("Preencha o campo estado."),
+    zipcode: string().required("Preencha o campo CEP."),
   });
 
   async function handleForm() {
     const dados = {
-      complemento,
-      numero,
-      rua,
-      bairro,
-      cidade,
-      estado,
-      cep,
+      complement,
+      number,
+      address,
+      district,
+      city,
+      state,
+      zipcode,
     };
 
     try {
       await validRegister.validate(dados);
 
       // Atualizar
+      const response = await PortifolioService.updadeAddress(
+        dadosPerfil.perfil.id,
+        dados,
+        auth.token
+      );
 
+      if (response.status === 200) {
+        dispatch(
+          changeUpdateAddress({
+            address: dados,
+          })
+        );
 
-
+        toast.success("Infomações atualizadas com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
     } catch (err) {
       toast.error(err.errors[0], {
         position: "top-right",
@@ -80,22 +107,22 @@ const Address = () => {
   }
 
   useEffect(() => {
-    searchCEP();
-  }, [cep]);
+    searchZipcode();
+  }, [zipcode]);
 
   return (
     <Styled.Form>
       <Styled.Row>
         <InputForm
           label="CEP"
-          value={cep}
-          handle={setCep}
+          value={zipcode}
+          handle={setZipcode}
           space={"20px"}
           mr={"20px"}
         />
         <InputForm
           label="Estado"
-          value={estado}
+          value={state}
           handle={() => ""}
           space={"20px"}
         />
@@ -103,14 +130,14 @@ const Address = () => {
       <Styled.Row>
         <InputForm
           label="Cidade"
-          value={cidade}
+          value={city}
           handle={() => ""}
           space={"20px"}
           mr={"20px"}
         />
         <InputForm
           label="Bairro"
-          value={bairro}
+          value={district}
           handle={() => ""}
           space={"20px"}
         />
@@ -118,28 +145,28 @@ const Address = () => {
       <Styled.Row>
         <InputForm
           label="Rua"
-          value={rua}
+          value={address}
           handle={() => ""}
           space={"20px"}
           mr={"20px"}
         />
         <InputForm
           label="Número"
-          value={numero}
-          handle={setNumero}
+          value={number}
+          handle={setNumber}
           space={"20px"}
         />
       </Styled.Row>
       <InputForm
-        label="Complemento  ou outros"
-        value={complemento}
-        handle={setComplemento}
+        label="Complemento ou outros"
+        value={complement}
+        handle={setComplement}
         space={"20px"}
         width={"770px"}
       />
       <Styled.RowJustifyEnd align={"flex-end"} style={{ width: "770px" }}>
         <FilledButton
-          onClick={() => ""}
+          onClick={() => handleForm()}
           marginRight={"0px"}
           color={Colors.PRIMARY_COLOR}
           width={190}

@@ -35,7 +35,6 @@ export const Chat = ({ socket }) => {
   useEffect(() => {
     socket.on("connect", () => {
       socket.emit("myInformation", { id }, (callback) => {
-        console.log("🚀 ~ file: Chat.js:32 ~ socket.on ~ callback:", callback);
         const idUser = callback.id;
 
         dispatch(

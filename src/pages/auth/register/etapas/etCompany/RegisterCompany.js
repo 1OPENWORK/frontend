@@ -15,6 +15,7 @@ import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
 import { AuthPath } from "../../../../../constants/Path";
 import InputMask from "react-input-mask";
+import { AmbienteBackend } from "../../../../../hooks/Ambiente";
 
 const RegisterCompany = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const RegisterCompany = () => {
 
   const navigate = useNavigate();
 
-  const URI = process.env.REACT_APP_BACKEND_LOCAL_HOST;
+  const URI = AmbienteBackend();
 
   const [nomeEmpresa, setnomeEmpresa] = useState("");
   const [email, setEmail] = useState("");
@@ -149,25 +150,16 @@ const RegisterCompany = () => {
       </Styled.Row>
 
       <Styled.Divisor align={"flex-end"} style={{ width: "48.125rem" }}>
-        {!isNext ? (
+    
           <FilledButton
             onClick={handleForm}
-            color={Colors.BLACK}
-            width={190}
-            heigth={60}
-          >
-            {"Verificar"}
-          </FilledButton>
-        ) : (
-          <FilledButton
-            onClick={nextEtapa}
             color={Colors.SECONDARY_COLOR}
             width={190}
             heigth={60}
           >
-            {"Próximo"}
+            {"Cadastrar"}
           </FilledButton>
-        )}
+     
       </Styled.Divisor>
     </Styled.Form>
   );

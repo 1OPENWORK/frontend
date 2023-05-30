@@ -14,6 +14,7 @@ import { AuthPath, HomeDevPath } from "../../../../../constants/Path";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addNewUser } from "../../../../../store/actions/MicroService";
+import { AmbienteBackend } from "../../../../../hooks/Ambiente";
 
 const RegisterEt6 = ({ checked }) => {
   const { register } = useSelector(selectRegister);
@@ -21,7 +22,7 @@ const RegisterEt6 = ({ checked }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const URI = process.env.REACT_APP_BACKEND_LOCAL_HOST;
+  const URI = AmbienteBackend();
 
   const editCompotencias = dados => {
     const prevItens = [...itens];

@@ -1,8 +1,9 @@
 const HomePagePath = "/";
 const AuthPath = "/login";
-const ChatPath = "/chat/:id";
+const ChatPath = "/chat";
 const RegisterPath = "/cadastro";
 const JobsPath = "/jobs";
+const HomeAnalistaPath = "/homeAnalista";
 const HomeDevPath = "/desenvolvedor";
 const DevsPath = "/desenvolvedores";
 const AvaliacoesPath = "/avaliacoes";
@@ -11,15 +12,17 @@ const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
 const TodoPath = "/gerenciador";
-const PortfolioEt5Path = "/portfolio/sobre-mim";
-const PortfolioEt6Path = "/portfolio/experiencias";
+const PortfolioSobreMim = "/portfolio/sobre-mim";
+const PortfolioExperiencia = "/portfolio/experiencias";
 const PortfolioProjectsPath = "/portfolio/projetos";
 const AvaliarPath = "avaliacoes/avaliar";
+const IndexPath = "/videoConferencia";
 const ProgressPath = "/projetos-andamentos";
 const ProjectsPath = "/projetos-concluidos";
 const canceledPath = "/projetos-cancelados";
 const CreateProjectPath = "/cadastrar-projeto";
-
+const SendContractPath = "/enviar-contrato";
+const AsignedContractPath = "assinar-contrato";
 
 module.exports = {
   HomePagePath,
@@ -27,6 +30,7 @@ module.exports = {
   ChatPath,
   RegisterPath,
   JobsPath,
+  HomeAnalistaPath,
   HomeDevPath,
   DevsPath,
   AvaliacoesPath,
@@ -35,12 +39,15 @@ module.exports = {
   ComunidadePath,
   PortfolioPath,
   TodoPath,
-  PortfolioEt5Path,
-  PortfolioEt6Path,
+  PortfolioSobreMim,
+  PortfolioExperiencia,
   PortfolioProjectsPath,
   AvaliarPath,
+  IndexPath,
   ProgressPath,
   ProjectsPath,
   canceledPath,
-  CreateProjectPath
+  CreateProjectPath,
+  SendContractPath,
+  AsignedContractPath,
 };

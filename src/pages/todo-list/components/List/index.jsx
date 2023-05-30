@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
-import Card from "../Card";
+import Card from "../Card/index.jsx";
 import { Container } from "./styles";
 import { Draggable } from "react-beautiful-dnd";
 import axios from "axios";

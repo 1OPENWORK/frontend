@@ -1,6 +1,7 @@
 import React from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import AvaliacaoTable from "./AvaliacaoTable";
+import SubMenu from "../../components/subMenu/subMenu";
 
 // --------------------------------------------------------
 // Devs INTERFACE
@@ -18,6 +19,7 @@ const Avaliacoes = () => {
   return (
     <>
       <NavBarList type={2} />
+      <SubMenu type={3} />
       <AvaliacaoTable />
     </>
   );

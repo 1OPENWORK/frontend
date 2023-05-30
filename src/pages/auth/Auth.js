@@ -5,20 +5,20 @@
 // --------------------------------------------------------
 // IMPORTS
 // --------------------------------------------------------
-import React, { useState } from "react";
-import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
-import InformationsAuth from "./components/Container/Informations";
-import Styled from "./Auth.styled";
-import InputForm from "../../components/input/InputForm";
-import { FilledButton } from "../../components/UI/buttons/Button";
-import Colors from "../../constants/Colors";
-import { useDispatch } from "react-redux";
-import { handleLogin } from "../../store/actions/UserAuth";
-import { changeActiveToken } from "../../store/reducers/AuthSlice";
-import { ToastContainer, toast } from "react-toastify";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router";
-import { HomeDevPath } from "../../constants/Path";
+import React, { useState } from 'react'
+import { GeneralContainer } from '../../components/UI/generalLayout/Layout.styled'
+import InformationsAuth from './components/Container/Informations'
+import Styled from './Auth.styled'
+import InputForm from '../../components/input/InputForm'
+import { FilledButton } from '../../components/UI/buttons/Button'
+import Colors from '../../constants/Colors'
+import { useDispatch } from 'react-redux'
+import { handleLogin } from '../../store/actions/UserAuth'
+import { changeActiveToken } from '../../store/reducers/AuthSlice'
+import { ToastContainer, toast } from 'react-toastify'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router'
+import { HomeDevPath } from '../../constants/Path'
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -51,13 +51,22 @@ function Auth() {
         const id = response.data.userId;
         const fullname = response.data.fullname;
         const email = response.data.email;
-        const isDev = response.data.dev;
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
-        Cookies.set("isDev", isDev, { expires: 1 });
+        Cookies.set("isDev", true, { expires: 1 });
         Cookies.set("fullname", fullname, { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
+
+        const { data } = await handleInformationsUser(id);
+
+        dispatch(
+          changeSave({
+            perfil: data.perfil,
+            address: data.address,
+            tools: data.tools,
+          })
+        );
 
         dispatch(
           changeActiveToken({
@@ -101,7 +110,7 @@ function Auth() {
           descricao="Faça login e comece a experiência "
           textButton="Home"
         />
-        <Styled.ContainerForm position="center">
+        <Styled.ContainerForm>
           <Styled.Form>
             <Styled.TitleForm style={{ marginBottom: 30 }}>
               {"Login"}
@@ -118,37 +127,29 @@ function Auth() {
               handle={setPassword}
               type={"password"}
             />
-            <Styled.Row
-              style={{
-                marginBottom: 20,
-                marginTop: 10,
-              }}
-            >
-              <Styled.Label>Não possui conta?</Styled.Label>
-              <Styled.Link onClick={() => navigate("/cadastro")}>
-                {" "}
-                Cadastre-se
-              </Styled.Link>
-            </Styled.Row>
-            <Styled.Row>
-              <Styled.CheckBox type={"checkbox"} />
-              <Styled.Label>Lembrar Senha</Styled.Label>
+            <Styled.Connection>
+              <Styled.RememberPassword>
+                <Styled.CheckBox type={"checkbox"} />
+                <Styled.Label>Lembrar Senha</Styled.Label>
+              </Styled.RememberPassword>
               <Styled.Link> Esqueci minha senha</Styled.Link>
-            </Styled.Row>
-            <Styled.Row
-              style={{
-                marginTop: 20,
-                marginBottom: 20,
-              }}
-            >
+            </Styled.Connection>
+            <Styled.Row>
               <FilledButton
                 onClick={() => handle()}
                 color={Colors.BLACK}
                 width={190}
                 heigth={60}
+                marginTop={"24px"}
               >
                 {" Entrar"}
               </FilledButton>
+            </Styled.Row>
+            <Styled.Row>
+              <Styled.Label>Não possui conta?</Styled.Label>
+              <Styled.Link onClick={() => navigate("/cadastro")}>
+                Cadastre-se
+              </Styled.Link>
             </Styled.Row>
           </Styled.Form>
         </Styled.ContainerForm>

@@ -15,7 +15,7 @@ const SendMessage = ({
   idSender,
   idReceiver,
   setAtualizarUltimaMessage,
-  visualized
+  visualized,
 }) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
@@ -80,19 +80,20 @@ const SendMessage = ({
   }, [messagesRecentes]);
 
   useEffect(() => {
-    setUpdateMessage([])
-  }, [])
+    setUpdateMessage([]);
+  }, []);
 
   return (
-    <Styled.Container>
-      <ToastContainer/>
+    <Styled.Container isText={message.length > 60 ? true : false}>
+      <ToastContainer />
       <Styled.InputSendMessage
+        rows={message.length > 60 ? 7 : 0}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Digite uma nova messagem"
         onKeyPress={handleKeyPress}
       />
-      <Styled.ButtonSend onClick={handMessage}>
+      <Styled.ButtonSend isText={message.length > 60 ? true : false} onClick={handMessage}>
         <ion-icon
           name="send-outline"
           style={{ color: Colors.WHITE01, fontSize: 20 }}

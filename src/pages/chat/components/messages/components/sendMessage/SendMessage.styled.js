@@ -7,17 +7,16 @@ const StyledSendMessage = {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 92%;
+    top: ${(props) => (props.isText ? "80%" : "92%")};
     border-top: 1px solid ${Colors.WHITE02};
     width: 70%;
-    height: 8%;
+    height: ${(props) => (props.isText ? "20%" : "8%")};
     background-color: #101318;
     z-index: 2;
     color: ${Colors.WHITE01};
   `,
 
-  InputSendMessage: styled.input`
-    height: 35px;
+  InputSendMessage: styled.textarea`
     width: 50%;
     border-radius: 5px 0px 0px 5px;
     padding-left: 5px;
@@ -25,6 +24,8 @@ const StyledSendMessage = {
     border: none;
     font-size: 14px;
     color: ${Colors.WHITE01};
+    transition: all 0.5s;
+    resize: none;
 
     &:focus {
       outline: none;
@@ -38,16 +39,9 @@ const StyledSendMessage = {
     background-color: ${Colors.GREEN};
     border: none;
     width: 45px;
-    height: 35px;
+    height: ${(props) => (props.isText ? "148px" : "42px")};
     border-radius: 0px 5px 5px 0px;
   `,
 };
-
-
-
-
-
-
-
 
 export default StyledSendMessage;

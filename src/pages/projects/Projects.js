@@ -15,8 +15,9 @@ function Projects() {
   const isDev = getIsDev()
   const id = getId()
 
-  const fetchCompany = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/empresa/1`
-  const fetchDev = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/projetos-aceitos/completos/desenvolvedor/3`
+  const fetchChange = isDev
+    ? `http://localhost:8004/projetos-aceitos/completos/desenvolvedor/${id}`
+    : `http://localhost:8004/projetos-aceitos/completos/empresa/${id}`
 
   // Exemplo
   //   axios({
@@ -88,7 +89,7 @@ function Projects() {
         </ContainerContent>
       </ContainerMain>
     </>
-  )
+  );
 }
 
-export default Projects
+export default Projects;

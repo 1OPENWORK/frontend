@@ -1,7 +1,8 @@
-import { get } from '../../services/Generected'
+import { AmbienteBackend } from "../../hooks/Ambiente";
+import { get } from "../../services/Generected";
 
-const URI = 'http://localhost:8004/api'
+const URI = AmbienteBackend();
 
 export const handleProeficiency = async () => {
-  return await get(URI + '/especializacoes')
-}
+  return await get(URI + "/api/especializacoes");
+};

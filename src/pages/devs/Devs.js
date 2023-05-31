@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import Desenvolvedores from "./DevsTable";
 import SubMenu from "../../components/subMenu/subMenu";
@@ -16,11 +16,22 @@ import SubMenu from "../../components/subMenu/subMenu";
  */
 
 const Devs = () => {
+  const [abaActive, setAbactive] = useState(0);
+
   return (
     <>
       <NavBarList type={1} />
-      <SubMenu type={1} />
-      <Desenvolvedores />
+      <SubMenu
+        dados={[
+          { name: "Usuários" },
+          { name: "Propostas" },
+        ]}
+        setActive={setAbactive}
+        active={abaActive}
+      />
+      {abaActive === 0 ?  <Desenvolvedores /> : <></>}
+     
+
     </>
   );
 };

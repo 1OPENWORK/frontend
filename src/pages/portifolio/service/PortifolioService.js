@@ -73,13 +73,21 @@ const uploadImg = async (id, img, token) => {
   return response;
 };
 
-const buscarMyProjectsDev = async (id, token) => {
+const buscarMyProjects = async (id, token) => {
   const response = await axios.get(
     `${URI}/projetos-aceitos/completos/desenvolvedor/${id}`,
     {
       Authorization: `Bearer ${token}`,
     }
   );
+
+  return response;
+};
+
+const deleteContaUser = async (id, token) => {
+  const response = await axios.delete(`${URI}/api/usuarios/deletar/${id}`, {
+    Authorization: `Bearer ${token}`,
+  });
 
   return response;
 };
@@ -92,7 +100,8 @@ const PortifolioService = {
   fetchMyExperiencie,
   updateExperiencie,
   uploadImg,
-  buscarMyProjectsDev,
+  buscarMyProjects,
+  deleteContaUser,
 };
 
 export default PortifolioService;

@@ -5,6 +5,7 @@ import {
   HomePagePath,
   RegisterPath,
   HomeDevPath,
+  HomeCompanyPath,
   ChatPath,
   JobsPath,
   HomeAnalistaPath,
@@ -16,14 +17,13 @@ import {
   ProjectsPath,
   TodoPath,
   PortfolioPath,
-  PortfolioProjectsPath,
-  AvaliarPath,
   ProgressPath,
   canceledPath,
   CreateProjectPath,
   SendContractPath,
   AsignedContractPath,
   IndexPath,
+  DevPropostaPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -41,8 +41,6 @@ import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
 import Comunidade from "./pages/comunidade/Comunidade";
 import Portifolio from "./pages/portifolio/Portifolio";
 import Projects from "./pages/projects/Projects";
-import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
-import Avaliar from "./pages/avaliacoes/Avaliar";
 import Index from "./pages/videoConference/Index";
 
 import { useDispatch } from "react-redux";
@@ -54,6 +52,8 @@ import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 import SendContract from "./pages/contract/SendContract";
 import AsignedContract from "./pages/contract/contratoAssinado/AsignedContract";
 import { Ambiente } from "./hooks/Ambiente";
+import HomeCompany from "./pages/homeDev/HomeCompany";
+import PropostaTableDev from "./pages/devs/PropostasTableDev";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -79,6 +79,8 @@ function App() {
         <Route path={JobsPath} element={<Jobs />} />
         <Route path={HomeAnalistaPath} element={<HomeAnalista />} />
         <Route path={HomeDevPath} element={<HomeDev />} />
+        <Route path={DevPropostaPath} element={<PropostaTableDev />} />
+        <Route path={HomeCompanyPath} element={<HomeCompany />} />
         <Route path={ChatPath} element={<Chat socket={socket} />} />
         <Route path={DevsPath} element={<Devs />} />
         <Route path={AvaliacoesPath} element={<Avaliacoes />} />
@@ -91,8 +93,6 @@ function App() {
         <Route path={PortfolioPath} element={<Portifolio />} />
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={TodoPath} element={<Todo />} />
-        <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
-        <Route path={AvaliarPath} element={<Avaliar />} />
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={ProgressPath} element={<Progress />} />
         <Route path={canceledPath} element={<Canceled />} />

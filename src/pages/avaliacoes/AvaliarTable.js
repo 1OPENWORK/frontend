@@ -11,17 +11,31 @@ import { useEffect } from "react";
 import moment from "moment";
 import { getId } from "../../hooks/Cookies";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import ModalStatus from "../../components/UI/modal/modal-status/ModalStatus";
 
 const AvaliarTeste = () => {
-  const [avaliar, setAvaliar] = useState();
+  const [avaliar, setAvaliar] = useState("");
   const [avaliacao, setAvaliacao] = useState([]);
   const [avaliacaoAtual, setAvaliacaoAtual] = useState({});
+  const [sucesso, setSucesso] = useState(false);
   const idUser = getId();
   const URIGet = AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`;
 
+  function handleFetchOnClose() {
+    setSucesso(false);
+  }
+
   async function handleFetchAvaliacao() {
     const response = await get(URIGet);
-    setAvaliacao(response.data.evaluates);
+
+    const myAvalacoes = [...response.data.myAvaliations];
+    const evaluates = [...response.data.evaluates];
+
+    const newEvaluates = evaluates.filter(
+      (e) => !myAvalacoes.find((m) => m.id === e.id)
+    );
+
+    setAvaliacao(newEvaluates);
   }
 
   async function handleFetchAvaliar(id) {
@@ -29,9 +43,11 @@ const AvaliarTeste = () => {
       AmbienteBackend() +
       `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
+    console.log(avaliar);
 
     if (response.status === 201) handleAvaliacaoAtual();
     setAvaliar(response);
+    setSucesso(true);
   }
 
   function handleAvaliacaoAtual(itemId, index) {
@@ -121,6 +137,21 @@ const AvaliarTeste = () => {
             })}
           </tbody>
         </Table>
+        {sucesso ? (
+          <ModalStatus
+            status={"sucess"}
+            texto={"Avaliado com sucesso"}
+            onClose={handleFetchOnClose}
+            modalError={sucesso}
+          />
+        ) : (
+          <ModalStatus
+            status={"error"}
+            texto={"Não foi possível avaliar"}
+            onClose={handleFetchOnClose}
+            modalError={sucesso}
+          />
+        )}
       </Container>
     </>
   );

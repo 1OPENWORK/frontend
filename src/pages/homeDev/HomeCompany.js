@@ -26,14 +26,14 @@ import { useNavigate } from "react-router";
 import {
   AvaliacoesPath,
   ComunidadePath,
-  JobsPath,
+  DevsPath,
   PortfolioPath,
 } from "../../constants/Path";
 import CardHelp from "../../components/UI/chatbot/Landbot";
 import { getEmail, getIsDev } from "../../hooks/Cookies.js";
 import { AmbienteBackend } from "../../hooks/Ambiente";
 
-const HomeDev = () => {
+const HomeCompany = () => {
   const navigate = useNavigate();
   const [showCardHelp, setShowCardHelp] = useState(false);
 
@@ -60,8 +60,8 @@ const HomeDev = () => {
   const goToAvaliation = () => {
     navigate(AvaliacoesPath);
   };
-  const goToJogs = () => {
-    navigate(JobsPath);
+  const goToDevs = () => {
+    navigate(DevsPath);
   };
   const goToComunidade = () => {
     navigate(ComunidadePath);
@@ -73,7 +73,7 @@ const HomeDev = () => {
     <>
       <GeneralContainer>
         <>
-          <NavBar nav={1} />
+          <NavBar nav={2} />
           <Container>
             <Input placeholder={placeholder}></Input>
             <Aside>
@@ -103,13 +103,13 @@ const HomeDev = () => {
                 </FlexCard>
               </Card>
 
-              <Card onClick={() => goToJogs()}>
+              <Card onClick={() => goToDevs()}>
                 <CardImg src={imgCard} />
                 <FlexCard>
-                  <TitleCard>{"Jobs"}</TitleCard>
+                  <TitleCard>{"Desenvolvedores"}</TitleCard>
                   <DescPara>
                     {
-                      "É nessa tela onde você, desenvolvedor, terá acesso aos trabalhos anunciados pelas empresas"
+                      "É nessa tela onde você, empresa, terá acesso aos nossos desenvolvedores cadastrados, prontos para receberem um projeto"
                     }
                   </DescPara>
                 </FlexCard>
@@ -153,4 +153,4 @@ const HomeDev = () => {
   );
 };
 
-export default HomeDev;
+export default HomeCompany;

@@ -5,6 +5,7 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import { getCompanyId } from "../../hooks/Cookies";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -17,13 +18,15 @@ import { AmbienteBackend } from "../../hooks/Ambiente";
  * @returns The component JSX.
  */
 
-const Desenvolvedores = () => {
-  const URI = AmbienteBackend() + "/api/usuarios/desenvolvedores";
+const PropostaDesenvolvedores = () => {
+  const idCompany = getCompanyId();
+  const URI = AmbienteBackend() + `/api/propostas/empresa/${idCompany}`;
 
   const [devs, setDevs] = useState([]);
 
   async function handleFetchDesenvolvedores() {
     const response = await get(URI);
+    console.log(response);
     setDevs(response.data);
   }
 
@@ -81,4 +84,4 @@ const Desenvolvedores = () => {
   );
 };
 
-export default Desenvolvedores;
+export default PropostaDesenvolvedores;

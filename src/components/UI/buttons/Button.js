@@ -12,6 +12,7 @@ export const FilledButton = ({
   marginLeft,
   marginTop,
   alignSelf,
+  semHouver
 }) => {
   return (
     <GenericSolidButton
@@ -25,6 +26,7 @@ export const FilledButton = ({
       isDark={isDark}
       marginLeft={marginLeft}
       alignSelf={alignSelf}
+      semHouver={semHouver}
     >
       {children}
     </GenericSolidButton>

@@ -95,7 +95,7 @@ const StyleSideBar = {
     top: 14.6rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     overflow: hidden;
   `,
 

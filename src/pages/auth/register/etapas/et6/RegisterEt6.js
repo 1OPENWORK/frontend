@@ -6,6 +6,7 @@ import Item from "./components/item/Item";
 import { useSelector } from "react-redux";
 import {
   changeClearRegister,
+  changeEtapaAll,
   selectRegister,
 } from "../../../../../store/reducers/RegisterSlice";
 import { post } from "../../../../../services/Generected";
@@ -24,9 +25,9 @@ const RegisterEt6 = ({ checked }) => {
 
   const URI = AmbienteBackend();
 
-  const editCompotencias = dados => {
+  const editCompotencias = (dados) => {
     const prevItens = [...itens];
-    const newItens = prevItens.map(i => {
+    const newItens = prevItens.map((i) => {
       if (i.id === dados.id) {
         return {
           ...i,
@@ -67,6 +68,7 @@ const RegisterEt6 = ({ checked }) => {
 
     const response = await post(`${URI}/api/cadastros/dev`, dados);
 
+    
     if (response.status === 201) {
       const id = response.data.userId;
       const nome = response.data.nome;
@@ -88,12 +90,31 @@ const RegisterEt6 = ({ checked }) => {
         navigate(AuthPath);
         dispatch(changeClearRegister());
       }, 2000);
+    } else {
+      toast.error(response.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+
+      if (response.error === 409) {
+        dispatch(
+          changeEtapaAll({
+            etapa: 0,
+          })
+        );
+      }
     }
   };
 
   useEffect(() => {
     setItens(register.etapa5);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

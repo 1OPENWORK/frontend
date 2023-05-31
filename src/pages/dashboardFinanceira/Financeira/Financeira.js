@@ -37,10 +37,8 @@ import Tag from "../../../components/UI/tag/tag";
 import CustomModal from "../../../components/UI/modal/Modal";
 import SubMenu from "../../../components/subMenu/subMenu";
 import {
-  handleDashboard,
   handleFinanceTable,
   handleProjectsCancelled,
-  handleProjectsCompleted,
   handleProjectsInProgress,
 } from "../../../store/actions/Dashboard";
 import Cookies from "js-cookie";
@@ -60,7 +58,7 @@ const Financeira = () => {
     { label: "Etapa 5", completed: false, value: "R$ 300" },
   ];
 
-  const [totalMes, settotalMes] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [tabelas, settabelas] = useState([]);
 
   async function getTableFinance() {
@@ -109,6 +107,7 @@ const Financeira = () => {
 
   useEffect(() => {
     getProjectsDev();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -126,8 +125,7 @@ const Financeira = () => {
 
   return (
     <>
-      <NavBarList />
-      <SubMenu />
+
       <LineSubMenu />
       <ContainerFinance>
         <HeaderFinancer>
@@ -137,20 +135,26 @@ const Financeira = () => {
             <Cash>
               R$
               {projetos.reduce((total, projeto) => {
-                        if (projeto.status !== 'cancelled') {
-                          if (projeto.status === 'progress') {
-                            const currentDate = new Date();
-                            const finishDate = new Date(projeto.finishDate);
-                            if (isAfter(currentDate, finishDate)) {
-                              const monthsDiff = differenceInMonths(finishDate, currentDate);
-                              return total + (projeto.valueProject - projeto.tax) * (monthsDiff + 1);
-                            }
-                          } else if (projeto.status === 'open') {
-                            return total + (projeto.valueProject - projeto.tax);
-                          }
-                        }
-                        return " " + total;
-                      }, 0)}
+                if (projeto.status !== "cancelled") {
+                  if (projeto.status === "progress") {
+                    const currentDate = new Date();
+                    const finishDate = new Date(projeto.finishDate);
+                    if (isAfter(currentDate, finishDate)) {
+                      const monthsDiff = differenceInMonths(
+                        finishDate,
+                        currentDate
+                      );
+                      return (
+                        total +
+                        (projeto.valueProject - projeto.tax) * (monthsDiff + 1)
+                      );
+                    }
+                  } else if (projeto.status === "open") {
+                    return total + (projeto.valueProject - projeto.tax);
+                  }
+                }
+                return " " + total;
+              }, 0)}
             </Cash>
           </Wallet>
         </HeaderFinancer>

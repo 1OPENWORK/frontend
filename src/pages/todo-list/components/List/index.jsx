@@ -4,15 +4,13 @@ import Card from "../Card/index.jsx";
 import { Container } from "./styles";
 import { Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import { getToken } from "../../../../hooks/Cookies";
 
 export default function List({ data }) {
-  const [cards, setCards] = useState([]);
-  const token = getToken();
+  const [cards, setCards] = useState(data.cardList);
 
-  useEffect(() => {
-    setCards(data.cardList);
-  }, [setCards, cards]);
+  // useEffect(() => {
+  //   setCards(data.cardList);
+  // }, [data.cardList]);
 
   // const fetchCards = async () => {
   //   try {
@@ -48,17 +46,16 @@ export default function List({ data }) {
     axios
       .post(
         `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/listas/${typeIdCreated}/add-card`,
-        newCard,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        newCard
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
       )
       .then((response) => {
         if (response.status === 201) {
-          const updatedCards = [...cards, response.data.cardList];
-          setCards(updatedCards);
+          setCards([...cards, response.data.cardList]);
         } else {
           console.error("Invalid response:", response);
         }
@@ -68,8 +65,18 @@ export default function List({ data }) {
       });
   }
 
+  function handleDeleteCard(id) {
+    axios
+      .delete(`${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/cards/${id}`)
+      .then((res) => {
+        setCards(data.filter((card) => card.id !== id));
+      })
+      .catch((err) => {
+        console.log("Deu erro: " + err);
+      });
+  }
   return (
-    <Container done={!data.creatable && (true)} creatable={data.creatable}>
+    <Container done={!data.creatable && true} creatable={data.creatable}>
       <header>
         <h2>{data.title}</h2>
         {data.creatable && (
@@ -88,7 +95,12 @@ export default function List({ data }) {
                 {...provided.dragHandleProps}
                 {...provided.draggableProps}
               >
-                <Card key={card.id} isDragging={snapshot.isDragging} data={card} />
+                <Card
+                  key={card.id}
+                  isDragging={snapshot.isDragging}
+                  data={card}
+                  onDelete={() => handleDeleteCard(card.id)}
+                />
               </div>
             )}
           </Draggable>

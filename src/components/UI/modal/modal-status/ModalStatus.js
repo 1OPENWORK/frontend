@@ -4,8 +4,8 @@ import Error from "../../../../assets/icons/error.svg";
 import Success from "../../../../assets/icons/success.svg";
 
 const ModalStatus = ({ status, texto, onClose, modalError }) => {
-  if (modalError) {
-    return null; // Não renderizar o componente se modalError for verdadeiro
+  if (!modalError) {
+    return null;
   }
   return (
     <>

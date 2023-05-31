@@ -16,9 +16,18 @@ import {
 import ImgContratoModelo from "../../../assets/imgs/img-contrato-modelo.svg";
 import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
-import axios from "axios";
 import { AmbienteBackend } from "../../../hooks/Ambiente";
+import axios from "axios";
 import emailjs from "@emailjs/browser";
+
+const ModeloContrado = async () => {
+  const response = await axios.get(
+    AmbienteBackend() + `/fileS3/download/${"contrato-prestacao 3.pdf"}`,
+    {}
+  );
+
+  return response;
+};
 
 function AsignedContract() {
   const [emailEnviado, setEmailEnviado] = useState(false);
@@ -104,6 +113,19 @@ function AsignedContract() {
 
           <ContainerModelContract>
             <ContainerImgModelContract src={ImgContratoModelo} />
+            <ContainerButton>
+              <FilledButton
+                marginLeft={"auto"}
+                marginRight={"auto"}
+                marginTop={"2rem"}
+                color={Colors.BLACK}
+                width={212}
+                heigth={41}
+                onClick={ModeloContrado()}
+              >
+                Contrato modelo
+              </FilledButton>
+            </ContainerButton>
           </ContainerModelContract>
 
           <ContainerButtons>
@@ -118,7 +140,6 @@ function AsignedContract() {
                   onClick={iniciarProjeto}
                 >
                   Iniciar Projeto
-                  
                 </FilledButton>
               </>
             ) : (

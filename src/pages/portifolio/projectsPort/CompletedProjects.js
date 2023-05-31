@@ -44,8 +44,8 @@ const CompletedProjects = () => {
   }
 
   const fetchMyProjects = async () => {
-    const { data } = await PortifolioService.buscarMyProjectsDev(
-      dadosPerfil.perfil.id,
+    const { data } = await PortifolioService.buscarMyProjects(
+      dadosPerfil.perfil.tipo === "DESENVOLVEDOR" ? dadosPerfil.perfil.id : dadosPerfil.perfil.idCompany,
       auth.token
     );
 
@@ -81,37 +81,42 @@ const CompletedProjects = () => {
           </Styled.ContainerHeader>
         </Styled.Header>
 
-        <Styled.Title>Meus projetos concluídos</Styled.Title>
-        {projects.map((dados, index) => (
-          <Styled.ContainerData>
-            <h3 style={{ letterSpacing: "0.22em", fontWeight: "bold" }}>
-              {dados.nameCompany}
-            </h3>
-            <h5>{dados.titleProject}</h5>
-            <AvatarGroup max={5}>
-              {dados.developers.map((d) => (
-                <Avatar alt={d.nameUser} src={d.imageUser} />
-              ))}
-            </AvatarGroup>
+        <Styled.Title>
+          {projects.length > 0 ? "Meus projetos concluídos" : "Você não tem nenhum projeto concluído."}
+        </Styled.Title>
+        {projects.length > 0 &&
+          projects.map((dados, index) => (
+            <Styled.ContainerData>
+              <h3 style={{ letterSpacing: "0.22em", fontWeight: "bold" }}>
+                {dados.nameCompany}
+              </h3>
+              <h5>{dados.titleProject}</h5>
+              <AvatarGroup max={5}>
+                {dados.developers.map((d) => (
+                  <Avatar alt={d.nameUser} src={d.imageUser} />
+                ))}
+              </AvatarGroup>
 
-            <Styled.Content>
-              <Styled.ContainerText>
-                <Styled.Text>{dados.descriptionProject}</Styled.Text>
-              </Styled.ContainerText>
+              <Styled.Content>
+                <Styled.ContainerText>
+                  <Styled.Text>{dados.descriptionProject}</Styled.Text>
+                </Styled.ContainerText>
 
-              <Styled.ContainerImg
-                isImg={true}
-                background={
-                  dados.imageCompany !== null ? dados.imageCompany : ImageDev
-                }
-              />
-            </Styled.Content>
-            <Styled.ContainerCalendary>
-              {moment(dados.beginDate).calendar()} -{" "}
-              {moment(dados.finishDate).calendar()}
-            </Styled.ContainerCalendary>
-          </Styled.ContainerData>
-        ))}
+                <Styled.ContainerImg
+                  isImg={true}
+                  background={
+                    dados.imageCompany !== null ? dados.imageCompany : ImageDev
+                  }
+                />
+              </Styled.Content>
+              <Styled.ContainerCalendary>
+                {moment(dados.beginDate).calendar()} -{" "}
+                {moment(dados.finishDate).calendar()}
+              </Styled.ContainerCalendary>
+            </Styled.ContainerData>
+          ))}
+
+        {/*  */}
       </Styled.ContainerContent>
     </Styled.Container>
   );

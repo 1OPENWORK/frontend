@@ -35,11 +35,13 @@ const Address = () => {
     if (zipcode.length > 7) {
       const dados = await get(`http://viacep.com.br/ws/${zipcode}/json/`);
 
-      setZipcode(dados.data.cep);
-      setAddress(dados.data.logradouro);
-      setState(dados.data.uf);
-      setDistrict(dados.data.bairro);
-      setCity(dados.data.localidade);
+      if (dados !== undefined) {
+        setZipcode(dados.data.cep);
+        setAddress(dados.data.logradouro);
+        setState(dados.data.uf);
+        setDistrict(dados.data.bairro);
+        setCity(dados.data.localidade);
+      }
     }
   }
 
@@ -108,7 +110,7 @@ const Address = () => {
 
   useEffect(() => {
     searchZipcode();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [zipcode]);
 
   return (

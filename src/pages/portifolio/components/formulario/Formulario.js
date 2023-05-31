@@ -14,9 +14,13 @@ import {
   selectedPerfil,
 } from "../../../../store/reducers/PerfilSlice";
 import PortifolioService from "../../service/PortifolioService";
-import { selectedAuth } from "../../../../store/reducers/AuthSlice";
+import {
+  changeActiveToken,
+  selectedAuth,
+} from "../../../../store/reducers/AuthSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -71,6 +75,14 @@ const Formulario = () => {
           })
         );
 
+        dispatch(
+          changeActiveToken({
+            token: response.data.token,
+          })
+        );
+
+        Cookies.set("token", response.data.token, { expires: 1 });
+
         toast.success("Infomações atualizadas com sucesso.", {
           position: "top-right",
           autoClose: 5000,
@@ -83,16 +95,29 @@ const Formulario = () => {
         });
       }
     } catch (err) {
-      toast.error(err.errors[0], {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      if (password.length < 9) {
+        toast.error(err.errors[0], {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      } else {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
     }
     setPassword("");
   }

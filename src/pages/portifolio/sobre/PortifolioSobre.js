@@ -79,8 +79,10 @@ const PortifolioSobre = () => {
   return (
     <Styled.Container>
       <Styled.Header>
-        <Styled.ImgUser>
-          <MdAdd size={24} color={Colors.WHITE} />
+        <Styled.ImgUser img={dadosPerfil.perfil.image}>
+          {dadosPerfil.perfil.image === null && (
+            <MdAdd size={24} color={Colors.WHITE} />
+          )}
         </Styled.ImgUser>
 
         <Styled.ContainerHeader>

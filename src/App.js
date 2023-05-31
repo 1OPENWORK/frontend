@@ -42,7 +42,7 @@ import Comunidade from "./pages/comunidade/Comunidade";
 import Portifolio from "./pages/portifolio/Portifolio";
 import Projects from "./pages/projects/Projects";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
-import Avaliar from "./components/list/listAvaliar/ListAvaliar";
+import Avaliar from "./pages/avaliacoes/Avaliar";
 import Index from "./pages/videoConference/Index";
 
 import { useDispatch } from "react-redux";

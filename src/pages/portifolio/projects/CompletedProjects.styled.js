@@ -1,19 +1,27 @@
 import styled from "styled-components";
 import Colors from "../../../constants/Colors";
 
-const StyledPortifolioSobre = {
+const StyledCompletedProjects = {
   Container: styled.div`
-    height: 100vh;
     width: 100%;
+    margin-left: 430px;
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: auto;
-    margin-left: 430px;
+  `,
+
+  ContainerContent: styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   `,
 
   Header: styled.div`
     position: relative;
     display: flex;
+    width: 50%;
     height: 90px;
     margin-left: 5rem;
     margin-top: 1rem;
@@ -30,12 +38,13 @@ const StyledPortifolioSobre = {
     cursor: pointer;
     border-radius: 100%;
     background-color: ${Colors.BLACK};
-    background-image: url(${(props) => (props.img ? props.img : "")});
+    background-image: url(${props => props.img ? props.img : ""});
     background-size: cover;
     background-position: center;
   `,
 
   ContainerHeader: styled.div`
+    position: absolute;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -67,86 +76,71 @@ const StyledPortifolioSobre = {
   `,
 
   Text: styled.div`
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 148.4%;
-    letter-spacing: 0.22em;
     margin-left: 0.5rem;
+    padding-left: 20px;
+    padding-right: 20px;
   `,
 
   Specializations: styled.div`
     width: auto;
     height: 100%;
-    margin-left: 2rem;
-    margin-right: 2rem;
   `,
 
   ContainerData: styled.div`
-    position: relative;
     display: flex;
     flex-direction: column;
-    padding: 40px;
-    width: auto;
-  `,
+    padding: 30px;
+    width: 90%;
+    height: 444px;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    background-color: ${Colors.WHITE};
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.25);
 
-  ContainerAboutMe: styled.div`
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    @media screen and (min-width: 2000px) {
+      width: 60%;
+    }
   `,
 
   Title: styled.div`
+    margin-top: 2.5rem;
+    margin-left: 2rem;
     font-style: normal;
     font-weight: 900;
     font-size: 1.5rem;
     line-height: 33px;
   `,
 
-  ContentBox: styled.textarea`
-    margin-top: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 148.4%;
+  Content: styled.div`
     width: 100%;
-    height: 600px;
-    padding: 10px;
-    border-radius: 8px;
-
-    &:focus {
-      outline: none;
-    }
-  `,
-
-  ContainerWhatLook: styled.div`
-    width: 51.7%;
-  `,
-
-  ContainerPreferences: styled.div`
-    width: 36.9%;
-    overflow: hidden;
-  `,
-
-  ContentPreferences: styled.div`
-    height: 100%;
+    height: 264px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
   `,
 
-  ItemContent: styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-  `,
-
-  Itens: styled.div`
-    max-width: 70%;
+  ContainerText: styled.div`
+    width: 100%;
+    max-height: auto;
     overflow: hidden;
-    font-size: large;
+  `,
+
+  ContainerImg: styled.div`
+    width: 500px;
+    max-height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: ${(props) => (props.isImg ? "" : props.background)};
+    background-image: url(${(props) => (props.isImg ? props.background : "")});
+    background-position: center;
+    background-size: cover;
   `,
 
   ContainerButtons: styled.div`
@@ -156,8 +150,8 @@ const StyledPortifolioSobre = {
     height: 60px;
     flex-direction: row;
     overflow: hidden;
-    margin-left: 2.5rem;
-    margin-bottom: 5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
     justify-content: space-between;
   `,
 
@@ -176,12 +170,12 @@ const StyledPortifolioSobre = {
     text-align: justify;
   `,
 
-  DivRow: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
+  ContainerCalendary: styled.div`
+    margin-top: 10px;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
   `,
 };
 
-export default StyledPortifolioSobre;
+export default StyledCompletedProjects;

@@ -1,24 +1,21 @@
-// --------------------------------------------------------
-// Auth - Auth
-// --------------------------------------------------------
-
-// --------------------------------------------------------
-// IMPORTS
-// --------------------------------------------------------
-import React, { useState } from 'react'
-import { GeneralContainer } from '../../components/UI/generalLayout/Layout.styled'
-import InformationsAuth from './components/Container/Informations'
-import Styled from './Auth.styled'
-import InputForm from '../../components/input/InputForm'
-import { FilledButton } from '../../components/UI/buttons/Button'
-import Colors from '../../constants/Colors'
-import { useDispatch } from 'react-redux'
-import { handleLogin } from '../../store/actions/UserAuth'
-import { changeActiveToken } from '../../store/reducers/AuthSlice'
-import { ToastContainer, toast } from 'react-toastify'
-import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router'
-import { HomeDevPath } from '../../constants/Path'
+import React, { useState } from "react";
+import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
+import InformationsAuth from "./components/Container/Informations";
+import Styled from "./Auth.styled";
+import InputForm from "../../components/input/InputForm";
+import { FilledButton } from "../../components/UI/buttons/Button";
+import Colors from "../../constants/Colors";
+import { useDispatch } from "react-redux";
+import {
+  handleInformationsUser,
+  handleLogin,
+} from "../../store/actions/UserAuth";
+import { changeActiveToken } from "../../store/reducers/AuthSlice";
+import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
+import { HomeDevPath } from "../../constants/Path";
+import { changeSave } from "../../store/reducers/PerfilSlice";
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -49,20 +46,19 @@ function Auth() {
       if (response.status === 200) {
         const token = response.data.token;
         const id = response.data.userId;
-        const fullname = response.data.fullname;
         const email = response.data.email;
+        const tipo = response.data.tipo;
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
-        Cookies.set("isDev", true, { expires: 1 });
-        Cookies.set("fullname", fullname, { expires: 1 });
+        Cookies.set("isDev", tipo === "DESENVOLVEDOR", { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
 
         const { data } = await handleInformationsUser(id);
 
         dispatch(
           changeSave({
-            perfil: data.perfil,
+            perfil: { ...data.perfil, tipo: tipo },
             address: data.address,
             tools: data.tools,
           })

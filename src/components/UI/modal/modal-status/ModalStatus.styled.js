@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ModalStatus = {
   Container: styled.div`
-  min-height: 200px;
+    min-height: 200px;
     z-index: 1000;
     /* left: 37.4%; */
     padding: 16px 0 16px 0;
@@ -13,6 +13,8 @@ const ModalStatus = {
     right: 124px;
     margin: 0 auto;
     border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+      rgba(0, 0, 0, 0.22) 0px 10px 10px;
   `,
 
   ModalHeader: styled.img`

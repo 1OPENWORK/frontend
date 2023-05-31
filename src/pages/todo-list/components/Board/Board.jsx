@@ -7,9 +7,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getToken } from "../../../../hooks/Cookies";
 
-
-
-
 export default function Board() {
   const [lists, setLists] = useState([]);
 
@@ -17,7 +14,9 @@ export default function Board() {
 
   const token = getToken();
 
-
+  useEffect(() => {
+    fetchBoard();
+  }, []);
 
   async function fetchBoard() {
     await axios
@@ -27,20 +26,13 @@ export default function Board() {
           setLists(response.data.listCards);
           console.log(response.data.listCards);
         } else if (response.status === 204) {
-          console.log('NO_CONTENT: ', response);
+          console.log("NO_CONTENT: ", response);
         }
       })
       .catch((error) => {
-        console.log('ERROR: ' + error);
+        console.log("ERROR: " + error);
       });
   }
-
-  useEffect(() => {
-    fetchBoard()
-  }, [])
-
-
-
 
   const handleDragEnd = async (result) => {
     if (!result.destination) {
@@ -54,14 +46,24 @@ export default function Board() {
     }
 
     // Encontre a lista de origem e a lista de destino com base nos índices
-    const sourceListIndex = lists.findIndex((list) => list.idType.toString() === source.droppableId);
-    const destinationListIndex = lists.findIndex((list) => list.idType.toString() === destination.droppableId);
+    const sourceListIndex = lists.findIndex(
+      (list) => list.idType.toString() === source.droppableId
+    );
+    const destinationListIndex = lists.findIndex(
+      (list) => list.idType.toString() === destination.droppableId
+    );
 
     if (sourceListIndex !== -1 && destinationListIndex !== -1) {
       // Crie cópias das listas e dos cartões
       const updatedLists = [...lists];
-      const sourceList = { ...updatedLists[sourceListIndex], cards: updatedLists[sourceListIndex].cards || [] };
-      const destinationList = { ...updatedLists[destinationListIndex], cards: updatedLists[destinationListIndex].cards || [] };
+      const sourceList = {
+        ...updatedLists[sourceListIndex],
+        cards: updatedLists[sourceListIndex].cards || [],
+      };
+      const destinationList = {
+        ...updatedLists[destinationListIndex],
+        cards: updatedLists[destinationListIndex].cards || [],
+      };
 
       // Remova o item da lista de origem e armazene-o em movedItem
       const movedItem = sourceList.cards.splice(source.index, 1)[0];
@@ -70,7 +72,6 @@ export default function Board() {
       destinationList.cards.splice(destination.index, 0, movedItem);
 
       // Atualize as listas no estado
-
 
       // Faça uma chamada à API para atualizar a posição do item
       await axios.put(
@@ -93,43 +94,41 @@ export default function Board() {
     }
   };
 
-
   return (
-    <DragDropContext
-      onDragEnd={handleDragEnd}
-    >
+    <DragDropContext onDragEnd={handleDragEnd}>
       <Container>
-        {lists.length > 0 && lists.map((list, index) => {
-          // Mapeia as listas com base no idType
-          let listTitle = "";
-          switch (list.idType) {
-            case 1:
-              listTitle = "Tarefas";
-              break;
-            case 2:
-              listTitle = "Fazendo";
-              break;
-            case 3:
-              listTitle = "Pausado";
-              break;
-            case 4:
-              listTitle = "Concluído";
-              break;
-            default:
-              listTitle = "";
-          }
+        {lists.length > 0 &&
+          lists.map((list, index) => {
+            // Mapeia as listas com base no idType
+            let listTitle = "";
+            switch (list.idType) {
+              case 1:
+                listTitle = "Tarefas";
+                break;
+              case 2:
+                listTitle = "Fazendo";
+                break;
+              case 3:
+                listTitle = "Pausado";
+                break;
+              case 4:
+                listTitle = "Concluído";
+                break;
+              default:
+                listTitle = "";
+            }
 
-          return (
-            <Droppable droppableId={String(list.idType)} key={list.idType}>
-              {(provided) => (
-                <Content ref={provided.innerRef} {...provided.droppableProps}>
-                  <List index={list.id} data={list} title={listTitle} />
-                  {provided.placeholder}
-                </Content>
-              )}
-            </Droppable>
-          );
-        })}
+            return (
+              <Droppable droppableId={String(list.idType)} key={list.idType}>
+                {(provided) => (
+                  <Content ref={provided.innerRef} {...provided.droppableProps}>
+                    <List index={list.id} data={list} title={listTitle} />
+                    {provided.placeholder}
+                  </Content>
+                )}
+              </Droppable>
+            );
+          })}
       </Container>
     </DragDropContext>
   );

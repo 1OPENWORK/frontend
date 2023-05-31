@@ -39,12 +39,12 @@ function CreateProject() {
   const [proef, setProef] = useState([]);
   const [tools, setTools] = useState([]);
 
-  const idCompany = getId();
+  const idCompany = getId(); 
 
   const fetchChange =
     selectedOption === 1
-      ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST_DEVELOPEING}/api/projetos-grandes`
-      : `${process.env.REACT_APP_BACKEND_LOCAL_HOST_DEVELOPEING}/api/projetos-pequenos`;
+      ? `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-grandes`
+      : `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-pequenos`;
 
   useEffect(() => {
     listar();
@@ -125,7 +125,7 @@ function CreateProject() {
   async function fetchUser() {
     await axios
       .get(
-        `${process.env.REACT_APP_BACKEND_LOCAL_HOST_DEVELOPEING}/api/empresas/${idCompany}`
+        `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/empresas/4`
       )
       .then((response) => {
         setInfoUser(response.data);
@@ -205,11 +205,13 @@ function CreateProject() {
     }
 
     axios
-      .post(fetchChange, registerProject, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(fetchChange, registerProject
+      //   , {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
+      )
       .then((res) => {
         console.log(res);
         notifySucess();

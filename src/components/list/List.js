@@ -6,7 +6,7 @@
 // GENERAL
 // --------------------------------------------------------
 import { React, useState } from "react";
-import Styled from "./List.styled";
+import Styled from "./CardList.styled";
 import ListJobs from "./ListJobs";
 import { useNavigate } from "react-router-dom";
 import {
@@ -17,7 +17,6 @@ import {
 
 import ListAvaliacao from "./listAvaliar/ListAvaliar";
 import ModalDev from "../../components/UI/modal/modal-desenvolvedores/ModalDev";
-import Modal from "react-modal";
 import CustomModal from "../../components/UI/modal/Modal";
 import {
   ModalHeader,

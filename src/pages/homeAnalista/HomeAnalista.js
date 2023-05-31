@@ -20,7 +20,7 @@ const HomeAnalista = () => {
         const URI =
           process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/obterFila";
         const response = await axios.get(URI);
-        const dados = await response.text();
+        const dados = response.data;
 
         if (dados) {
           const registros = dados.split("\n");

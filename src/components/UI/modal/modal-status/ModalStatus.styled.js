@@ -1,6 +1,20 @@
 import styled from "styled-components";
 
 const ModalStatus = {
+  Container: styled.div`
+  min-height: 200px;
+    z-index: 1000;
+    /* left: 37.4%; */
+    padding: 16px 0 16px 0;
+    background-color: #f5f5f5;
+    position: fixed;
+    top: 20%;
+    left: 124px;
+    right: 124px;
+    margin: 0 auto;
+    border-radius: 12px;
+  `,
+
   ModalHeader: styled.img`
     display: flex;
     flex-direction: row;

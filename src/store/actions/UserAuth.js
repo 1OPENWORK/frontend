@@ -1,5 +1,5 @@
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import { get, post } from "../../services/Generected";
+import { get, post } from '../../services/Generected'
 
 // const URI = AmbienteBackend();
 const URI = "http://localhost:8004";

@@ -131,11 +131,16 @@ export const Container = styled.div`
     margin-bottom: 18px;
     text-align: center;
     min-height: 72px;
+    color: #ffffff;
   }
 
   .content-tools .card-tool p {
     font-size: 1rem;
     color: #ffffff;
     align-self: center;
+  }
+
+  .content-tools .card-tool .btn-close {
+    background-color: #ffffff;
   }
 `;

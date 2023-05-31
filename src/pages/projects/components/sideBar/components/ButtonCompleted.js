@@ -1,22 +1,24 @@
-import React from "react";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { MdOutlineRunCircle } from "react-icons/md";
-import { TiCancel } from "react-icons/ti";
+import React from 'react'
+import { AiOutlineCheckCircle } from 'react-icons/ai'
+import { MdOutlineRunCircle } from 'react-icons/md'
+import { TiCancel } from 'react-icons/ti'
+import { BsFillClipboard2PlusFill } from 'react-icons/bs'
+import { RxDashboard } from 'react-icons/rx'
 
-import styled from "styled-components";
-import Colors from "../../../../../constants/Colors";
+import styled from 'styled-components'
+import Colors from '../../../../../constants/Colors'
 
 const StyledButton = styled.button`
   background-color: transparent;
   border: none;
   color: #fff;
   cursor: pointer;
-  color: ${(props) => (props.color ? props.color : "#fff")};
+  color: ${(props) => (props.color ? props.color : '#fff')};
 
   transition: all 0.15s ease-in;
 
   h2 {
-    color: ${(props) => (props.color ? props.color : "#fff")};
+    color: ${(props) => (props.color ? props.color : '#fff')};
     transition: all 0.15s ease-in;
   }
 
@@ -25,7 +27,7 @@ const StyledButton = styled.button`
     color: ${Colors.SECONDARY_COLOR};
     text-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
-`;
+`
 
 function ButtonCompleted({ onClick, color, desc, type }) {
   return (
@@ -38,15 +40,19 @@ function ButtonCompleted({ onClick, color, desc, type }) {
         <>
           <AiOutlineCheckCircle size={40} color={color} />
         </>
-      ) : (
+      ) : type === 3 ? (
         <>
           <TiCancel size={40} color={color} />
         </>
+      ) : type === 4 ? (
+        <RxDashboard size={38} />
+      ) : (
+        <BsFillClipboard2PlusFill size={38} color={color} />
       )}
 
       <h2>{desc}</h2>
     </StyledButton>
-  );
+  )
 }
 
-export default ButtonCompleted;
+export default ButtonCompleted

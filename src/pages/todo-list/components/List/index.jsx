@@ -4,9 +4,13 @@ import Card from "../Card/index.jsx";
 import { Container } from "./styles";
 import { Draggable } from "react-beautiful-dnd";
 import axios from "axios";
+import { getToken } from "../../../../hooks/Cookies.js";
+import { AmbienteBackend } from "../../../../hooks/Ambiente.js";
 
 export default function List({ data }) {
   const [cards, setCards] = useState(data.cardList);
+
+  const token = getToken();
 
   // useEffect(() => {
   //   setCards(data.cardList);
@@ -15,7 +19,7 @@ export default function List({ data }) {
   // const fetchCards = async () => {
   //   try {
   //     const response = await axios.get(
-  //       `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/cards/list-cards?idType=${data.idType}`,
+  //       `${AmbienteBackend()}/api/cards/list-cards?idType=${data.idType}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -45,17 +49,18 @@ export default function List({ data }) {
     const typeIdCreated = data.idType;
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/listas/${typeIdCreated}/add-card`,
-        newCard
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // }
+        `${AmbienteBackend()}/api/listas/${typeIdCreated}/add-card`,
+        newCard,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       )
       .then((response) => {
+        
         if (response.status === 201) {
-          setCards([...cards, response.data.cardList]);
+          setCards([...cards, response.data]);
         } else {
           console.error("Invalid response:", response);
         }
@@ -67,7 +72,11 @@ export default function List({ data }) {
 
   function handleDeleteCard(id) {
     axios
-      .delete(`${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/cards/${id}`)
+      .delete(`${AmbienteBackend()}/api/cards/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
       .then((res) => {
         setCards(data.filter((card) => card.id !== id));
       })
@@ -87,7 +96,7 @@ export default function List({ data }) {
       </header>
 
       <ul>
-        {data.cardList.map((card, index) => (
+        {cards.map((card, index) => (
           <Draggable key={card.id} draggableId={String(card.id)} index={index}>
             {(provided, snapshot) => (
               <div

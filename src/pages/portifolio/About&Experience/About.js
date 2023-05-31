@@ -8,7 +8,7 @@ import Colors from "../../../constants/Colors";
 import { FilledButton } from "../../../components/UI/buttons/Button";
 import { useNavigate } from "react-router-dom";
 import {
-  PortfolioEt6Path,
+  PortfolioExperiencia,
   PortfolioProjectsPath,
 } from "../../../constants/Path";
 import CustomModal from "../../../components/UI/modal/Modal";
@@ -148,7 +148,7 @@ function About({ isAbout }) {
                   Alterar dados
                 </FilledButton>
                 <Styled.Info onClick={handleCellClick}>
-                  <img src={Info}></img>
+                  <img src={Info} alt="info"></img>
                 </Styled.Info>
               </Styled.ButtonInfoDiv>
 
@@ -157,7 +157,7 @@ function About({ isAbout }) {
                 color={Colors.PRIMARY_COLOR}
                 width={190}
                 heigth={60}
-                onClick={() => navigate(PortfolioEt6Path)}
+                onClick={() => navigate(PortfolioExperiencia)}
               >
                 Próximo
               </FilledButton>
@@ -196,7 +196,7 @@ function About({ isAbout }) {
                     onClick={handleCellClickExperience}
                     tamanho={"20px"}
                   >
-                    <img src={Info}></img>
+                    <img src={Info} alt="info"></img>
                   </Styled.Info>
                 </Styled.ButtonInfoDiv>
                 <Styled.Content>
@@ -269,7 +269,7 @@ function About({ isAbout }) {
                   Alterar dados
                 </FilledButton>
                 <Styled.Info onClick={handleCellClick}>
-                  <img src={Info}></img>
+                  <img src={Info} alt="info"></img>
                 </Styled.Info>
               </Styled.ButtonInfoDiv>
               <Styled.ButtonInfoDiv>
@@ -283,7 +283,7 @@ function About({ isAbout }) {
                   Projetos
                 </FilledButton>
                 <Styled.Info onClick={handleCellClickProject} tamanho={"20px"}>
-                  <img src={Info}></img>
+                  <img src={Info} alt="info"></img>
                 </Styled.Info>
               </Styled.ButtonInfoDiv>
             </Styled.ContainerButtons>

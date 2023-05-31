@@ -10,7 +10,7 @@ import {
 } from "../../../../../store/reducers/RegisterSlice";
 import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
-import { AuthPath, HomeDevPath } from "../../../../../constants/Path";
+import { AuthPath } from "../../../../../constants/Path";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addNewUser } from "../../../../../store/actions/MicroService";
@@ -93,6 +93,7 @@ const RegisterEt6 = ({ checked }) => {
 
   useEffect(() => {
     setItens(register.etapa5);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

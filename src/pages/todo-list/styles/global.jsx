@@ -11,40 +11,39 @@ box-sizing: border-box;
 
 }
 
-::-webkit-scrollbar{
-    width:0px;
-    height:0px;
-  } 
+ ::-webkit-scrollbar{
+     width:0px;
+     height: .5rem;
+   } 
   
-  ::-webkit-scrollbar-thumb{
-     background-color: rgba(255,255,255,1);
+//   ::-webkit-scrollbar-thumb{
+//      background-color: rgba(255,255,255,1);
   
-  } 
+//   } 
 
 
-html, body, #root {
+ html, body, #root {
 
-height: 100%;
-font: 14px Nunito, sans-serif;
+ height: 100%;
+ font: 16px Nunito, sans-serif;
+ line-height: 24px;
 -webkit-font-smoothing: antialiased !important;
-overflow-x: auto;    
-
+ overflow-x: auto;    
     
 
 }
 
-body {
+ body {
 
-background: #ecf1f8;
-color: #333;
-}
+ background: #ecf1f8;
+ }
 
-ul {
+ ul {
 
-list-style: none;
-padding: 0;
+ list-style: none;
+ padding: 0;
 
-}
+ }
 
 
-`;
+// `;

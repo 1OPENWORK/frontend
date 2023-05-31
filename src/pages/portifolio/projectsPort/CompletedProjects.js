@@ -44,8 +44,8 @@ const CompletedProjects = () => {
   }
 
   const fetchMyProjects = async () => {
-    const { data } = await PortifolioService.buscarMyProjectsDev(
-      dadosPerfil.perfil.id,
+    const { data } = await PortifolioService.buscarMyProjects(
+      dadosPerfil.perfil.tipo === "DESENVOLVEDOR" ? dadosPerfil.perfil.id : dadosPerfil.perfil.idCompany,
       auth.token
     );
 

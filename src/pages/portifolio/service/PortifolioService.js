@@ -73,7 +73,7 @@ const uploadImg = async (id, img, token) => {
   return response;
 };
 
-const buscarMyProjectsDev = async (id, token) => {
+const buscarMyProjects = async (id, token) => {
   const response = await axios.get(
     `${URI}/projetos-aceitos/completos/desenvolvedor/${id}`,
     {
@@ -100,7 +100,7 @@ const PortifolioService = {
   fetchMyExperiencie,
   updateExperiencie,
   uploadImg,
-  buscarMyProjectsDev,
+  buscarMyProjects,
   deleteContaUser,
 };
 

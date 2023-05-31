@@ -67,7 +67,7 @@ function Auth() {
 
         dispatch(
           changeSave({
-            perfil: { ...data.perfil, tipo: tipo },
+            perfil: { ...data.perfil, idCompany: companyId, tipo: tipo },
             address: data.address,
             tools: data.tools,
           })

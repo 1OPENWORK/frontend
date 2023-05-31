@@ -37,6 +37,10 @@ const HomeDev = () => {
   const navigate = useNavigate();
   const [showCardHelp, setShowCardHelp] = useState(false);
 
+
+
+      console.log(getEmail());
+  console.log(getIsDev());
   function handleButtonClick() {
     setShowCardHelp(true);
     try {

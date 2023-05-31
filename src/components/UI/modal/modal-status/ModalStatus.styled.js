@@ -1,6 +1,30 @@
 import styled from "styled-components";
 
 const ModalStatus = {
+  Container: styled.div`
+    min-height: 200px;
+    width: 50%;
+    z-index: 1000;
+    padding: 16px 0 16px 0;
+    background-color: #f5f5f5;
+    position: fixed;
+    top: 20%;
+    left: 8rem;
+    right: 8rem;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+  `,
+
+  Img: styled.div`
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+  `,
+
   ModalHeader: styled.img`
     display: flex;
     flex-direction: row;
@@ -31,7 +55,7 @@ const ModalStatus = {
     justify-content: center;
     margin: 0 auto;
     padding: 0px;
-    width: 90%;
+    width: 50%;
     height: 44px;
     background: #20ac69;
     border-radius: 8px;

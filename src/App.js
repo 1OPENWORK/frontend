@@ -17,7 +17,6 @@ import {
   TodoPath,
   PortfolioPath,
   PortfolioProjectsPath,
-  AvaliarPath,
   ProgressPath,
   canceledPath,
   CreateProjectPath,
@@ -42,7 +41,6 @@ import Comunidade from "./pages/comunidade/Comunidade";
 import Portifolio from "./pages/portifolio/Portifolio";
 import Projects from "./pages/projects/Projects";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
-import Avaliar from "./pages/avaliacoes/Avaliar";
 import Index from "./pages/videoConference/Index";
 
 import { useDispatch } from "react-redux";
@@ -92,7 +90,6 @@ function App() {
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={TodoPath} element={<Todo />} />
         <Route path={PortfolioProjectsPath} element={<PortfolioProjects />} />
-        <Route path={AvaliarPath} element={<Avaliar />} />
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={ProgressPath} element={<Progress />} />
         <Route path={canceledPath} element={<Canceled />} />

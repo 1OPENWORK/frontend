@@ -18,12 +18,13 @@ import { AmbienteBackend } from "../../hooks/Ambiente";
  */
 
 const Desenvolvedores = () => {
-  const URI = AmbienteBackend() + +"/api/usuarios/desenvolvedores";
+  const URI = AmbienteBackend() + "/api/usuarios/desenvolvedores";
 
   const [devs, setDevs] = useState([]);
 
   async function handleFetchDesenvolvedores() {
     const response = await get(URI);
+
     setDevs(response.data);
   }
 

@@ -28,7 +28,7 @@ import Footer from "./components/Footer/Footer";
 import AceptedAll from "./components/AceptedAll/AceptedAll";
 import { useNavigate } from "react-router-dom";
 import { AuthPath, RegisterPath } from "../../constants/Path";
-import VLibras from "@djpfs/react-vlibras";
+//import VLibras from "@djpfs/react-vlibras";
 
 // --------------------------------------------------------
 // Home INTERFACE
@@ -105,7 +105,7 @@ const Home = () => {
       <Depoiments />
       <BePartToo />
       <Footer />
-      <VLibras />
+      {/* <VLibras /> */}
     </GeneralContainer>
   );
 };

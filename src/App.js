@@ -42,7 +42,7 @@ import Comunidade from "./pages/comunidade/Comunidade";
 import Portifolio from "./pages/portifolio/Portifolio";
 import Projects from "./pages/projects/Projects";
 import PortfolioProjects from "./pages/portifolio/portfolioEt7/components/Projects";
-import Avaliar from "./components/list/listAvaliar/ListAvaliar";
+import Avaliar from "./pages/avaliacoes/Avaliar";
 import Index from "./pages/videoConference/Index";
 
 import { useDispatch } from "react-redux";
@@ -51,13 +51,9 @@ import Todo from "./pages/todo-list/Todo.js";
 import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";
 import CreateProject from "./pages/projects/pages/createProject/CreateProject";
-import SubMenu from "./components/subMenu/subMenu";
 import SendContract from "./pages/contract/SendContract";
 import AsignedContract from "./pages/contract/contratoAssinado/AsignedContract";
-import { getIsDev } from "./hooks/Cookies";
 import { Ambiente } from "./hooks/Ambiente";
-import { PortfolioSobreMim } from "./constants/Path";
-import { PortfolioExperiencia } from "./constants/Path";
 
 const socket = socketIO.connect(Ambiente());
 

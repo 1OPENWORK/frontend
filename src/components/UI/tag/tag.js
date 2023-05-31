@@ -5,7 +5,7 @@ const Tag = ({ status, statusColor }) => {
   return (
     <TableTag status={statusColor}>
       {status == "open"
-        ? "Aberto"
+        ? "Concluído"
         : status == "progress"
         ? "Em Progresso"
         : "Fechado"}

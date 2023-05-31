@@ -4,7 +4,7 @@ import Styled from "../Portifolio.style";
 import { useDispatch } from "react-redux";
 import { get } from "../../../services/Generected";
 import { object, string } from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import InputForm from "../../../components/input/InputForm";
 import { FilledButton } from "../../../components/UI/buttons/Button";
 import Colors from "../../../constants/Colors";
@@ -108,6 +108,7 @@ const Address = () => {
 
   useEffect(() => {
     searchZipcode();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [zipcode]);
 
   return (

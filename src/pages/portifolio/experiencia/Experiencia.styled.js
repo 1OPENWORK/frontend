@@ -30,6 +30,9 @@ const StyledExperiencia = {
     cursor: pointer;
     border-radius: 100%;
     background-color: ${Colors.BLACK};
+    background-image: url(${props => props.img ? props.img : ""});
+    background-size: cover;
+    background-position: center;
   `,
 
   ContainerHeader: styled.div`

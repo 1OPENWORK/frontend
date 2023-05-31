@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { post } from "../../services/Generected";
 import emailjs from "@emailjs/browser";
 import axios from "axios";
+import { AmbienteBackend } from "../../hooks/Ambiente";
 
 const HomeAnalista = () => {
   const navigate = useNavigate();
-  const [type] = useState("logado");
   const [assuntoGet, setAssunto] = useState("");
   const [descricaoGet, setDescricao] = useState("");
   const [fila, setFila] = useState([]);
@@ -17,10 +17,9 @@ const HomeAnalista = () => {
   useEffect(() => {
     const obterDadosFila = async () => {
       try {
-        const URI =
-          process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/obterFila";
+        const URI = AmbienteBackend() + "/api/queue/obterFila";
         const response = await axios.get(URI);
-        const dados = response.data;
+        const dados = await response.data;
 
         if (dados) {
           const registros = dados.split("\n");
@@ -57,11 +56,6 @@ const HomeAnalista = () => {
       )
       .then(
         (response) => {
-          console.log(
-            "Email enviado com sucesso!",
-            response.status,
-            response.text
-          );
           setAssunto("");
           setDescricao("");
         },
@@ -74,9 +68,7 @@ const HomeAnalista = () => {
   const enviarNotificacao = async () => {
     try {
       // Obter o topo da pilha
-      const response = await fetch(
-        process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/topoPilha"
-      );
+      const response = await fetch(AmbienteBackend() + "/api/queue/topoPilha");
       const topoPilha = await response.text();
 
       // Separar assunto e descrição do topoPilha
@@ -84,7 +76,6 @@ const HomeAnalista = () => {
 
       // Enviar o email com o assunto e descrição
       enviarEmail(assuntoEmail, descricaoEmail);
-      console.log("Email enviado com sucesso!");
     } catch (error) {
       console.error("Erro ao enviar o email:", error);
     }
@@ -92,15 +83,13 @@ const HomeAnalista = () => {
 
   const cadastrarPilha = async () => {
     try {
-      const URI =
-        process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/cadastroPilha";
+      const URI = AmbienteBackend() + "/api/queue/cadastroPilha";
       const dados = {
         assunto: assuntoGet,
         descricao: descricaoGet,
       };
 
       await post(URI, dados);
-      console.log("Pilha cadastrada com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar na pilha:", error);
     }
@@ -123,6 +112,7 @@ const HomeAnalista = () => {
 
   const [highlightedItem, setHighlightedItem] = useState(null);
 
+  // eslint-disable-next-line no-unused-vars
   const handleItemClick = (item) => {
     setHighlightedItem(item);
   };
@@ -147,15 +137,15 @@ const HomeAnalista = () => {
 
       try {
         const response = await fetch(
-          process.env.REACT_APP_BACKEND_LOCAL_HOST + "/api/queue/topoFila",
+          AmbienteBackend() + "/api/queue/topoFila",
           {
             method: "GET",
           }
         );
 
         if (response.ok) {
+          // eslint-disable-next-line no-unused-vars
           const valorTopo = await response.text();
-          console.log("Elemento excluído:", valorTopo);
         } else {
           console.error("Não foi possível excluir o elemento da fila.");
         }
@@ -173,16 +163,16 @@ const HomeAnalista = () => {
             Notificações Para Usuários
           </Styled.ContainerTitle>
 
-          <Styled.inputText>
+          <Styled.InputText>
             <Styled.H1>Assunto</Styled.H1>
             <Styled.Input
               id="assunto"
               value={assuntoGet}
               onChange={handleAssuntoChange}
             ></Styled.Input>
-          </Styled.inputText>
+          </Styled.InputText>
 
-          <Styled.inputText>
+          <Styled.InputText>
             <Styled.H1>Descrição</Styled.H1>
             <Styled.InputMore
               id="descricao"
@@ -190,15 +180,15 @@ const HomeAnalista = () => {
               onChange={handleDescricaoChange}
               rows={6}
             ></Styled.InputMore>
-          </Styled.inputText>
+          </Styled.InputText>
 
-          <Styled.buttonLeft primary onClick={() => cadastrarPilha()}>
+          <Styled.ButtonLeft primary onClick={() => cadastrarPilha()}>
             Salvar Notificação
-          </Styled.buttonLeft>
+          </Styled.ButtonLeft>
 
-          <Styled.buttonLeft onClick={() => enviarNotificacao()}>
+          <Styled.ButtonLeft onClick={() => enviarNotificacao()}>
             Enviar Notificação
-          </Styled.buttonLeft>
+          </Styled.ButtonLeft>
         </Styled.ContainerLeft>
 
         <Styled.ContainerRight>
@@ -216,9 +206,9 @@ const HomeAnalista = () => {
           </Styled.ContainerTitle2>
 
           <Styled.ContainerRole>
-            <Styled.textRole1>Nome</Styled.textRole1>
+            <Styled.TextRole1>Nome</Styled.TextRole1>
 
-            <Styled.textRole2>Role</Styled.textRole2>
+            <Styled.TextRole2>Role</Styled.TextRole2>
           </Styled.ContainerRole>
 
           <Styled.ContainerTableRole>
@@ -236,8 +226,8 @@ const HomeAnalista = () => {
                   onMouseLeave={handleMouseLeave}
                   onClick={handleDeleteItem}
                 >
-                  <Styled.textTable1>{item.email}</Styled.textTable1>
-                  <Styled.textTable2>{item.tipo}</Styled.textTable2>
+                  <Styled.TextTable1>{item.email}</Styled.TextTable1>
+                  <Styled.TextTable2>{item.tipo}</Styled.TextTable2>
                   {isFirstItem && isHighlighted && (
                     <Styled.ExcluirText>Excluir</Styled.ExcluirText>
                   )}

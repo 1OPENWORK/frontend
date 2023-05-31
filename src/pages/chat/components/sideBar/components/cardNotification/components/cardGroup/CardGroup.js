@@ -1,6 +1,5 @@
 import React from "react";
 import Styled from "./CardGroup.styled";
-import { Avatar } from "@mui/material";
 
 const CardGroup = ({ dados, img, socket }) => {
   console.log("🚀 ~ file: CardGroup.js:6 ~ CardGroup ~ dados:", dados.id)

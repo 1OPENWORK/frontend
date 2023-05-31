@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Container, Aside, Article, TextArea } from "./CreateProject.styled";
-import { FilledButton } from "./../../../../components/UI/buttons/Button";
+import { FilledButton } from "../../../../components/UI/buttons/Button";
 import Colors from "../../../../constants/Colors";
 import { useNavigate } from "react-router-dom";
 import { ProgressPath } from "../../../../constants/Path";
@@ -15,17 +15,42 @@ import {
 import CardOverviewOne from "./components/cardOverviewOne/CardOverviewOne";
 import { MdEmail, MdPhoneInTalk } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
-import Cookies from "js-cookie";
+import { AiFillCloseCircle } from "react-icons/ai";
+
 import { handleProeficiency } from "../../../../store/actions/Proeficiency";
-import { Filter } from "../../../dashboardFinanceira/Dashboard.styled";
+
+import axios from "axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getId, getToken } from "../../../../hooks/Cookies";
+import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 function CreateProject() {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState();
-  const fullname = Cookies.get("fullname");
-  const email = Cookies.get("email");
-
+  const [selectedOption, setSelectedOption] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [typeError, setTypeError] = useState();
+  const [modalError, setModalError] = useState(true);
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const [search, setSearch] = useState("");
+  const [proef, setProef] = useState([]);
+  const [tools, setTools] = useState([]);
+
+  const idCompany = getId();
+
+  const fetchChange =
+    selectedOption === 1
+      ? AmbienteBackend() + `/api/projetos-grandes`
+      : AmbienteBackend() + `/api/projetos-pequenos`;
+
+  useEffect(() => {
+    listar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isModalOpen]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -35,42 +60,205 @@ function CreateProject() {
     setIsModalOpen(false);
   };
 
-  const [search, setSearch] = useState("");
-  const [proef, setProef] = useState([]);
+  const handleCloseError = () => {
+    setModalError(true);
+  };
+
+  const notifySucess = () => {
+    toast.success("Projeto cadastrado com sucesso", {
+      position: "top-left",
+      autoClose: 500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: 1,
+      theme: "light",
+    });
+  };
+
+  const notifyInfo = () => {
+    toast.info("Ferramenta já adicionada", {
+      position: "top-left",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const listar = async () => {
     const dados = await handleProeficiency();
     setProef(dados.data);
+    console.log(dados.data);
+
+    const allTools = proef.flatMap(({ tools }) => Object.values(tools));
+    setTools(allTools);
+  };
+
+  //info empresa - GET
+
+  const [infoUser, setInfoUser] = useState({
+    name: "",
+    sector: "",
+    email: "",
+    user: {
+      name: "",
+      cellphone: "",
+    },
+  });
+
+  async function fetchUser() {
+    await axios
+      .get(
+        AmbienteBackend() + `/api/empresas/${idCompany}`
+      )
+      .then((response) => {
+        setInfoUser(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("Deu erro: " + error);
+      });
+  }
+
+  useEffect(() => {
+    fetchUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //cadastro projetos - POST
+
+  const token = getToken();
+
+  function cadastrar() {
+    const registerProject = {
+      title: debouncedInputValues.nameProject,
+      description: debouncedInputValues.describe,
+      value: debouncedInputValues.value,
+      idCompany: 1,
+      qtdSprint: debouncedInputValues.estimatedTime,
+      daysToSprint: debouncedInputValues.estimatedTime,
+      maxDevelopers: debouncedInputValues.qntdPeople,
+      tools: {
+        projectTool: selectedOptions,
+      },
+    };
+
+    if (
+      debouncedInputValues.nameProject === null ||
+      debouncedInputValues.nameProject.length <= 0
+    ) {
+      console.log("Nome do projeto não pode estar vazio");
+      setTypeError(1);
+      setModalError(false);
+
+      return;
+    } else if (debouncedInputValues.describe.length <= 60) {
+      setTypeError(2);
+      setModalError(false);
+      console.log("A descrição deve ter um tamanho maior que sessenta");
+      return;
+    } else if (debouncedInputValues.qntdPeople <= 0) {
+      setTypeError(3);
+      setModalError(false);
+      console.log("Número de pessoas deve ser maior que 0");
+      return;
+    } else if (debouncedInputValues.qntdPeople > 6) {
+      setTypeError(4);
+      setModalError(false);
+      console.log("Número de pessoas excedido deve ser menor ou igual que 6");
+      return;
+    } else if (debouncedInputValues.estimatedTime <= 0) {
+      setTypeError(5);
+      setModalError(false);
+      console.log("Quantidade de meses deve ser maior que 0");
+      return;
+    } else if (debouncedInputValues.estimatedTime > 12) {
+      setTypeError(6);
+      setModalError(false);
+      console.log("Quantidade de meses excedido, deve ser menor ou igual á 12");
+      return;
+    } else if (!/^\d+(\.\d{1,2})?$/.test(debouncedInputValues.value)) {
+      setTypeError(7);
+      setModalError(false);
+      console.log("O valor não pode conter letras");
+      return;
+    } else if (debouncedInputValues.value <= 100.0) {
+      setTypeError(8);
+      setModalError(false);
+      console.log("O valor deve ser maior que R$100,00");
+      return;
+    }
+
+    axios
+      .post(fetchChange, registerProject, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        notifySucess();
+        const myTimeout = () => setTimeout(() => navigate("/jobs"), 1000);
+        myTimeout();
+      })
+      .catch((err) => {
+        console.log("Deu erro: " + err);
+        console.log(registerProject);
+      });
+  }
+
+  //filtro de ferramentas
+
+  const filterSearch = useMemo(() => {
+    const searchLowerCase = search.toLowerCase();
+
+    return tools.filter((tool) =>
+      tool.name.toLowerCase().includes(searchLowerCase)
+    );
+  }, [tools, search]);
+
+  //seleção de ferramentas
+
+  const handleSelectOption = (option) => {
+    if (selectedOptions.includes(option)) {
+      notifyInfo();
+    } else if (!selectedOptions.includes(option)) {
+      setSelectedOptions((prevOptions) => [...prevOptions, option]);
+      console.log(selectedOptions);
+    }
+  };
+
+  const handleDeselectOption = (option) => {
+    setSelectedOptions((prevOptions) =>
+      prevOptions.filter((selectedOption) => selectedOption !== option)
+    );
   };
 
   useEffect(() => {
-    listar();
-  }, []);
-
-  const filter = useMemo(() => {
-    const searchLowerCase = search.toLowerCase();
-
-    return proef.filter((proef) =>
-      proef.name.toLowerCase().includes(searchLowerCase)
-    );
-  }, [proef, search]);
-
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  const handleSelectOption = (option) => {
-    setSelectedOptions([...selectedOptions, option]);
-    closeModal();
     console.log(selectedOptions);
-  };
+  }, [selectedOptions]);
+
+  // useEffect(() => {
+  //   setSelectedOptions((prevOptions) =>
+  //     prevOptions.filter((option) => selectedOptions.includes(option))
+  //   );
+  // }, [selectedOptions]);
+
+  //captura de informações(input) com debounced
 
   const [inputValues, setInputValues] = useState({
     nameProject: "",
     nameCompany: "",
     languages: [{ id: "" }],
     describe: "",
-    qntdPeople: "",
-    estimatedTime: "",
-    value: "",
+    qntdPeople: 0,
+    estimatedTime: 0,
+    value: 0.0,
   });
 
   const [debouncedInputValues, setDebouncedInputValues] = useState({
@@ -144,6 +332,19 @@ function CreateProject() {
   return (
     <>
       <Container>
+        <ToastContainer
+          position="top-left"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
         <Aside>
           <div className="container-align">
             <FilledButton
@@ -184,6 +385,7 @@ function CreateProject() {
               <label>{"Nome do Projeto"}</label>
               <br />
               <InputText
+                onBlur={() => closeModal()}
                 type="text"
                 name="nameProject"
                 value={inputValues.nameProject}
@@ -200,30 +402,42 @@ function CreateProject() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   onFocus={openModal}
-                  w={"50%"}
+                  placeholder={"selecionar campo para escolher"}
                 />
 
                 <div className={`modal ${isModalOpen ? "display" : ""}`}>
+                  {/* <AiFillCloseCircle
+                    onClick={() => closeModal()}
+                    size={24}
+                    style={{
+                      position: "fixed",
+                      top: 8,
+                      right: 4,
+                      cursor: "pointer",
+                    }}
+                  /> */}
                   <ul>
-                    {filter.map((proef) => (
+                    {filterSearch.map((tool) => (
                       <li
-                        onClick={() => handleSelectOption(proef)}
-                        key={proef.id}
+                        onClick={() => handleSelectOption(tool)}
+                        key={tool.id}
                       >
-                        {proef.name}
+                        {tool.name}
                       </li>
                     ))}
                   </ul>
+                  <div
+                    className={`modal-close ${isModalOpen ? "display" : ""}`}
+                  >
+                    <AiFillCloseCircle
+                      onClick={() => closeModal()}
+                      size={24}
+                      style={{
+                        cursor: "pointer",
+                      }}
+                    />
+                  </div>
                 </div>
-
-                <FilledButton
-                  marginRight={"0px"}
-                  color={Colors.PRIMARY_COLOR}
-                  width={200}
-                  heigth={60}
-                >
-                  {"Adicionar"}
-                </FilledButton>
               </div>
             </div>
 
@@ -232,6 +446,7 @@ function CreateProject() {
               <br />
 
               <TextArea
+                onBlur={() => closeModal()}
                 type="text"
                 name="describe"
                 value={inputValues.describe}
@@ -240,49 +455,57 @@ function CreateProject() {
               <br />
 
               <div className="lang-program">
-                <div className="qnt-check">
-                  <label>{"Quatidade de Pessoas"} </label>
-                  <br />
-                  <br />
-                  <DivInput style={{ width: "100%", height: "58px" }}>
-                    <Input
-                      style={{ boxSizing: "border-box" }}
-                      w={"58px"}
-                      type="number"
-                      min="0"
-                      max="6"
-                      placeholder="0"
-                      maxLength="99"
-                      name="qntdPeople"
-                      value={inputValues.qntdPeople}
-                      onChange={handleInputChange}
-                    />
-                    <H3Input>{"Pessoas"}</H3Input>
-                  </DivInput>
-                </div>
+                {selectedOption === 1 ? (
+                  <>
+                    <div className="qnt-check">
+                      <label>{"Quatidade de Pessoas"} </label>
+                      <br />
+                      <br />
+                      <DivInput style={{ width: "100%", height: "58px" }}>
+                        <Input
+                          style={{ boxSizing: "border-box" }}
+                          w={"58px"}
+                          type="number"
+                          min="0"
+                          max="6"
+                          placeholder="0"
+                          maxLength="99"
+                          name="qntdPeople"
+                          value={inputValues.qntdPeople}
+                          onChange={handleInputChange}
+                          onBlur={() => closeModal()}
+                        />
+                        <H3Input>{"Pessoas"}</H3Input>
+                      </DivInput>
+                    </div>
 
-                <div className="qnt-check">
-                  <label>{"Meses Estimados"} </label>
-                  <br />
-                  <br />
-                  <DivInput style={{ width: "100%", height: "58px" }}>
-                    <Input
-                      style={{
-                        "word-break": "break-all",
-                        boxSizing: "border-box",
-                      }}
-                      w={"58px"}
-                      type="number"
-                      min="0"
-                      max="12"
-                      placeholder="0"
-                      name="estimatedTime"
-                      value={inputValues.estimatedTime}
-                      onChange={handleInputChange}
-                    />
-                    <H3Input>{"Meses"}</H3Input>
-                  </DivInput>
-                </div>
+                    <div className="qnt-check">
+                      <label>{"Meses Estimados"} </label>
+                      <br />
+                      <br />
+                      <DivInput style={{ width: "100%", height: "58px" }}>
+                        <Input
+                          style={{
+                            "word-break": "break-all",
+                            boxSizing: "border-box",
+                          }}
+                          w={"58px"}
+                          type="number"
+                          min="0"
+                          max="12"
+                          placeholder="0"
+                          name="estimatedTime"
+                          value={inputValues.estimatedTime}
+                          onChange={handleInputChange}
+                          onBlur={() => closeModal()}
+                        />
+                        <H3Input>{"Meses"}</H3Input>
+                      </DivInput>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
               <br />
 
@@ -297,6 +520,7 @@ function CreateProject() {
                 value={formatNumber(inputValues.value, "R$", ".", ",")}
                 onChange={handleInputChange}
                 placeholder="R$00,00"
+                onBlur={() => closeModal()}
               />
 
               <br />
@@ -318,7 +542,9 @@ function CreateProject() {
             <br />
             <CardOverviewOne
               selectedOptions={selectedOptions}
+              handleDeselectOption={handleDeselectOption}
               debouncedInputValues={debouncedInputValues}
+              type={selectedOption}
             />
 
             <br />
@@ -326,23 +552,23 @@ function CreateProject() {
             <br />
 
             <CardHunter>
-              <h3>{debouncedInputValues.nameCompany}</h3>
+              <h3>{infoUser.name}</h3>
               <br />
-              <p>{"Empresa de Freelancer"}</p>
+              <p>{infoUser.sector}</p>
               <br />
               <div className="content-infos-company">
                 <div className="info-company">
-                  <p>{fullname}</p>
+                  <p>{infoUser.user.name}</p>
                   <AiOutlineUser size={24} color={`${Colors.PRIMARY_COLOR}`} />
                 </div>
                 <br />
                 <div className="info-company">
-                  <p>{email}</p>
+                  <p>{infoUser.email}</p>
                   <MdEmail size={24} color={`${Colors.PRIMARY_COLOR}`} />
                 </div>
                 <br />
                 <div className="info-company">
-                  <p>{"+55 (11) 9000-4222"}</p>
+                  <p>{infoUser.user.cellphone}</p>
                   <MdPhoneInTalk size={24} color={`${Colors.PRIMARY_COLOR}`} />
                 </div>
               </div>
@@ -351,17 +577,79 @@ function CreateProject() {
 
           <div className="content-desc">
             <FilledButton
-              marginTop={"48px"}
               marginRight={""}
               color={Colors.PRIMARY_COLOR}
               width={477}
               heigth={60}
               alignSelf={"center"}
+              onClick={() => cadastrar()}
             >
               {"Criar Job"}
             </FilledButton>
           </div>
         </Article>
+
+        {typeError === 1 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"Nome do projeto não pode estar vazio"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 2 ? (
+          <ModalStatus
+            status={"error"}
+            texto={
+              "A descrição deve ter um tamanho maior que sessenta (60) caractéres"
+            }
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 3 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"Número de pessoas deve ser maior que 0"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 4 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"Número de pessoas excedido deve ser menor ou igual que 6"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 5 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"Quantidade de meses deve ser maior que 0"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 6 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"Quantidade de meses excedido, deve ser menor ou igual á 12"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 7 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"O valor não pode conter letras"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : typeError === 8 ? (
+          <ModalStatus
+            status={"error"}
+            texto={"O valor deve ser maior que R$100,00"}
+            onClose={handleCloseError}
+            modalError={modalError}
+          />
+        ) : (
+          ""
+        )}
       </Container>
     </>
   );

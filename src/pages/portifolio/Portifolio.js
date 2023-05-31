@@ -8,11 +8,10 @@ import PortifolioSobre from "./sobre/PortifolioSobre";
 import Address from "./address/Address";
 import { ToastContainer } from "react-toastify";
 import Experiencia from "./experiencia/Experiencia";
+import CompletedProjects from "./projects/CompletedProjects";
 
 const Portifolio = () => {
   const [abaActive, setAbaActive] = useState(1);
-
-
 
   return (
     <>
@@ -33,7 +32,7 @@ const Portifolio = () => {
         ) : abaActive === 3 ? (
           <Experiencia />
         ) : (
-          <></>
+          <CompletedProjects />
         )}
       </Styled.Container>
     </>

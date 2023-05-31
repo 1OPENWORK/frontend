@@ -53,20 +53,19 @@ function Auth() {
       if (response.status === 200) {
         const token = response.data.token;
         const id = response.data.userId;
-        const fullname = response.data.fullname;
         const email = response.data.email;
+        const tipo = response.data.tipo;
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
-        Cookies.set("isDev", true, { expires: 1 });
-        Cookies.set("fullname", fullname, { expires: 1 });
+        Cookies.set("isDev", tipo === "DESENVOLVEDOR", { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
 
         const { data } = await handleInformationsUser(id);
 
         dispatch(
           changeSave({
-            perfil: data.perfil,
+            perfil: {...data.perfil, tipo: tipo},
             address: data.address,
             tools: data.tools,
           })

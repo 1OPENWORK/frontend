@@ -11,13 +11,12 @@ import PortifolioService from "../service/PortifolioService";
 import { toast } from "react-toastify";
 
 const Experiencia = () => {
-
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { auth } = useSelector(selectedAuth);
   const [experience, setExperiencie] = useState("");
 
   const fetchMyExperiencies = async () => {
-    const {data} = await PortifolioService.fetchMyExperiencie(
+    const { data } = await PortifolioService.fetchMyExperiencie(
       dadosPerfil.perfil.id,
       auth.token
     );
@@ -32,7 +31,7 @@ const Experiencia = () => {
         { experience: experience },
         auth.token
       );
-     
+
       if (response.status === 200) {
         toast.success("Infomações atualizadas com sucesso.", {
           position: "top-right",
@@ -66,10 +65,11 @@ const Experiencia = () => {
   return (
     <Styled.Container>
       <Styled.Header>
-        <Styled.ImgUser>
-          <MdAdd size={24} color={Colors.WHITE} />
+        <Styled.ImgUser img={dadosPerfil.perfil.image}>
+          {dadosPerfil.perfil.image === null && (
+            <MdAdd size={24} color={Colors.WHITE} />
+          )}
         </Styled.ImgUser>
-
         <Styled.ContainerHeader>
           <Styled.NameUser>{dadosPerfil.perfil.name}</Styled.NameUser>
         </Styled.ContainerHeader>

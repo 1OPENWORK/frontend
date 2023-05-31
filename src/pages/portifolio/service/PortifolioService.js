@@ -59,13 +59,40 @@ const updateExperiencie = async (id, dados, token) => {
   return response;
 };
 
+const uploadImg = async (id, img, token) => {
+  const formData = new FormData();
+  formData.append("file", img);
+
+  const response = await axios.post(`${URI}/fileS3/upload/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+};
+
+const buscarMyProjectsDev = async (id, token) => {
+  const response = await axios.get(
+    `${URI}/projetos-aceitos/completos/desenvolvedor/${id}`,
+    {
+      Authorization: `Bearer ${token}`,
+    }
+  );
+
+  return response;
+};
+
 const PortifolioService = {
   updade,
   updadeAddress,
   fetchMyInformations,
   updateAboutMe,
   fetchMyExperiencie,
-  updateExperiencie
+  updateExperiencie,
+  uploadImg,
+  buscarMyProjectsDev,
 };
 
 export default PortifolioService;

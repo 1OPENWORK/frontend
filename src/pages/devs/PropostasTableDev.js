@@ -5,7 +5,7 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import { getId } from "../../hooks/Cookies";
+import { getCompanyId, getId } from "../../hooks/Cookies";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -19,8 +19,8 @@ import { getId } from "../../hooks/Cookies";
  */
 
 const PropostaDesenvolvedores = () => {
-  const id = getId();
-  const URI = AmbienteBackend() + `/api/propostas/desenvolvedor/${id}`;
+  const idCompany = getCompanyId();
+  const URI = AmbienteBackend() + `/api/propostas/empresa/${idCompany}`;
 
   const [devs, setDevs] = useState([]);
 

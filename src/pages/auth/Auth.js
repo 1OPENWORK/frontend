@@ -55,9 +55,11 @@ function Auth() {
         const id = response.data.userId;
         const email = response.data.email;
         const tipo = response.data.tipo;
+        const companyId = response.data.companyId;
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
+        Cookies.set("companyId", companyId, { expires: 1 });
         Cookies.set("isDev", tipo === "DESENVOLVEDOR", { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
 

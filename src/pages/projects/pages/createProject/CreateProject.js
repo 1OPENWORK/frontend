@@ -23,7 +23,7 @@ import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getId, getToken } from "../../../../hooks/Cookies";
+import { getCompanyId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
@@ -40,7 +40,7 @@ function CreateProject() {
   const [proef, setProef] = useState([]);
   const [tools, setTools] = useState([]);
 
-  const idCompany = getId();
+  const idCompany = getCompanyId();
 
   const fetchChange =
     selectedOption === 1
@@ -49,7 +49,7 @@ function CreateProject() {
 
   useEffect(() => {
     listar();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
   const openModal = () => {
@@ -113,9 +113,7 @@ function CreateProject() {
 
   async function fetchUser() {
     await axios
-      .get(
-        AmbienteBackend() + `/api/empresas/${idCompany}`
-      )
+      .get(AmbienteBackend() + `/api/empresas/${idCompany}`)
       .then((response) => {
         setInfoUser(response.data);
         console.log(response.data);
@@ -127,7 +125,7 @@ function CreateProject() {
 
   useEffect(() => {
     fetchUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //cadastro projetos - POST
@@ -139,7 +137,7 @@ function CreateProject() {
       title: debouncedInputValues.nameProject,
       description: debouncedInputValues.describe,
       value: debouncedInputValues.value,
-      idCompany: 1,
+      idCompany: `${idCompany}`,
       qtdSprint: debouncedInputValues.estimatedTime,
       daysToSprint: debouncedInputValues.estimatedTime,
       maxDevelopers: debouncedInputValues.qntdPeople,
@@ -350,6 +348,7 @@ function CreateProject() {
             <FilledButton
               onClick={voltar}
               marginRight={"0px"}
+              marginLeft={"0px"}
               color={Colors.BLACK}
               width={110}
               heigth={60}

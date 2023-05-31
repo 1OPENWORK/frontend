@@ -11,12 +11,7 @@ import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
 import { useNavigate } from "react-router-dom";
-import {
-  deleteId,
-  deleteIsDev,
-  deleteToken,
-  getIsDev,
-} from "../../hooks/Cookies";
+import { deleteId, deleteIsDev, deleteToken } from "../../hooks/Cookies";
 import {
   HomeDevPath,
   ProgressPath,

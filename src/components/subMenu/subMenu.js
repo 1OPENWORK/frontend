@@ -1,33 +1,6 @@
 import React, { useState } from "react";
 import "./subMenu.styled";
 import { Container } from "./subMenu.styled";
-import {
-  DevsPath,
-  JobsPath,
-  AvaliacoesPath,
-  AvaliarPath,
-  DashboardFinanceiraPath,
-  FinanceiraPath,
-} from "../../constants/Path";
-import { useNavigate } from "react-router-dom";
-
-const navigate = useNavigate;
-
-const goToDevs = () => {
-  navigate(DevsPath);
-};
-
-const goToJobs = () => {
-  navigate(JobsPath);
-};
-
-const goToAvaliacoes = () => {
-  navigate(AvaliacoesPath);
-};
-
-const goToAvaliar = () => {
-  navigate(DevsPath);
-};
 
 function SubMenu({ type }) {
   const [click, setClick] = useState("");

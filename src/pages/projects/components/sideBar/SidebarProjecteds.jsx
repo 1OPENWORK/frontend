@@ -11,6 +11,7 @@ import {
   ProgressPath,
   ProjectsPath,
   canceledPath,
+  HomeCompanyPath,
 } from "../../../../constants/Path";
 
 import { useState } from "react";
@@ -30,26 +31,26 @@ function SidebarProjecteds({ type }) {
     navigate(HomeDevPath);
   };
 
+  const goToHomeCompany = () => {
+    navigate(HomeCompanyPath);
+  };
+
   const goToProgress = () => {
     navigate(ProgressPath);
     setType(1);
-    console.log(typeof isDev)
+    console.log(typeof isDev);
   };
   const goToCompleted = () => {
     navigate(ProjectsPath);
     setType(2);
-    console.log(typeof isDev)
-
-
+    console.log(typeof isDev);
   };
 
   const goToCanceled = () => {
     navigate(canceledPath);
     setType(3);
-    console.log(typeof isDev)
+    console.log(typeof isDev);
   };
-
-
 
   const goToCreateProject = () => {
     navigate(CreateProjectPath);
@@ -57,18 +58,34 @@ function SidebarProjecteds({ type }) {
 
   return (
     <Container>
-      <MdArrowBack
-        onClick={() => goToHomeDev()}
-        size={56}
-        style={{
-          position: "absolute",
-          top: 20,
-          marginTop: "1rem",
-          cursor: "pointer",
-        }}
-        color={Colors.WHITE}
-        active={Colors.SECONDARY_COLOR}
-      />
+      {isDev === "true" ? (
+        <MdArrowBack
+          onClick={() => goToHomeDev()}
+          size={56}
+          style={{
+            position: "absolute",
+            top: 20,
+            marginTop: "1rem",
+            cursor: "pointer",
+          }}
+          color={Colors.WHITE}
+          active={Colors.SECONDARY_COLOR}
+        />
+      ) : (
+        <MdArrowBack
+          onClick={() => goToHomeCompany()}
+          size={56}
+          style={{
+            position: "absolute",
+            top: 20,
+            marginTop: "1rem",
+            cursor: "pointer",
+          }}
+          color={Colors.WHITE}
+          active={Colors.SECONDARY_COLOR}
+        />
+      )}
+
       <BodyContainerProjecteds>
         {type === 3 ? (
           <>
@@ -97,7 +114,6 @@ function SidebarProjecteds({ type }) {
                 </button>
               </>
             )}
-
           </>
         ) : type === 2 ? (
           <>

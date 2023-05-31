@@ -5,6 +5,7 @@ import {
   HomePagePath,
   RegisterPath,
   HomeDevPath,
+  HomeCompanyPath,
   ChatPath,
   JobsPath,
   HomeAnalistaPath,
@@ -23,6 +24,7 @@ import {
   SendContractPath,
   AsignedContractPath,
   IndexPath,
+  DevPropostaPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -52,6 +54,8 @@ import CreateProject from "./pages/projects/pages/createProject/CreateProject";
 import SendContract from "./pages/contract/SendContract";
 import AsignedContract from "./pages/contract/contratoAssinado/AsignedContract";
 import { Ambiente } from "./hooks/Ambiente";
+import HomeCompany from "./pages/homeDev/HomeCompany";
+import PropostaTableDev from "./pages/devs/PropostasTableDev";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -77,6 +81,8 @@ function App() {
         <Route path={JobsPath} element={<Jobs />} />
         <Route path={HomeAnalistaPath} element={<HomeAnalista />} />
         <Route path={HomeDevPath} element={<HomeDev />} />
+        <Route path={DevPropostaPath} element={<PropostaTableDev />} />
+        <Route path={HomeCompanyPath} element={<HomeCompany />} />
         <Route path={ChatPath} element={<Chat socket={socket} />} />
         <Route path={DevsPath} element={<Devs />} />
         <Route path={AvaliacoesPath} element={<Avaliacoes />} />

@@ -21,7 +21,7 @@ import { changeActiveToken } from "../../store/reducers/AuthSlice";
 import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-import { HomeDevPath } from "../../constants/Path";
+import { HomeCompanyPath, HomeDevPath } from "../../constants/Path";
 import { changeSave } from "../../store/reducers/PerfilSlice";
 // --------------------------------------------------------
 // Auth INTERFACE
@@ -55,9 +55,11 @@ function Auth() {
         const id = response.data.userId;
         const email = response.data.email;
         const tipo = response.data.tipo;
+        const companyId = response.data.companyId;
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
+        Cookies.set("companyId", companyId, { expires: 1 });
         Cookies.set("isDev", tipo === "DESENVOLVEDOR", { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
 
@@ -77,7 +79,9 @@ function Auth() {
           })
         );
 
-        navigate(HomeDevPath);
+        tipo === "DESENVOLVEDOR"
+          ? navigate(HomeDevPath)
+          : navigate(HomeCompanyPath);
 
         toast.success("Logado com sucesso.", {
           position: "top-right",

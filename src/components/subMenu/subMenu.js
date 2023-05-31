@@ -5,10 +5,9 @@ import { Container } from "./subMenu.styled";
 function SubMenu({ dados, setActive, active }) {
   const [abas, setAbas] = useState([]);
 
- 
-
   useEffect(() => {
     setAbas(dados);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const SubMenuComponent = () => {
@@ -37,7 +36,6 @@ function SubMenu({ dados, setActive, active }) {
             <nav aria-label="primaria">
               <ul className="header-menu cor-0">
                 <SubMenuComponent />
-             
               </ul>
             </nav>
           </div>

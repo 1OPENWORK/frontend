@@ -10,10 +10,20 @@ const ModalStatus = {
     background-color: #f5f5f5;
     position: fixed;
     top: 20%;
-    left: 124px;
-    right: 124px;
+    left: 8rem;
+    right: 8rem;
     margin: 0 auto;
     border-radius: 12px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+  `,
+
+  Img: styled.div`
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 0.5rem;
   `,
 
   ModalHeader: styled.img`

@@ -8,7 +8,7 @@ import PortifolioSobre from "./sobre/PortifolioSobre";
 import Address from "./address/Address";
 import { ToastContainer } from "react-toastify";
 import Experiencia from "./experiencia/Experiencia";
-import CompletedProjects from "./projects/CompletedProjects";
+import CompletedProjects from "./projectsPort/CompletedProjects";
 
 const Portifolio = () => {
   const [abaActive, setAbaActive] = useState(1);

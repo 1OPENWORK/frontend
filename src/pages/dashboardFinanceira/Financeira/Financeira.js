@@ -39,13 +39,18 @@ import SubMenu from "../../../components/subMenu/subMenu";
 import {
   handleDashboard,
   handleFinanceTable,
+  handleProjectsCancelled,
+  handleProjectsCompleted,
+  handleProjectsInProgress,
 } from "../../../store/actions/Dashboard";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
+import { differenceInMonths, isAfter } from "date-fns";
 
 const Financeira = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [projetoSelecionado, setProjetoSelecionado] = useState(null);
+  const [projetos, setProjetos] = useState([]);
 
   const etapas = [
     { label: "Etapa 1", completed: true, value: "R$ 300" },
@@ -67,20 +72,48 @@ const Financeira = () => {
     }
   }
 
-  useEffect(() => {
-    getTableFinance();
-  }, []);
-
-  async function getDashboard() {
+  async function getProjectsDev() {
     try {
-      const response = await handleDashboard();
-      settotalMes(response.data.totalMes);
+      const response = await handleFinanceTable(Cookies.get("id"));
+      const responseInProgress = await handleProjectsInProgress(
+        Cookies.get("id")
+      );
+      const responseCancelled = await handleProjectsCancelled(
+        Cookies.get("id")
+      );
+
+      const dataWithStatus = response.data.map((item) => ({
+        ...item,
+        status: "open",
+      }));
+      const dataInProgressWithStatus = responseInProgress.data.map((item) => ({
+        ...item,
+        status: "progress",
+      }));
+      const dataCancelledWithStatus = responseCancelled.data.map((item) => ({
+        ...item,
+        status: "cancelled",
+      }));
+
+      setProjetos(
+        projetos.concat(
+          dataWithStatus,
+          dataInProgressWithStatus,
+          dataCancelledWithStatus
+        )
+      );
     } catch {
       console.log("error");
     }
   }
 
-  getDashboard();
+  useEffect(() => {
+    getProjectsDev();
+  }, []);
+
+  useEffect(() => {
+    getTableFinance();
+  }, []);
 
   const handleCellClick = (projeto) => {
     setProjetoSelecionado(projeto);
@@ -101,7 +134,24 @@ const Financeira = () => {
           <InputSearch type="search" placeholder="Digite sua busca" />
           <Wallet>
             <Styled.LogoImg src={WalletImg} />
-            <Cash>R${totalMes}</Cash>
+            <Cash>
+              R$
+              {projetos.reduce((total, projeto) => {
+                        if (projeto.status !== 'cancelled') {
+                          if (projeto.status === 'progress') {
+                            const currentDate = new Date();
+                            const finishDate = new Date(projeto.finishDate);
+                            if (isAfter(currentDate, finishDate)) {
+                              const monthsDiff = differenceInMonths(finishDate, currentDate);
+                              return total + (projeto.valueProject - projeto.tax) * (monthsDiff + 1);
+                            }
+                          } else if (projeto.status === 'open') {
+                            return total + (projeto.valueProject - projeto.tax);
+                          }
+                        }
+                        return " " + total;
+                      }, 0)}
+            </Cash>
           </Wallet>
         </HeaderFinancer>
         <BodyFinance>
@@ -118,24 +168,27 @@ const Financeira = () => {
               </tr>
             </TableHead>
             <tbody>
-              {tabelas.length > 0 ? (
-                tabelas.map((tabela, index) => (
-                  <tr onClick={() => handleCellClick(tabela)} key={index}>
-                    <TableBodyTd>{tabela.titleProject}</TableBodyTd>
-                    <TableBodyTd>{tabela.nameCompany}</TableBodyTd>
+              {projetos.length > 0 ? (
+                projetos.map((projeto, index) => (
+                  <tr onClick={() => handleCellClick(projetos)} key={index}>
+                    <TableBodyTd>{projeto.titleProject}</TableBodyTd>
+                    <TableBodyTd>{projeto.nameCompany}</TableBodyTd>
                     <TableBodyTd>
-                      {format(new Date(tabela.beginDate), "dd/MM/yyyy")} |{" "}
-                      {format(new Date(tabela.finishDate), "dd/MM/yyyy")}
+                      {format(new Date(projeto.beginDate), "dd/MM/yyyy")} |{" "}
+                      {format(new Date(projeto.finishDate), "dd/MM/yyyy")}
                     </TableBodyTd>
-                    <TableBodyTd>R${tabela.valueProject}</TableBodyTd>
-                    <TableBodyTd>{tabela.tax}%</TableBodyTd>
+                    <TableBodyTd>R${projeto.valueProject}</TableBodyTd>
+                    <TableBodyTd>{projeto.tax}%</TableBodyTd>
                     <TableBodyTd>
                       R$
-                      {tabela.valueProject -
-                        (tabela.valueProject * tabela.tax) / 100}
+                      {projeto.valueProject -
+                        (projeto.valueProject * projeto.tax) / 100}
                     </TableBodyTd>
                     <TableBodyTd>
-                      <Tag status={"open"} statusColor={"open"}></Tag>
+                      <Tag
+                        status={projeto.status}
+                        statusColor={projeto.status}
+                      ></Tag>
                     </TableBodyTd>
                   </tr>
                 ))

@@ -10,3 +10,13 @@ export const handleDashboard = async () => {
 export const handleFinanceTable = async (id) => {
     return await get(`${URI}/dashboard/tableFinance/${id}`)
 }
+
+export const handleProjectsCompleted = async(id) =>{
+  return await get(`${URI}/dashboard/projetos-completed/${id}`)
+}
+export const handleProjectsInProgress = async(id) =>{
+  return await get(`${URI}/dashboard/projetos-progress/${id}`)
+}
+export const handleProjectsCancelled = async(id) =>{
+  return await get(`${URI}/dashboard/projetos-cancelled/${id}`)
+}

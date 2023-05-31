@@ -11,7 +11,7 @@ const ModalStatus = ({ status, texto, onClose, modalError }) => {
     <>
       <Styled.Container>
         <Styled.ModalHeader
-          src={status == "error" ? Error : status == "success" ? Success : ""}
+          src={status === "error" ? Error : status === "success" ? Success : ""}
         />
         <Styled.ModalBody>{texto}</Styled.ModalBody>
         <Styled.ModalButton onClick={onClose}>Fechar</Styled.ModalButton>

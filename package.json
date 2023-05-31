@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@100mslive/react-sdk": "^0.3.0",
+    "@djpfs/react-vlibras": "^2.0.2",
     "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

@@ -16,7 +16,6 @@ function CardProject({ type, selected, onSelect }) {
   const handleClick = () => {
     setIsSelected(!isSelected);
     onSelect();
-    console.log(selected);
   };
 
   return (

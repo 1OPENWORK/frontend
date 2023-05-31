@@ -18,8 +18,8 @@ export const ModalContent = styled.div`
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  width: ${props => props.tamanho ? props.tamanho : "1020px"}; 
-  height: ${props => props.altura ? props.altura : "568px"}; 
+  width: ${(props) => (props.tamanho ? props.tamanho : "1020px")};
+  height: ${(props) => (props.altura ? props.altura : "568px")};
   box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.25);
   border-radius: 32px;
 `;

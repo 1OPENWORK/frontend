@@ -1,21 +1,24 @@
-import React, { useState } from "react";
-import { GeneralContainer } from "../../components/UI/generalLayout/Layout.styled";
-import InformationsAuth from "./components/Container/Informations";
-import Styled from "./Auth.styled";
-import InputForm from "../../components/input/InputForm";
-import { FilledButton } from "../../components/UI/buttons/Button";
-import Colors from "../../constants/Colors";
-import { useDispatch } from "react-redux";
-import {
-  handleInformationsUser,
-  handleLogin,
-} from "../../store/actions/UserAuth";
-import { changeActiveToken } from "../../store/reducers/AuthSlice";
-import { ToastContainer, toast } from "react-toastify";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router";
-import { HomeDevPath } from "../../constants/Path";
-import { changeSave } from "../../store/reducers/PerfilSlice";
+// --------------------------------------------------------
+// Auth - Auth
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// IMPORTS
+// --------------------------------------------------------
+import React, { useState } from 'react'
+import { GeneralContainer } from '../../components/UI/generalLayout/Layout.styled'
+import InformationsAuth from './components/Container/Informations'
+import Styled from './Auth.styled'
+import InputForm from '../../components/input/InputForm'
+import { FilledButton } from '../../components/UI/buttons/Button'
+import Colors from '../../constants/Colors'
+import { useDispatch } from 'react-redux'
+import { handleLogin } from '../../store/actions/UserAuth'
+import { changeActiveToken } from '../../store/reducers/AuthSlice'
+import { ToastContainer, toast } from 'react-toastify'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router'
+import { HomeDevPath } from '../../constants/Path'
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------

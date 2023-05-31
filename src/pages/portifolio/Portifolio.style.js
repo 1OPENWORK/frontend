@@ -34,13 +34,14 @@ const PortifolioStyle = {
     line-height: 49px;
     width: 100%;
     color: ${Colors.PRIMARY_COLOR};
+    margin-top: 2rem;
   `,
 
   Divisor: styled.div`
     width: 100%;
     height: 3px;
     background-color: ${Colors.PRIMARY_COLOR};
-    margin-top: 30px;
+    margin-top: 2rem;
   `,
 
   Row: styled.div`
@@ -57,6 +58,7 @@ const PortifolioStyle = {
     justify-content: center;
     width: 100%;
     margin-top: 2rem;
+    font-family: nunito;
   `,
 
   TitleForm: styled.h2`

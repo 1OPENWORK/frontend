@@ -107,6 +107,10 @@ export const Container = Styled.div`
         font-weight: 900;
         font-size: 1.5rem;
         line-height: 33px;
+
+        :hover {
+            cursor: pointer;
+        }
     }
     
     .white-row {

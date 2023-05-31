@@ -164,6 +164,7 @@ const Formulario = () => {
         <FilledButton
           onClick={handleUpdate}
           marginTop={"20px"}
+          marginRight={"0px"}
           color={Colors.PRIMARY_COLOR}
           width={190}
           heigth={60}

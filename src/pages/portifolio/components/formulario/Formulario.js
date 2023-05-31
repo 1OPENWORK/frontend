@@ -10,6 +10,7 @@ import { cleanMask } from "../../../../helpers/HelperFunctions";
 import { FilledButton } from "../../../../components/UI/buttons/Button";
 import Colors from "../../../../constants/Colors";
 import {
+  changeSave,
   changeUpdatePerfil,
   selectedPerfil,
 } from "../../../../store/reducers/PerfilSlice";
@@ -21,6 +22,9 @@ import {
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import { Button, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { AuthPath } from "../../../../constants/Path";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -28,12 +32,21 @@ const Formulario = () => {
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { auth } = useSelector(selectedAuth);
 
+  const navigate = useNavigate();
+
   const [dadosPessoais] = useState(dadosPerfil.perfil);
   const [nome, setNome] = useState(dadosPessoais.name);
   const [email, setEmail] = useState(dadosPessoais.email);
   const [tel, setTel] = useState(dadosPessoais.cellphone);
   const [cpfOrCnpj, setCpfOrCnpj] = useState(dadosPessoais.cpfCnpj);
   const [password, setPassword] = useState("");
+
+  // MODAL
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const validRegister = object({
     password: string()
@@ -122,6 +135,56 @@ const Formulario = () => {
     setPassword("");
   }
 
+  const handleExcluirConta = async () => {
+
+    try {
+      const response = await PortifolioService.deleteContaUser(
+        dadosPerfil.perfil.id,
+        auth.token
+      );
+  
+      if (response.status === 200) {
+        toast.success(
+          "Você deletou sua conta, estamos te redirecionando para o login.",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: false,
+            theme: "light",
+          }
+        );
+  
+        Cookies.set("token", "");
+        Cookies.set("id", "");
+        Cookies.set("isDev", "");
+  
+        dispatch(
+          changeActiveToken({
+            token: "",
+          })
+        );
+  
+        dispatch(
+          changeSave({
+            perfil: {},
+            address: {},
+            tools: [],
+          })
+        );
+  
+        navigate(AuthPath);
+      }
+    } catch (error) {
+      console.log("🚀 ~ file: Formulario.js:182 ~ handleExcluirConta ~ error:", error)
+      
+    }
+    
+  };
+
   return (
     <Styled.Form>
       <Styled.Row>
@@ -196,7 +259,60 @@ const Formulario = () => {
         >
           {"Atualizar"}
         </FilledButton>
+        <FilledButton
+          onClick={handleShow}
+          marginTop={"20px"}
+          marginRight={"0px"}
+          color={Colors.RED}
+          width={190}
+          heigth={60}
+          semHouver={true}
+        >
+          {"Excluir Conta"}
+        </FilledButton>
       </Styled.Divisor>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered={true}
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Você está prestes a excluir sua conta</Modal.Title>
+        </Modal.Header>
+        <Modal.Body
+          style={{
+            fontSize: "1.3rem",
+            fontWeight: "500",
+          }}
+        >
+          <p
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Tem certeza de que deseja excluir sua conta? Esta ação é
+            irreversível e todos os seus dados e informações serão
+            permanentemente apagados.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <FilledButton
+            onClick={handleExcluirConta}
+            marginTop={"20px"}
+            marginRight={"0px"}
+            color={Colors.RED}
+            width={190}
+            heigth={60}
+            semHouver={true}
+          >
+            {"Excluir"}
+          </FilledButton>
+        </Modal.Footer>
+      </Modal>
     </Styled.Form>
   );
 };

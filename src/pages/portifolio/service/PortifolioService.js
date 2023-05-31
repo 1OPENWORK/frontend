@@ -84,6 +84,14 @@ const buscarMyProjectsDev = async (id, token) => {
   return response;
 };
 
+const deleteContaUser = async (id, token) => {
+  const response = await axios.delete(`${URI}/api/usuarios/deletar/${id}`, {
+    Authorization: `Bearer ${token}`,
+  });
+
+  return response;
+};
+
 const PortifolioService = {
   updade,
   updadeAddress,
@@ -93,6 +101,7 @@ const PortifolioService = {
   updateExperiencie,
   uploadImg,
   buscarMyProjectsDev,
+  deleteContaUser,
 };
 
 export default PortifolioService;

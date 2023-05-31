@@ -65,7 +65,7 @@ function Auth() {
 
         dispatch(
           changeSave({
-            perfil: {...data.perfil, tipo: tipo},
+            perfil: { ...data.perfil, tipo: tipo },
             address: data.address,
             tools: data.tools,
           })
@@ -80,6 +80,17 @@ function Auth() {
         navigate(HomeDevPath);
 
         toast.success("Logado com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      } else {
+        toast.error(response.response.data.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

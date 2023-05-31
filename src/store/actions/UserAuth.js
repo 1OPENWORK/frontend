@@ -1,8 +1,7 @@
 import { AmbienteBackend } from "../../hooks/Ambiente";
 import { get, post } from '../../services/Generected'
 
-// const URI = AmbienteBackend();
-const URI = "http://localhost:8004";
+const URI = AmbienteBackend();
 
 export const handleLogin = async (body) => {
   return await post(`${URI}/api/usuarios/login`, body);

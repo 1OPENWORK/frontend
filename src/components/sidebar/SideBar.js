@@ -1,30 +1,96 @@
-import React from "react";
+import React, { useRef } from "react";
 import Styled from "./SideBar.styled";
 import IconPlus from "../../assets/icons/icon-plus.svg";
-import IconProfile from "../../assets/icons/icon-profile.svg";
-import IconAbout from "../../assets/icons/icon-about.svg";
-import IconExperiences from "../../assets/icons/icon-specialtys.svg";
-import IconProject from "../../assets/icons/icon-projects.svg";
-import { useNavigate } from "react-router-dom";
 import { MdArrowBack, MdNewspaper } from "react-icons/md";
 import Colors from "../../constants/Colors";
-import {
-  HomeDevPath,
-  PortfolioEt5Path,
-  PortfolioEt6Path,
-  PortfolioProjectsPath,
-} from "../../constants/Path";
 
 import { useState } from "react";
 import { BsPersonCircle, BsStarFill } from "react-icons/bs";
 import { AiOutlineProfile } from "react-icons/ai";
+import PortifolioService from "../../pages/portifolio/service/PortifolioService";
+import {
+  changeSave,
+  changeUpdatePerfil,
+  selectedPerfil,
+} from "../../store/reducers/PerfilSlice";
+import { selectedAuth } from "../../store/reducers/AuthSlice";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { HomeDevPath } from "../../constants/Path";
 
 const SideBar = ({ tabActive }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { dadosPerfil } = useSelector(selectedPerfil);
+  const { auth } = useSelector(selectedAuth);
   const [tabSelection, setSelection] = useState(1);
+  const [previewImage, setPreviewImage] = useState(dadosPerfil.perfil.image);
+  const inputRef = useRef(null);
 
   const handleClick = (value) => {
     setSelection(value);
     tabActive(value);
+  };
+
+  const handleImagePerson = () => {
+    inputRef.current.click();
+  };
+
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setPreviewImage(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+      handlePushImg(file);
+    }
+  };
+
+  const handlePushImg = async (file) => {
+    const response = await PortifolioService.uploadImg(
+      dadosPerfil.perfil.id,
+      file,
+      auth.token
+    );
+
+    if (response.status === 200) {
+      dispatch(
+        changeSave({
+          perfil: response.data.perfil,
+          address: response.data.adress,
+          tools: response.data.tools,
+        })
+      );
+
+      toast.success("Foto atualizada com sucesso.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+    } else {
+      toast.error("Ocorreu algum problema ao tentar enviar a imagem.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+    }
   };
 
   return (
@@ -33,16 +99,21 @@ const SideBar = ({ tabActive }) => {
         <Styled.Header>
           <Styled.IconCallBack
             onClick={() => {
-              handleClick(1);
+              navigate(HomeDevPath);
             }}
           >
             <MdArrowBack size={40} color={Colors.WHITE} />
           </Styled.IconCallBack>
-          <Styled.ContainerPhotograph>
-            <Styled.IconPlus
-              isImg={true}
-              background={IconPlus}
-            ></Styled.IconPlus>
+          <Styled.Input
+            type="file"
+            onChange={handleInputChange}
+            ref={inputRef}
+          />
+          <Styled.ContainerPhotograph
+            back={previewImage}
+            onClick={handleImagePerson}
+          >
+            {previewImage === "" && <img src={IconPlus} />}
           </Styled.ContainerPhotograph>
 
           <Styled.AddPhotograph>Adicionar foto</Styled.AddPhotograph>

@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 const ModalStatus = {
   Container: styled.div`
-  min-height: 200px;
+    width: 40%;
+    box-shadow: 0 0 0 0 20px rgba(0, 0, 0, 0.25);
+    min-height: 200px;
     z-index: 1000;
-    /* left: 37.4%; */
     padding: 16px 0 16px 0;
     background-color: #f5f5f5;
     position: fixed;
@@ -45,7 +46,7 @@ const ModalStatus = {
     justify-content: center;
     margin: 0 auto;
     padding: 0px;
-    width: 90%;
+    width: 30%;
     height: 44px;
     background: #20ac69;
     border-radius: 8px;

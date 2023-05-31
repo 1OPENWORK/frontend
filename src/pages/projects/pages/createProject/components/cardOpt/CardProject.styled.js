@@ -6,7 +6,7 @@ export const Container = styled.div`
   background-color: #ffffff;
   padding: 12px 12px;
   border-radius: 18px;
-  border: 1px solid ${(props) => props.color ? props.color : "none"};
+  border: 1px solid ${(props) => (props.color ? props.color : "none")};
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
     rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
     rgba(0, 0, 0, 0.07) 0px 16px 16px;
@@ -47,7 +47,7 @@ export const Desc = styled.div`
   }
 
   p {
-    font-size: 0.75rem;
+    font-size: .9rem;
     font-weight: medium;
     letter-spacing: 0.2rem;
   }

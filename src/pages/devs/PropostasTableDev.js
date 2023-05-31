@@ -5,6 +5,7 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import { getId } from "../../hooks/Cookies";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -17,8 +18,9 @@ import { AmbienteBackend } from "../../hooks/Ambiente";
  * @returns The component JSX.
  */
 
-const Desenvolvedores = () => {
-  const URI = AmbienteBackend() + "/api/usuarios/desenvolvedores";
+const PropostaDesenvolvedores = () => {
+  const id = getId();
+  const URI = AmbienteBackend() + `/api/propostas/desenvolvedor/${id}`;
 
   const [devs, setDevs] = useState([]);
 
@@ -82,4 +84,4 @@ const Desenvolvedores = () => {
   );
 };
 
-export default Desenvolvedores;
+export default PropostaDesenvolvedores;

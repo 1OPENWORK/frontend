@@ -4,8 +4,15 @@ import { HiUserGroup } from "react-icons/hi";
 import Colors from "../../../../../../constants/Colors";
 import moment from "moment";
 import { NumericFormat } from "react-number-format";
+import { FaUser } from "react-icons/fa";
+import { GrFormClose } from "react-icons/gr";
 
-function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
+function CardOverviewOne({
+  debouncedInputValues,
+  selectedOptions,
+  type,
+  handleDeselectOption,
+}) {
   const [startDate, setStartDate] = useState(moment()); // Data inicial, pode ser atualizada conforme necessário
   const [durationInMonths, setDurationInMonths] = useState(
     debouncedInputValues.estimatedTime
@@ -45,15 +52,27 @@ function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
 
     calculateEndDate();
   }, [startDate, durationInMonths]);
+
   return (
     <>
       <Container>
         <h2>{debouncedInputValues.nameProject}</h2>
 
         <div className="content-desc-over">
-          <HiUserGroup size={66} color={`${Colors.PRIMARY_COLOR}`} />
-          <br />
-          <label>Projeto grande</label>
+          {type === 1 ? (
+            <>
+              <HiUserGroup size={66} color={`${Colors.PRIMARY_COLOR}`} />
+              <br />
+              <label>Projeto grande</label>
+            </>
+          ) : (
+            <>
+              <FaUser size={54} color={`${Colors.PRIMARY_COLOR}`} />
+              <br />
+              <label>Projeto pequeno</label>
+            </>
+          )}
+
           <br />
           <p
             style={{
@@ -93,6 +112,12 @@ function CardOverviewOne({ debouncedInputValues, selectedOptions }) {
               {selectedOptions.map((option) => (
                 <div key={option.id} className="card-tool">
                   <p>{option.name}</p>
+                  <GrFormClose
+                    onClick={() => handleDeselectOption(option)}
+                    size={26}
+                    style={{ cursor: "pointer", alignSelf: "center", color: "white" }}
+                    className="btn-close"
+                  />
                 </div>
               ))}
             </div>

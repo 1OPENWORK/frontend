@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   position: relative;
@@ -7,7 +7,6 @@ export const Container = styled.div`
   padding: 0 5px;
   height: 100%;
   flex: 0 0 320px;
-
   opacity: ${(props) => (props.done ? 0.6 : 1)};
 
   & + div {
@@ -51,4 +50,4 @@ export const Container = styled.div`
   ul {
     margin-top: 30px;
   }
-`;
+`

@@ -80,9 +80,9 @@ export const Aside = styled.aside`
     flex-direction: column;
     position: absolute;
     left: 5%;
-    top: 991px;
+    top: 999px;
     height: 144px;
-    width: 20%;
+    width: 40%;
     border-radius: 5px;
     background: #f2f2f2;
     border: 1px solid ${Colors.PRIMARY_COLOR};
@@ -95,10 +95,23 @@ export const Aside = styled.aside`
 
     list-style: none;
     text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1);
+    transition: 0.2s ease-in-out;
+    z-index: 1000;
+
+    overflow-y: auto;
   }
 
   .modal.display {
     display: flex;
+    transform: scale(1.02);
+  }
+
+  .modal-close {
+    position: fixed;
+    top: 0.3em;
+    right: 0.2em;
   }
 
   .modal ul {

@@ -4,35 +4,42 @@ import { ContainerContent, ContainerMain } from "../../Projects.styled";
 import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { getId, getIsDev } from "../../../../hooks/Cookies";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 // import Cookies from "js-cookie";
 function Canceled({ developers }) {
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [noProject, setNoProject] = useState(false);
 
-  const isDev = true;
-  const id = 1;
+  const isDev = getIsDev();
+  const id = getId();
 
-  const fetchChange = isDev
-    ? AmbienteBackend() + `/projetos-aceitos/cancelados/desenvolvedor/${id}`
-    : AmbienteBackend() + `/projetos-aceitos/cancelados/empresa/${id}`;
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/cancelados/empresa/${id}`;
+  const fetchDev = AmbienteBackend() + `/projetos-aceitos/cancelados/desenvolvedor/${id}`;
+
+  async function fetchProjetos() {
+    await axios
+      .get(isDev === "true" ? fetchDev : fetchCompany)
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setProjetos(response.data);
+          console.log(response);
+        } else if (response.status === 204) {
+          setLoading(false);
+          setNoProject(true);
+          console.log("caiu aqui", response);
+        }
+      })
+      .catch((error) => {
+        console.log("Deu erro: " + error);
+      });
+  }
 
   useEffect(() => {
-    async function fetchProjetos() {
-      await axios
-        .get(fetchChange)
-        .then((response) => {
-
-          if (response.status === 200) {
-            setLoading(false);
-            setProjetos(response.data);
-          }
-        })
-        .catch((error) => {
-        });
-    }
-
     fetchProjetos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -46,6 +53,11 @@ function Canceled({ developers }) {
           {loading ? (
             <div className="loading">
               <h3>Carregando...</h3>
+            </div>
+          ) : noProject ? (
+            <div className="loading">
+              <AiOutlineFundProjectionScreen size={64} />
+              <h3>Sem projetos...</h3>
             </div>
           ) : (
             projetos.map((projeto) => (
@@ -61,6 +73,7 @@ function Canceled({ developers }) {
                 company={projeto.nameCompany}
                 logoCompany={projeto.imageCompany}
                 developers={projeto.developers}
+                isDev={isDev}
               />
             ))
           )}

@@ -11,34 +11,45 @@ import {
   ProgressPath,
   ProjectsPath,
   canceledPath,
+  HomeCompanyPath,
 } from "../../../../constants/Path";
-import { RxDashboard } from "react-icons/rx";
-import { BsFillClipboard2PlusFill } from "react-icons/bs";
+
 import { useState } from "react";
 
 import ButtonCompleted from "./components/ButtonCompleted";
+import { getIsDev } from "../../../../hooks/Cookies";
 
 function SidebarProjecteds({ type }) {
   const navigate = useNavigate();
 
-  const [setType] = useState(type);
+  const isDev = getIsDev();
+
+  // eslint-disable-next-line no-unused-vars
+  const [typeUse, setType] = useState(type);
 
   const goToHomeDev = () => {
     navigate(HomeDevPath);
   };
 
+  const goToHomeCompany = () => {
+    navigate(HomeCompanyPath);
+  };
+
   const goToProgress = () => {
     navigate(ProgressPath);
     setType(1);
+    console.log(typeof isDev);
   };
   const goToCompleted = () => {
     navigate(ProjectsPath);
     setType(2);
+    console.log(typeof isDev);
   };
 
   const goToCanceled = () => {
     navigate(canceledPath);
     setType(3);
+    console.log(typeof isDev);
   };
 
   const goToCreateProject = () => {
@@ -47,18 +58,34 @@ function SidebarProjecteds({ type }) {
 
   return (
     <Container>
-      <MdArrowBack
-        onClick={() => goToHomeDev()}
-        size={56}
-        style={{
-          position: "absolute",
-          top: 20,
-          marginTop: "1rem",
-          cursor: "pointer",
-        }}
-        color={Colors.WHITE}
-        active={Colors.SECONDARY_COLOR}
-      />
+      {isDev === "true" ? (
+        <MdArrowBack
+          onClick={() => goToHomeDev()}
+          size={56}
+          style={{
+            position: "absolute",
+            top: 20,
+            marginTop: "1rem",
+            cursor: "pointer",
+          }}
+          color={Colors.WHITE}
+          active={Colors.SECONDARY_COLOR}
+        />
+      ) : (
+        <MdArrowBack
+          onClick={() => goToHomeCompany()}
+          size={56}
+          style={{
+            position: "absolute",
+            top: 20,
+            marginTop: "1rem",
+            cursor: "pointer",
+          }}
+          color={Colors.WHITE}
+          active={Colors.SECONDARY_COLOR}
+        />
+      )}
+
       <BodyContainerProjecteds>
         {type === 3 ? (
           <>
@@ -79,11 +106,14 @@ function SidebarProjecteds({ type }) {
               onClick={() => goToCanceled()}
             />
 
-            <button type="button" onClick={() => goToCreateProject()}>
-              <AiFillFolderAdd size={40} className="icon-cancel" />
-
-              <h2>Criar Projeto</h2>
-            </button>
+            {isDev === "false" && (
+              <>
+                <button type="button" onClick={() => goToCreateProject()}>
+                  <AiFillFolderAdd size={40} className="icon-cancel" />
+                  <h2>Criar Projeto</h2>
+                </button>
+              </>
+            )}
           </>
         ) : type === 2 ? (
           <>
@@ -104,11 +134,15 @@ function SidebarProjecteds({ type }) {
               onClick={() => goToCanceled()}
             />
 
-            <button type="button" onClick={() => goToCreateProject()}>
-              <AiFillFolderAdd size={40} className="icon-cancel" />
+            {isDev === "false" && (
+              <>
+                <button type="button" onClick={() => goToCreateProject()}>
+                  <AiFillFolderAdd size={40} className="icon-cancel" />
 
-              <h2>Criar Projeto</h2>
-            </button>
+                  <h2>Criar Projeto</h2>
+                </button>
+              </>
+            )}
           </>
         ) : type === 1 ? (
           <>
@@ -128,27 +162,28 @@ function SidebarProjecteds({ type }) {
               desc={"Cancelados"}
               onClick={() => goToCanceled()}
             />
-            <button type="button" onClick={() => goToCreateProject()}>
-              <AiFillFolderAdd size={40} className="icon-cancel" />
+            {isDev === "false" && (
+              <>
+                <button type="button" onClick={() => goToCreateProject()}>
+                  <AiFillFolderAdd size={40} className="icon-cancel" />
 
-              <h2>Criar Projeto</h2>
-            </button>
+                  <h2>Criar Projeto</h2>
+                </button>
+              </>
+            )}
           </>
         ) : (
           <>
-            <button
-              type="button"
+            <ButtonCompleted
+              type={4}
+              desc={"Projetos"}
               onClick={() => goToProgress()}
-            >
-              <RxDashboard size={32} />
-
-              <h2>Projetos</h2>
-            </button>
-            <button type="button">
-              <BsFillClipboard2PlusFill size={32} color={"#20ac51"} />
-
-              <h2 color={"#20ac51"}>Tarefas</h2>
-            </button>
+            />
+            <ButtonCompleted
+              color={"rgb(77, 255, 126)"}
+              type={5}
+              desc={"Tarefas"}
+            />
           </>
         )}
       </BodyContainerProjecteds>

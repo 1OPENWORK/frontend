@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   height: 100%;
   width: 10em;
   position: fixed;
-  background: #20ac51;
+  background: #161616;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
   align-items: center;
   gap: 2rem;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   flex-direction: column;
   z-index: 1000;
   font-size: 1rem;
-`;
+`
 
 export const BodyContainerProjecteds = styled.div`
   display: flex;
@@ -35,12 +35,12 @@ export const BodyContainerProjecteds = styled.div`
     cursor: pointer;
     color: ${(props) => props.color};
   }
-`;
+`
 
 export const Logo = styled.img`
   height: ${(props) => props.height};
-`;
+`
 
 export const Tarefa = styled.img`
   height: 28px;
-`;
+`

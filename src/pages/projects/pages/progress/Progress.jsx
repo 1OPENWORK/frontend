@@ -4,26 +4,58 @@ import { ContainerContent, ContainerMain } from "../../Projects.styled";
 import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { getId, getIsDev, getToken } from "../../../../hooks/Cookies";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const Progress = ({ developers }) => {
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [noProject, setNoProject] = useState(false);
+
+  const isDev = getIsDev();
+  const id = getId();
+  const token = getToken();
+
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/andamentos/empresa/${id}`
+  const fetchDev = AmbienteBackend() + `/projetos-aceitos/andamentos/desenvolvedor/${id}`
+
+
+
+  async function fetchProjetos() {
+    await axios
+      .get(isDev === "true" ? fetchDev : fetchCompany
+        , {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setProjetos(response.data);
+          console.log(response);
+        } else if (response.status === 204) {
+          setLoading(false);
+          setNoProject(true);
+          console.log("caiu aqui", response);
+        }
+      })
+      .catch((error) => {
+
+        setLoading(false);
+        setNoProject(true);
+        console.log("Deu erro: " + error);
+
+      });
+  }
 
   useEffect(() => {
-    async function fetchProjetos() {
-      await axios
-        .get(AmbienteBackend() + `/api/projetos-aceitos/assinados`)
-        .then((response) => {
-          setProjetos(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-        });
-    }
-
     fetchProjetos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <SidebarProjecteds type={1} />
@@ -34,6 +66,11 @@ const Progress = ({ developers }) => {
           {loading ? (
             <div className="loading">
               <h3>Carregando...</h3>
+            </div>
+          ) : noProject ? (
+            <div className="loading">
+              <AiOutlineFundProjectionScreen size={64} />
+              <h3>Sem projetos...</h3>
             </div>
           ) : (
             projetos.map((projeto) => (
@@ -49,6 +86,7 @@ const Progress = ({ developers }) => {
                 company={projeto.nameCompany}
                 logoCompany={projeto.imageCompany}
                 developers={projeto.developers}
+                isDev={isDev}
               />
             ))
           )}

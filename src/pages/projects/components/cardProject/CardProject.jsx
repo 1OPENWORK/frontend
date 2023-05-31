@@ -23,6 +23,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { usePopper } from "react-popper";
+import Colors from "../../../../constants/Colors";
 import { TodoPath } from "../../../../constants/Path"
 
 function CardProject({
@@ -35,6 +36,7 @@ function CardProject({
   initDate,
   company,
   logoCompany,
+  isDev,
 }) {
   const navigate = useNavigate();
   const [clicked, setClicked] = useState(false);
@@ -44,11 +46,6 @@ function CardProject({
 
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
-
-
-
-
-
 
   const clickNavigate = () => {
     setClicked(true);
@@ -76,7 +73,9 @@ function CardProject({
             <h2>{company}</h2>
           </div>
           <h2>{title}</h2>
-          <p>{describe}</p>
+          <p style={{ maxWidth: "200px", wordBreak: "break-all" }}>
+            {describe}
+          </p>
         </DivLeft>
 
         <DivRight>
@@ -97,30 +96,44 @@ function CardProject({
                 ref={referenceElement}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-
               >
                 {hovered ? (
                   <div
                     ref={popperElement}
                     style={styles.popper}
                     {...attributes.popper}
-
                   >
-                    <div style={{ backgroundColor: "white" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#fafafa",
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "200px",
+                        borderTop: `3px solid ${Colors.PRIMARY_COLOR}`,
+                        gap: ".5rem",
+                        padding: "5px",
+                        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                        borderRadius: "5px",
+                        transition: "all 1s ease-in-out",
+                      }}
+                    >
                       {developers.slice(0).map((developer) => (
                         <>
-                          <UserImg
-                            style={{ zIndex: "5" }}
-                            ref={popperElement}
-                            width="24px"
-                            height="24px"
-                            key={developer.id}
-                            imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie"
-
-                          >
-                            <TitleImg></TitleImg>
-                          </UserImg>
-                          <p >{developer.nameUser}</p>
+                          <div className="pop-align">
+                            <UserImg
+                              style={{ zIndex: "5", float: "left" }}
+                              ref={popperElement}
+                              width="24px"
+                              height="24px"
+                              key={developer.id}
+                              imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie"
+                            >
+                              <TitleImg></TitleImg>
+                            </UserImg>
+                            <p style={{ fontSize: "1.25rem" }}>
+                              {developer.nameUser}
+                            </p>
+                          </div>
                         </>
                       ))}
                     </div>
@@ -130,8 +143,9 @@ function CardProject({
                     {developers.map((developer) => (
                       <div
                         key={developer.id}
-                        className={`developer-card ${numDevelopers > 2 ? "card-block" : ""
-                          }`}
+                        className={`developer-card ${
+                          numDevelopers > 2 ? "card-block" : ""
+                        }`}
                       >
                         <UserImg imageSrc="https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Annie">
                           <TitleImg></TitleImg>
@@ -142,70 +156,54 @@ function CardProject({
                 )}
 
                 <div
-                  className={`dev-apos ${numDevelopers > 2 ? "display" : ""}`}
+                  className={`dev-apos ${
+                    numDevelopers > 2 && !hovered ? "display" : ""
+                  }`}
                 >
                   <SlOptions size={16} />
                 </div>
               </div>
 
-              {/* {open && (
-                <DivConfig>
-                  <Ul>
-                    <Li>Editar</Li>
-                    <Li>Finalizar</Li>
-                    <Li>Deletar</Li>
-                  </Ul>
-                </DivConfig>
+              {isDev === "false" && (
+                <>
+                  <div style={{ zIndex: 5 }}>
+                    <DropdownButton
+                      id="dropdown-toggle"
+                      as={ButtonGroup}
+                      size="sm"
+                      variant=""
+                      style={{
+                        backgroundColor: "transparent",
+                        outline: "none",
+                      }}
+                      title={
+                        <GrConfigure
+                          size={24}
+                          alt="Botão de configurações (mais)"
+                        />
+                      }
+                    >
+                      <Dropdown.Item
+                        as="button"
+                        className="highlight-dropdown-item"
+                        eventKey="2"
+                        onClick={() => alert("Finalizando...")}
+                      >
+                        Finalizar
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item
+                        as="button"
+                        className="highlight-dropdown-item"
+                        eventKey="3"
+                        onClick={() => alert("Deletando...")}
+                      >
+                        Cancelar
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                </>
               )}
-
-              <GrSettingsOption
-                color={"#e5e5e5"}
-                className="btn-config"
-                size={18}
-                onClick={() => setOpen(!open)}
-              /> */}
-
-              <div>
-                <DropdownButton
-                  id="dropdown-toggle"
-                  as={ButtonGroup}
-                  size="sm"
-                  variant=""
-                  style={{ backgroundColor: "transparent", outline: "none" }}
-                  title={
-                    <GrConfigure
-                      size={24}
-                      alt="Botão de configurações (mais)"
-                    />
-                  }
-                >
-                  <Dropdown.Item
-                    as="button"
-                    className="highlight-dropdown-item"
-                    eventKey="1"
-                    onClick={() => alert("Editando...")}
-                  >
-                    Editar
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    as="button"
-                    className="highlight-dropdown-item"
-                    eventKey="2"
-                    onClick={() => alert("Finalizando...")} //exemplo para fazer o modal quando clicar em cada uma das opções dropdown.item
-                  >
-                    Finalizar
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item
-                    as="button"
-                    className="highlight-dropdown-item"
-                    eventKey="3"
-                    onClick={() => alert("Deletando...")}
-                  >
-                    Deletar
-                  </Dropdown.Item>
-                </DropdownButton>
-              </div>
             </div>
           </div>
 

@@ -11,23 +11,23 @@ import {
 } from "../../constants/Path";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate
+const navigate = useNavigate;
 
 const goToDevs = () => {
-  navigate(DevsPath)
-}
+  navigate(DevsPath);
+};
 
 const goToJobs = () => {
-  navigate(JobsPath)
-}
+  navigate(JobsPath);
+};
 
 const goToAvaliacoes = () => {
-  navigate(AvaliacoesPath)
-}
+  navigate(AvaliacoesPath);
+};
 
 const goToAvaliar = () => {
-  navigate(DevsPath)
-}
+  navigate(DevsPath);
+};
 
 function SubMenu({ type }) {
   const [click, setClick] = useState("");
@@ -52,7 +52,7 @@ function SubMenu({ type }) {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="/desenvolvedores/propostas"
                         className={`${click === 2 ? "display" : ""}`}
                         onClick={() => setClick(2)}
                       >

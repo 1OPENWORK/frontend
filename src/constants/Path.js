@@ -16,7 +16,6 @@ const TodoPath = "/gerenciador-tarefas";
 const PortfolioSobreMim = "/portfolio/sobre-mim";
 const PortfolioExperiencia = "/portfolio/experiencias";
 const PortfolioProjectsPath = "/portfolio/projetos";
-const AvaliarPath = "/avaliacoes/avaliar";
 const IndexPath = "/video-conferencia";
 const ProgressPath = "/projetos-andamentos";
 const ProjectsPath = "/projetos-concluidos";
@@ -44,7 +43,6 @@ module.exports = {
   PortfolioSobreMim,
   PortfolioExperiencia,
   PortfolioProjectsPath,
-  AvaliarPath,
   IndexPath,
   ProgressPath,
   ProjectsPath,

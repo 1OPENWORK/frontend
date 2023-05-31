@@ -93,6 +93,17 @@ function Auth() {
           progress: false,
           theme: "light",
         });
+      } else {
+        toast.error(response.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
       }
     } catch (error) {
       toast.error("Credências incorretas.", {

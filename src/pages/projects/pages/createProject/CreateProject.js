@@ -61,7 +61,7 @@ function CreateProject() {
   };
 
   const handleCloseError = () => {
-    setModalError(true);
+    setModalError(false);
   };
 
   const notifySucess = () => {
@@ -152,42 +152,42 @@ function CreateProject() {
     ) {
       console.log("Nome do projeto não pode estar vazio");
       setTypeError(1);
-      setModalError(false);
+      setModalError(true);
 
       return;
     } else if (debouncedInputValues.describe.length <= 60) {
       setTypeError(2);
-      setModalError(false);
+      setModalError(true);
       console.log("A descrição deve ter um tamanho maior que sessenta");
       return;
     } else if (debouncedInputValues.qntdPeople <= 0) {
       setTypeError(3);
-      setModalError(false);
+      setModalError(true);
       console.log("Número de pessoas deve ser maior que 0");
       return;
     } else if (debouncedInputValues.qntdPeople > 6) {
       setTypeError(4);
-      setModalError(false);
+      setModalError(true);
       console.log("Número de pessoas excedido deve ser menor ou igual que 6");
       return;
     } else if (debouncedInputValues.estimatedTime <= 0) {
       setTypeError(5);
-      setModalError(false);
+      setModalError(true);
       console.log("Quantidade de meses deve ser maior que 0");
       return;
     } else if (debouncedInputValues.estimatedTime > 12) {
       setTypeError(6);
-      setModalError(false);
+      setModalError(true);
       console.log("Quantidade de meses excedido, deve ser menor ou igual á 12");
       return;
     } else if (!/^\d+(\.\d{1,2})?$/.test(debouncedInputValues.value)) {
       setTypeError(7);
-      setModalError(false);
+      setModalError(true);
       console.log("O valor não pode conter letras");
       return;
     } else if (debouncedInputValues.value <= 100.0) {
       setTypeError(8);
-      setModalError(false);
+      setModalError(true);
       console.log("O valor deve ser maior que R$100,00");
       return;
     }

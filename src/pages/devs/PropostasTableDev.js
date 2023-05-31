@@ -5,7 +5,7 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import { getCompanyId, getId } from "../../hooks/Cookies";
+import { getCompanyId } from "../../hooks/Cookies";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------

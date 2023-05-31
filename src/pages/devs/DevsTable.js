@@ -24,7 +24,6 @@ const Desenvolvedores = () => {
 
   async function handleFetchDesenvolvedores() {
     const response = await get(URI);
-    console.log(response);
     setDevs(response.data);
   }
 

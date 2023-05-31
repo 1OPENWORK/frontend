@@ -125,8 +125,7 @@ const Financeira = () => {
 
   return (
     <>
-      <NavBarList />
-      <SubMenu />
+
       <LineSubMenu />
       <ContainerFinance>
         <HeaderFinancer>

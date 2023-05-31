@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import InformationsAuth from "../components/Container/Informations";
 import Styled from "./Register.styled";
@@ -44,6 +43,7 @@ const Register = () => {
             textButton="Home"
             textButtonVoltar="Voltar"
             isRegister={true}
+            etapaAtual={register.etapaAtual}
           />
           <Styled.ContainerForm position="start">
             {register.etapaAtual >= 3 && (

@@ -18,7 +18,7 @@ export async function post(uri, body) {
       return dados;
     })
     .catch((error) => {
-      console.log(error);
+      return error
     });
 }
 

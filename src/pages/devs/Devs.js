@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import Desenvolvedores from "./DevsTable";
 import SubMenu from "../../components/subMenu/subMenu";
+import PropostaDesenvolvedores from "./PropostasTableDev";
 
 // --------------------------------------------------------
 // Devs INTERFACE
@@ -22,16 +23,11 @@ const Devs = () => {
     <>
       <NavBarList type={1} />
       <SubMenu
-        dados={[
-          { name: "Usuários" },
-          { name: "Propostas" },
-        ]}
+        dados={[{ name: "Usuários" }, { name: "Propostas" }]}
         setActive={setAbactive}
         active={abaActive}
       />
-      {abaActive === 0 ?  <Desenvolvedores /> : <></>}
-     
-
+      {abaActive === 0 ? <Desenvolvedores /> : <PropostaDesenvolvedores />}
     </>
   );
 };

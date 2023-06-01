@@ -22,6 +22,7 @@ const AvaliarTeste = () => {
   const URIGet = AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`;
 
   function handleFetchOnClose() {
+    handleFetchAvaliacao();
     setSucesso(false);
   }
 
@@ -31,6 +32,18 @@ const AvaliarTeste = () => {
   }
 
   async function handleFetchAvaliar(id) {
+    const URI =
+      AmbienteBackend() +
+      `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
+    const response = await post(URI);
+    console.log(avaliar);
+
+    if (response.status === 201) handleAvaliacaoAtual();
+    setAvaliar(response);
+    setSucesso(true);
+  }
+
+  async function handleFetchAvaliarEmpresa(id) {
     const URI =
       AmbienteBackend() +
       `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
@@ -131,7 +144,7 @@ const AvaliarTeste = () => {
         </Table>
         {sucesso ? (
           <ModalStatus
-            status={"sucess"}
+            status={"success"}
             texto={"Avaliado com sucesso"}
             onClose={handleFetchOnClose}
             modalError={sucesso}

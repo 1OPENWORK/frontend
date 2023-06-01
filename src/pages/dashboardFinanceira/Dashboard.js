@@ -112,15 +112,14 @@ const Dashboard = () => {
                           );
                           return (
                             total +
-                            (projeto.valueProject - projeto.tax) *
-                              (monthsDiff + 1)
+                            (projeto.value - projeto.tax) * (monthsDiff + 1)
                           );
                         }
                       } else if (projeto.status === "open") {
-                        return total + (projeto.valueProject - projeto.tax);
+                        return total + (projeto.value - projeto.tax);
                       }
                     }
-                    return " " + total;
+                    return total > 0 ? total : "0,00";
                   }, 0)}
                 </h2>
               </ContentCard>

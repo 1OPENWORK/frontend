@@ -89,7 +89,7 @@ const BarChart = () => {
         backgroundColor: ["#0263FF", "#FF7723", "#8E30FF"],
         hoverBackgroundColor: ["#0263FF", "#FF7723", "#8E30FF"],
         data: projetos.map((tabela) => {
-          if (tabela.status !== "cancelled") return tabela.valueProject;
+          if (tabela.status !== "cancelled") return tabela.value;
         }),
       },
     ],

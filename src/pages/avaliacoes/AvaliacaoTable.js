@@ -14,13 +14,15 @@ import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 const AvaliacaoTeste = ({ type }) => {
   const id = getId();
   const { dadosPerfil } = useSelector(selectedPerfil);
- 
+
   const [avaliacao, setAvaliacao] = useState([]);
 
   async function handleFetchAvaliacao() {
-   const URI = dadosPerfil.perfil.tipo !== "EMPRESA"
-    ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`
-    : AmbienteBackend() + `/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
+    const URI =
+      dadosPerfil.perfil.tipo !== "EMPRESA"
+        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`
+        : AmbienteBackend() +
+          `/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
 
     const response = await get(URI);
     setAvaliacao(response.data.myAvaliations);

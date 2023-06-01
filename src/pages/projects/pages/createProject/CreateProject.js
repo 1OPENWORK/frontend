@@ -16,7 +16,7 @@ import CardOverviewOne from "./components/cardOverviewOne/CardOverviewOne";
 import { MdEmail, MdPhoneInTalk } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiFillCloseCircle } from "react-icons/ai";
-
+import { Wallet } from "@mercadopago/sdk-react";
 import { handleProeficiency } from "../../../../store/actions/Proeficiency";
 
 import axios from "axios";
@@ -25,7 +25,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCompanyId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
-import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import { Ambiente, AmbienteBackend } from "../../../../hooks/Ambiente";
+import { initMercadoPago } from "@mercadopago/sdk-react";
 
 function CreateProject() {
   const navigate = useNavigate();
@@ -33,6 +34,11 @@ function CreateProject() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeError, setTypeError] = useState();
   const [modalError, setModalError] = useState(true);
+  const [isReady, setIsReady] = React.useState(true);
+
+  // Integração.
+  const [preferenceId, setPreferenceId] = useState(null);
+  initMercadoPago("TEST-e1ceca9c-b4bd-44ce-85e1-d6b4dac2d997");
 
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -41,6 +47,10 @@ function CreateProject() {
   const [tools, setTools] = useState([]);
 
   const idCompany = getCompanyId();
+
+  const handleOnReady = () => {
+    setIsReady(true);
+  };
 
   const fetchChange =
     selectedOption === 1
@@ -132,7 +142,7 @@ function CreateProject() {
 
   const token = getToken();
 
-  function cadastrar() {
+  async function cadastrar() {
     const registerProject = {
       title: debouncedInputValues.nameProject,
       description: debouncedInputValues.describe,
@@ -192,6 +202,25 @@ function CreateProject() {
       return;
     }
 
+    const dados = {
+      quantity: "1",
+      price: registerProject.value,
+      amount: 1,
+      description: registerProject.title,
+    };
+
+    await axios
+      .post(Ambiente() + "/create_preference", dados)
+      .then((response) => {
+        setPreferenceId(response.data.id);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        // setIsLoading(false);
+      });
+
     axios
       .post(fetchChange, registerProject, {
         headers: {
@@ -200,15 +229,27 @@ function CreateProject() {
       })
       .then((res) => {
         console.log(res);
-        notifySucess();
-        const myTimeout = () => setTimeout(() => navigate("/jobs"), 1000);
-        myTimeout();
+        // notifySucess();
+        // const myTimeout = () => setTimeout(() => navigate("/jobs"), 1000);
+        // myTimeout();
       })
       .catch((err) => {
         console.log("Deu erro: " + err);
         console.log(registerProject);
       });
   }
+
+  const renderCheckoutButton = (preferenceId) => {
+    if (!preferenceId) return null;
+
+    return (
+      <Wallet
+        locale="pt-BR"
+        initialization={{ preferenceId: preferenceId, redirectMode: "modal" }}
+        onReady={handleOnReady}
+      />
+    );
+  };
 
   //filtro de ferramentas
 
@@ -523,6 +564,9 @@ function CreateProject() {
               />
 
               <br />
+              <div style={{ width: 200 }}>
+                {renderCheckoutButton(preferenceId)}
+              </div>
             </div>
           </div>
         </Aside>
@@ -583,7 +627,7 @@ function CreateProject() {
               alignSelf={"center"}
               onClick={() => cadastrar()}
             >
-              {"Criar Job"}
+              {preferenceId !== undefined ? "Fazer pagamento" : "Criar projeto"}
             </FilledButton>
           </div>
         </Article>

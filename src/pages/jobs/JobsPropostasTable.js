@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import "../avaliacoes/Table.styled";
 import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import { getId } from "../../hooks/Cookies";
+import { getId, getToken } from "../../hooks/Cookies";
+import { FilledButton } from "../../components/UI/buttons/Button";
+import Colors from "../../constants/Colors";
+import axios from "axios";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -20,14 +23,41 @@ import { getId } from "../../hooks/Cookies";
 
 const JobsPropostas = () => {
   const id = getId();
-  const URI = AmbienteBackend() + `/api/propostas/desenvolvedor/${id}`;
+  const token = getToken();
+  const URI = AmbienteBackend();
 
   const [jobs, setJobs] = useState([]);
+  console.log(
+    "🚀 ~ file: JobsPropostasTable.js:30 ~ JobsPropostas ~ jobs:",
+    jobs
+  );
+  const [showModal, setShowModal] = useState(false);
+  const [idProject, setIdProject] = useState(0);
 
   async function handleFetchDesenvolvedores() {
-    const response = await get(URI);
+    const response = await get(URI + `/api/propostas/desenvolvedor/${id}`);
     setJobs(response.data);
   }
+
+  const handleShowModal = () => setShowModal(true);
+  const hideShowModal = () => setShowModal(false);
+
+  const handleAccpted = async () => {
+    const response = await axios.post(
+      URI + "/projetos-aceitos/projetos-grandes",
+      { idBigProject: idProject, usersId: [parseInt(id)] },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    hideShowModal();
+    console.log(
+      "🚀 ~ file: JobsPropostasTable.js:52 ~ handleAccpted ~ response:",
+      response
+    );
+  };
 
   useEffect(() => {
     handleFetchDesenvolvedores();
@@ -37,6 +67,35 @@ const JobsPropostas = () => {
   return (
     <>
       <Container>
+        <Modal
+          size="lg"
+          show={showModal}
+          onHide={hideShowModal}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Proposta de projeto</Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{ fontSize: 20 }}>
+            Deseja aceitar essa proposta?
+          </Modal.Body>
+          <Modal.Footer>
+            <FilledButton
+              onClick={handleAccpted}
+              marginTop={"20px"}
+              marginRight={"0px"}
+              color={Colors.PRIMARY_COLOR}
+              width={190}
+              heigth={60}
+              semHouver={true}
+            >
+              {"Aceitar"}
+            </FilledButton>
+          </Modal.Footer>
+        </Modal>
+
         <Table striped borderless hover>
           <thead>
             <tr>
@@ -52,6 +111,11 @@ const JobsPropostas = () => {
             {jobs ? (
               jobs.map((dados, index) => (
                 <tr
+                  onClick={() => {
+                    handleShowModal();
+                    setIdProject(dados.idProject);
+                  }}
+                  style={{ cursor: "pointer" }}
                   key={`${dados.id}-${index}`}
                   data={dados}
                   className={index % 2 === 0 ? "gray-row" : "white-row"}

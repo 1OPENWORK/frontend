@@ -21,17 +21,15 @@ import Styled from "../../components/navBar/NavBar.styled";
 import BarChart from "../../components/charts/BarChart";
 import SemiCircleDonutChart from "../../components/charts/SemiCircleDonutChart";
 import {
-  handleDashboard,
   handleFinanceTable,
   handleProjectsCancelled,
-  handleProjectsCompleted,
   handleProjectsInProgress,
-  handleProjectsProgress,
 } from "../../store/actions/Dashboard";
 import Cookies from "js-cookie";
 import { differenceInMonths, isAfter } from "date-fns";
 
 const Dashboard = () => {
+  // eslint-disable-next-line no-unused-vars
   const [tabelas, settabelas] = useState([]);
   const [projetos, setProjetos] = useState([]);
 
@@ -81,6 +79,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getProjectsDev();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

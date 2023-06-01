@@ -11,12 +11,7 @@ import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
 import { useNavigate } from "react-router-dom";
-import {
-  deleteId,
-  deleteIsDev,
-  deleteToken,
-  getIsDev,
-} from "../../hooks/Cookies";
+import { deleteId, deleteIsDev, deleteToken } from "../../hooks/Cookies";
 import {
   HomeDevPath,
   ProgressPath,
@@ -49,7 +44,6 @@ const NavBar = ({ nav }) => {
 
   // --------------------------------------------------------
   const navigate = useNavigate();
-  const isDev = getIsDev();
   const { dadosPerfil } = useSelector(selectedPerfil);
 
   const deslogar = () => {
@@ -67,7 +61,16 @@ const NavBar = ({ nav }) => {
       {nav === 1 ? (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} onClick={() => navigate(dadosPerfil.perfil.tipo !== "EMPRESA" ? HomeDevPath : HomeCompanyPath)} />
+            <Styled.LogoImg
+              src={Logo}
+              onClick={() =>
+                navigate(
+                  dadosPerfil.perfil.tipo !== "EMPRESA"
+                    ? HomeDevPath
+                    : HomeCompanyPath
+                )
+              }
+            />
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>

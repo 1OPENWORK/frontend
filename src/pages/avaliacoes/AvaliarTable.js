@@ -9,7 +9,7 @@ import { useState } from "react";
 import { get, post } from "../../services/Generected";
 import { useEffect } from "react";
 import moment from "moment";
-import { getId } from "../../hooks/Cookies";
+import { getCompanyId, getId, getIsDev } from "../../hooks/Cookies";
 import { AmbienteBackend } from "../../hooks/Ambiente";
 import ModalStatus from "../../components/UI/modal/modal-status/ModalStatus";
 
@@ -19,7 +19,8 @@ const AvaliarTeste = () => {
   const [avaliacaoAtual, setAvaliacaoAtual] = useState({});
   const [sucesso, setSucesso] = useState(false);
   const idUser = getId();
-  const URIGet = AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`;
+  const idCompany = getCompanyId();
+  const isDev = getIsDev();
 
   function handleFetchOnClose() {
     handleFetchAvaliacao();
@@ -27,6 +28,10 @@ const AvaliarTeste = () => {
   }
 
   async function handleFetchAvaliacao() {
+    const URIGet =
+      isDev === "true"
+        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`
+        : AmbienteBackend() + `/avaliacoes/empresa/${idCompany}`;
     const response = await get(URIGet);
 
     const myAvalacoes = [...response.data.myAvaliations];
@@ -39,28 +44,21 @@ const AvaliarTeste = () => {
     setAvaliacao(newEvaluates);
   }
 
-  async function handleFetchAvaliar(id) {
+  async function handleFetchAvaliar(id, idAcceptedDev) {
     const URI =
-      AmbienteBackend() +
-      `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
+      isDev === "false"
+        ? AmbienteBackend() + `/avaliacoes/empresa/${idAcceptedDev}/${avaliar}`
+        : AmbienteBackend() +
+          `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
     console.log(avaliar);
 
-    if (response.status === 201) handleAvaliacaoAtual();
-    setAvaliar(response);
-    setSucesso(true);
-  }
-
-  async function handleFetchAvaliarEmpresa(id) {
-    const URI =
-      AmbienteBackend() +
-      `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
-    const response = await post(URI);
-    console.log(avaliar);
-
-    if (response.status === 201) handleAvaliacaoAtual();
-    setAvaliar(response);
-    setSucesso(true);
+    if (response.status === 201) {
+      handleAvaliacaoAtual();
+      console.log(response);
+      setAvaliar(response);
+      setSucesso(true);
+    }
   }
 
   function handleAvaliacaoAtual(itemId, index) {

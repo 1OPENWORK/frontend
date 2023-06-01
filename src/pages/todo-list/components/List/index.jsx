@@ -46,10 +46,10 @@ export default function List({ data }) {
       tasks: [],
     };
 
-    const typeIdCreated = data.idType;
+    const typeIdCreated = data.id;
     axios
       .post(
-        `${AmbienteBackend()}/api/listas/${typeIdCreated}/add-card`,
+        `${AmbienteBackend()}/api/listas/add-card/${typeIdCreated}`,
         newCard,
         {
           headers: {
@@ -70,20 +70,20 @@ export default function List({ data }) {
       });
   }
 
-  function handleDeleteCard(id) {
-    axios
-      .delete(`${AmbienteBackend()}/api/cards/${id}`, {
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      })
-      .then((res) => {
-        setCards(data.filter((card) => card.id !== id));
-      })
-      .catch((err) => {
-        console.log("Deu erro: " + err);
-      });
-  }
+  // function handleDeleteCard(id) {
+  //   axios
+  //     .delete(`${AmbienteBackend()}/api/cards/${id}`, {
+  //       headers: {
+  //         Authorization: 'Bearer ' + token
+  //       }
+  //     })
+  //     .then((res) => {
+  //       setCards(data.filter((card) => card.id !== id));
+  //     })
+  //     .catch((err) => {
+  //       console.log("Deu erro: " + err);
+  //     });
+  // }
   return (
     <Container done={!data.creatable && true} creatable={data.creatable}>
       <header>
@@ -108,7 +108,7 @@ export default function List({ data }) {
                   key={card.id}
                   isDragging={snapshot.isDragging}
                   data={card}
-                  onDelete={() => handleDeleteCard(card.id)}
+                  // onDelete={() => handleDeleteCard(card.id)}
                 />
               </div>
             )}

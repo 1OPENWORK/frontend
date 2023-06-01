@@ -29,14 +29,9 @@ const AvaliarTeste = () => {
   async function handleFetchAvaliacao() {
     const response = await get(URIGet);
 
-    const myAvalacoes = [...response.data.myAvaliations];
     const evaluates = [...response.data.evaluates];
 
-    const newEvaluates = evaluates.filter(
-      (e) => !myAvalacoes.find((m) => m.id === e.id)
-    );
-
-    setAvaliacao(newEvaluates);
+    setAvaliacao(evaluates);
   }
 
   async function handleFetchAvaliar(id) {

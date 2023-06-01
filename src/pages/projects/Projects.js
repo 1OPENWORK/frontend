@@ -5,7 +5,7 @@ import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
 import axios from "axios";
 import { AmbienteBackend } from "../../hooks/Ambiente";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { getId, getIsDev } from "../../hooks/Cookies";
+import { getCompanyId, getId, getIsDev } from "../../hooks/Cookies";
 
 function Projects() {
   const [projetos, setProjetos] = useState([]);
@@ -14,9 +14,10 @@ function Projects() {
 
   const isDev = getIsDev();
   const id = getId();
+  const idCompany = getCompanyId();
 
   const fetchDev =  AmbienteBackend() + `/projetos-aceitos/completos/desenvolvedor/${id}`
-  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/completos/empresa/${id}`;
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/completos/empresa/${idCompany}`;
 
   async function fetchProjetos() {
     await axios

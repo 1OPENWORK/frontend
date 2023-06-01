@@ -113,7 +113,7 @@ const SideBar = ({ tabActive }) => {
             back={previewImage}
             onClick={handleImagePerson}
           >
-            {previewImage === "" && <img src={IconPlus} />}
+            {previewImage === "" && <img src={IconPlus} alt="imagem ou logo" />}
           </Styled.ContainerPhotograph>
 
           <Styled.AddPhotograph>Adicionar foto</Styled.AddPhotograph>

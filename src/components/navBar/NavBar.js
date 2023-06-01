@@ -11,7 +11,12 @@ import { FilledButton } from "../UI/buttons/Button";
 import Logo from "../../assets/imgs/logo.svg";
 import Styled from "./NavBar.styled";
 import { useNavigate } from "react-router-dom";
-import { deleteId, deleteIsDev, deleteToken } from "../../hooks/Cookies";
+import {
+  deleteId,
+  deleteIsDev,
+  deleteToken,
+  getIsDev,
+} from "../../hooks/Cookies";
 import {
   HomeDevPath,
   ProgressPath,
@@ -20,7 +25,6 @@ import {
   AuthPath,
   RegisterPath,
   ChatPath,
-  HomeCompanyPath,
 } from "../../constants/Path";
 // -----------------------------------------------------
 
@@ -42,6 +46,7 @@ const NavBar = ({ nav }) => {
 
   // --------------------------------------------------------
   const navigate = useNavigate();
+  const isDev = getIsDev();
 
   const deslogar = () => {
     deleteToken();
@@ -59,43 +64,6 @@ const NavBar = ({ nav }) => {
         <>
           <Styled.Divisor>
             <Styled.LogoImg src={Logo} onClick={() => navigate(HomeDevPath)} />
-          </Styled.Divisor>
-
-          <Styled.NavigateNavBar>
-            <Styled.TitleNavBar
-              onClick={() => navigate(ProgressPath)}
-              size={24}
-            >
-              {"Projetos"}
-            </Styled.TitleNavBar>
-            <Styled.TitleNavBar
-              onClick={() => navigate(DashboardFinanceiraPath)}
-              size={24}
-            >
-              {"Financeiro"}
-            </Styled.TitleNavBar>
-
-            <Styled.TitleNavBar onClick={() => navigate(ChatPath)} size={24}>
-              {"Chat"}
-            </Styled.TitleNavBar>
-          </Styled.NavigateNavBar>
-          <FilledButton
-            onClick={() => deslogar()}
-            color={Colors.BLACK}
-            width={190}
-            heigth={60}
-            marginRight={"1.5rem"}
-          >
-            {"Sair"}
-          </FilledButton>
-        </>
-      ) : nav === 2 ? (
-        <>
-          <Styled.Divisor>
-            <Styled.LogoImg
-              src={Logo}
-              onClick={() => navigate(HomeCompanyPath)}
-            />
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>

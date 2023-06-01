@@ -5,7 +5,7 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import { getCompanyId } from "../../hooks/Cookies";
+import { getId } from "../../hooks/Cookies";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -18,16 +18,15 @@ import { getCompanyId } from "../../hooks/Cookies";
  * @returns The component JSX.
  */
 
-const PropostaDesenvolvedores = () => {
-  const idCompany = getCompanyId();
-  const URI = AmbienteBackend() + `/api/propostas/empresa/${idCompany}`;
+const JobsPropostas = () => {
+  const id = getId();
+  const URI = AmbienteBackend() + `/api/propostas/desenvolvedor/${id}`;
 
-  const [devs, setDevs] = useState([]);
+  const [jobs, setJobs] = useState([]);
 
   async function handleFetchDesenvolvedores() {
     const response = await get(URI);
-    console.log(response);
-    setDevs(response.data);
+    setJobs(response.data);
   }
 
   useEffect(() => {
@@ -41,29 +40,31 @@ const PropostaDesenvolvedores = () => {
         <Table striped borderless hover>
           <thead>
             <tr>
-              <th scope="col">Nome</th>
+              <th scope="col">Empresa</th>
               <th scope="col">Descrição</th>
-              <th scope="col">Projetos concluídos</th>
-              <th scope="col">Valor hora</th>
+              <th scope="col">Tempo aproximado</th>
+              <th scope="col">Devs necessários</th>
+              <th scope="col">Valor estimado</th>
             </tr>
           </thead>
 
           <tbody>
-            {devs ? (
-              devs.map((dados, index) => (
+            {jobs ? (
+              jobs.map((dados, index) => (
                 <tr
-                  key={dados.id}
+                  key={`${dados.id}-${index}`}
+                  data={dados}
                   className={index % 2 === 0 ? "gray-row" : "white-row"}
                 >
                   <td>
                     <div className="containerCompany">
                       <img
                         className="img"
-                        src={dados.image}
-                        alt="imagem usuário"
+                        src={dados.imageCompany}
+                        alt="logo"
                       />
                       <div className="profileInformation">
-                        <h1>{dados.name}</h1>
+                        <h1>{dados.nameCompany}</h1>
                         <div className="grade">
                           <MdStarBorder size={16} />
                           <h2>{dados.grade}</h2>
@@ -74,8 +75,9 @@ const PropostaDesenvolvedores = () => {
                   <td>
                     <p>{dados.description}</p>
                   </td>
-                  <td className="date">{dados.completedProjects} projetos</td>
-                  <td className="date">R$ {dados.hourValue},00</td>
+                  <td className="date">{dados.timeExpected} dias</td>
+                  <td className="date">{dados.maxDevelopers} devs</td>
+                  <td className="date">R$ {dados.value},00</td>
                 </tr>
               ))
             ) : (
@@ -92,4 +94,4 @@ const PropostaDesenvolvedores = () => {
   );
 };
 
-export default PropostaDesenvolvedores;
+export default JobsPropostas;

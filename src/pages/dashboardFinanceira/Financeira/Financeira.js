@@ -125,7 +125,6 @@ const Financeira = () => {
 
   return (
     <>
-
       <LineSubMenu />
       <ContainerFinance>
         <HeaderFinancer>
@@ -197,7 +196,7 @@ const Financeira = () => {
                   </tr>
                 ))
               ) : (
-                <p>Não existem dados</p>
+                <h2>Não existem dados</h2>
               )}
             </tbody>
           </TableFinance>

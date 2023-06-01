@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Styled from "./Formulario.styled";
 import { object, string } from "yup";
 import { toast } from "react-toastify";
@@ -25,6 +25,8 @@ import Cookies from "js-cookie";
 import { Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AuthPath } from "../../../../constants/Path";
+import axios from "axios";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -63,6 +65,21 @@ const Formulario = () => {
     name: string().required("Preencha o campo nome."),
   });
 
+  const fetchInformation = async () => {
+    const response = await axios.get(
+      AmbienteBackend() + "/api/usuarios/perfil/" + dadosPerfil.perfil.id
+    );
+    console.log("🚀 ~ file: Formulario.js:72 ~ fetchInformation ~ response:", response)
+
+    if (response.status === 200) {
+      dispatch(
+        changeUpdatePerfil({
+          perfil: { ...response.data.perfil },
+        })
+      );
+    }
+  };
+
   async function handleUpdate() {
     const dados = {
       cpfCnpj: cleanMask(cpfOrCnpj),
@@ -82,11 +99,7 @@ const Formulario = () => {
       );
 
       if (response.status === 200) {
-        dispatch(
-          changeUpdatePerfil({
-            perfil: { id: dadosPessoais.id, ...dados },
-          })
-        );
+        fetchInformation();
 
         dispatch(
           changeActiveToken({
@@ -136,13 +149,12 @@ const Formulario = () => {
   }
 
   const handleExcluirConta = async () => {
-
     try {
       const response = await PortifolioService.deleteContaUser(
         dadosPerfil.perfil.id,
         auth.token
       );
-  
+
       if (response.status === 200) {
         toast.success(
           "Você deletou sua conta, estamos te redirecionando para o login.",
@@ -157,17 +169,17 @@ const Formulario = () => {
             theme: "light",
           }
         );
-  
+
         Cookies.set("token", "");
         Cookies.set("id", "");
         Cookies.set("isDev", "");
-  
+
         dispatch(
           changeActiveToken({
             token: "",
           })
         );
-  
+
         dispatch(
           changeSave({
             perfil: {},
@@ -175,15 +187,20 @@ const Formulario = () => {
             tools: [],
           })
         );
-  
+
         navigate(AuthPath);
       }
     } catch (error) {
-      console.log("🚀 ~ file: Formulario.js:182 ~ handleExcluirConta ~ error:", error)
-      
+      console.log(
+        "🚀 ~ file: Formulario.js:182 ~ handleExcluirConta ~ error:",
+        error
+      );
     }
-    
   };
+
+  useEffect(() => {
+    fetchInformation();
+  }, [])
 
   return (
     <Styled.Form>

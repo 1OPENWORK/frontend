@@ -73,7 +73,7 @@ const HomeCompany = () => {
     <>
       <GeneralContainer>
         <>
-          <NavBar nav={2} />
+          <NavBar nav={1} />
           <Container>
             <Input placeholder={placeholder}></Input>
             <Aside>

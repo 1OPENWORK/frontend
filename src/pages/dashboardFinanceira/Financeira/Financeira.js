@@ -123,9 +123,10 @@ const Financeira = () => {
     setModalIsOpen(false);
   }
 
+  console.log(projetos);
+
   return (
     <>
-
       <LineSubMenu />
       <ContainerFinance>
         <HeaderFinancer>
@@ -145,12 +146,11 @@ const Financeira = () => {
                         currentDate
                       );
                       return (
-                        total +
-                        (projeto.valueProject - projeto.tax) * (monthsDiff + 1)
+                        total + (projeto.value - projeto.tax) * (monthsDiff + 1)
                       );
                     }
                   } else if (projeto.status === "open") {
-                    return total + (projeto.valueProject - projeto.tax);
+                    return total + (projeto.value - projeto.tax);
                   }
                 }
                 return " " + total;
@@ -181,12 +181,11 @@ const Financeira = () => {
                       {format(new Date(projeto.beginDate), "dd/MM/yyyy")} |{" "}
                       {format(new Date(projeto.finishDate), "dd/MM/yyyy")}
                     </TableBodyTd>
-                    <TableBodyTd>R${projeto.valueProject}</TableBodyTd>
+                    <TableBodyTd>R${projeto.value}</TableBodyTd>
                     <TableBodyTd>{projeto.tax}%</TableBodyTd>
                     <TableBodyTd>
                       R$
-                      {projeto.valueProject -
-                        (projeto.valueProject * projeto.tax) / 100}
+                      {projeto.value - (projeto.value * projeto.tax) / 100}
                     </TableBodyTd>
                     <TableBodyTd>
                       <Tag
@@ -197,7 +196,7 @@ const Financeira = () => {
                   </tr>
                 ))
               ) : (
-                <p>Não existem dados</p>
+                <h2>Não existem dados</h2>
               )}
             </tbody>
           </TableFinance>

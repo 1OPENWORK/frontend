@@ -6,11 +6,12 @@ import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getToken } from "../../../../hooks/Cookies";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
-export default function Board() {
+export default function Board({id}) {
   const [lists, setLists] = useState([]);
 
-  const fetchLists = `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/projetos-grandes/9`;
+  const fetchLists = `${AmbienteBackend()}/api/projetos-grandes/` + id;
 
   const token = getToken();
 
@@ -20,7 +21,11 @@ export default function Board() {
 
   async function fetchBoard() {
     await axios
-      .get(fetchLists)
+      .get(fetchLists, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
       .then((response) => {
         if (response.status === 200) {
           setLists(response.data.listCards);
@@ -75,7 +80,7 @@ export default function Board() {
 
       // Faça uma chamada à API para atualizar a posição do item
       await axios.put(
-        `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/listas/${sourceList.id}/cards/${movedItem.id}/position`,
+        `${AmbienteBackend()}/api/listas/${sourceList.id}/cards/${movedItem.id}/position`,
         { newPosition: destination.index },
         {
           headers: {

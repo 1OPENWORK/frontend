@@ -22,6 +22,8 @@ import {
   ChatPath,
   HomeCompanyPath,
 } from "../../constants/Path";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -42,6 +44,7 @@ const NavBar = ({ nav }) => {
 
   // --------------------------------------------------------
   const navigate = useNavigate();
+  const { dadosPerfil } = useSelector(selectedPerfil);
 
   const deslogar = () => {
     deleteToken();
@@ -58,43 +61,15 @@ const NavBar = ({ nav }) => {
       {nav === 1 ? (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} onClick={() => navigate(HomeDevPath)} />
-          </Styled.Divisor>
-
-          <Styled.NavigateNavBar>
-            <Styled.TitleNavBar
-              onClick={() => navigate(ProgressPath)}
-              size={24}
-            >
-              {"Projetos"}
-            </Styled.TitleNavBar>
-            <Styled.TitleNavBar
-              onClick={() => navigate(DashboardFinanceiraPath)}
-              size={24}
-            >
-              {"Financeiro"}
-            </Styled.TitleNavBar>
-
-            <Styled.TitleNavBar onClick={() => navigate(ChatPath)} size={24}>
-              {"Chat"}
-            </Styled.TitleNavBar>
-          </Styled.NavigateNavBar>
-          <FilledButton
-            onClick={() => deslogar()}
-            color={Colors.BLACK}
-            width={190}
-            heigth={60}
-            marginRight={"1.5rem"}
-          >
-            {"Sair"}
-          </FilledButton>
-        </>
-      ) : nav === 2 ? (
-        <>
-          <Styled.Divisor>
             <Styled.LogoImg
               src={Logo}
-              onClick={() => navigate(HomeCompanyPath)}
+              onClick={() =>
+                navigate(
+                  dadosPerfil.perfil.tipo !== "EMPRESA"
+                    ? HomeDevPath
+                    : HomeCompanyPath
+                )
+              }
             />
           </Styled.Divisor>
 
@@ -136,11 +111,6 @@ const NavBar = ({ nav }) => {
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar size={24}>
-              {"Como contratamos"}
-            </Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
             <FilledButton
               onClick={() => navigate(AuthPath)}
               color={Colors.BLACK}

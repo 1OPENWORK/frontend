@@ -26,6 +26,7 @@ ChartJS.register(
 );
 
 const BarChart = () => {
+  // eslint-disable-next-line no-unused-vars
   const [tabelas, settabelas] = useState([]);
   const [projetos, setProjetos] = useState([]);
 
@@ -79,6 +80,7 @@ const BarChart = () => {
 
   useEffect(() => {
     getProjectsDev();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const data = {
@@ -88,8 +90,9 @@ const BarChart = () => {
         label: "Jobs",
         backgroundColor: ["#0263FF", "#FF7723", "#8E30FF"],
         hoverBackgroundColor: ["#0263FF", "#FF7723", "#8E30FF"],
+        // eslint-disable-next-line array-callback-return
         data: projetos.map((tabela) => {
-          if (tabela.status !== "cancelled") return tabela.valueProject;
+          if (tabela.status !== "cancelled") return tabela.value;
         }),
       },
     ],

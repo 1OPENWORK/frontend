@@ -49,34 +49,42 @@ const PropostaDesenvolvedores = () => {
           </thead>
 
           <tbody>
-            {devs.map((dados, index) => (
-              <tr
-                key={dados.id}
-                className={index % 2 === 0 ? "gray-row" : "white-row"}
-              >
-                <td>
-                  <div className="containerCompany">
-                    <img
-                      className="img"
-                      src={dados.image}
-                      alt="imagem usuário"
-                    />
-                    <div className="profileInformation">
-                      <h1>{dados.name}</h1>
-                      <div className="grade">
-                        <MdStarBorder size={16} />
-                        <h2>{dados.grade}</h2>
+            {devs ? (
+              devs.map((dados, index) => (
+                <tr
+                  key={dados.id}
+                  className={index % 2 === 0 ? "gray-row" : "white-row"}
+                >
+                  <td>
+                    <div className="containerCompany">
+                      <img
+                        className="img"
+                        src={dados.image}
+                        alt="imagem usuário"
+                      />
+                      <div className="profileInformation">
+                        <h1>{dados.name}</h1>
+                        <div className="grade">
+                          <MdStarBorder size={16} />
+                          <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </td>
+                  <td>
+                    <p>{dados.description}</p>
+                  </td>
+                  <td className="date">{dados.completedProjects} projetos</td>
+                  <td className="date">R$ {dados.hourValue},00</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="date" colSpan="5">
+                  Nenhuma proposta foi enviada...
                 </td>
-                <td>
-                  <p>{dados.description}</p>
-                </td>
-                <td className="date">{dados.completedProjects} projetos</td>
-                <td className="date">R$ {dados.hourValue},00</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </Table>
       </Container>

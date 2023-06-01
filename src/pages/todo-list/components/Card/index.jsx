@@ -15,12 +15,16 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 import moment from "moment";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import { getToken } from "../../../../hooks/Cookies";
 
 export default function Card({ data, index, onDelete }) {
   const now = moment();
   const day = now.format("DD");
   const month = now.format("MM");
   const year = now.format("YYYY");
+
+  const token = getToken();
 
   const [editedContent, setEditedContent] = useState(data.content);
   const [editedDescribe, setEditedDescribe] = useState(data.describe);
@@ -94,10 +98,11 @@ export default function Card({ data, index, onDelete }) {
     };
 
     await axios
-      .put(
-        `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/cards/${data.id}`,
-        updatedData
-      )
+      .put(`${AmbienteBackend()}/api/cards/${data.id}`, updatedData, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         console.log("Dados atualizados:" + res.data);
         setLgShow(false);
@@ -444,7 +449,9 @@ export default function Card({ data, index, onDelete }) {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={handleDeleteCard(data.id)}>
+              <Button variant="danger" 
+              // onClick={handleDeleteCard(data.id)}
+              >
                 Deletar card
               </Button>
 

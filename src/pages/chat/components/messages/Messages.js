@@ -9,6 +9,8 @@ import Styled, { IMessageContainer } from "./Messages.styled";
 import MessageDefault from "../../../../assets/imgs/message_default.svg";
 import ToastNewMessage from "./components/toastNewMessage/ToastNewMessage";
 import { getS3 } from "../../../../store/actions/MicroService";
+import axios from "axios";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const Messages = ({
   socket,
@@ -31,9 +33,11 @@ const Messages = ({
   }, [websocket, websocket.messages]);
 
   const fetchS3 = async () => {
-    const response = await getS3(dadosConversa.img);
+    const response = await axios.get(
+      AmbienteBackend() + "/api/usuarios/imagem/" + 1
+    );
 
-    setImgPerfil(response);
+    setImgPerfil(response.data.image);
   };
 
   useEffect(() => {
@@ -79,7 +83,6 @@ const Messages = ({
       </Styled.Container>
 
       <SendMessage
-      
         socket={socket}
         idSender={idSender}
         idReceiver={idReceiver}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../components/sidebar/SideBar";
 import {
   ContainerComponents,
@@ -25,109 +25,211 @@ import {
   ContainerCard,
   ContainerProposal,
   ContainerImgEnviarProposta,
+  ContentTextSobre,
+  HeaderContainer,
 } from "./SendContract.styled";
-import { MdStarBorder } from "react-icons/md";
+import { MdHome, MdStarBorder } from "react-icons/md";
+import { FaArrowLeft } from "react-icons/fa";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import ImgEnviarProposta from "../../assets/imgs/img-enviar-proposta.svg";
 import Colors from "../../constants/Colors";
-import { post } from "../../services/Generected";
+import { get, post } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import {  getId  } from "../../hooks/Cookies";
-//trazer id da empresa e colocar no lugar do getID, precisa tbm arrumar o endPoint para passar o id do dev
-const id = getId()
-function SendProposta() {
-  try {
-const URI = AmbienteBackend() + `/api/propostas/desenvolvedor/proposta/${id}`;
-    post(URI, id);
-  } catch (error) {
-    console.error("Erro ao cadastrar campos:", error);
-  }
-}
-
+import { getId, getToken } from "../../hooks/Cookies";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { HomeCompanyPath } from "../../constants/Path";
 
 const SendContract = () => {
+  const id = getId();
+  const { dadosPerfil } = useSelector(selectedPerfil);
+  const URI = AmbienteBackend();
+  const params = useParams();
+  const [perfil, setPerfil] = useState({});
+  const [aboutMe, setAboutMe] = useState({});
+  const [projects, setProjects] = useState([]);
+
+  const navigate = useNavigate();
+
+
+  function SendProposta(idProject) {
+    try {
+      const response = axios.post(
+        URI + `/api/propostas/empresa/proposta/${dadosPerfil.perfil.idCompany}`,
+        { idProject: idProject, idUser: params.id, tipo: "BIG" },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Proposta enviada com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar campos:", error);
+    }
+  }
+  const token = getToken();
+
+  const handleInformationUser = async () => {
+    try {
+      const { data, status } = await axios.get(
+        URI + "/api/usuarios/perfil/" + params.id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (status === 200) {
+        setPerfil(data.perfil);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAboutMe = async () => {
+    try {
+      const { data, status } = await axios.get(
+        URI + "/api/usuarios/sobre-mim/" + params.id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (status === 200) {
+        setAboutMe(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleProjects = async () => {
+    try {
+      const { data, status } = await axios.get(
+        URI + "/api/projetos/" + dadosPerfil.perfil.idCompany,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (status === 200) {
+        setProjects(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleInformationUser();
+    handleAboutMe();
+    handleProjects();
+  }, []);
+
   return (
     <>
       <Container>
-        <SideBar />
         <ContainerComponents>
-          <Header>
-            <Img src={ImgEnviarProposta} />
-            <NameGrade>
-              <Name>OpenWork</Name>
-              <ContainerGrade>
-                <MdStarBorder size={24} />
-                <Grade>4,5</Grade>
-              </ContainerGrade>
-            </NameGrade>
-          </Header>
+          <HeaderContainer>
+            <Header>
+              <Img src={perfil.image} />
+              <NameGrade>
+                <Name>{perfil.name}</Name>
+                <ContainerGrade>
+                  <MdStarBorder size={24} />
+                  <Grade>{aboutMe.grade}</Grade>
+                </ContainerGrade>
+              </NameGrade>
+            </Header>
+
+            <FaArrowLeft onClick={() => navigate(HomeCompanyPath)} style={{ cursor: "pointer" }} size={40} />
+          </HeaderContainer>
+
+          <ContentTextSobre>{aboutMe.description}</ContentTextSobre>
 
           <ContainerNameProject>
-            <ContentText>ola otário</ContentText>
+            <ContentText>Meus projetos</ContentText>
           </ContainerNameProject>
 
-          <CardProject>
-            <NameProject>Importação de arquivo</NameProject>
-            <ContainerCard>
-              <Aside>
-                <HourDificulty>
-                  <Content>
-                    <Title>Nível de dificuldade</Title>
-                    <SubTitle>Sênior</SubTitle>
-                  </Content>
-                  <Content>
-                    <Title>Carga horária</Title>
-                    <SubTitle>20 horas</SubTitle>
-                  </Content>
-                </HourDificulty>
+          {projects.length > 0 &&
+            projects.map((dados, index) => (
+              <CardProject>
+                <NameProject>{dados.title}</NameProject>
+                <ContainerCard>
+                  <Aside>
+                    <HourDificulty>
+                      <Content>
+                        <Title>Nível de dificuldade</Title>
+                        <SubTitle>{dados.maxDevelopers}</SubTitle>
+                      </Content>
+                      <Content>
+                        <Title>Carga horária</Title>
+                        <SubTitle>{dados.timeExpected} dias</SubTitle>
+                      </Content>
+                    </HourDificulty>
 
-                <ContainerLanguages>
-                  <Title>Linguagens</Title>
-                  <Languages>
-                    <IconAndName>
-                      <MdStarBorder size={40} />
-                      <SubTitle>React</SubTitle>
-                    </IconAndName>
+                    <ContainerLanguages>
+                      <Title>Linguagens</Title>
+                      <Languages>
+                        {dados.tools.map((d) => (
+                          <IconAndName>
+                            <MdStarBorder size={40} />
+                            <SubTitle>{d.name}</SubTitle>
+                          </IconAndName>
+                        ))}
+                      </Languages>
+                    </ContainerLanguages>
 
-                    <IconAndName>
-                      <MdStarBorder size={40} />
-                      <SubTitle>React</SubTitle>
-                    </IconAndName>
+                    <FilledButton
+                      heigth={41}
+                      width={106}
+                      marginTop={"2.5rem"}
+                      marginLeft={"0px"}
+                      color={Colors.PRIMARY_COLOR}
+                    >
+                      Chat
+                    </FilledButton>
+                  </Aside>
 
-                    <IconAndName>
-                      <MdStarBorder size={40} />
-                      <SubTitle>React</SubTitle>
-                    </IconAndName>
-                  </Languages>
-                </ContainerLanguages>
-
-                <FilledButton
-                  heigth={41}
-                  width={106}
-                  marginTop={"2.5rem"}
-                  marginLeft={"0px"}
-                  color={Colors.PRIMARY_COLOR}
-                >
-                  Chat
-                </FilledButton>
-              </Aside>
-
-              <Article>
-                <ContainerProposal>
-                  <ContainerImgEnviarProposta src={ImgEnviarProposta} />
-                  <FilledButton
-                    color={Colors.BLACK}
-                    heigth={41}
-                    width={180}
-                    marginTop={"2.5rem"}
-                    onClick={SendProposta()}
-                  >
-                    Enviar proposta
-                  </FilledButton>
-                </ContainerProposal>
-              </Article>
-            </ContainerCard>
-          </CardProject>
+                  <Article>
+                    <ContainerProposal>
+                      <ContainerImgEnviarProposta src={ImgEnviarProposta} />
+                      <FilledButton
+                        color={Colors.BLACK}
+                        heigth={41}
+                        width={180}
+                        marginTop={"1.5rem"}
+                        onClick={() => SendProposta(dados.id)}
+                      >
+                        Enviar proposta
+                      </FilledButton>
+                    </ContainerProposal>
+                  </Article>
+                </ContainerCard>
+              </CardProject>
+            ))}
         </ContainerComponents>
       </Container>
     </>

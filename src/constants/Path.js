@@ -12,7 +12,7 @@ const DashboardFinanceiraPath = "/dashboard";
 const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
-const TodoPath = "/gerenciador-tarefas";
+const TodoPath = "/gerenciador-tarefas/:id";
 const PortfolioSobreMim = "/portfolio/sobre-mim";
 const PortfolioExperiencia = "/portfolio/experiencias";
 const PortfolioProjectsPath = "/portfolio/projetos";
@@ -21,7 +21,7 @@ const ProgressPath = "/projetos-andamentos";
 const ProjectsPath = "/projetos-concluidos";
 const canceledPath = "/projetos-cancelados";
 const CreateProjectPath = "/cadastrar-projeto";
-const SendContractPath = "/enviar-contrato";
+const SendContractPath = "/enviar-contrato/:id";
 const AsignedContractPath = "/assinar-contrato";
 const DevPropostaPath = "/desenvolvedores/propostas";
 

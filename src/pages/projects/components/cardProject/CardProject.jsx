@@ -24,9 +24,13 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { usePopper } from "react-popper";
 import Colors from "../../../../constants/Colors";
-import { TodoPath } from "../../../../constants/Path"
+import { TodoPath } from "../../../../constants/Path";
+import axios from "axios";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import { toast } from "react-toastify";
 
 function CardProject({
+  idProject,
   developers,
   canceled,
   title,
@@ -37,6 +41,7 @@ function CardProject({
   company,
   logoCompany,
   isDev,
+  idProjectAccepted,
 }) {
   const navigate = useNavigate();
   const [clicked, setClicked] = useState(false);
@@ -49,7 +54,8 @@ function CardProject({
 
   const clickNavigate = () => {
     setClicked(true);
-    navigate(TodoPath);
+    const newPath = TodoPath.replace(":id", idProject);
+    navigate(newPath);
   };
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -63,6 +69,25 @@ function CardProject({
       },
     ],
   });
+
+  const finalziarProject = async () => {
+    const response = await axios.patch(
+      AmbienteBackend() + "/projetos-aceitos/completo/" + idProjectAccepted
+    );
+
+    if (response.status === 200) {
+      toast.success("Projeto finalizado com sucesso.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+    }
+  };
 
   return (
     <>
@@ -187,7 +212,7 @@ function CardProject({
                         as="button"
                         className="highlight-dropdown-item"
                         eventKey="2"
-                        onClick={() => alert("Finalizando...")}
+                        onClick={() => finalziarProject()}
                       >
                         Finalizar
                       </Dropdown.Item>

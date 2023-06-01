@@ -9,45 +9,53 @@ import { useState } from "react";
 import { get, post } from "../../services/Generected";
 import { useEffect } from "react";
 import moment from "moment";
-import { getId } from "../../hooks/Cookies";
+import { getCompanyId, getId, getIsDev } from "../../hooks/Cookies";
 import { AmbienteBackend } from "../../hooks/Ambiente";
 import ModalStatus from "../../components/UI/modal/modal-status/ModalStatus";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
+import { useSelector } from "react-redux";
 
 const AvaliarTeste = () => {
+  const { dadosPerfil } = useSelector(selectedPerfil);
   const [avaliar, setAvaliar] = useState("");
   const [avaliacao, setAvaliacao] = useState([]);
   const [avaliacaoAtual, setAvaliacaoAtual] = useState({});
   const [sucesso, setSucesso] = useState(false);
   const idUser = getId();
-  const URIGet = AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`;
+  const idCompany = getCompanyId();
+  const isDev = getIsDev();
 
   function handleFetchOnClose() {
+    handleFetchAvaliacao();
     setSucesso(false);
   }
 
   async function handleFetchAvaliacao() {
+    const URIGet =
+    dadosPerfil.perfil.tipo !== "EMPRESA"
+        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`
+        : AmbienteBackend() + `/avaliacoes/empresa/${idCompany}`;
     const response = await get(URIGet);
 
-    const myAvalacoes = [...response.data.myAvaliations];
     const evaluates = [...response.data.evaluates];
 
-    const newEvaluates = evaluates.filter(
-      (e) => !myAvalacoes.find((m) => m.id === e.id)
-    );
-
-    setAvaliacao(newEvaluates);
+    setAvaliacao(evaluates);
   }
 
-  async function handleFetchAvaliar(id) {
+  async function handleFetchAvaliar(id, idAcceptedDev) {
     const URI =
-      AmbienteBackend() +
-      `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
+      isDev === "false"
+        ? AmbienteBackend() + `/avaliacoes/empresa/${idAcceptedDev}/${avaliar}`
+        : AmbienteBackend() +
+          `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
-    console.log(avaliar);
 
-    if (response.status === 201) handleAvaliacaoAtual();
-    setAvaliar(response);
-    setSucesso(true);
+    if (response.status === 201) {
+      handleAvaliacaoAtual();
+      console.log(response);
+      setAvaliar(response);
+      setSucesso(true);
+    }
   }
 
   function handleAvaliacaoAtual(itemId, index) {
@@ -92,7 +100,7 @@ const AvaliarTeste = () => {
                         <h1>{dados.name}</h1>
                         <div className="grade">
                           <MdStarBorder size={16} />
-                          <h2>{dados.grade}</h2>
+                          <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
                         </div>
                       </div>
                     </div>
@@ -111,11 +119,11 @@ const AvaliarTeste = () => {
                             key={i}
                             size={24}
                             color={
-                              i < avaliacaoAtual[idAvaliacao]
+                              i < avaliacaoAtual[dados.idAcceptedDev]
                                 ? "yellow"
                                 : "gray"
                             }
-                            onClick={() => handleAvaliacaoAtual(idAvaliacao, i)}
+                            onClick={() => handleAvaliacaoAtual(dados.idAcceptedDev, i)}
                           />
                         ))}
                       </div>
@@ -126,7 +134,7 @@ const AvaliarTeste = () => {
                         marginRight={"0px"}
                         marginLeft={"0px"}
                         color={Colors.BLACK}
-                        onClick={() => handleFetchAvaliar(idAvaliacao)}
+                        onClick={() => handleFetchAvaliar(idAvaliacao, dados.idAcceptedDev)}
                       >
                         Avaliar
                       </FilledButton>
@@ -139,7 +147,7 @@ const AvaliarTeste = () => {
         </Table>
         {sucesso ? (
           <ModalStatus
-            status={"sucess"}
+            status={"success"}
             texto={"Avaliado com sucesso"}
             onClose={handleFetchOnClose}
             modalError={sucesso}

@@ -21,17 +21,15 @@ import Styled from "../../components/navBar/NavBar.styled";
 import BarChart from "../../components/charts/BarChart";
 import SemiCircleDonutChart from "../../components/charts/SemiCircleDonutChart";
 import {
-  handleDashboard,
   handleFinanceTable,
   handleProjectsCancelled,
-  handleProjectsCompleted,
   handleProjectsInProgress,
-  handleProjectsProgress,
 } from "../../store/actions/Dashboard";
 import Cookies from "js-cookie";
 import { differenceInMonths, isAfter } from "date-fns";
 
 const Dashboard = () => {
+  // eslint-disable-next-line no-unused-vars
   const [tabelas, settabelas] = useState([]);
   const [projetos, setProjetos] = useState([]);
 
@@ -81,6 +79,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getProjectsDev();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -112,15 +111,14 @@ const Dashboard = () => {
                           );
                           return (
                             total +
-                            (projeto.valueProject - projeto.tax) *
-                              (monthsDiff + 1)
+                            (projeto.value - projeto.tax) * (monthsDiff + 1)
                           );
                         }
                       } else if (projeto.status === "open") {
-                        return total + (projeto.valueProject - projeto.tax);
+                        return total + (projeto.value - projeto.tax);
                       }
                     }
-                    return " " + total;
+                    return total > 0 ? total : "0,00";
                   }, 0)}
                 </h2>
               </ContentCard>

@@ -6,40 +6,42 @@ import {
   changeFriends,
   changeIdUser,
   changeMessagesPendentes,
+  selectedWebSocket,
 } from "../../store/reducers/WebSocketSlice";
 import Styled from "./Chat.styled";
 import Messages from "./components/messages/Messages";
 import SideBar from "./components/sideBar/SideBar";
 import { getId } from "../../hooks/Cookies";
 import { getS3 } from "../../store/actions/MicroService";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 
 export const Chat = ({ socket }) => {
+  const { dadosPerfil } = useSelector(selectedPerfil);
+  const { websocket } = useSelector(selectedWebSocket);
   const [loading, setLoading] = useState(false);
   const [messageActive, setMessageActive] = useState(false);
   const [visualized, setVisualized] = useState([]);
   const [dadosConversa, setDadosConversa] = useState({});
-  const [tag, setTag] = useState("");
-  const [imagemPerfil, setImagemPerfil] = useState("");
-  const [nome, setNome] = useState("");
+  const [imagemPerfil] = useState(dadosPerfil.perfil.image);
+
+  const dispatch = useDispatch();
+
+  const [nome] = useState(dadosPerfil.perfil.name);
+  const [tag] = useState(websocket.tag);
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
-  const dispatch = useDispatch();
-  const id = getId();
-
-  const fetchS3 = async (img) => {
-    const imagemPerfil = await getS3(img);
-
-    setImagemPerfil(imagemPerfil);
-  };
+  
 
   useEffect(() => {
     socket.on("connect", () => {
-      socket.emit("myInformation", { id }, (callback) => {
+      socket.emit("myInformation", { id: dadosPerfil.perfil.id }, (callback) => {
         const idUser = callback.id;
 
         dispatch(
           changeIdUser({
             id: idUser,
+            tag: callback.tag,
           })
         );
 
@@ -74,14 +76,11 @@ export const Chat = ({ socket }) => {
         );
 
         socket.emit("updateSocketId", { idUser }, (user) => {});
-
-        fetchS3(callback.img);
-        setTag(callback.tag);
-        setNome(callback.nome);
       });
     });
   }, []);
 
+ 
   return (
     <Styled.Container>
       <Styled.Div width={"30%"}>

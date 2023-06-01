@@ -5,7 +5,7 @@ import CardProject from "../../components/cardProject/CardProject";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { getId, getIsDev, getToken } from "../../../../hooks/Cookies";
+import { getCompanyId, getId, getIsDev, getToken } from "../../../../hooks/Cookies";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const Progress = ({ developers }) => {
@@ -16,9 +16,10 @@ const Progress = ({ developers }) => {
   const isDev = getIsDev();
   const id = getId();
   const token = getToken();
+  const idCompany = getCompanyId();
 
-  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/andamentos/empresa/${id}`
-  const fetchDev = AmbienteBackend() + `/projetos-aceitos/andamentos/desenvolvedor/${id}`
+  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/andamento/empresa/${idCompany}`
+  const fetchDev = AmbienteBackend() + `/projetos-aceitos/andamento/desenvolvedor/${id}`
 
 
 
@@ -76,6 +77,8 @@ const Progress = ({ developers }) => {
             projetos.map((projeto) => (
               <CardProject
                 key={projeto.id}
+                idProjectAccepted={projeto.id}
+                idProject={projeto.idBigProject}
                 title={projeto.titleProject}
                 describe={projeto.descriptionProject}
                 progress={projeto.progress}

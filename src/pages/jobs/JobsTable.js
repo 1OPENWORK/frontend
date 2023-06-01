@@ -28,6 +28,7 @@ const JobsTeste = () => {
           <thead>
             <tr>
               <th scope="col">Empresa</th>
+              <th scope="col">Título</th>
               <th scope="col">Descrição</th>
               <th scope="col">Tempo aproximado</th>
               <th scope="col">Devs necessários</th>
@@ -49,10 +50,13 @@ const JobsTeste = () => {
                       <h1>{dados.nameCompany}</h1>
                       <div className="grade">
                         <MdStarBorder size={16} />
-                        <h2>{dados.grade}</h2>
+                        <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
                       </div>
                     </div>
                   </div>
+                </td>
+                <td>
+                  <p>{dados.title}</p>
                 </td>
                 <td>
                   <p>{dados.description}</p>

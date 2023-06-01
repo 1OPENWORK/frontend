@@ -13,6 +13,7 @@ import {
   selectRegister,
 } from "../../../../../store/reducers/RegisterSlice";
 import { useSelector } from "react-redux";
+import { cleanMask } from "../../../../../helpers/HelperFunctions";
 
 const RegisterEt2 = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ const RegisterEt2 = () => {
 
 
   async function searchCEP() {
-    if (cep.length > 7) {
-      const dados = await get(`http://viacep.com.br/ws/${cep}/json/`);
+    if (cleanMask(cep).length === 8) {
+      const dados = await get(`http://viacep.com.br/ws/${cleanMask(cep)}/json/`);
 
       setCep(dados.data.cep);
       setRua(dados.data.logradouro);
@@ -105,6 +106,8 @@ const RegisterEt2 = () => {
           handle={setCep}
           space={"20px"}
           mr={"20px"}
+          maxLength={8}
+          
         />
         <InputForm
           label="Estado"

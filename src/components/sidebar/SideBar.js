@@ -18,7 +18,8 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HomeDevPath } from "../../constants/Path";
+import { HomeCompanyPath, HomeDevPath } from "../../constants/Path";
+import { getIsDev } from "../../hooks/Cookies";
 
 const SideBar = ({ tabActive }) => {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const SideBar = ({ tabActive }) => {
       dispatch(
         changeSave({
           perfil: response.data.perfil,
-          address: response.data.adress,
+          address: response.data.address,
           tools: response.data.tools,
         })
       );
@@ -99,7 +100,7 @@ const SideBar = ({ tabActive }) => {
         <Styled.Header>
           <Styled.IconCallBack
             onClick={() => {
-              navigate(HomeDevPath);
+              navigate(dadosPerfil.perfil.tipo !== "EMPRESA" ? HomeDevPath : HomeCompanyPath);
             }}
           >
             <MdArrowBack size={40} color={Colors.WHITE} />
@@ -113,7 +114,7 @@ const SideBar = ({ tabActive }) => {
             back={previewImage}
             onClick={handleImagePerson}
           >
-            {previewImage === "" && <img src={IconPlus} />}
+            {previewImage === "" && <img src={IconPlus} alt="imagem ou logo" />}
           </Styled.ContainerPhotograph>
 
           <Styled.AddPhotograph>Adicionar foto</Styled.AddPhotograph>

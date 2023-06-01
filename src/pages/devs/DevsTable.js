@@ -74,7 +74,7 @@ const Desenvolvedores = () => {
                       <h1>{dados.name}</h1>
                       <div className="grade">
                         <MdStarBorder size={16} />
-                        <h2>{dados.grade}</h2>
+                        <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
                       </div>
                     </div>
                   </div>

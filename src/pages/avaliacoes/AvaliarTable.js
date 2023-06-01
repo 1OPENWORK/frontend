@@ -12,8 +12,11 @@ import moment from "moment";
 import { getCompanyId, getId, getIsDev } from "../../hooks/Cookies";
 import { AmbienteBackend } from "../../hooks/Ambiente";
 import ModalStatus from "../../components/UI/modal/modal-status/ModalStatus";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
+import { useSelector } from "react-redux";
 
 const AvaliarTeste = () => {
+  const { dadosPerfil } = useSelector(selectedPerfil);
   const [avaliar, setAvaliar] = useState("");
   const [avaliacao, setAvaliacao] = useState([]);
   const [avaliacaoAtual, setAvaliacaoAtual] = useState({});
@@ -29,7 +32,7 @@ const AvaliarTeste = () => {
 
   async function handleFetchAvaliacao() {
     const URIGet =
-      isDev === "true"
+    dadosPerfil.perfil.tipo !== "EMPRESA"
         ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`
         : AmbienteBackend() + `/avaliacoes/empresa/${idCompany}`;
     const response = await get(URIGet);
@@ -46,7 +49,6 @@ const AvaliarTeste = () => {
         : AmbienteBackend() +
           `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
-    console.log(avaliar);
 
     if (response.status === 201) {
       handleAvaliacaoAtual();
@@ -98,7 +100,7 @@ const AvaliarTeste = () => {
                         <h1>{dados.name}</h1>
                         <div className="grade">
                           <MdStarBorder size={16} />
-                          <h2>{dados.grade}</h2>
+                          <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
                         </div>
                       </div>
                     </div>
@@ -117,11 +119,11 @@ const AvaliarTeste = () => {
                             key={i}
                             size={24}
                             color={
-                              i < avaliacaoAtual[idAvaliacao]
+                              i < avaliacaoAtual[dados.idAcceptedDev]
                                 ? "yellow"
                                 : "gray"
                             }
-                            onClick={() => handleAvaliacaoAtual(idAvaliacao, i)}
+                            onClick={() => handleAvaliacaoAtual(dados.idAcceptedDev, i)}
                           />
                         ))}
                       </div>
@@ -132,7 +134,7 @@ const AvaliarTeste = () => {
                         marginRight={"0px"}
                         marginLeft={"0px"}
                         color={Colors.BLACK}
-                        onClick={() => handleFetchAvaliar(idAvaliacao)}
+                        onClick={() => handleFetchAvaliar(idAvaliacao, dados.idAcceptedDev)}
                       >
                         Avaliar
                       </FilledButton>

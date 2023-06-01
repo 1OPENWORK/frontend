@@ -65,7 +65,7 @@ const SideBar = ({ tabActive }) => {
       dispatch(
         changeSave({
           perfil: response.data.perfil,
-          address: response.data.adress,
+          address: response.data.address,
           tools: response.data.tools,
         })
       );

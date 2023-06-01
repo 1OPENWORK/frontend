@@ -449,7 +449,9 @@ export default function Card({ data, index, onDelete }) {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={handleDeleteCard(data.id)}>
+              <Button variant="danger" 
+              // onClick={handleDeleteCard(data.id)}
+              >
                 Deletar card
               </Button>
 

@@ -5,6 +5,7 @@ export const slice = createSlice({
   initialState: {
     idSocket: "",
     idUser: "",
+    tag: "",
     friends: [],
     conversationActive: {},
     conversationRecents: [],
@@ -17,12 +18,15 @@ export const slice = createSlice({
       return { ...state, idSocket: payload.id };
     },
 
+   
+
+
     changeOff(state) {
       return { ...state, idSocket: "" };
     },
 
     changeIdUser(state, { payload }) {
-      return { ...state, idUser: payload.id };
+      return { ...state, idUser: payload.id,  tag: payload.tag };
     },
 
     changeFriends(state, { payload }) {

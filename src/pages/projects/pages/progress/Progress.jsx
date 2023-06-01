@@ -77,7 +77,8 @@ const Progress = ({ developers }) => {
             projetos.map((projeto) => (
               <CardProject
                 key={projeto.id}
-                idProject={projeto.id}
+                idProjectAccepted={projeto.id}
+                idProject={projeto.idBigProject}
                 title={projeto.titleProject}
                 describe={projeto.descriptionProject}
                 progress={projeto.progress}

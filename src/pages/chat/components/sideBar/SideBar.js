@@ -27,6 +27,10 @@ import ToastNewMessage from "../messages/components/toastNewMessage/ToastNewMess
 import { ToastNewMessageContainer } from "../messages/components/toastNewMessage/ToastNewMessage.styled";
 import { useSpring, animated } from "react-spring";
 import { MdOutlineEditNote } from "react-icons/md";
+import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
+import { HomeDevPath } from "../../../../constants/Path";
+import { HomeCompanyPath } from "../../../../constants/Path";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = ({
   socket,
@@ -38,6 +42,7 @@ const SideBar = ({
   setVisualized,
   myInformation,
 }) => {
+  const { dadosPerfil } = useSelector(selectedPerfil);
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
@@ -56,6 +61,7 @@ const SideBar = ({
   const [on, setOn] = useState([]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFriends(websocket.friends);
@@ -326,7 +332,15 @@ const SideBar = ({
       ) : (
         <>
           <MenuLateral>
-            <Styled.Img src={Logo} />
+            <Styled.Img
+              onClick={() => {
+                dadosPerfil.perfil.tipo !== "EMPRESA"
+                  ? navigate(HomeDevPath)
+                  : navigate(HomeCompanyPath);
+              }}
+              src={Logo}
+              style={{ cursor: "pointer" }}
+            />
             <OpcaoMenuLateral
               style={{
                 flexDirection: "column",
@@ -344,8 +358,10 @@ const SideBar = ({
                 }}
                 src={myInformation.img}
               />
-              <DivOpcaoLateral>
-                <TitleOpcaoMenuLateral>
+              <DivOpcaoLateral style={{ width: "200px" }}>
+                <TitleOpcaoMenuLateral
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
                   {myInformation.nome}
                 </TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
@@ -407,7 +423,7 @@ const SideBar = ({
                 <TitleOpcaoMenuLateral>Adicionar</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
-            <OpcaoMenuLateral onClick={() => setShowModal(true)}>
+            {/* <OpcaoMenuLateral onClick={() => setShowModal(true)}>
               <ion-icon
                 name="people-outline"
                 style={{
@@ -419,8 +435,8 @@ const SideBar = ({
               <DivOpcaoLateral>
                 <TitleOpcaoMenuLateral>Novo grupo</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
-            </OpcaoMenuLateral>
-            <OpcaoMenuLateral>
+            </OpcaoMenuLateral> */}
+            {/* <OpcaoMenuLateral>
               <ion-icon
                 name="list-outline"
                 style={{
@@ -432,7 +448,7 @@ const SideBar = ({
               <DivOpcaoLateral>
                 <TitleOpcaoMenuLateral>Atividades</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
-            </OpcaoMenuLateral>
+            </OpcaoMenuLateral> */}
             <OpcaoMenuLateral onClick={() => setIndexAbaActive(3)}>
               {indexAbaActive !== 3 ? (
                 <Badge
@@ -505,11 +521,15 @@ const SideBar = ({
                 ></ion-icon>
               </Styled.Header>
               <Styled.DivRow>
-                <span style={{
-                fontSize: 40, 
-                color: Colors.PRIMARY_COLOR
-              }}>#</span>
-              <Styled.Search placeholder="AAA00" maxLength={5}/>
+                <span
+                  style={{
+                    fontSize: 40,
+                    color: Colors.PRIMARY_COLOR,
+                  }}
+                >
+                  #
+                </span>
+                <Styled.Search placeholder="AAA00" maxLength={5} />
               </Styled.DivRow>
               <Styled.ListPersons></Styled.ListPersons>
             </Styled.DivColumn>

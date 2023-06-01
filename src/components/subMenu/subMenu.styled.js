@@ -19,9 +19,10 @@ export const Container = Styled.div`
         letter-spacing: 0.22em;
     }
 
-    a {
+    div {
         text-decoration: none;
         color: ${Colors.BLACK};
+        cursor: pointer;
     }
 
     ul {
@@ -48,12 +49,12 @@ export const Container = Styled.div`
         flex-wrap: wrap;
     }
 
-    .header-menu a {
+    .header-menu div {
         position: relative;
         display: inline-block;
     }
 
-    .header-menu a::after{
+    .header-menu div::after{
         content: "";
         position: absolute;
         width: 0px;
@@ -63,8 +64,9 @@ export const Container = Styled.div`
         background: ${Colors.SECONDARY_COLOR};
     }
 
-    .header-menu a:hover::after {
+    .header-menu div:hover::after {
         width: 100%;
+
     }
 
     .header-menu .display::after {

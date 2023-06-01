@@ -25,7 +25,7 @@ import Styled from "./InputForm.styled";
  * @param props The component props.
  * @returns The component JSX.
  */
-const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, disabled, type }) => {
+const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, disabled, type, maxLength }) => {
   // --------------------------------------------------------
   // InputForm PRIVATE DECLARATIONS
   // --------------------------------------------------------
@@ -41,6 +41,7 @@ const InputForm = ({ label, value, handle, space, ml, mr, mt, mb, width, disable
       <Styled.Input
         w={width}
         value={value}
+        maxLength={maxLength}
         onChange={(e) => handle(e.target.value)}
         ml={ml}
         mr={mr}

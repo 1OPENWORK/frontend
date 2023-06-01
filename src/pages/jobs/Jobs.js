@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import JobsTable from "./JobsTable";
 import SubMenu from "../../components/subMenu/subMenu";
+import JobsPropostas from "./JobsPropostasTable";
 
 // --------------------------------------------------------
 // Jobs INTERFACE
@@ -15,11 +16,17 @@ import SubMenu from "../../components/subMenu/subMenu";
  * @returns The component JSX.
  */
 const Jobs = () => {
+  const [abaActive, setAbactive] = useState(0);
+
   return (
     <>
       <NavBarList type={3} />
-      <SubMenu type={2} />
-      <JobsTable />
+      <SubMenu
+        dados={[{ name: "Jobs" }, { name: "Propostas" }]}
+        setActive={setAbactive}
+        active={abaActive}
+      />
+      {abaActive === 0 ? <JobsTable /> : <JobsPropostas />}
     </>
   );
 };

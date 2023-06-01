@@ -8,13 +8,22 @@ import { useEffect } from "react";
 import moment from "moment";
 import { getId } from "../../hooks/Cookies";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 
 const AvaliacaoTeste = ({ type }) => {
   const id = getId();
-  const URI = AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`;
+  const { dadosPerfil } = useSelector(selectedPerfil);
+
   const [avaliacao, setAvaliacao] = useState([]);
 
   async function handleFetchAvaliacao() {
+    const URI =
+      dadosPerfil.perfil.tipo !== "EMPRESA"
+        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`
+        : AmbienteBackend() +
+          `/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
+
     const response = await get(URI);
     setAvaliacao(response.data.myAvaliations);
   }
@@ -50,7 +59,7 @@ const AvaliacaoTeste = ({ type }) => {
                       <h1>{dados.name}</h1>
                       <div className="grade">
                         <MdStarBorder size={16} />
-                        <h2>{dados.grade}</h2>
+                        <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
                       </div>
                     </div>
                   </div>

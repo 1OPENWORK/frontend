@@ -5,6 +5,8 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import { DevPropostaPath, SendContractPath } from "../../constants/Path";
+import { useNavigate } from "react-router-dom";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -18,7 +20,11 @@ import { AmbienteBackend } from "../../hooks/Ambiente";
  */
 
 const Desenvolvedores = () => {
-  const URI = AmbienteBackend() + +"/api/usuarios/desenvolvedores";
+  const URI = AmbienteBackend() + "/api/usuarios/desenvolvedores";
+
+  const navigate = useNavigate();
+
+
 
   const [devs, setDevs] = useState([]);
 
@@ -26,6 +32,11 @@ const Desenvolvedores = () => {
     const response = await get(URI);
     setDevs(response.data);
   }
+
+  const handleAccessPerfil = (id) => {
+    const newPath = SendContractPath.replace(":id", id);
+    navigate(newPath);
+  };
 
   useEffect(() => {
     handleFetchDesenvolvedores();
@@ -48,6 +59,7 @@ const Desenvolvedores = () => {
           <tbody>
             {devs.map((dados, index) => (
               <tr
+                onClick={() => handleAccessPerfil(dados.id)}
                 key={dados.id}
                 className={index % 2 === 0 ? "gray-row" : "white-row"}
               >
@@ -62,7 +74,7 @@ const Desenvolvedores = () => {
                       <h1>{dados.name}</h1>
                       <div className="grade">
                         <MdStarBorder size={16} />
-                        <h2>{dados.grade}</h2>
+                        <h2>{Math.fround(dados.grade).toFixed(1)}</h2>
                       </div>
                     </div>
                   </div>

@@ -21,26 +21,17 @@ import Styled from "../../components/navBar/NavBar.styled";
 import BarChart from "../../components/charts/BarChart";
 import SemiCircleDonutChart from "../../components/charts/SemiCircleDonutChart";
 import {
-  handleDashboard,
   handleFinanceTable,
+  handleProjectsCancelled,
+  handleProjectsInProgress,
 } from "../../store/actions/Dashboard";
 import Cookies from "js-cookie";
+import { differenceInMonths, isAfter } from "date-fns";
 
 const Dashboard = () => {
-  const [totalMes, settotalMes] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const [quantidadeJobs, setquantidadeJobs] = useState("");
   const [tabelas, settabelas] = useState([]);
-
-  async function getDashboard() {
-    try {
-      const response = await handleDashboard();
-      settotalMes(response.data.totalMes);
-      setquantidadeJobs(response.data.quantidadeJobs);
-    } catch {
-      console.log("error");
-    }
-  }
+  const [projetos, setProjetos] = useState([]);
 
   async function getTableFinance() {
     try {
@@ -51,11 +42,49 @@ const Dashboard = () => {
     }
   }
 
+  async function getProjectsDev() {
+    try {
+      const response = await handleFinanceTable(Cookies.get("id"));
+      const responseInProgress = await handleProjectsInProgress(
+        Cookies.get("id")
+      );
+      const responseCancelled = await handleProjectsCancelled(
+        Cookies.get("id")
+      );
+
+      const dataWithStatus = response.data.map((item) => ({
+        ...item,
+        status: "open",
+      }));
+      const dataInProgressWithStatus = responseInProgress.data.map((item) => ({
+        ...item,
+        status: "progress",
+      }));
+      const dataCancelledWithStatus = responseCancelled.data.map((item) => ({
+        ...item,
+        status: "cancelled",
+      }));
+
+      setProjetos(
+        projetos.concat(
+          dataWithStatus,
+          dataInProgressWithStatus,
+          dataCancelledWithStatus
+        )
+      );
+    } catch {
+      console.log("error");
+    }
+  }
+
+  useEffect(() => {
+    getProjectsDev();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     getTableFinance();
   }, []);
-
-  getDashboard();
 
   return (
     <>
@@ -68,7 +97,30 @@ const Dashboard = () => {
               </div>
               <ContentCard>
                 <Paragraph>Total a receber no mês </Paragraph>
-                <h2>R${totalMes}</h2>
+                <h2>
+                  R$
+                  {projetos.reduce((total, projeto) => {
+                    if (projeto.status !== "cancelled") {
+                      if (projeto.status === "progress") {
+                        const currentDate = new Date();
+                        const finishDate = new Date(projeto.finishDate);
+                        if (isAfter(currentDate, finishDate)) {
+                          const monthsDiff = differenceInMonths(
+                            finishDate,
+                            currentDate
+                          );
+                          return (
+                            total +
+                            (projeto.value - projeto.tax) * (monthsDiff + 1)
+                          );
+                        }
+                      } else if (projeto.status === "open") {
+                        return total + (projeto.value - projeto.tax);
+                      }
+                    }
+                    return total > 0 ? total : "0,00";
+                  }, 0)}
+                </h2>
               </ContentCard>
             </ContainerCard>
 
@@ -78,7 +130,13 @@ const Dashboard = () => {
               </div>
               <ContentCard>
                 <Paragraph>Quantidade de Jobs</Paragraph>
-                <h2> {tabelas.length} Jobs</h2>
+                <h2>
+                  {
+                    projetos.filter((projeto) => projeto.status !== "cancelled")
+                      .length
+                  }{" "}
+                  Jobs
+                </h2>
               </ContentCard>
             </ContainerCard>
           </ContainerCards>
@@ -90,7 +148,6 @@ const Dashboard = () => {
           <ContainerFilter>
             <div>
               <TitleH2>Ajustar tempo</TitleH2>
-              {/* Futuramente um component  */}
               <InputDate type="date"></InputDate>
             </div>
             <Styled.LogoImg src={Event} />

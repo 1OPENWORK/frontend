@@ -21,7 +21,7 @@ import { changeActiveToken } from "../../store/reducers/AuthSlice";
 import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-import { HomeDevPath } from "../../constants/Path";
+import { HomeCompanyPath, HomeDevPath } from "../../constants/Path";
 import { changeSave } from "../../store/reducers/PerfilSlice";
 // --------------------------------------------------------
 // Auth INTERFACE
@@ -53,20 +53,21 @@ function Auth() {
       if (response.status === 200) {
         const token = response.data.token;
         const id = response.data.userId;
-        const fullname = response.data.fullname;
         const email = response.data.email;
+        const tipo = response.data.tipo;
+        const companyId = response.data.companyId;
 
         Cookies.set("token", token, { expires: 1 });
         Cookies.set("id", id, { expires: 1 });
-        Cookies.set("isDev", true, { expires: 1 });
-        Cookies.set("fullname", fullname, { expires: 1 });
+        Cookies.set("companyId", companyId, { expires: 1 });
+        Cookies.set("isDev", tipo === "DESENVOLVEDOR", { expires: 1 });
         Cookies.set("email", email, { expires: 1 });
 
         const { data } = await handleInformationsUser(id);
 
         dispatch(
           changeSave({
-            perfil: data.perfil,
+            perfil: { ...data.perfil, idCompany: companyId, tipo: tipo },
             address: data.address,
             tools: data.tools,
           })
@@ -78,9 +79,22 @@ function Auth() {
           })
         );
 
-        navigate(HomeDevPath);
+        tipo === "DESENVOLVEDOR"
+          ? navigate(HomeDevPath)
+          : navigate(HomeCompanyPath);
 
         toast.success("Logado com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      } else {
+        toast.error(response.response.data.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

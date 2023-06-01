@@ -10,12 +10,16 @@ import { get } from "../../../../../services/Generected";
 import {
   changeEtapa2,
   changeEtapaAll,
+  selectRegister,
 } from "../../../../../store/reducers/RegisterSlice";
+import { useSelector } from "react-redux";
+import { cleanMask } from "../../../../../helpers/HelperFunctions";
 
 const RegisterEt2 = () => {
   const dispatch = useDispatch();
-
-  const [cep, setCep] = useState("");
+  const { register } = useSelector(selectRegister);
+  
+  const [cep, setCep] = useState(register.etapa2.cep);
   const [estado, setEstado] = useState("");
   const [cidade, setCidade] = useState("");
   const [bairro, setBairro] = useState("");
@@ -23,12 +27,11 @@ const RegisterEt2 = () => {
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
 
-  const [isNext, setIsNext] = useState(false);
-  const [verified, setVerified] = useState(false);
+
 
   async function searchCEP() {
-    if (cep.length > 7) {
-      const dados = await get(`http://viacep.com.br/ws/${cep}/json/`);
+    if (cleanMask(cep).length === 8) {
+      const dados = await get(`http://viacep.com.br/ws/${cleanMask(cep)}/json/`);
 
       setCep(dados.data.cep);
       setRua(dados.data.logradouro);
@@ -67,9 +70,12 @@ const RegisterEt2 = () => {
           ...dados,
         })
       );
+      dispatch(
+        changeEtapaAll({
+          etapa: 2,
+        })
+      );
 
-      setVerified(true);
-      setIsNext(true);
     } catch (err) {
       toast.error(err.errors[0], {
         position: "top-right",
@@ -88,13 +94,7 @@ const RegisterEt2 = () => {
     searchCEP();
   }, [cep]);
 
-  function nextEtapa() {
-    dispatch(
-      changeEtapaAll({
-        etapa: 2,
-      })
-    );
-  }
+
 
   return (
     <Styled.Form>
@@ -106,6 +106,8 @@ const RegisterEt2 = () => {
           handle={setCep}
           space={"20px"}
           mr={"20px"}
+          maxLength={8}
+          
         />
         <InputForm
           label="Estado"
@@ -152,7 +154,7 @@ const RegisterEt2 = () => {
         width={"770px"}
       />
       <Styled.Divisor align={"flex-end"} style={{ width: "770px" }}>
-        {!isNext ? (
+    
           <FilledButton
             onClick={handleForm}
             color={Colors.BLACK}
@@ -160,19 +162,9 @@ const RegisterEt2 = () => {
             heigth={60}
             marginRight={"0px"}
           >
-            {"Verificar"}
-          </FilledButton>
-        ) : (
-          <FilledButton
-            onClick={() => nextEtapa()}
-            color={Colors.PRIMARY_COLOR}
-            width={190}
-            heigth={60}
-            marginRight={"0px"}
-          >
             {"Próximo"}
           </FilledButton>
-        )}
+        
       </Styled.Divisor>
     </Styled.Form>
   );

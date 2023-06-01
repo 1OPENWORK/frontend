@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
+import Colors from './../../../../constants/Colors'
 
 export const Container = styled.div`
   position: relative;
@@ -24,7 +25,7 @@ export const Container = styled.div`
       background-color: transparent;
       color: #b3b3b3;
       position: absolute;
-      left:0;
+      left: 0;
       top: 148px;
     }
   }
@@ -54,65 +55,6 @@ export const Container = styled.div`
     top: 52px;
     left: 15px;
     color: #b3b3b3;
-  }
-
-  .container-label input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .container-label {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    font-size: 20px;
-    user-select: none;
-    top: 20px;
-  }
-
-  /* Create a custom checkbox */
-  .checkmark {
-    position: relative;
-    top: 20;
-    left: 0;
-    height: 1em;
-    width: 1em;
-    background-color: #ccc;
-    border-radius: 25px;
-    transition: 0.15s;
-  }
-
-  /* When the checkbox is checked, add a blue background */
-  .container-label input:checked ~ .checkmark {
-    background-color: limegreen;
-    border-radius: 25px;
-    transition: 0.15s;
-  }
-
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  /* Show the checkmark when checked */
-  .container-label input:checked ~ .checkmark:after {
-    display: block;
-  }
-
-  /* Style the checkmark/indicator */
-  .container-label .checkmark:after {
-    left: 0.45em;
-    top: 0.25em;
-    width: 0.25em;
-    height: 0.5em;
-    border: solid white;
-    border-width: 0 0.15em 0.15em 0;
-    transform: rotate(45deg);
   }
 
   button {
@@ -174,7 +116,20 @@ export const Container = styled.div`
         opacity: 0;
       }
     `}
-`;
+
+  .form-control {
+    font-family: system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.1;
+    gap: 0.5em;
+  }
+
+  .form-control + .form-control {
+    margin-top: 1em;
+    position: relative;
+  }
+`
 export const Label = styled.span`
   width: 98px;
   height: 24px;
@@ -184,4 +139,24 @@ export const Label = styled.span`
   text-align: center;
   color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
+`
+
+export const InputDate = styled.input`
+  background-color: ${Colors.PRIMARY_COLOR};
+  padding: 0.4em;
+  color: ${Colors.WHITE};
+
+  font-family: 'Nunito', monospace;
+  color: #ffffff;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+
+  ::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+`

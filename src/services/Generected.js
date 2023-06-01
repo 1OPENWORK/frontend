@@ -1,8 +1,14 @@
 import axios from "axios";
+import { getToken } from "../hooks/Cookies";
 
 export async function get(uri) {
+  const token = getToken();
   return await axios
-    .get(uri)
+    .get(uri, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then((dados) => {
       return dados;
     })
@@ -18,7 +24,7 @@ export async function post(uri, body) {
       return dados;
     })
     .catch((error) => {
-      console.log(error);
+      return error;
     });
 }
 
@@ -51,10 +57,10 @@ export async function postImage(uri, body) {
 export async function getImagem(uri) {
   return await axios
     .get(uri, {
-      responseType: 'blob'
+      responseType: "blob",
     })
     .then((dados) => {
-      return  dados;
+      return dados;
     })
     .catch((err) => {
       console.log(err);

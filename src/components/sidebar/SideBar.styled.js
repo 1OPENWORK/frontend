@@ -34,13 +34,25 @@ const StyleSideBar = {
   `,
 
   ContainerPhotograph: styled.div`
-    width: 88px;
-    height: 88px;
-    background-color: ${Colors.WHITE_TEST};
-    border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 88px;
+    height: 88px;
+    background-color: white;
+    background-image: url(${(props) => props.back && props.back});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    border-radius: 100%;
+ 
+
+    img {
+    
+      font-size: 80px;
+      font-weight: 900;
+    }
 
     :hover {
       cursor: pointer;
@@ -48,8 +60,8 @@ const StyleSideBar = {
   `,
 
   IconPlus: styled.div`
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
     background-repeat: no-repeat;
     background-color: ${(props) => (props.isImg ? "" : props.background)};
     background-image: url(${(props) => (props.isImg ? props.background : "")});
@@ -83,7 +95,7 @@ const StyleSideBar = {
     top: 14.6rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     overflow: hidden;
   `,
 
@@ -122,6 +134,15 @@ const StyleSideBar = {
     line-height: 2.063rem;
     color: ${(props) =>
       props.isSelected ? Colors.PRIMARY_COLOR : Colors.WHITE};
+  `,
+
+  Input: styled.input`
+    position: absolute;
+    top: -2000px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
   `,
 };
 

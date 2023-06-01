@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBarList from "../../components/navBarList/NavBarList";
 import AvaliacaoTable from "./AvaliacaoTable";
 import SubMenu from "../../components/subMenu/subMenu";
-
+import AvaliarTable from "./AvaliarTable";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -16,11 +16,20 @@ import SubMenu from "../../components/subMenu/subMenu";
  */
 
 const Avaliacoes = () => {
+  const [abaActive, setAbactive] = useState(0);
+
+
   return (
     <>
       <NavBarList type={2} />
-      <SubMenu type={3} />
-      <AvaliacaoTable />
+      <SubMenu
+        dados={[{ name: "Avaliações" }, { name: "Avaliar" }]}
+        setActive={setAbactive}
+        active={abaActive}
+      />
+      {abaActive === 0 ? <AvaliacaoTable /> : <AvaliarTable />}
+      
+      
     </>
   );
 };

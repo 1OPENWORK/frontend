@@ -9,7 +9,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { handleFinanceTable } from "../../store/actions/Dashboard";
+import {
+  handleFinanceTable,
+  handleProjectsCancelled,
+  handleProjectsInProgress,
+} from "../../store/actions/Dashboard";
 import Cookies from "js-cookie";
 
 ChartJS.register(
@@ -22,7 +26,9 @@ ChartJS.register(
 );
 
 const BarChart = () => {
+  // eslint-disable-next-line no-unused-vars
   const [tabelas, settabelas] = useState([]);
+  const [projetos, setProjetos] = useState([]);
 
   async function getTableFinance() {
     try {
@@ -37,14 +43,57 @@ const BarChart = () => {
     getTableFinance();
   }, []);
 
+  async function getProjectsDev() {
+    try {
+      const response = await handleFinanceTable(Cookies.get("id"));
+      const responseInProgress = await handleProjectsInProgress(
+        Cookies.get("id")
+      );
+      const responseCancelled = await handleProjectsCancelled(
+        Cookies.get("id")
+      );
+
+      const dataWithStatus = response.data.map((item) => ({
+        ...item,
+        status: "open",
+      }));
+      const dataInProgressWithStatus = responseInProgress.data.map((item) => ({
+        ...item,
+        status: "progress",
+      }));
+      const dataCancelledWithStatus = responseCancelled.data.map((item) => ({
+        ...item,
+        status: "cancelled",
+      }));
+
+      setProjetos(
+        projetos.concat(
+          dataWithStatus,
+          dataInProgressWithStatus,
+          dataCancelledWithStatus
+        )
+      );
+    } catch {
+      console.log("error");
+    }
+  }
+
+  useEffect(() => {
+    getProjectsDev();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const data = {
-    labels: tabelas.map((_, index) => `Job ${index + 1}`),
+    labels: projetos.map((_, index) => `Job ${index + 1}`),
     datasets: [
       {
         label: "Jobs",
         backgroundColor: ["#0263FF", "#FF7723", "#8E30FF"],
         hoverBackgroundColor: ["#0263FF", "#FF7723", "#8E30FF"],
-        data: tabelas.map((tabela) => tabela.valueProject),
+        // eslint-disable-next-line array-callback-return
+        data: projetos.map((tabela) => {
+          if (tabela.status !== "cancelled") return tabela.value;
+        }),
       },
     ],
   };

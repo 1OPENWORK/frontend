@@ -30,6 +30,9 @@ const StyledPortifolioSobre = {
     cursor: pointer;
     border-radius: 100%;
     background-color: ${Colors.BLACK};
+    background-image: url(${(props) => (props.img ? props.img : "")});
+    background-size: cover;
+    background-position: center;
   `,
 
   ContainerHeader: styled.div`
@@ -58,7 +61,6 @@ const StyledPortifolioSobre = {
   `,
 
   Note: styled.div`
-    width: 11%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -157,24 +159,22 @@ const StyledPortifolioSobre = {
     margin-left: 2.5rem;
     margin-bottom: 5rem;
     justify-content: space-between;
-    `,
+  `,
 
-    ButtonInfoDiv : styled.div`
-        display:flex;
-        align-items:center;
-    `,
+  ButtonInfoDiv: styled.div`
+    display: flex;
+    align-items: center;
+  `,
 
-    Info : styled.p`
-        cursor:pointer;
-        margin-left:${props => props.tamanho ? props.tamanho : "0"}; 
-    `,
+  Info: styled.p`
+    cursor: pointer;
+    margin-left: ${(props) => (props.tamanho ? props.tamanho : "0")};
+  `,
 
-    InfoText : styled.p`
-        padding-inline: 20px;
-        text-align: justify;
-    `,
-
-
+  InfoText: styled.p`
+    padding-inline: 20px;
+    text-align: justify;
+  `,
 
   DivRow: styled.div`
     display: flex;

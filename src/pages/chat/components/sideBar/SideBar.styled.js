@@ -154,9 +154,8 @@ export const OpcaoMenuLateral = styled.div`
 
 export const TitleOpcaoMenuLateral = styled.h3`
   display: flex;
-  align-self: center;
-  justify-self: center;
-
+  width: 100%;
+  align-items: start;
   font-size: 18px;
 `;
 

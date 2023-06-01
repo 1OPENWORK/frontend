@@ -9,19 +9,19 @@ import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
 import {
   changeEtapaAll,
-  selectRegister,
-} from "../../../../../store/reducers/RegisterSlice";
-import { post } from "../../../../../services/Generected";
-import { useNavigate } from "react-router-dom";
-import { AuthPath } from "../../../../../constants/Path";
-import InputMask from "react-input-mask";
+  selectRegister
+} from '../../../../../store/reducers/RegisterSlice'
+import { post } from '../../../../../services/Generected'
+import { useNavigate } from 'react-router-dom'
+import { AuthPath } from '../../../../../constants/Path'
+import InputMask from 'react-input-mask'
 import { AmbienteBackend } from "../../../../../hooks/Ambiente";
 
 const RegisterCompany = () => {
-  const dispatch = useDispatch();
-  const { register } = useSelector(selectRegister);
+  const dispatch = useDispatch()
+  const { register } = useSelector(selectRegister)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const URI = AmbienteBackend();
 
@@ -32,21 +32,21 @@ const RegisterCompany = () => {
   const [verified, setVerified] = useState(false);
 
   const validRegister = object({
-    cnpj: string().required("Preencha o campo CNPJ."),
-    sector: string().required("Preencha o campo setor."),
+    cnpj: string().required('Preencha o campo CNPJ.'),
+    sector: string().required('Preencha o campo setor.'),
     email: string()
-      .email("E-mail inválido")
-      .required("Preencha o campo Email."),
-    name: string().required("Preencha o campo nome empresa."),
-  });
+      .email('E-mail inválido')
+      .required('Preencha o campo Email.'),
+    name: string().required('Preencha o campo nome empresa.')
+  })
 
   async function handleForm() {
     const dados = {
       cnpj: cnpj,
       sector: setor,
       email: email,
-      name: nomeEmpresa,
-    };
+      name: nomeEmpresa
+    }
 
     const dadosSave = {
       user: {
@@ -55,7 +55,7 @@ const RegisterCompany = () => {
         cpfCnpj: register.etapa1.cfp_cnpj,
         cellphone: register.etapa1.tel,
         password: register.etapa1.password,
-        autentication: false,
+        autentication: false
       },
       address: {
         zipcode: register.etapa2.cep,
@@ -64,32 +64,32 @@ const RegisterCompany = () => {
         district: register.etapa2.bairro,
         address: register.etapa2.rua,
         number: register.etapa2.numero,
-        complement: register.etapa2.complemento,
+        complement: register.etapa2.complemento
       },
-      company: { ...dados },
-    };
+      company: { ...dados }
+    }
 
     try {
-      await validRegister.validate(dados);
+      await validRegister.validate(dados)
 
-      const response = await post(URI + "/api/cadastros/company", dadosSave);
+      const response = await post(URI + '/api/cadastros/company', dadosSave)
 
       if (response.status === 201) {
-        navigate(AuthPath);
+        navigate(AuthPath)
       }
 
-      setVerified(true);
+      setVerified(true)
     } catch (err) {
       toast.error(err.errors[0], {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: false,
-        theme: "light",
-      });
+        theme: 'light'
+      })
     }
   }
 
@@ -97,9 +97,9 @@ const RegisterCompany = () => {
   function nextEtapa() {
     dispatch(
       changeEtapaAll({
-        etapa: 7,
+        etapa: 7
       })
-    );
+    )
   }
 
   return (
@@ -110,7 +110,7 @@ const RegisterCompany = () => {
           label="Nome Empresa"
           value={nomeEmpresa}
           handle={setnomeEmpresa}
-          space={"1.25rem"}
+          space={'1.25rem'}
           disabled={verified}
         />
 
@@ -118,7 +118,7 @@ const RegisterCompany = () => {
           label="Email"
           value={email}
           handle={setEmail}
-          space={"1.25rem"}
+          space={'1.25rem'}
           disabled={verified}
         />
       </Styled.Row>
@@ -128,12 +128,12 @@ const RegisterCompany = () => {
           label="Setor"
           value={setor}
           handle={setSetor}
-          space={"1.25rem"}
+          space={'1.25rem'}
           disabled={verified}
         />
 
         <Styled.Column>
-          <Styled.Text>{"CNPJ"}</Styled.Text>
+          <Styled.Text>{'CNPJ'}</Styled.Text>
           <InputMask
             className="InputMask2"
             mask="99.999.999/9999-99"
@@ -160,7 +160,7 @@ const RegisterCompany = () => {
         </FilledButton>
       </Styled.Divisor>
     </Styled.Form>
-  );
-};
+  )
+}
 
-export default RegisterCompany;
+export default RegisterCompany

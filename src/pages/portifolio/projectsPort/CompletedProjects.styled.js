@@ -1,18 +1,17 @@
 import styled from "styled-components";
-import Colors from "../../../../constants/Colors";
+import Colors from "../../../constants/Colors";
 
-const projectStyles = {
+const StyledCompletedProjects = {
   Container: styled.div`
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    font-family: nunito;
+    margin-left: 430px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
   `,
 
   ContainerContent: styled.div`
-    width: 72.3%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -25,7 +24,7 @@ const projectStyles = {
     width: 50%;
     height: 90px;
     margin-left: 5rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
   `,
 
   ImgUser: styled.div`
@@ -39,11 +38,13 @@ const projectStyles = {
     cursor: pointer;
     border-radius: 100%;
     background-color: ${Colors.BLACK};
+    background-image: url(${props => props.img ? props.img : ""});
+    background-size: cover;
+    background-position: center;
   `,
 
   ContainerHeader: styled.div`
     position: absolute;
-    width: 80%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -69,45 +70,47 @@ const projectStyles = {
   `,
 
   Note: styled.div`
-    width: 11%;
     height: 100%;
     display: flex;
     flex-direction: row;
   `,
 
   Text: styled.div`
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 148.4%;
-    letter-spacing: 0.22em;
     margin-left: 0.5rem;
+    padding-left: 20px;
+    padding-right: 20px;
   `,
 
   Specializations: styled.div`
     width: auto;
     height: 100%;
-    margin-left: 2rem;
-    margin-right: 2rem;
   `,
 
   ContainerData: styled.div`
-    position: relative;
     display: flex;
-    width: auto;
-    height: 344px;
+    flex-direction: column;
+    padding: 30px;
+    width: 90%;
+    height: 444px;
     margin-top: 1rem;
-    margin-left: 5rem;
-    margin-right: 5rem;
+    margin-left: 2rem;
     margin-bottom: 2rem;
     border-radius: 1rem;
     background-color: ${Colors.WHITE};
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.25);
+
+    @media screen and (min-width: 2000px) {
+      width: 60%;
+    }
   `,
 
   Title: styled.div`
     margin-top: 2.5rem;
-    margin-left: 5rem;
+    margin-left: 2rem;
     font-style: normal;
     font-weight: 900;
     font-size: 1.5rem;
@@ -115,17 +118,16 @@ const projectStyles = {
   `,
 
   Content: styled.div`
-    position: absolut;
     width: 100%;
     height: 264px;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-between;
     margin-top: 1rem;
   `,
 
   ContainerText: styled.div`
-    width: 299px;
+    width: 100%;
     max-height: auto;
     overflow: hidden;
   `,
@@ -134,8 +136,11 @@ const projectStyles = {
     width: 500px;
     max-height: auto;
     overflow: hidden;
+    border-radius: 10px;
     background-color: ${(props) => (props.isImg ? "" : props.background)};
     background-image: url(${(props) => (props.isImg ? props.background : "")});
+    background-position: center;
+    background-size: cover;
   `,
 
   ContainerButtons: styled.div`
@@ -164,6 +169,13 @@ const projectStyles = {
     padding-inline: 20px;
     text-align: justify;
   `,
+
+  ContainerCalendary: styled.div`
+    margin-top: 10px;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+  `,
 };
 
-export default projectStyles;
+export default StyledCompletedProjects;

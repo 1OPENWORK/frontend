@@ -25,12 +25,60 @@ export const Chat = ({ socket }) => {
   const [dadosConversa, setDadosConversa] = useState({});
   const [imagemPerfil] = useState(dadosPerfil.perfil.image);
 
+  const dispatch = useDispatch();
 
   const [nome] = useState(dadosPerfil.perfil.name);
   const [tag] = useState(websocket.tag);
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
   
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      socket.emit("myInformation", { id: dadosPerfil.perfil.id }, (callback) => {
+        const idUser = callback.id;
+
+        dispatch(
+          changeIdUser({
+            id: idUser,
+            tag: callback.tag,
+          })
+        );
+
+        socket.emit(
+          "allFriends",
+          { idUser },
+          (friends, listConversationsRecentes, messagePedentes) => {
+            let messagesPendentes = [];
+
+            for (const item of messagePedentes) {
+              messagesPendentes.push(item);
+            }
+
+            dispatch(
+              changeMessagesPendentes({
+                messages: messagesPendentes,
+              })
+            );
+
+            dispatch(
+              changeFriends({
+                friends,
+              })
+            );
+
+            dispatch(
+              changeConversationRecentes({
+                conversations: listConversationsRecentes,
+              })
+            );
+          }
+        );
+
+        socket.emit("updateSocketId", { idUser }, (user) => {});
+      });
+    });
+  }, []);
 
  
   return (

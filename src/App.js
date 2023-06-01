@@ -68,6 +68,7 @@ function App() {
   const dispatch = useDispatch();
 
   const id = getId();
+  console.log("🚀 ~ file: App.js:71 ~ App ~ id:", id)
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -79,52 +80,7 @@ function App() {
     });
   });
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      socket.emit("myInformation", { id }, (callback) => {
-        const idUser = callback.id;
-
-        dispatch(
-          changeIdUser({
-            id: idUser,
-            tag: callback.tag,
-          })
-        );
-
-        socket.emit(
-          "allFriends",
-          { idUser },
-          (friends, listConversationsRecentes, messagePedentes) => {
-            let messagesPendentes = [];
-
-            for (const item of messagePedentes) {
-              messagesPendentes.push(item);
-            }
-
-            dispatch(
-              changeMessagesPendentes({
-                messages: messagesPendentes,
-              })
-            );
-
-            dispatch(
-              changeFriends({
-                friends,
-              })
-            );
-
-            dispatch(
-              changeConversationRecentes({
-                conversations: listConversationsRecentes,
-              })
-            );
-          }
-        );
-
-        socket.emit("updateSocketId", { idUser }, (user) => {});
-      });
-    });
-  }, [socket]);
+ 
 
   return (
     <Router>

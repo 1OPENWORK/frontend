@@ -339,7 +339,7 @@ const SideBar = ({
                   : navigate(HomeCompanyPath);
               }}
               src={Logo}
-              style={{cursor: "pointer"}}
+              style={{ cursor: "pointer" }}
             />
             <OpcaoMenuLateral
               style={{
@@ -358,8 +358,10 @@ const SideBar = ({
                 }}
                 src={myInformation.img}
               />
-              <DivOpcaoLateral>
-                <TitleOpcaoMenuLateral>
+              <DivOpcaoLateral style={{ width: "200px" }}>
+                <TitleOpcaoMenuLateral
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
                   {myInformation.nome}
                 </TitleOpcaoMenuLateral>
               </DivOpcaoLateral>

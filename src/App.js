@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   AuthPath,
@@ -44,7 +44,13 @@ import Projects from "./pages/projects/Projects";
 import Index from "./pages/videoConference/Index";
 
 import { useDispatch } from "react-redux";
-import { changeOn } from "./store/reducers/WebSocketSlice";
+import {
+  changeConversationRecentes,
+  changeFriends,
+  changeIdUser,
+  changeMessagesPendentes,
+  changeOn,
+} from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";
@@ -54,11 +60,15 @@ import AsignedContract from "./pages/contract/contratoAssinado/AsignedContract";
 import { Ambiente } from "./hooks/Ambiente";
 import HomeCompany from "./pages/homeDev/HomeCompany";
 import PropostaTableDev from "./pages/devs/PropostasTableDev";
+import { getId } from "./hooks/Cookies";
 
 const socket = socketIO.connect(Ambiente());
 
 function App() {
   const dispatch = useDispatch();
+
+  const id = getId();
+
   useEffect(() => {
     socket.on("connect", () => {
       dispatch(
@@ -68,6 +78,53 @@ function App() {
       );
     });
   });
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      socket.emit("myInformation", { id }, (callback) => {
+        const idUser = callback.id;
+
+        dispatch(
+          changeIdUser({
+            id: idUser,
+            tag: callback.tag,
+          })
+        );
+
+        socket.emit(
+          "allFriends",
+          { idUser },
+          (friends, listConversationsRecentes, messagePedentes) => {
+            let messagesPendentes = [];
+
+            for (const item of messagePedentes) {
+              messagesPendentes.push(item);
+            }
+
+            dispatch(
+              changeMessagesPendentes({
+                messages: messagesPendentes,
+              })
+            );
+
+            dispatch(
+              changeFriends({
+                friends,
+              })
+            );
+
+            dispatch(
+              changeConversationRecentes({
+                conversations: listConversationsRecentes,
+              })
+            );
+          }
+        );
+
+        socket.emit("updateSocketId", { idUser }, (user) => {});
+      });
+    });
+  }, [socket]);
 
   return (
     <Router>

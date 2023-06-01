@@ -27,6 +27,9 @@ import ToastNewMessage from "../messages/components/toastNewMessage/ToastNewMess
 import { ToastNewMessageContainer } from "../messages/components/toastNewMessage/ToastNewMessage.styled";
 import { useSpring, animated } from "react-spring";
 import { MdOutlineEditNote } from "react-icons/md";
+import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
+import { HomeDevPath } from "../../../../constants/Path";
+import { HomeCompanyPath } from "../../../../constants/Path";
 
 const SideBar = ({
   socket,
@@ -38,6 +41,7 @@ const SideBar = ({
   setVisualized,
   myInformation,
 }) => {
+  const { dadosPerfil } = useSelector(selectedPerfil);
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
@@ -326,7 +330,15 @@ const SideBar = ({
       ) : (
         <>
           <MenuLateral>
-            <Styled.Img src={Logo} />
+            <Styled.Img
+              onClick={() => {
+                // dadosPerfil.perfil.tipo !== "EMPRESA"
+                //   ? HomeDevPath
+                //   : HomeCompanyPath;
+                ""
+              }}
+              src={Logo}
+            />
             <OpcaoMenuLateral
               style={{
                 flexDirection: "column",
@@ -505,11 +517,15 @@ const SideBar = ({
                 ></ion-icon>
               </Styled.Header>
               <Styled.DivRow>
-                <span style={{
-                fontSize: 40, 
-                color: Colors.PRIMARY_COLOR
-              }}>#</span>
-              <Styled.Search placeholder="AAA00" maxLength={5}/>
+                <span
+                  style={{
+                    fontSize: 40,
+                    color: Colors.PRIMARY_COLOR,
+                  }}
+                >
+                  #
+                </span>
+                <Styled.Search placeholder="AAA00" maxLength={5} />
               </Styled.DivRow>
               <Styled.ListPersons></Styled.ListPersons>
             </Styled.DivColumn>

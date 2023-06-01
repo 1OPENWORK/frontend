@@ -25,7 +25,10 @@ import {
   AuthPath,
   RegisterPath,
   ChatPath,
+  HomeCompanyPath,
 } from "../../constants/Path";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -47,6 +50,7 @@ const NavBar = ({ nav }) => {
   // --------------------------------------------------------
   const navigate = useNavigate();
   const isDev = getIsDev();
+  const { dadosPerfil } = useSelector(selectedPerfil);
 
   const deslogar = () => {
     deleteToken();
@@ -63,7 +67,7 @@ const NavBar = ({ nav }) => {
       {nav === 1 ? (
         <>
           <Styled.Divisor>
-            <Styled.LogoImg src={Logo} onClick={() => navigate(HomeDevPath)} />
+            <Styled.LogoImg src={Logo} onClick={() => navigate(dadosPerfil.perfil.tipo !== "EMPRESA" ? HomeDevPath : HomeCompanyPath)} />
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
@@ -104,11 +108,6 @@ const NavBar = ({ nav }) => {
           </Styled.Divisor>
 
           <Styled.NavigateNavBar>
-            <Styled.TitleNavBar size={24}>
-              {"Como contratamos"}
-            </Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Depoimentos"}</Styled.TitleNavBar>
-            <Styled.TitleNavBar size={24}>{"Empresas"}</Styled.TitleNavBar>
             <FilledButton
               onClick={() => navigate(AuthPath)}
               color={Colors.BLACK}

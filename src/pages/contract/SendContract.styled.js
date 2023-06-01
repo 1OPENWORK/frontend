@@ -5,22 +5,30 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   overflow: hidden;
   font-family: nunito;
 `;
 
 export const ContainerComponents = styled.div`
-  width: 61.2%;
-  height: 100%;
-  margin-left: 33rem;
-  margin-right: 5rem;
-  margin-top: 2.5rem;
+  width: 50%;
+  margin: 40px;
+
+  @media screen and (max-width: 1900px) {
+    width: 80%;
+  }
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
 `;
 
 export const Header = styled.div`
-  width: 100%;
   height: 11.6%;
   display: flex;
   flex-direction: row;
@@ -29,6 +37,7 @@ export const Header = styled.div`
 export const Img = styled.img`
   width: 80px;
   height: 100%;
+  border-radius: 100%;
 `;
 
 export const NameGrade = styled.div`
@@ -84,6 +93,15 @@ export const ContentText = styled.text`
   letter-spacing: 0.22em;
 `;
 
+export const ContentTextSobre = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 148.4%;
+  letter-spacing: 0.22em;
+  margin-top: 30px;
+`;
+
 export const CardProject = styled.div`
   width: 100%;
   height: 61%;
@@ -115,10 +133,9 @@ export const Aside = styled.div`
 `;
 
 export const Article = styled.div`
+  display: flex;
   width: 25%;
-  margin-top: 2rem;
-  margin-bottom: 2.5rem;
-  margin-right: 2.5rem;
+  margin: 2.5rem;
 `;
 
 export const NameProject = styled.text`
@@ -188,9 +205,10 @@ export const ContainerProposal = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   border-radius: 0.5rem;
-  margin-right: 2.5rem;
   background-color: ${Colors.PRIMARY_COLOR};
 `;
 

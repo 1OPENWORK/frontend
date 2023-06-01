@@ -73,9 +73,9 @@ const uploadImg = async (id, img, token) => {
   return response;
 };
 
-const buscarMyProjects = async (id, token) => {
+const buscarMyProjects = async (id, url, token) => {
   const response = await axios.get(
-    `${URI}/projetos-aceitos/completos/desenvolvedor/${id}`,
+    `${URI}${url}${id}`,
     {
       Authorization: `Bearer ${token}`,
     }

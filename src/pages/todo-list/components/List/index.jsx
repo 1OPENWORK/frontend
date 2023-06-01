@@ -4,20 +4,22 @@ import Card from "../Card/index.jsx";
 import { Container } from "./styles";
 import { Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import { getToken } from "../../../../hooks/Cookies";
+import { getToken } from "../../../../hooks/Cookies.js";
+import { AmbienteBackend } from "../../../../hooks/Ambiente.js";
 
 export default function List({ data }) {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState(data.cardList);
+
   const token = getToken();
 
-  useEffect(() => {
-    setCards(data.cardList);
-  }, [setCards, cards]);
+  // useEffect(() => {
+  //   setCards(data.cardList);
+  // }, [data.cardList]);
 
   // const fetchCards = async () => {
   //   try {
   //     const response = await axios.get(
-  //       `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/cards/list-cards?idType=${data.idType}`,
+  //       `${AmbienteBackend()}/api/cards/list-cards?idType=${data.idType}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -47,7 +49,7 @@ export default function List({ data }) {
     const typeIdCreated = data.idType;
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_LOCAL_HOST}/api/listas/${typeIdCreated}/add-card`,
+        `${AmbienteBackend()}/api/listas/${typeIdCreated}/add-card`,
         newCard,
         {
           headers: {
@@ -56,9 +58,9 @@ export default function List({ data }) {
         }
       )
       .then((response) => {
+        
         if (response.status === 201) {
-          const updatedCards = [...cards, response.data.cardList];
-          setCards(updatedCards);
+          setCards([...cards, response.data]);
         } else {
           console.error("Invalid response:", response);
         }
@@ -68,8 +70,22 @@ export default function List({ data }) {
       });
   }
 
+  function handleDeleteCard(id) {
+    axios
+      .delete(`${AmbienteBackend()}/api/cards/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      .then((res) => {
+        setCards(data.filter((card) => card.id !== id));
+      })
+      .catch((err) => {
+        console.log("Deu erro: " + err);
+      });
+  }
   return (
-    <Container done={!data.creatable && (true)} creatable={data.creatable}>
+    <Container done={!data.creatable && true} creatable={data.creatable}>
       <header>
         <h2>{data.title}</h2>
         {data.creatable && (
@@ -80,7 +96,7 @@ export default function List({ data }) {
       </header>
 
       <ul>
-        {data.cardList.map((card, index) => (
+        {cards.map((card, index) => (
           <Draggable key={card.id} draggableId={String(card.id)} index={index}>
             {(provided, snapshot) => (
               <div
@@ -88,7 +104,12 @@ export default function List({ data }) {
                 {...provided.dragHandleProps}
                 {...provided.draggableProps}
               >
-                <Card key={card.id} isDragging={snapshot.isDragging} data={card} />
+                <Card
+                  key={card.id}
+                  isDragging={snapshot.isDragging}
+                  data={card}
+                  onDelete={() => handleDeleteCard(card.id)}
+                />
               </div>
             )}
           </Draggable>

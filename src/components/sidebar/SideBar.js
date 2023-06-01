@@ -136,40 +136,47 @@ const SideBar = ({ tabActive }) => {
               Perfil
             </Styled.TextSideBarOption>
           </Styled.SideBarOption>
+          {dadosPerfil.perfil.tipo === "DESENVOLVEDOR" && (
+            <>
+              <Styled.SideBarOption
+                isSelected={tabSelection === 2}
+                onClick={() => {
+                  handleClick(2);
+                }}
+              >
+                <Styled.IconSideBarOption>
+                  <AiOutlineProfile
+                    size={35}
+                    color={
+                      tabSelection === 2 ? Colors.PRIMARY_COLOR : Colors.WHITE
+                    }
+                  />
+                </Styled.IconSideBarOption>
+                <Styled.TextSideBarOption isSelected={tabSelection === 2}>
+                  Sobre
+                </Styled.TextSideBarOption>
+              </Styled.SideBarOption>
 
-          <Styled.SideBarOption
-            isSelected={tabSelection === 2}
-            onClick={() => {
-              handleClick(2);
-            }}
-          >
-            <Styled.IconSideBarOption>
-              <AiOutlineProfile
-                size={35}
-                color={tabSelection === 2 ? Colors.PRIMARY_COLOR : Colors.WHITE}
-              />
-            </Styled.IconSideBarOption>
-            <Styled.TextSideBarOption isSelected={tabSelection === 2}>
-              Sobre
-            </Styled.TextSideBarOption>
-          </Styled.SideBarOption>
-
-          <Styled.SideBarOption
-            isSelected={tabSelection === 3}
-            onClick={() => {
-              handleClick(3);
-            }}
-          >
-            <Styled.IconSideBarOption>
-              <BsStarFill
-                size={30}
-                color={tabSelection === 3 ? Colors.PRIMARY_COLOR : Colors.WHITE}
-              />
-            </Styled.IconSideBarOption>
-            <Styled.TextSideBarOption isSelected={tabSelection === 3}>
-              Experiências
-            </Styled.TextSideBarOption>
-          </Styled.SideBarOption>
+              <Styled.SideBarOption
+                isSelected={tabSelection === 3}
+                onClick={() => {
+                  handleClick(3);
+                }}
+              >
+                <Styled.IconSideBarOption>
+                  <BsStarFill
+                    size={30}
+                    color={
+                      tabSelection === 3 ? Colors.PRIMARY_COLOR : Colors.WHITE
+                    }
+                  />
+                </Styled.IconSideBarOption>
+                <Styled.TextSideBarOption isSelected={tabSelection === 3}>
+                  Experiências
+                </Styled.TextSideBarOption>
+              </Styled.SideBarOption>
+            </>
+          )}
 
           <Styled.SideBarOption
             isSelected={tabSelection === 4}

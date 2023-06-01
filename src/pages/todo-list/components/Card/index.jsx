@@ -8,21 +8,32 @@ import { FiEdit } from "react-icons/fi";
 import { RiAddCircleLine, RiDeleteBin2Fill } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
 
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import Modal from 'react-bootstrap/Modal';
-import { useEffect } from "react";
+import moment from "moment";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import { getToken } from "../../../../hooks/Cookies";
 
-import moment from 'moment'
-
-export default function Card({ data, index }) {
-
+export default function Card({ data, index, onDelete }) {
   const now = moment();
-  const day = now.format('DD');
-  const month = now.format('MM');
-  const year = now.format('YYYY');
+  const day = now.format("DD");
+  const month = now.format("MM");
+  const year = now.format("YYYY");
+
+  const token = getToken();
+
+  const [editedContent, setEditedContent] = useState(data.content);
+  const [editedDescribe, setEditedDescribe] = useState(data.describe);
+  const [editedLabel, setEditedLabel] = useState(data.label);
+  const [editedDate, setEditedDate] = useState(data.date);
+
+  function handleDeleteCard() {
+    onDelete();
+  }
   // const ref = useRef();
   // const { move } = useContext(BoardContext);
 
@@ -77,14 +88,36 @@ export default function Card({ data, index }) {
     setTasks(newTasks);
   };
 
+  const handleSaveChanges = async () => {
+    const updatedData = {
+      ...data,
+      content: editedContent,
+      describe: editedDescribe,
+      label: editedLabel,
+      date: editedDate,
+    };
+
+    await axios
+      .put(`${AmbienteBackend()}/api/cards/${data.id}`, updatedData, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log("Dados atualizados:" + res.data);
+        setLgShow(false);
+      })
+      .catch((err) => {
+        console.error("Erro ao atualizar os dados:" + err);
+      });
+  };
+
   const style = {
     font: "inherit",
     border: "0.15em solid currentColor",
     borderRadius: "0.15em",
-    placeContent: 'center',
-
-
-  }
+    placeContent: "center",
+  };
 
   // const handleDateChange = (date) => {
   //   // Atualize o estado com a nova data selecionada
@@ -104,24 +137,18 @@ export default function Card({ data, index }) {
   //   setData({ ...data, cardList: updatedCard });
   // };
 
-
-
-
-
   // ESCOLHA DA PRIORIDADE
 
   const [checked, setChecked] = useState(false);
-  const [radioValue, setRadioValue] = useState('');
+  const [radioValue, setRadioValue] = useState("");
 
   const radios = [
-    { name: 'Desejável', value: '1' },
-    { name: 'Importante', value: '2' },
-    { name: 'Essencial', value: '3' },
+    { name: "Desejável", value: "1" },
+    { name: "Importante", value: "2" },
+    { name: "Essencial", value: "3" },
   ];
 
   const selectedLabel = radios.find((radio) => radio.value === data.label);
-
-
 
   // const [{ isDragging }, dragRef] = useDrag({
   //   type: "CARD",
@@ -183,12 +210,9 @@ export default function Card({ data, index }) {
 
   return (
     <>
-
       <Container>
         <header>
-
           {selectedLabel && (
-
             <>
               <Label color={selectedLabel.color}>
                 <p>{selectedLabel.title}</p>
@@ -202,26 +226,24 @@ export default function Card({ data, index }) {
           )}
         </header>
 
-
-
-
-
-
-
-        <div style={{
-          minHeight: "88px", maxHeight: "88px", border: "none", marginTop: ".5rem", wordBreak: "break-all", overflowY: "scroll", padding: ".5rem", borderRadius: ".3em",
-          background: "#f6f6f6f6",
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-        }}>
+        <div
+          style={{
+            minHeight: "88px",
+            maxHeight: "88px",
+            border: "none",
+            marginTop: ".5rem",
+            wordBreak: "break-all",
+            overflowY: "scroll",
+            padding: ".5rem",
+            borderRadius: ".3em",
+            background: "#f6f6f6f6",
+            boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+          }}
+        >
           <p>{data.content}</p>
-
         </div>
 
-
-
-        <footer className="footer">
-
-        </footer>
+        <footer className="footer"></footer>
 
         <Modal
           size="lg"
@@ -236,7 +258,6 @@ export default function Card({ data, index }) {
             </Modal.Title>
           </Modal.Header>
           <form action="submit">
-
             <Modal.Body>
               <h3>Título</h3>
               <br />
@@ -250,11 +271,18 @@ export default function Card({ data, index }) {
               <br />
               <br />
 
-              <div className="div-priority-date" style={{ display: "flex", width: "80%", height: "88px", justifyContent: "space-between", alignItems: "center" }}>
+              <div
+                className="div-priority-date"
+                style={{
+                  display: "flex",
+                  width: "80%",
+                  height: "88px",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p>
-                    Prioridade
-                  </p>
+                  <p>Prioridade</p>
 
                   <ButtonGroup>
                     {radios.map((radio, idx) => (
@@ -262,7 +290,13 @@ export default function Card({ data, index }) {
                         key={idx}
                         id={`radio-${idx}`}
                         type="radio"
-                        variant={idx === 0 ? ('outline-primary') : idx === 1 ? ('outline-warning') : ('outline-danger')}
+                        variant={
+                          idx === 0
+                            ? "outline-primary"
+                            : idx === 1
+                            ? "outline-warning"
+                            : "outline-danger"
+                        }
                         name="radio"
                         value={radio.value}
                         checked={radioValue === radio.value}
@@ -273,29 +307,47 @@ export default function Card({ data, index }) {
                     ))}
                   </ButtonGroup>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column" }}> <p>Fim estimado</p> <InputDate type="date" min={`${day}/${month}/${year}`} /></div>
-
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {" "}
+                  <p>Fim estimado</p>{" "}
+                  <InputDate type="date" min={`${day}/${month}/${year}`} />
+                </div>
               </div>
               <br />
               <br />
               <label htmlFor="describe">Descrição</label>
               <br />
               <br />
-              <textarea placeholder="Adicione aqui a descrição de sua tarefa" style={{ width: "100%", height: "104px", backgroundColor: "#f3f2f1", borderRadius: "8px", border: "none", padding: ".6rem", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}>{data.content}</textarea>
+              <textarea
+                placeholder="Adicione aqui a descrição de sua tarefa"
+                style={{
+                  width: "100%",
+                  height: "104px",
+                  backgroundColor: "#f3f2f1",
+                  borderRadius: "8px",
+                  border: "none",
+                  padding: ".6rem",
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                }}
+              >
+                {data.content}
+              </textarea>
 
               <br />
               <br />
-              <label htmlFor="task" style={{ cursor: "pointer", gap: "8px" }}
+              <label
+                htmlFor="task"
+                style={{ cursor: "pointer", gap: "8px" }}
                 onClick={handleAddTask}
               >
                 Lista de tarefas
-                <RiAddCircleLine size={14} style={{ marginLeft: ".5rem", cursor: "pointer" }}
+                <RiAddCircleLine
+                  size={14}
+                  style={{ marginLeft: ".5rem", cursor: "pointer" }}
                 />
-
               </label>
               <br />
               <br />
-
 
               <div>
                 <input
@@ -304,7 +356,9 @@ export default function Card({ data, index }) {
                   onChange={(e) => setNewTask(e.target.value)}
                   placeholder="Digite aqui a descrição da sua nova tarefa"
                   style={{
-                    outline: "none", border: "none", width: "100%"
+                    outline: "none",
+                    border: "none",
+                    width: "100%",
                   }}
                 />
               </div>
@@ -315,18 +369,19 @@ export default function Card({ data, index }) {
                   <div key={index} style={{ marginBottom: ".5rem" }}>
                     {editIndex === index ? (
                       <>
-
                         <label className="form-control">
-
                           <input
                             className="input"
-                            style={{ outline: "none", border: "1px solid red", width: "100%" }}
+                            style={{
+                              outline: "none",
+                              border: "1px solid red",
+                              width: "100%",
+                            }}
                             type="text"
                             value={newTask}
                             onChange={(e) => setNewTask(e.target.value)}
                             onBlur={handleSaveOnBlur}
                           />
-
                         </label>
                       </>
                     ) : (
@@ -343,55 +398,68 @@ export default function Card({ data, index }) {
                       </label>
                     )}
 
-
                     {editIndex === index ? (
                       <>
                         <GiConfirmed
                           size={16}
-                          style={{ position: "absolute", right: "3rem", marginTop: ".1em", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }}
+                          style={{
+                            position: "absolute",
+                            right: "3rem",
+                            marginTop: ".1em",
+                            transform: "translateY(-1.8em)",
+                            cursor: "pointer",
+                            zIndex: 100,
+                            color: "#6e6d6d",
+                          }}
                           onClick={() => handleSaveOnClick()}
                         />
                       </>
-
                     ) : (
-
                       <>
                         <FiEdit
                           size={16}
-                          style={{ position: "absolute", right: "3rem", marginTop: ".1em", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }}
+                          style={{
+                            position: "absolute",
+                            right: "3rem",
+                            marginTop: ".1em",
+                            transform: "translateY(-1.8em)",
+                            cursor: "pointer",
+                            zIndex: 100,
+                            color: "#6e6d6d",
+                          }}
                           onClick={() => handleEdit(index)}
                         />
                       </>
-
                     )}
-
-
 
                     <RiDeleteBin2Fill
                       size={18}
-                      style={{ position: "absolute", right: "1.5rem", transform: "translateY(-1.8em)", cursor: "pointer", zIndex: 100, color: "#6e6d6d" }}
+                      style={{
+                        position: "absolute",
+                        right: "1.5rem",
+                        transform: "translateY(-1.8em)",
+                        cursor: "pointer",
+                        zIndex: 100,
+                        color: "#6e6d6d",
+                      }}
                       onClick={() => handleDelete(index)}
                     />
                   </div>
                 ))}
               </div>
             </Modal.Body>
-            <Modal.Footer >
-              <Button variant="danger" >
+            <Modal.Footer>
+              <Button variant="danger" onClick={handleDeleteCard(data.id)}>
                 Deletar card
               </Button>
 
-              <Button variant="success" >
+              <Button variant="success" onClick={handleSaveChanges}>
                 Salvar Alterações
               </Button>
             </Modal.Footer>
-
           </form>
         </Modal>
       </Container>
-
-
-
     </>
   );
 }

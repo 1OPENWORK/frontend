@@ -24,9 +24,10 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { usePopper } from "react-popper";
 import Colors from "../../../../constants/Colors";
-import { TodoPath } from "../../../../constants/Path"
+import { TodoPath } from "../../../../constants/Path";
 
 function CardProject({
+  idProject,
   developers,
   canceled,
   title,
@@ -49,7 +50,8 @@ function CardProject({
 
   const clickNavigate = () => {
     setClicked(true);
-    navigate(TodoPath);
+    const newPath = TodoPath.replace(":id", idProject);
+    navigate(newPath);
   };
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {

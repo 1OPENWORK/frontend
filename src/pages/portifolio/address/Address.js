@@ -32,7 +32,7 @@ const Address = () => {
   const [complement, setComplement] = useState(dadosAddress.complement);
 
   async function searchZipcode() {
-    if (zipcode.length > 7) {
+    if (zipcode !== undefined && zipcode.length > 7) {
       const dados = await get(`http://viacep.com.br/ws/${zipcode}/json/`);
 
       if (dados !== undefined) {

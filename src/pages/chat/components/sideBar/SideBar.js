@@ -30,6 +30,7 @@ import { MdOutlineEditNote } from "react-icons/md";
 import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
 import { HomeDevPath } from "../../../../constants/Path";
 import { HomeCompanyPath } from "../../../../constants/Path";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = ({
   socket,
@@ -60,6 +61,7 @@ const SideBar = ({
   const [on, setOn] = useState([]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFriends(websocket.friends);
@@ -332,12 +334,12 @@ const SideBar = ({
           <MenuLateral>
             <Styled.Img
               onClick={() => {
-                // dadosPerfil.perfil.tipo !== "EMPRESA"
-                //   ? HomeDevPath
-                //   : HomeCompanyPath;
-                ""
+                dadosPerfil.perfil.tipo !== "EMPRESA"
+                  ? navigate(HomeDevPath)
+                  : navigate(HomeCompanyPath);
               }}
               src={Logo}
+              style={{cursor: "pointer"}}
             />
             <OpcaoMenuLateral
               style={{

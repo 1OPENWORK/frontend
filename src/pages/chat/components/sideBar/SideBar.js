@@ -407,7 +407,7 @@ const SideBar = ({
                 <TitleOpcaoMenuLateral>Adicionar</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
             </OpcaoMenuLateral>
-            <OpcaoMenuLateral onClick={() => setShowModal(true)}>
+            {/* <OpcaoMenuLateral onClick={() => setShowModal(true)}>
               <ion-icon
                 name="people-outline"
                 style={{
@@ -419,8 +419,8 @@ const SideBar = ({
               <DivOpcaoLateral>
                 <TitleOpcaoMenuLateral>Novo grupo</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
-            </OpcaoMenuLateral>
-            <OpcaoMenuLateral>
+            </OpcaoMenuLateral> */}
+            {/* <OpcaoMenuLateral>
               <ion-icon
                 name="list-outline"
                 style={{
@@ -432,7 +432,7 @@ const SideBar = ({
               <DivOpcaoLateral>
                 <TitleOpcaoMenuLateral>Atividades</TitleOpcaoMenuLateral>
               </DivOpcaoLateral>
-            </OpcaoMenuLateral>
+            </OpcaoMenuLateral> */}
             <OpcaoMenuLateral onClick={() => setIndexAbaActive(3)}>
               {indexAbaActive !== 3 ? (
                 <Badge

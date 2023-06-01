@@ -212,7 +212,7 @@ function CardProject({
                         as="button"
                         className="highlight-dropdown-item"
                         eventKey="2"
-                        onClick={finalziarProject}
+                        onClick={() => finalziarProject()}
                       >
                         Finalizar
                       </Dropdown.Item>

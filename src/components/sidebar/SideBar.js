@@ -24,6 +24,7 @@ import { getIsDev } from "../../hooks/Cookies";
 const SideBar = ({ tabActive }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+ 
 
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { auth } = useSelector(selectedAuth);
@@ -137,7 +138,7 @@ const SideBar = ({ tabActive }) => {
               Perfil
             </Styled.TextSideBarOption>
           </Styled.SideBarOption>
-          {dadosPerfil.perfil.tipo === "DESENVOLVEDOR" && (
+          {getIsDev() === "true" && (
             <>
               <Styled.SideBarOption
                 isSelected={tabSelection === 2}

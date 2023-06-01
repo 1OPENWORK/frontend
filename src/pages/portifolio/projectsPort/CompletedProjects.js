@@ -14,10 +14,12 @@ import PortifolioService from "../service/PortifolioService";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import moment from "moment/moment";
+import { getIsDev } from "../../../hooks/Cookies";
 
 const CompletedProjects = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isDev = getIsDev();
 
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { auth } = useSelector(selectedAuth);
@@ -45,7 +47,7 @@ const CompletedProjects = () => {
 
   const fetchMyProjects = async () => {
     const { data } = await PortifolioService.buscarMyProjects(
-      dadosPerfil.perfil.tipo === "DESENVOLVEDOR" ? dadosPerfil.perfil.id : dadosPerfil.perfil.idCompany,
+      isDev === "true" ? dadosPerfil.perfil.id : dadosPerfil.perfil.idCompany,
       auth.token
     );
 

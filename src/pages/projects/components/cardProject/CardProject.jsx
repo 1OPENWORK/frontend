@@ -243,7 +243,6 @@ function CardProject({
                 <h3>{moment(finishDate).format("DD/MM/YYYY")}</h3>
               </DivData>
             </div>
-            <div className="div-row-re">
               <BtnReset
                 className={clicked ? "btn-reset clicked" : "btn-reset"}
                 onClick={() => clickNavigate()}
@@ -251,10 +250,7 @@ function CardProject({
                 <h2>Abrir</h2>
               </BtnReset>
 
-              <AlertData>
-                <h2>Faltam 8 meses</h2>
-              </AlertData>
-            </div>
+             
           </DivFooterCard>
         </DivRight>
       </DivCard>

@@ -22,8 +22,8 @@ const CardNotification = ({ dados, socket }) => {
   }, []);
 
   return (
-    <Styled.Container>
-      {dados.type === "GROUP" && (
+    <Styled.Container >
+      {dados.type === "SERVER" && (
         <CardGroup dados={dados} img={img} socket={socket} />
       )}
     </Styled.Container>

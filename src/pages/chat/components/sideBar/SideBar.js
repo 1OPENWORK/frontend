@@ -31,6 +31,8 @@ import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
 import { HomeDevPath } from "../../../../constants/Path";
 import { HomeCompanyPath } from "../../../../constants/Path";
 import { useNavigate } from "react-router-dom";
+import CardNewConexao from "./components/cardNotification/components/cardPerson/CardConexao";
+import { toast } from "react-toastify";
 
 const SideBar = ({
   socket,
@@ -45,6 +47,7 @@ const SideBar = ({
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
+  const [search, setSearch] = useState("");
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
   const [indexAbaActive, setIndexAbaActive] = useState(3);
@@ -58,6 +61,7 @@ const SideBar = ({
   const [show, setShowModal] = useState(false);
   const [showModalNewConversa, setShowModalNewConversa] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [allPersons, setAllPersons] = useState([]);
   const [on, setOn] = useState([]);
 
   const dispatch = useDispatch();
@@ -241,6 +245,7 @@ const SideBar = ({
       "listAllNotifications",
       { idUser: websocket.idUser },
       (callback) => {
+
         dispatch(
           changeAllNotifications({
             notifications: callback,
@@ -309,6 +314,35 @@ const SideBar = ({
       return () => clearTimeout(timeout);
     }
   }, [toastNewMessage]);
+
+  useEffect(() => {
+    socket.emit("fetchAllListPersons", {}, (callback) => {
+      console.log(
+        "🚀 ~ file: SideBar.js:318 ~ socket.emit ~ callback:",
+        callback
+      );
+      setAllPersons(callback);
+    });
+  }, []);
+
+  const handleNewConviteConexao = (dados) => {
+    socket.emit(
+      "conviteConexao",
+      { idUser: websocket.idUser, dados },
+      (callback) => {
+        toast.success("Convite enviado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
+    );
+  };
 
   return (
     <Styled.Container>
@@ -507,7 +541,11 @@ const SideBar = ({
               <Styled.ListPersons>
                 {/* Colocar os cards de noticações */}
                 {notifications.map((d, index) => (
-                  <CardNotification dados={d} socket={socket} key={index} />
+                  <CardNotification
+                    dados={d}
+                    socket={socket}
+                    key={index}
+                  />
                 ))}
               </Styled.ListPersons>
             </Styled.DivColumn>
@@ -529,9 +567,32 @@ const SideBar = ({
                 >
                   #
                 </span>
-                <Styled.Search placeholder="AAA00" maxLength={5} />
+                <Styled.Search
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="AAA00"
+                  maxLength={5}
+                />
               </Styled.DivRow>
-              <Styled.ListPersons></Styled.ListPersons>
+              <Styled.ListPersons>
+                {allPersons
+                  .filter((p) => {
+                    return (
+                      p.id !== websocket.idUser &&
+                      !websocket.friends.some((f) => f.id === p.id)
+                    );
+                  })
+                  .filter((p) => {
+                    if (search.length > 2) {
+                      return p.tag.startsWith(search);
+                    } else {
+                      return true; // Mostrar todos os resultados quando o comprimento de search não for maior que 2
+                    }
+                  })
+                  .map((dados) => (
+                    <CardNewConexao handleClick={() => handleNewConviteConexao(dados)} dados={dados} key={dados.id} />
+                  ))}
+              </Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 3 ? (
             <Styled.DivColumn>

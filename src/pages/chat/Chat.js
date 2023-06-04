@@ -31,56 +31,58 @@ export const Chat = ({ socket }) => {
   const [tag] = useState(websocket.tag);
 
   const [atualizarUltimaMessage, setAtualizarUltimaMessage] = useState(0);
-  
 
   useEffect(() => {
     socket.on("connect", () => {
-      socket.emit("myInformation", { id: dadosPerfil.perfil.id }, (callback) => {
-        const idUser = callback.id;
+      socket.emit(
+        "myInformation",
+        { id: dadosPerfil.perfil.id },
+        (callback) => {
+          const idUser = callback.id;
 
-        dispatch(
-          changeIdUser({
-            id: idUser,
-            tag: callback.tag,
-          })
-        );
+          dispatch(
+            changeIdUser({
+              id: idUser,
+              tag: callback.tag,
+            })
+          );
 
-        socket.emit(
-          "allFriends",
-          { idUser },
-          (friends, listConversationsRecentes, messagePedentes) => {
-            let messagesPendentes = [];
+          socket.emit(
+            "allFriends",
+            { idUser },
+            (friends, listConversationsRecentes, messagePedentes) => {
+              let messagesPendentes = [];
 
-            for (const item of messagePedentes) {
-              messagesPendentes.push(item);
+              for (const item of messagePedentes) {
+                messagesPendentes.push(item);
+              }
+
+              dispatch(
+                changeMessagesPendentes({
+                  messages: messagesPendentes,
+                })
+              );
+
+              dispatch(
+                changeFriends({
+                  friends,
+                })
+              );
+
+              dispatch(
+                changeConversationRecentes({
+                  conversations: listConversationsRecentes,
+                })
+              );
             }
+          );
 
-            dispatch(
-              changeMessagesPendentes({
-                messages: messagesPendentes,
-              })
-            );
-
-            dispatch(
-              changeFriends({
-                friends,
-              })
-            );
-
-            dispatch(
-              changeConversationRecentes({
-                conversations: listConversationsRecentes,
-              })
-            );
-          }
-        );
-
-        socket.emit("updateSocketId", { idUser }, (user) => {});
-      });
+          socket.emit("updateSocketId", { idUser }, (user) => {});
+        }
+      );
     });
   }, []);
 
- 
   return (
     <Styled.Container>
       <Styled.Div width={"30%"}>

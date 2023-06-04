@@ -5,6 +5,7 @@ import {
   changeAllNotifications,
   changeConversationActive,
   changeConversationRecentes,
+  changeFriends,
   changeMessages,
   changeMessagesPendentes,
   changeNewMessage,
@@ -31,6 +32,8 @@ import { selectedPerfil } from "../../../../store/reducers/PerfilSlice";
 import { HomeDevPath } from "../../../../constants/Path";
 import { HomeCompanyPath } from "../../../../constants/Path";
 import { useNavigate } from "react-router-dom";
+import CardNewConexao from "./components/cardNotification/components/cardPerson/CardConexao";
+import { toast } from "react-toastify";
 
 const SideBar = ({
   socket,
@@ -45,19 +48,21 @@ const SideBar = ({
   const { dadosPerfil } = useSelector(selectedPerfil);
   const { websocket } = useSelector(selectedWebSocket);
   const [friends, setFriends] = useState([]);
+  const [search, setSearch] = useState("");
   const [conversationsRecentes, setConversationsRecentes] = useState([]);
   const [indexActive, setIndexActive] = useState(-1);
   const [indexAbaActive, setIndexAbaActive] = useState(3);
   const [totalMessagePendentes, setTotalMessagePendentes] = useState(0);
   const [totalNotificationPendentes, setTotalNotificationPendentes] =
     useState(0);
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState(websocket.notifications);
   const [toastNewMessage, setToastNewMessage] = useState({});
   const [showToastNewMessage, setShowToastNewMessage] = useState(false);
   const [dados, setDados] = useState({});
   const [show, setShowModal] = useState(false);
   const [showModalNewConversa, setShowModalNewConversa] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [allPersons, setAllPersons] = useState([]);
   const [on, setOn] = useState([]);
 
   const dispatch = useDispatch();
@@ -310,6 +315,50 @@ const SideBar = ({
     }
   }, [toastNewMessage]);
 
+  const fetchAllListPersons = () => {
+    socket.emit("fetchAllListPersons", {}, (callback) => {
+      setAllPersons(callback);
+    });
+  };
+
+  const listAllFriends = () => {
+    socket.emit(
+      "allFriends",
+      { idUser: websocket.idUser },
+      (friends, listConversationsRecentes, messagePedentes) => {
+        dispatch(
+          changeFriends({
+            friends,
+          })
+        );
+      }
+    );
+  };
+
+  useEffect(() => {
+    fetchAllListPersons();
+    listAllFriends();
+  }, [indexAbaActive]);
+
+  const handleNewConviteConexao = (dados) => {
+    socket.emit(
+      "conviteConexao",
+      { idUser: websocket.idUser, dados },
+      (callback) => {
+        toast.success("Convite enviado com sucesso!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
+    );
+  };
+
   return (
     <Styled.Container>
       <ModalGroup socket={socket} show={show} handleClick={setShowModal} />
@@ -409,6 +458,7 @@ const SideBar = ({
             <OpcaoMenuLateral
               onClick={() => {
                 setIndexAbaActive(2);
+                fetchAllListPersons();
               }}
             >
               <ion-icon
@@ -506,9 +556,11 @@ const SideBar = ({
               </Styled.Header>
               <Styled.ListPersons>
                 {/* Colocar os cards de noticações */}
-                {notifications.map((d, index) => (
-                  <CardNotification dados={d} socket={socket} key={index} />
-                ))}
+                {notifications
+                  .filter((n) => !n.isAcepty)
+                  .map((d, index) => (
+                    <CardNotification dados={d} socket={socket} key={index} />
+                  ))}
               </Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 2 ? (
@@ -529,9 +581,36 @@ const SideBar = ({
                 >
                   #
                 </span>
-                <Styled.Search placeholder="AAA00" maxLength={5} />
+                <Styled.Search
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="AAA00"
+                  maxLength={5}
+                />
               </Styled.DivRow>
-              <Styled.ListPersons></Styled.ListPersons>
+              <Styled.ListPersons>
+                {allPersons
+                  .filter((p) => {
+                    return (
+                      p.id !== websocket.idUser &&
+                      !websocket.friends.some((f) => f.id === p.id)
+                    );
+                  })
+                  .filter((p) => {
+                    if (search.length > 2) {
+                      return p.tag.startsWith(search);
+                    } else {
+                      return true; // Mostrar todos os resultados quando o comprimento de search não for maior que 2
+                    }
+                  })
+                  .map((dados) => (
+                    <CardNewConexao
+                      handleClick={() => handleNewConviteConexao(dados)}
+                      dados={dados}
+                      key={dados.id}
+                    />
+                  ))}
+              </Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 3 ? (
             <Styled.DivColumn>
@@ -563,4 +642,5 @@ const SideBar = ({
     </Styled.Container>
   );
 };
+
 export default SideBar;

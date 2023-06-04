@@ -68,7 +68,6 @@ function App() {
   const dispatch = useDispatch();
 
   const id = getId();
-  console.log("🚀 ~ file: App.js:71 ~ App ~ id:", id)
 
   useEffect(() => {
     socket.on("connect", () => {

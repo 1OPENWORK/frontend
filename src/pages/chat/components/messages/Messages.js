@@ -33,11 +33,18 @@ const Messages = ({
   }, [websocket, websocket.messages]);
 
   const fetchS3 = async () => {
-    const response = await axios.get(
-      AmbienteBackend() + "/api/usuarios/imagem/" + 1
-    );
-
-    setImgPerfil(response.data.image);
+    axios
+      .get(
+        AmbienteBackend() +
+          "/api/usuarios/imagem/" +
+          websocket.conversationActive.idRelacionado
+      )
+      .then((response) => {
+        setImgPerfil(response.data.image);
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: Messages.js:42 ~ ).then ~ error:", error);
+      });
   };
 
   useEffect(() => {

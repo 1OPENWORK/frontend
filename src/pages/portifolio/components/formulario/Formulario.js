@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthPath } from "../../../../constants/Path";
 import axios from "axios";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import { getId } from "../../../../hooks/Cookies";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -67,9 +68,8 @@ const Formulario = () => {
 
   const fetchInformation = async () => {
     const response = await axios.get(
-      AmbienteBackend() + "/api/usuarios/perfil/" + dadosPerfil.perfil.id
+      AmbienteBackend() + "/api/usuarios/perfil/" + getId()
     );
-    console.log("🚀 ~ file: Formulario.js:72 ~ fetchInformation ~ response:", response)
 
     if (response.status === 200) {
       dispatch(
@@ -133,16 +133,16 @@ const Formulario = () => {
           theme: "light",
         });
       } else {
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+        // toast.error(err.response.data.message, {
+        //   position: "top-right",
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: false,
+        //   theme: "light",
+        // });
       }
     }
     setPassword("");
@@ -151,7 +151,7 @@ const Formulario = () => {
   const handleExcluirConta = async () => {
     try {
       const response = await PortifolioService.deleteContaUser(
-        dadosPerfil.perfil.id,
+        getId(),
         auth.token
       );
 

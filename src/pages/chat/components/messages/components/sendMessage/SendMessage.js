@@ -31,7 +31,7 @@ const SendMessage = ({
   };
 
   const handMessage = () => {
-    if (message.length > 0) {
+    if (message.trim().length > 0) {
       socket.emit(
         "sendMessage",
         { idSender: idSender, idReceiver: idReceiver, message },
@@ -43,7 +43,7 @@ const SendMessage = ({
       );
     } else {
       toast.error("Mensagem vazia.", {
-        position: "bottom-left",
+        position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

@@ -1,24 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Styled from "./CardGroup.styled";
+import { useDispatch } from "react-redux";
+import {
+  changeAllNotifications,
+  changeConversationRecentes,
+  changeFriends,
+  changeMessagesPendentes,
+  selectedWebSocket,
+} from "../../../../../../../../store/reducers/WebSocketSlice";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { AmbienteBackend } from "../../../../../../../../hooks/Ambiente";
+import { useSelector } from "react-redux";
 
-const CardGroup = ({ dados, img, socket }) => {
-  console.log("🚀 ~ file: CardGroup.js:6 ~ CardGroup ~ dados:", dados.id)
+const CardGroup = ({ dados, socket }) => {
+  const dispatch = useDispatch();
+  const { websocket } = useSelector(selectedWebSocket);
+  const [imgUser, setImgUser] = useState("");
+
+  const fetchImage = async () => {
+    axios
+      .get(AmbienteBackend() + "/api/usuarios/imagem/" + dados.idRelacionado)
+      .then((response) => {
+        setImgUser(response.data.image);
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: Messages.js:42 ~ ).then ~ error:", error);
+      });
+  };
+
   const handleClick = (value) => {
     const isAccpty = value ? true : false;
 
-    socket.emit("eventGroup", { id: dados.id, isAccpty }, (callback) => {
-      console.log(
-        "🚀 ~ file: CardGroup.js:11 ~ socket.emit ~ callback:",
-        callback
-      );
-    });
+    socket.emit(
+      "eventConexao",
+      {
+        idNotification: dados.id,
+        idReceiver: dados.idReceiver,
+        idSender: dados.idSender,
+        isAccpty,
+      },
+      (callback) => {}
+    );
+
+    if (isAccpty) {
+      toast.success("Você aceitou o pedido de conexão.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+    }
+
+    const listaNotification = websocket.notifications.filter(
+      (n) => !n.id === dados.id
+    );
+
+    dispatch(
+      changeAllNotifications({
+        notifications: listaNotification,
+      })
+    );
   };
+
+
+  
+
+  useEffect(() => {
+    fetchImage();
+  }, [dados]);
 
   return (
     <Styled.Container>
-      <Styled.Imagem img={img} />
+      {/* <Styled.Imagem img={img} /> */}
       <Styled.Divisor paddingLeft={"16px"} paddingTop={"16px"}>
-        <Styled.ImgUser src={dados.imgSender} />
+        <Styled.ImgUser src={imgUser} />
         <Styled.Title>{dados.nomeSender}, te convidou.</Styled.Title>
       </Styled.Divisor>
       <Styled.Divisor width={"60%"} justifyContent={"center"}>

@@ -14,7 +14,7 @@ import PortifolioService from "../service/PortifolioService";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import moment from "moment/moment";
-import { getIsDev } from "../../../hooks/Cookies";
+import { getCompanyId, getId, getIsDev } from "../../../hooks/Cookies";
 
 const CompletedProjects = () => {
   const navigate = useNavigate();
@@ -46,8 +46,12 @@ const CompletedProjects = () => {
   }
 
   const fetchMyProjects = async () => {
+
+    const url = (isDev !== "true" ? "/projetos-aceitos/completos/empresa/" : "/projetos-aceitos/completos/desenvolvedor/");
+
     const { data } = await PortifolioService.buscarMyProjects(
-      isDev === "true" ? dadosPerfil.perfil.id : dadosPerfil.perfil.idCompany,
+      isDev === "true" ? getId() : getCompanyId(),
+      url,
       auth.token
     );
 

@@ -6,6 +6,8 @@ import { selectedWebSocket } from "../../../../store/reducers/WebSocketSlice";
 
 import Styled from "./CardPerson.styled";
 import { getS3 } from "../../../../store/actions/MicroService";
+import axios from "axios";
+import { AmbienteBackend } from "../../../../hooks/Ambiente";
 
 const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
   const { websocket } = useSelector(selectedWebSocket);
@@ -38,6 +40,7 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
     if (myID === dados.idEnviou) {
       handleClick({
         id: dados.idRecebeu,
+        idRelacionado: dados.myIdRelacionado,
         img: dados.imagemRecebeu,
         nome: dados.nomeRecebeu,
         message: dados.message,
@@ -48,6 +51,7 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
     } else {
       handleClick({
         id: dados.idEnviou,
+        idRelacionado: dados.idDoFriend,
         img: dados.imagemEnviou,
         nome: dados.nomeEnviou,
         message: dados.message,
@@ -58,20 +62,30 @@ const CardPerson = ({ dados, handleClick, atualizarUltimaMessage }) => {
     }
   }
 
-  const fetchS3 = async (img) => {
-    const imagemPerfil = await getS3(img);
-    setImg(imagemPerfil);
+  const fetchS3 = async (id) => {
+    axios
+    .get(
+      AmbienteBackend() +
+        "/api/usuarios/imagem/" +
+        id
+    )
+    .then((response) => {
+      setImg(response.data.image);
+    })
+    .catch((error) => {
+      console.log("🚀 ~ file: Messages.js:42 ~ ).then ~ error:", error);
+    });
   };
 
   useEffect(() => {
     const myID = websocket.idUser;
     if (myID === dados.idEnviou) {
       setName(dados.nomeRecebeu);
-      fetchS3(dados.imagemRecebeu);
+      fetchS3(dados.myIdRelacionado);
       setUltimaMessage(true);
     } else {
       setName(dados.nomeEnviou);
-      fetchS3(dados.imagemEnviou);
+      fetchS3(dados.idDoFriend);
       setUltimaMessage(false);
     }
 

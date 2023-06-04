@@ -5,6 +5,7 @@ import {
   changeAllNotifications,
   changeConversationActive,
   changeConversationRecentes,
+  changeFriends,
   changeMessages,
   changeMessagesPendentes,
   changeNewMessage,
@@ -54,7 +55,7 @@ const SideBar = ({
   const [totalMessagePendentes, setTotalMessagePendentes] = useState(0);
   const [totalNotificationPendentes, setTotalNotificationPendentes] =
     useState(0);
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState(websocket.notifications);
   const [toastNewMessage, setToastNewMessage] = useState({});
   const [showToastNewMessage, setShowToastNewMessage] = useState(false);
   const [dados, setDados] = useState({});
@@ -245,7 +246,6 @@ const SideBar = ({
       "listAllNotifications",
       { idUser: websocket.idUser },
       (callback) => {
-
         dispatch(
           changeAllNotifications({
             notifications: callback,
@@ -315,15 +315,30 @@ const SideBar = ({
     }
   }, [toastNewMessage]);
 
-  useEffect(() => {
+  const fetchAllListPersons = () => {
     socket.emit("fetchAllListPersons", {}, (callback) => {
-      console.log(
-        "🚀 ~ file: SideBar.js:318 ~ socket.emit ~ callback:",
-        callback
-      );
       setAllPersons(callback);
     });
-  }, []);
+  };
+
+  const listAllFriends = () => {
+    socket.emit(
+      "allFriends",
+      { idUser: websocket.idUser },
+      (friends, listConversationsRecentes, messagePedentes) => {
+        dispatch(
+          changeFriends({
+            friends,
+          })
+        );
+      }
+    );
+  };
+
+  useEffect(() => {
+    fetchAllListPersons();
+    listAllFriends();
+  }, [indexAbaActive]);
 
   const handleNewConviteConexao = (dados) => {
     socket.emit(
@@ -331,7 +346,7 @@ const SideBar = ({
       { idUser: websocket.idUser, dados },
       (callback) => {
         toast.success("Convite enviado com sucesso!", {
-          position: "top-right",
+          position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -443,6 +458,7 @@ const SideBar = ({
             <OpcaoMenuLateral
               onClick={() => {
                 setIndexAbaActive(2);
+                fetchAllListPersons();
               }}
             >
               <ion-icon
@@ -540,13 +556,11 @@ const SideBar = ({
               </Styled.Header>
               <Styled.ListPersons>
                 {/* Colocar os cards de noticações */}
-                {notifications.map((d, index) => (
-                  <CardNotification
-                    dados={d}
-                    socket={socket}
-                    key={index}
-                  />
-                ))}
+                {notifications
+                  .filter((n) => !n.isAcepty)
+                  .map((d, index) => (
+                    <CardNotification dados={d} socket={socket} key={index} />
+                  ))}
               </Styled.ListPersons>
             </Styled.DivColumn>
           ) : indexAbaActive === 2 ? (
@@ -590,7 +604,11 @@ const SideBar = ({
                     }
                   })
                   .map((dados) => (
-                    <CardNewConexao handleClick={() => handleNewConviteConexao(dados)} dados={dados} key={dados.id} />
+                    <CardNewConexao
+                      handleClick={() => handleNewConviteConexao(dados)}
+                      dados={dados}
+                      key={dados.id}
+                    />
                   ))}
               </Styled.ListPersons>
             </Styled.DivColumn>
@@ -624,4 +642,5 @@ const SideBar = ({
     </Styled.Container>
   );
 };
+
 export default SideBar;

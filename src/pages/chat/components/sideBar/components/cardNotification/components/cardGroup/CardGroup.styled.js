@@ -1,5 +1,6 @@
 import { Avatar } from "@mui/material";
 import styled from "styled-components";
+import Colors from "../../../../../../../../constants/Colors";
 
 const StyledCardGroup = {
   Container: styled.div`
@@ -11,6 +12,8 @@ const StyledCardGroup = {
     position: relative;
     margin-bottom: 10px;
     padding-bottom: 20px;
+    border-bottom: 1px solid ${Colors.PRIMARY_COLOR};
+    border-top: 1px solid ${Colors.PRIMARY_COLOR};
   `,
 
   Imagem: styled.div`

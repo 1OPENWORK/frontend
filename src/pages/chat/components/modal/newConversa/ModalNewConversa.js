@@ -6,6 +6,8 @@ import Styled from "./ModalNewConversa.styled";
 import { useSelector } from "react-redux";
 import { selectedWebSocket } from "../../../../../store/reducers/WebSocketSlice";
 import { handleImgGroup } from "../../../../../store/actions/MicroService";
+import axios from "axios";
+import { AmbienteBackend } from "../../../../../hooks/Ambiente";
 
 const ModalNewConversa = ({ show, handleClick, handleConversation }) => {
   const { websocket } = useSelector(selectedWebSocket);
@@ -16,13 +18,36 @@ const ModalNewConversa = ({ show, handleClick, handleConversation }) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    setFriends(websocket.friends);
+    listFriends();
   }, [websocket]);
 
+  const listFriends = () => {
+    const friendsList = websocket.friends;
+
+    let friendsImgs = [];
+    friendsList.map(async (dados) => {
+      const img = await fetchImage(dados.idRelacionado);
+
+      friendsImgs.push({ ...dados, img: img });
+    });
+
+    setFriends(friendsImgs);
+  };
+
+  const fetchImage = async (id) => {
+   return axios
+      .get(AmbienteBackend() + "/api/usuarios/imagem/" + id)
+      .then((response) => {
+        return response.data.image;
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: Messages.js:42 ~ ).then ~ error:", error);
+      });
+  };
 
   useEffect(() => {
-    setSearch("")
-  }, [show])
+    setSearch("");
+  }, [show]);
 
   return (
     <Styled.Modal

@@ -143,14 +143,15 @@ function CreateProject() {
   const token = getToken();
 
   async function cadastrar() {
+
     const registerProject = {
       title: debouncedInputValues.nameProject,
       description: debouncedInputValues.describe,
-      value: debouncedInputValues.value,
-      idCompany: `${idCompany}`,
-      qtdSprint: debouncedInputValues.estimatedTime,
-      daysToSprint: debouncedInputValues.estimatedTime,
-      maxDevelopers: debouncedInputValues.qntdPeople,
+      value: parseInt(debouncedInputValues.value),
+      idCompany: parseInt(idCompany),
+      qtdSprint: parseInt(debouncedInputValues.estimatedTime),
+      daysToSprint: parseInt(debouncedInputValues.estimatedTime),
+      maxDevelopers: parseInt(debouncedInputValues.qntdPeople),
       tools: {
         projectTool: selectedOptions,
       },
@@ -278,15 +279,9 @@ function CreateProject() {
     );
   };
 
-  useEffect(() => {
-    console.log(selectedOptions);
-  }, [selectedOptions]);
 
-  // useEffect(() => {
-  //   setSelectedOptions((prevOptions) =>
-  //     prevOptions.filter((option) => selectedOptions.includes(option))
-  //   );
-  // }, [selectedOptions]);
+
+ 
 
   //captura de informações(input) com debounced
 

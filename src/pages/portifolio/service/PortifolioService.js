@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AmbienteBackend } from "../../../hooks/Ambiente";
+import { get } from "../../../services/Generected";
 
 const URI = AmbienteBackend();
 
@@ -74,12 +75,7 @@ const uploadImg = async (id, img, token) => {
 };
 
 const buscarMyProjects = async (id, url, token) => {
-  const response = await axios.get(
-    `${URI}${url}${id}`,
-    {
-      Authorization: `Bearer ${token}`,
-    }
-  );
+  const response = await get(`${URI}${url}${id}`);
 
   return response;
 };

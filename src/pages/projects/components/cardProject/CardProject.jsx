@@ -28,6 +28,7 @@ import { TodoPath } from "../../../../constants/Path";
 import axios from "axios";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 import { toast } from "react-toastify";
+import { patch } from "../../../../services/Generected";
 
 function CardProject({
   idProject,
@@ -71,7 +72,7 @@ function CardProject({
   });
 
   const finalziarProject = async () => {
-    const response = await axios.patch(
+    const response = await patch(
       AmbienteBackend() + "/projetos-aceitos/completo/" + idProjectAccepted
     );
 
@@ -243,14 +244,12 @@ function CardProject({
                 <h3>{moment(finishDate).format("DD/MM/YYYY")}</h3>
               </DivData>
             </div>
-              <BtnReset
-                className={clicked ? "btn-reset clicked" : "btn-reset"}
-                onClick={() => clickNavigate()}
-              >
-                <h2>Abrir</h2>
-              </BtnReset>
-
-             
+            <BtnReset
+              className={clicked ? "btn-reset clicked" : "btn-reset"}
+              onClick={() => clickNavigate()}
+            >
+              <h2>Abrir</h2>
+            </BtnReset>
           </DivFooterCard>
         </DivRight>
       </DivCard>

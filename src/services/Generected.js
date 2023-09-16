@@ -77,3 +77,22 @@ export async function put(uri, body) {
       console.log(error);
     });
 }
+
+export async function patch(uri) {
+  const token = getToken();
+
+  return await axios
+    .patch(uri, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((dados) => {
+      return dados;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+

@@ -105,7 +105,6 @@ function App() {
         <Route path={PortfolioPath} element={<Portifolio />} />
         <Route path={ProjectsPath} element={<Projects />} />
         <Route path={TodoPath} element={<Todo />} />
-        <Route path={ProjectsPath} element={<Projects />} />
         <Route path={ProgressPath} element={<Progress />} />
         <Route path={canceledPath} element={<Canceled />} />
         <Route path={CreateProjectPath} element={<CreateProject />} />

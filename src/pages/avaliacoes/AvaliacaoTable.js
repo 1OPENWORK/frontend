@@ -30,7 +30,6 @@ const AvaliacaoTeste = ({ type }) => {
 
   useEffect(() => {
     handleFetchAvaliacao();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -47,7 +46,7 @@ const AvaliacaoTeste = ({ type }) => {
           </thead>
 
           <tbody>
-            {avaliacao.map((dados, index) => (
+            {avaliacao?.map((dados, index) => (
               <tr
                 key={dados.id}
                 className={index % 2 === 0 ? "gray-row" : "white-row"}

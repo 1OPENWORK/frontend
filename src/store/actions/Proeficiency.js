@@ -1,9 +1,8 @@
-import axios from "axios";
 import { AmbienteBackend } from "../../hooks/Ambiente";
-import { get } from "../../services/Generected";
+import axiosInstance from "../../services/Axios";
 
 const URI = AmbienteBackend();
 
 export const handleProeficiency = async () => {
-  return await axios.get(URI + "/api/especializacoes");
+  return await axiosInstance.get(URI + "/api/especializacoes");
 };

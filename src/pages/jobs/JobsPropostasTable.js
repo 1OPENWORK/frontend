@@ -9,6 +9,7 @@ import { getId, getToken } from "../../hooks/Cookies";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import Colors from "../../constants/Colors";
 import axios from "axios";
+import axiosInstance from "../../services/Axios";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -43,20 +44,12 @@ const JobsPropostas = () => {
   const hideShowModal = () => setShowModal(false);
 
   const handleAccpted = async () => {
-    const response = await axios.post(
+    const response = await axiosInstance.post(
       URI + "/projetos-aceitos/projetos-grandes",
-      { idBigProject: idProject, usersId: [parseInt(id)] },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      { idBigProject: idProject, usersId: [parseInt(id)] }
     );
     hideShowModal();
-    console.log(
-      "🚀 ~ file: JobsPropostasTable.js:52 ~ handleAccpted ~ response:",
-      response
-    );
+   
   };
 
   useEffect(() => {

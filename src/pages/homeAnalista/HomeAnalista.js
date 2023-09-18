@@ -7,6 +7,7 @@ import { post } from "../../services/Generected";
 import emailjs from "@emailjs/browser";
 import axios from "axios";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import axiosInstance from "../../services/Axios";
 
 const HomeAnalista = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const HomeAnalista = () => {
     const obterDadosFila = async () => {
       try {
         const URI = AmbienteBackend() + "/api/queue/obterFila";
-        const response = await axios.get(URI);
+        const response = await axiosInstance.get(URI);
         const dados = await response.data;
 
         if (dados) {

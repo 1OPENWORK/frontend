@@ -1,17 +1,9 @@
-import axios from "axios";
-import { getToken } from "../hooks/Cookies";
-import { selectedAuth } from "../store/reducers/AuthSlice";
-import { useSelector } from "react-redux";
+import axiosInstance from "./Axios";
 
-const { auth } = useSelector(selectedAuth);
 
 export async function get(uri) {
-  return await axios
-    .get(uri, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
+  return await axiosInstance
+    .get(uri)
     .then((dados) => {
       return dados;
     })
@@ -21,7 +13,7 @@ export async function get(uri) {
 }
 
 export async function post(uri, body) {
-  return await axios
+  return await axiosInstance
     .post(uri, body)
     .then((dados) => {
       return dados;
@@ -33,7 +25,7 @@ export async function post(uri, body) {
 
 export async function postImage(uri, body) {
   try {
-    const response = await axios.post(uri, body, {
+    const response = await axiosInstance.post(uri, body, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -58,7 +50,7 @@ export async function postImage(uri, body) {
 }
 
 export async function getImagem(uri) {
-  return await axios
+  return await axiosInstance
     .get(uri, {
       responseType: "blob",
     })
@@ -71,7 +63,7 @@ export async function getImagem(uri) {
 }
 
 export async function put(uri, body) {
-  return await axios
+  return await axiosInstance
     .put(uri, body)
     .then((dados) => {
       return dados;
@@ -82,14 +74,9 @@ export async function put(uri, body) {
 }
 
 export async function patch(uri) {
-  const token = getToken();
 
-  return await axios
-    .patch(uri, null, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
+  return await axiosInstance
+    .patch(uri)
     .then((dados) => {
       return dados;
     })

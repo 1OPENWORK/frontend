@@ -42,6 +42,7 @@ import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { HomeCompanyPath } from "../../constants/Path";
+import axiosInstance from "../../services/Axios";
 
 const SendContract = () => {
   const id = getId();
@@ -54,17 +55,11 @@ const SendContract = () => {
 
   const navigate = useNavigate();
 
-
   function SendProposta(idProject) {
     try {
-      const response = axios.post(
+      const response = axiosInstance.post(
         URI + `/api/propostas/empresa/proposta/${dadosPerfil.perfil.idCompany}`,
-        { idProject: idProject, idUser: params.id, tipo: "BIG" },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        { idProject: idProject, idUser: params.id, tipo: "BIG" }
       );
 
       if (response.status === 200) {
@@ -87,13 +82,8 @@ const SendContract = () => {
 
   const handleInformationUser = async () => {
     try {
-      const { data, status } = await axios.get(
-        URI + "/api/usuarios/perfil/" + params.id,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const { data, status } = await axiosInstance.get(
+        URI + "/api/usuarios/perfil/" + params.id
       );
 
       if (status === 200) {
@@ -106,13 +96,8 @@ const SendContract = () => {
 
   const handleAboutMe = async () => {
     try {
-      const { data, status } = await axios.get(
-        URI + "/api/usuarios/sobre-mim/" + params.id,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const { data, status } = await axiosInstance.get(
+        URI + "/api/usuarios/sobre-mim/" + params.id
       );
 
       if (status === 200) {
@@ -125,13 +110,8 @@ const SendContract = () => {
 
   const handleProjects = async () => {
     try {
-      const { data, status } = await axios.get(
-        URI + "/api/projetos/" + dadosPerfil.perfil.idCompany,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const { data, status } = await axiosInstance.get(
+        URI + "/api/projetos/" + dadosPerfil.perfil.idCompany
       );
 
       if (status === 200) {
@@ -164,7 +144,11 @@ const SendContract = () => {
               </NameGrade>
             </Header>
 
-            <FaArrowLeft onClick={() => navigate(HomeCompanyPath)} style={{ cursor: "pointer" }} size={40} />
+            <FaArrowLeft
+              onClick={() => navigate(HomeCompanyPath)}
+              style={{ cursor: "pointer" }}
+              size={40}
+            />
           </HeaderContainer>
 
           <ContentTextSobre>{aboutMe.description}</ContentTextSobre>

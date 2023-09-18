@@ -28,6 +28,7 @@ import { AuthPath } from "../../../../constants/Path";
 import axios from "axios";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 import { getId } from "../../../../hooks/Cookies";
+import axiosInstance from "../../../../services/Axios";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const Formulario = () => {
   });
 
   const fetchInformation = async () => {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       AmbienteBackend() + "/api/usuarios/perfil/" + getId()
     );
 

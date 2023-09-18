@@ -34,6 +34,7 @@ import { HomeCompanyPath } from "../../../../constants/Path";
 import { useNavigate } from "react-router-dom";
 import CardNewConexao from "./components/cardNotification/components/cardPerson/CardConexao";
 import { toast } from "react-toastify";
+import { ToastSuccess } from "../../../../helpers/Toast";
 
 const SideBar = ({
   socket,
@@ -345,16 +346,7 @@ const SideBar = ({
       "conviteConexao",
       { idUser: websocket.idUser, dados },
       (callback) => {
-        toast.success("Convite enviado com sucesso!", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+        ToastSuccess("Convite enviado com sucesso!");
       }
     );
   };

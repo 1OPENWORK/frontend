@@ -29,6 +29,7 @@ import axios from "axios";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 import { toast } from "react-toastify";
 import { patch } from "../../../../services/Generected";
+import { ToastSuccess } from "../../../../helpers/Toast";
 
 function CardProject({
   idProject,
@@ -77,16 +78,7 @@ function CardProject({
     );
 
     if (response.status === 200) {
-      toast.success("Projeto finalizado com sucesso.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      ToastSuccess("Projeto finalizado com sucesso.");
     }
   };
 

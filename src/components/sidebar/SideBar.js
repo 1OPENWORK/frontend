@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { HomeCompanyPath, HomeDevPath } from "../../constants/Path";
 import { getIsDev } from "../../hooks/Cookies";
+import { ToastSuccess } from "../../helpers/Toast";
 
 const SideBar = ({ tabActive }) => {
   const dispatch = useDispatch();
@@ -71,16 +72,7 @@ const SideBar = ({ tabActive }) => {
         })
       );
 
-      toast.success("Foto atualizada com sucesso.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      ToastSuccess("Foto atualizada com sucesso.");
     } else {
       toast.error("Ocorreu algum problema ao tentar enviar a imagem.", {
         position: "top-right",

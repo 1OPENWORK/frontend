@@ -29,6 +29,7 @@ import axios from "axios";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 import { getId } from "../../../../hooks/Cookies";
 import axiosInstance from "../../../../services/Axios";
+import { ToastSuccess } from "../../../../helpers/Toast";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -110,16 +111,7 @@ const Formulario = () => {
 
         Cookies.set("token", response.data.token, { expires: 1 });
 
-        toast.success("Infomações atualizadas com sucesso.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+        ToastSuccess("Infomações atualizadas com sucesso.");
       }
     } catch (err) {
       if (password.length < 9) {
@@ -157,18 +149,8 @@ const Formulario = () => {
       );
 
       if (response.status === 200) {
-        toast.success(
-          "Você deletou sua conta, estamos te redirecionando para o login.",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: false,
-            theme: "light",
-          }
+        ToastSuccess(
+          "Você deletou sua conta, estamos te redirecionando para o login."
         );
 
         Cookies.set("token", "");
@@ -201,7 +183,7 @@ const Formulario = () => {
 
   useEffect(() => {
     fetchInformation();
-  }, [])
+  }, []);
 
   return (
     <Styled.Form>

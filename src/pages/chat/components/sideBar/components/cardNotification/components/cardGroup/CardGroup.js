@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { AmbienteBackend } from "../../../../../../../../hooks/Ambiente";
 import { useSelector } from "react-redux";
+import { ToastSuccess } from "../../../../../../../../helpers/Toast";
 
 const CardGroup = ({ dados, socket }) => {
   const dispatch = useDispatch();
@@ -44,16 +45,7 @@ const CardGroup = ({ dados, socket }) => {
     );
 
     if (isAccpty) {
-      toast.success("Você aceitou o pedido de conexão.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      ToastSuccess("Você aceitou o pedido de conexão.");
     }
 
     const listaNotification = websocket.notifications.filter(

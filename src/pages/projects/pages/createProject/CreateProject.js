@@ -27,6 +27,7 @@ import { getCompanyId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
 import { Ambiente, AmbienteBackend } from "../../../../hooks/Ambiente";
 import { initMercadoPago } from "@mercadopago/sdk-react";
+import { ToastSuccess } from "../../../../helpers/Toast";
 
 function CreateProject() {
   const navigate = useNavigate();
@@ -75,16 +76,7 @@ function CreateProject() {
   };
 
   const notifySucess = () => {
-    toast.success("Projeto cadastrado com sucesso", {
-      position: "top-left",
-      autoClose: 500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: 1,
-      theme: "light",
-    });
+    ToastSuccess("Projeto cadastrado com sucesso");
   };
 
   const notifyInfo = () => {

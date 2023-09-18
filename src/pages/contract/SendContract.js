@@ -43,6 +43,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { HomeCompanyPath } from "../../constants/Path";
 import axiosInstance from "../../services/Axios";
+import { ToastSuccess } from "../../helpers/Toast";
 
 const SendContract = () => {
   const id = getId();
@@ -62,17 +63,8 @@ const SendContract = () => {
         { idProject: idProject, idUser: params.id, tipo: "BIG" }
       );
 
-      if (response.status === 200) {
-        toast.success("Proposta enviada com sucesso!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+      if (response.status === 201) {
+        ToastSuccess("Proposta enviada com sucesso!");
       }
     } catch (error) {
       console.error("Erro ao cadastrar campos:", error);

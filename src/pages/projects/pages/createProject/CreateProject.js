@@ -21,7 +21,7 @@ import { handleProeficiency } from "../../../../store/actions/Proeficiency";
 
 import axios from "axios";
 
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCompanyId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
@@ -358,18 +358,7 @@ function CreateProject() {
   return (
     <>
       <Container>
-        <ToastContainer
-          position="top-left"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss={false}
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+       
 
         <Aside>
           <div className="container-align">

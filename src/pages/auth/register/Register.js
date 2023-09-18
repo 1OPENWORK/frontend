@@ -11,7 +11,6 @@ import RegisterEt6 from "./etapas/et6/RegisterEt6";
 import { Userlog } from "./etapas/et4/components/loged/UserLog";
 import { useSelector } from "react-redux";
 import { selectRegister } from "../../../store/reducers/RegisterSlice";
-import { ToastContainer } from "react-toastify";
 import { Box } from "@mui/material";
 import { Stepper } from "react-form-stepper";
 import Colors from "../../../constants/Colors";
@@ -34,7 +33,6 @@ const Register = () => {
 
   return (
     <Styled.Container>
-      <ToastContainer />
       {register.etapaAtual !== 2 ? (
         <>
           <InformationsAuth

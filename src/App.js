@@ -61,6 +61,7 @@ import { Ambiente } from "./hooks/Ambiente";
 import HomeCompany from "./pages/homeDev/HomeCompany";
 import PropostaTableDev from "./pages/devs/PropostasTableDev";
 import { getId } from "./hooks/Cookies";
+import { ToastContainer } from "react-toastify";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -79,10 +80,20 @@ function App() {
     });
   });
 
- 
-
   return (
     <Router>
+      <ToastContainer
+        position="top-left"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Routes>
         <Route path={HomePagePath} element={<Home />} />
         <Route path={AuthPath} element={<Auth />} />

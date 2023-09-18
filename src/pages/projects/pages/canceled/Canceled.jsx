@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { getId, getIsDev } from "../../../../hooks/Cookies";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import { get } from "../../../../services/Generected";
 
 // import Cookies from "js-cookie";
 function Canceled({ developers }) {
@@ -21,17 +22,15 @@ function Canceled({ developers }) {
   const fetchDev = AmbienteBackend() + `/projetos-aceitos/cancelados/desenvolvedor/${id}`;
 
   async function fetchProjetos() {
-    await axios
-      .get(isDev === "true" ? fetchDev : fetchCompany)
+    await 
+      get(isDev === "true" ? fetchDev : fetchCompany)
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
           setProjetos(response.data);
-          console.log(response);
         } else if (response.status === 204) {
           setLoading(false);
           setNoProject(true);
-          console.log("caiu aqui", response);
         }
       })
       .catch((error) => {

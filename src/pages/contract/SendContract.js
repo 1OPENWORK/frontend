@@ -40,10 +40,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { HomeCompanyPath } from "../../constants/Path";
+import { ChatPath, HomeCompanyPath } from "../../constants/Path";
 import axiosInstance from "../../services/Axios";
-import { ToastSuccess } from "../../helpers/Toast";
+import { ToastError, ToastSuccess } from "../../helpers/Toast";
+import ModalStatus from "../../components/UI/modal/modal-status/ModalStatus.styled";
+import { ToastContainer } from "react-toastify";
 
 const SendContract = () => {
   const id = getId();
@@ -56,21 +57,24 @@ const SendContract = () => {
 
   const navigate = useNavigate();
 
-  function SendProposta(idProject) {
+  async function SendProposta(idProject) {
     try {
-      const response = axiosInstance.post(
+      const response = await axiosInstance.post(
         URI + `/api/propostas/empresa/proposta/${dadosPerfil.perfil.idCompany}`,
         { idProject: idProject, idUser: params.id, tipo: "BIG" }
       );
 
       if (response.status === 201) {
-        ToastSuccess("Proposta enviada com sucesso!");
+        navigate(HomeCompanyPath);
       }
     } catch (error) {
-      console.error("Erro ao cadastrar campos:", error);
+      ToastError("Error");
     }
   }
-  const token = getToken();
+
+  useEffect(() => {
+    ToastSuccess("Proposta enviada com sucesso!");
+  }, []);
 
   const handleInformationUser = async () => {
     try {
@@ -184,6 +188,7 @@ const SendContract = () => {
                       marginTop={"2.5rem"}
                       marginLeft={"0px"}
                       color={Colors.PRIMARY_COLOR}
+                      onClick={() => navigate(ChatPath)}
                     >
                       Chat
                     </FilledButton>

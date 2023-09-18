@@ -6,7 +6,6 @@ import { useState } from "react";
 import PortifolioSobre from "./sobre/PortifolioSobre";
 
 import Address from "./address/Address";
-import { ToastContainer } from "react-toastify";
 import Experiencia from "./experiencia/Experiencia";
 import CompletedProjects from "./projectsPort/CompletedProjects";
 
@@ -17,7 +16,6 @@ const Portifolio = () => {
     <>
       <Styled.Container>
         <SideBar tabActive={setAbaActive} />
-        <ToastContainer />
         {abaActive === 1 ? (
           <Styled.ContainerInputs>
             <Styled.TitlePortfolio>Informações pessoais</Styled.TitlePortfolio>

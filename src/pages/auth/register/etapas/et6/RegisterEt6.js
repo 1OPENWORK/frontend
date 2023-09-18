@@ -12,7 +12,7 @@ import {
 import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
 import { AuthPath } from "../../../../../constants/Path";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addNewUser } from "../../../../../store/actions/MicroService";
 import { AmbienteBackend } from "../../../../../hooks/Ambiente";
@@ -112,7 +112,6 @@ const RegisterEt6 = ({ checked }) => {
   return (
     <>
       <Container>
-        <ToastContainer />
         <DivFlowScroll>
           {itens.map((dados, index) => (
             <Item

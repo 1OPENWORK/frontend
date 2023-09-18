@@ -18,7 +18,7 @@ import {
   handleLogin,
 } from "../../store/actions/UserAuth";
 import { changeActiveToken } from "../../store/reducers/AuthSlice";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { HomeCompanyPath, HomeDevPath } from "../../constants/Path";
@@ -113,7 +113,6 @@ function Auth() {
 
   return (
     <GeneralContainer>
-      <ToastContainer />
       <Styled.Container>
         <InformationsAuth
           title="Entre e faça História"

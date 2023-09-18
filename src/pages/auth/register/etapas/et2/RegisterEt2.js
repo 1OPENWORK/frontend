@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
 import { object, string, ref } from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
 import { get } from "../../../../../services/Generected";
@@ -98,7 +98,6 @@ const RegisterEt2 = () => {
 
   return (
     <Styled.Form>
-      <ToastContainer />
       <Styled.Row>
         <InputForm
           label="CEP"

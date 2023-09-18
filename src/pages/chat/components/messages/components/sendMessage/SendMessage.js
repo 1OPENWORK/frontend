@@ -8,7 +8,7 @@ import {
   selectedWebSocket,
 } from "../../../../../../store/reducers/WebSocketSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const SendMessage = ({
   socket,
@@ -85,7 +85,6 @@ const SendMessage = ({
 
   return (
     <Styled.Container isText={message.length > 60 ? true : false}>
-      <ToastContainer />
       <Styled.InputSendMessage
         rows={message.length > 60 ? 7 : 0}
         value={message}

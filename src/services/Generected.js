@@ -1,12 +1,15 @@
 import axios from "axios";
 import { getToken } from "../hooks/Cookies";
+import { selectedAuth } from "../store/reducers/AuthSlice";
+import { useSelector } from "react-redux";
+
+const { auth } = useSelector(selectedAuth);
 
 export async function get(uri) {
-  const token = getToken();
   return await axios
     .get(uri, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${auth.token}`,
       },
     })
     .then((dados) => {
@@ -84,7 +87,7 @@ export async function patch(uri) {
   return await axios
     .patch(uri, null, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${auth.token}`,
       },
     })
     .then((dados) => {

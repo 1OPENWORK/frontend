@@ -20,9 +20,9 @@ const AvaliacaoTeste = ({ type }) => {
   async function handleFetchAvaliacao() {
     const URI =
       dadosPerfil.perfil.tipo !== "EMPRESA"
-        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`
+        ? AmbienteBackend() + `/api/avaliacoes/desenvolvedor/${id}`
         : AmbienteBackend() +
-          `/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
+          `/api/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
 
     const response = await get(URI);
     setAvaliacao(response.data.myAvaliations);

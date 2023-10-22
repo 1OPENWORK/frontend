@@ -47,7 +47,7 @@ const CompletedProjects = () => {
 
   const fetchMyProjects = async () => {
 
-    const url = (isDev !== "true" ? "/projetos-aceitos/completos/empresa/" : "/projetos-aceitos/completos/desenvolvedor/");
+    const url = (isDev !== "true" ? "/api/projetos-aceitos/completos/empresa/" : "/api/projetos-aceitos/completos/desenvolvedor/");
 
     const { data } = await PortifolioService.buscarMyProjects(
       isDev === "true" ? getId() : getCompanyId(),

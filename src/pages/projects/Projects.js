@@ -16,8 +16,8 @@ function Projects() {
   const id = getId();
   const idCompany = getCompanyId();
 
-  const fetchDev =  AmbienteBackend() + `/projetos-aceitos/completos/desenvolvedor/${id}`
-  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/completos/empresa/${idCompany}`;
+  const fetchDev =  AmbienteBackend() + `/api/projetos-aceitos/completos/desenvolvedor/${id}`
+  const fetchCompany = AmbienteBackend() + `/api/projetos-aceitos/completos/empresa/${idCompany}`;
 
   async function fetchProjetos() {
     await get(isDev === "true" ? fetchDev : fetchCompany)

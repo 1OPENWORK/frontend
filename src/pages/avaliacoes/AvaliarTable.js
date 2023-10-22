@@ -33,8 +33,8 @@ const AvaliarTeste = () => {
   async function handleFetchAvaliacao() {
     const URIGet =
     dadosPerfil.perfil.tipo !== "EMPRESA"
-        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${idUser}`
-        : AmbienteBackend() + `/avaliacoes/empresa/${idCompany}`;
+        ? AmbienteBackend() + `/api/avaliacoes/desenvolvedor/${idUser}`
+        : AmbienteBackend() + `/api/avaliacoes/empresa/${idCompany}`;
     const response = await get(URIGet);
 
     const evaluates = [...response.data.evaluates];
@@ -45,9 +45,9 @@ const AvaliarTeste = () => {
   async function handleFetchAvaliar(id, idAcceptedDev) {
     const URI =
       isDev === "false"
-        ? AmbienteBackend() + `/avaliacoes/empresa/${idAcceptedDev}/${avaliar}`
+        ? AmbienteBackend() + `/api/avaliacoes/empresa/${idAcceptedDev}/${avaliar}`
         : AmbienteBackend() +
-          `/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
+          `/api/avaliacoes/desenvolvedor/${id}/${avaliar}/${idUser}`;
     const response = await post(URI);
 
     if (response.status === 201) {

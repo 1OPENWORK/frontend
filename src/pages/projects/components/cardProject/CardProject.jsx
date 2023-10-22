@@ -74,7 +74,7 @@ function CardProject({
 
   const finalziarProject = async () => {
     const response = await patch(
-      AmbienteBackend() + "/projetos-aceitos/completo/" + idProjectAccepted
+      AmbienteBackend() + "/api/projetos-aceitos/completo/" + idProjectAccepted
     );
 
     if (response.status === 200) {

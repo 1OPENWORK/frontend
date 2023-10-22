@@ -18,8 +18,8 @@ const Progress = ({ developers }) => {
   const token = getToken();
   const idCompany = getCompanyId();
 
-  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/andamento/empresa/${idCompany}`
-  const fetchDev = AmbienteBackend() + `/projetos-aceitos/andamento/desenvolvedor/${id}`
+  const fetchCompany = AmbienteBackend() + `/api/projetos-aceitos/andamento/empresa/${idCompany}`
+  const fetchDev = AmbienteBackend() + `/api/projetos-aceitos/andamento/desenvolvedor/${id}`
 
 
 

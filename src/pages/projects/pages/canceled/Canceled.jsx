@@ -18,8 +18,8 @@ function Canceled({ developers }) {
   const isDev = getIsDev();
   const id = getId();
 
-  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/cancelados/empresa/${id}`;
-  const fetchDev = AmbienteBackend() + `/projetos-aceitos/cancelados/desenvolvedor/${id}`;
+  const fetchCompany = AmbienteBackend() + `/api/projetos-aceitos/cancelados/empresa/${id}`;
+  const fetchDev = AmbienteBackend() + `/api/projetos-aceitos/cancelados/desenvolvedor/${id}`;
 
   async function fetchProjetos() {
     await 

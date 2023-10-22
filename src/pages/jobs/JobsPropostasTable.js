@@ -44,7 +44,7 @@ const JobsPropostas = () => {
 
   const handleAccpted = async () => {
     const response = await axiosInstance.post(
-      URI + "/projetos-aceitos/projetos-grandes",
+      URI + "/api/projetos-aceitos/projetos-grandes",
       { idBigProject: idProject, usersId: [parseInt(id)] }
     );
 

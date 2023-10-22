@@ -18,11 +18,12 @@ import {
   handleLogin,
 } from "../../store/actions/UserAuth";
 import { changeActiveToken } from "../../store/reducers/AuthSlice";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { HomeCompanyPath, HomeDevPath } from "../../constants/Path";
 import { changeSave } from "../../store/reducers/PerfilSlice";
+import { ToastSuccess } from "../../helpers/Toast";
 // --------------------------------------------------------
 // Auth INTERFACE
 // --------------------------------------------------------
@@ -83,16 +84,7 @@ function Auth() {
           ? navigate(HomeDevPath)
           : navigate(HomeCompanyPath);
 
-        toast.success("Logado com sucesso.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+          ToastSuccess("Logado com sucesso.");
       } else {
         toast.error(response.response.data.message, {
           position: "top-right",
@@ -121,7 +113,6 @@ function Auth() {
 
   return (
     <GeneralContainer>
-      <ToastContainer />
       <Styled.Container>
         <InformationsAuth
           title="Entre e faça História"

@@ -15,6 +15,7 @@ import {
 } from "../../../store/reducers/PerfilSlice";
 import PortifolioService from "../service/PortifolioService";
 import { selectedAuth } from "../../../store/reducers/AuthSlice";
+import { ToastSuccess } from "../../../helpers/Toast";
 
 const Address = () => {
   const { auth } = useSelector(selectedAuth);
@@ -83,16 +84,7 @@ const Address = () => {
           })
         );
 
-        toast.success("Infomações atualizadas com sucesso.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+        ToastSuccess("Infomações atualizadas com sucesso.");
       }
     } catch (err) {
       toast.error(err.errors[0], {

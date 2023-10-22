@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InputForm from "../../../../../components/input/InputForm";
 import Styled from "../../Register.styled";
 import { object, string } from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilledButton } from "../../../../../components/UI/buttons/Button";
 import Colors from "../../../../../constants/Colors";
@@ -104,7 +104,6 @@ const RegisterCompany = () => {
 
   return (
     <Styled.Form>
-      <ToastContainer />
       <Styled.Row>
         <InputForm
           label="Nome Empresa"

@@ -9,6 +9,7 @@ import { selectedPerfil } from "../../../store/reducers/PerfilSlice";
 import { selectedAuth } from "../../../store/reducers/AuthSlice";
 import PortifolioService from "../service/PortifolioService";
 import { toast } from "react-toastify";
+import { ToastSuccess } from "../../../helpers/Toast";
 
 const PortifolioSobre = () => {
   const dispatch = useDispatch();
@@ -47,16 +48,7 @@ const PortifolioSobre = () => {
       );
 
       if (response.status === 200) {
-        toast.success("Infomações atualizadas com sucesso.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: false,
-          theme: "light",
-        });
+        ToastSuccess("Infomações atualizadas com sucesso.");
       }
     } catch (error) {
       toast.error(error.errors[0], {

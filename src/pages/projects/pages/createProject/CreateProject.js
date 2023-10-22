@@ -21,12 +21,13 @@ import { handleProeficiency } from "../../../../store/actions/Proeficiency";
 
 import axios from "axios";
 
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCompanyId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
 import { Ambiente, AmbienteBackend } from "../../../../hooks/Ambiente";
 import { initMercadoPago } from "@mercadopago/sdk-react";
+import { ToastSuccess } from "../../../../helpers/Toast";
 
 function CreateProject() {
   const navigate = useNavigate();
@@ -75,16 +76,7 @@ function CreateProject() {
   };
 
   const notifySucess = () => {
-    toast.success("Projeto cadastrado com sucesso", {
-      position: "top-left",
-      autoClose: 500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: 1,
-      theme: "light",
-    });
+    ToastSuccess("Projeto cadastrado com sucesso");
   };
 
   const notifyInfo = () => {
@@ -143,14 +135,15 @@ function CreateProject() {
   const token = getToken();
 
   async function cadastrar() {
+
     const registerProject = {
       title: debouncedInputValues.nameProject,
       description: debouncedInputValues.describe,
-      value: debouncedInputValues.value,
-      idCompany: `${idCompany}`,
-      qtdSprint: debouncedInputValues.estimatedTime,
-      daysToSprint: debouncedInputValues.estimatedTime,
-      maxDevelopers: debouncedInputValues.qntdPeople,
+      value: parseInt(debouncedInputValues.value),
+      idCompany: parseInt(idCompany),
+      qtdSprint: parseInt(debouncedInputValues.estimatedTime),
+      daysToSprint: parseInt(debouncedInputValues.estimatedTime),
+      maxDevelopers: parseInt(debouncedInputValues.qntdPeople),
       tools: {
         projectTool: selectedOptions,
       },
@@ -278,15 +271,9 @@ function CreateProject() {
     );
   };
 
-  useEffect(() => {
-    console.log(selectedOptions);
-  }, [selectedOptions]);
 
-  // useEffect(() => {
-  //   setSelectedOptions((prevOptions) =>
-  //     prevOptions.filter((option) => selectedOptions.includes(option))
-  //   );
-  // }, [selectedOptions]);
+
+ 
 
   //captura de informações(input) com debounced
 
@@ -371,18 +358,7 @@ function CreateProject() {
   return (
     <>
       <Container>
-        <ToastContainer
-          position="top-left"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss={false}
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+       
 
         <Aside>
           <div className="container-align">

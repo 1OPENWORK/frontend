@@ -20,9 +20,9 @@ const AvaliacaoTeste = ({ type }) => {
   async function handleFetchAvaliacao() {
     const URI =
       dadosPerfil.perfil.tipo !== "EMPRESA"
-        ? AmbienteBackend() + `/avaliacoes/desenvolvedor/${id}`
+        ? AmbienteBackend() + `/api/avaliacoes/desenvolvedor/${id}`
         : AmbienteBackend() +
-          `/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
+          `/api/avaliacoes/empresa/${dadosPerfil.perfil.idCompany}`;
 
     const response = await get(URI);
     setAvaliacao(response.data.myAvaliations);
@@ -30,7 +30,6 @@ const AvaliacaoTeste = ({ type }) => {
 
   useEffect(() => {
     handleFetchAvaliacao();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -47,7 +46,7 @@ const AvaliacaoTeste = ({ type }) => {
           </thead>
 
           <tbody>
-            {avaliacao.map((dados, index) => (
+            {avaliacao?.map((dados, index) => (
               <tr
                 key={dados.id}
                 className={index % 2 === 0 ? "gray-row" : "white-row"}

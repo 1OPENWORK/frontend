@@ -19,11 +19,11 @@ import Colors from "../../../constants/Colors";
 import { AmbienteBackend } from "../../../hooks/Ambiente";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
+import axiosInstance from "../../../services/Axios";
 
 const ModeloContrado = async () => {
-  const response = await axios.get(
-    AmbienteBackend() + `/fileS3/download/${"contrato-prestacao 3.pdf"}`,
-    {}
+  const response = await axiosInstance.get(
+    AmbienteBackend() + `/fileS3/download/${"contrato-prestacao 3.pdf"}`
   );
 
   return response;

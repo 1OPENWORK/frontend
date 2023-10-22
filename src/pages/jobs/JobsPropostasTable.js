@@ -9,6 +9,9 @@ import { getId, getToken } from "../../hooks/Cookies";
 import { FilledButton } from "../../components/UI/buttons/Button";
 import Colors from "../../constants/Colors";
 import axios from "axios";
+import axiosInstance from "../../services/Axios";
+import { toast } from "react-toastify";
+import { ToastSuccess } from "../../helpers/Toast";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -27,10 +30,7 @@ const JobsPropostas = () => {
   const URI = AmbienteBackend();
 
   const [jobs, setJobs] = useState([]);
-  console.log(
-    "🚀 ~ file: JobsPropostasTable.js:30 ~ JobsPropostas ~ jobs:",
-    jobs
-  );
+
   const [showModal, setShowModal] = useState(false);
   const [idProject, setIdProject] = useState(0);
 
@@ -43,20 +43,16 @@ const JobsPropostas = () => {
   const hideShowModal = () => setShowModal(false);
 
   const handleAccpted = async () => {
-    const response = await axios.post(
-      URI + "/projetos-aceitos/projetos-grandes",
-      { idBigProject: idProject, usersId: [parseInt(id)] },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+    const response = await axiosInstance.post(
+      URI + "/api/projetos-aceitos/projetos-grandes",
+      { idBigProject: idProject, usersId: [parseInt(id)] }
     );
+
+    if (response.status === 201) {
+      ToastSuccess("Proposta aceita com sucesso!");
+    }
+
     hideShowModal();
-    console.log(
-      "🚀 ~ file: JobsPropostasTable.js:52 ~ handleAccpted ~ response:",
-      response
-    );
   };
 
   useEffect(() => {

@@ -12,10 +12,11 @@ import {
 import { post } from "../../../../../services/Generected";
 import { useNavigate } from "react-router-dom";
 import { AuthPath } from "../../../../../constants/Path";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addNewUser } from "../../../../../store/actions/MicroService";
 import { AmbienteBackend } from "../../../../../hooks/Ambiente";
+import { ToastSuccess } from "../../../../../helpers/Toast";
 
 const RegisterEt6 = ({ checked }) => {
   const { register } = useSelector(selectRegister);
@@ -75,16 +76,7 @@ const RegisterEt6 = ({ checked }) => {
 
       await addNewUser({ id, nome });
 
-      toast.success("Cadastro realizado.", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      ToastSuccess("Cadastro realizado.");
 
       setTimeout(() => {
         navigate(AuthPath);
@@ -120,7 +112,6 @@ const RegisterEt6 = ({ checked }) => {
   return (
     <>
       <Container>
-        <ToastContainer />
         <DivFlowScroll>
           {itens.map((dados, index) => (
             <Item

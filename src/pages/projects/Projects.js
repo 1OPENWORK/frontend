@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { ContainerMain, ContainerContent } from "./Projects.styled";
 import CardProject from "./components/cardProject/CardProject";
 import SidebarProjecteds from "./components/sideBar/SidebarProjecteds";
-import axios from "axios";
 import { AmbienteBackend } from "../../hooks/Ambiente";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { getCompanyId, getId, getIsDev } from "../../hooks/Cookies";
+import { get } from "../../services/Generected";
 
 function Projects() {
   const [projetos, setProjetos] = useState([]);
@@ -16,12 +16,11 @@ function Projects() {
   const id = getId();
   const idCompany = getCompanyId();
 
-  const fetchDev =  AmbienteBackend() + `/projetos-aceitos/completos/desenvolvedor/${id}`
-  const fetchCompany = AmbienteBackend() + `/projetos-aceitos/completos/empresa/${idCompany}`;
+  const fetchDev =  AmbienteBackend() + `/api/projetos-aceitos/completos/desenvolvedor/${id}`
+  const fetchCompany = AmbienteBackend() + `/api/projetos-aceitos/completos/empresa/${idCompany}`;
 
   async function fetchProjetos() {
-    await axios
-      .get(isDev === "true" ? fetchDev : fetchCompany)
+    await get(isDev === "true" ? fetchDev : fetchCompany)
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);

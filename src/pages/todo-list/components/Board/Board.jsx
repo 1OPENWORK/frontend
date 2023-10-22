@@ -7,8 +7,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getToken } from "../../../../hooks/Cookies";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
+import axiosInstance from "../../../../services/Axios";
 
-export default function Board({id}) {
+export default function Board({ id }) {
   const [lists, setLists] = useState([]);
 
   const fetchLists = `${AmbienteBackend()}/api/projetos-grandes/` + id;
@@ -23,8 +24,8 @@ export default function Board({id}) {
     await axios
       .get(fetchLists, {
         headers: {
-          Authorization: 'Bearer ' + token
-        }
+          Authorization: "Bearer " + token,
+        },
       })
       .then((response) => {
         if (response.status === 200) {
@@ -79,14 +80,11 @@ export default function Board({id}) {
       // Atualize as listas no estado
 
       // Faça uma chamada à API para atualizar a posição do item
-      await axios.put(
-        `${AmbienteBackend()}/api/listas/${sourceList.id}/cards/${movedItem.id}/position`,
-        { newPosition: destination.index },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      await axiosInstance.put(
+        `${AmbienteBackend()}/api/listas/${sourceList.id}/cards/${
+          movedItem.id
+        }/position`,
+        { newPosition: destination.index }
       );
       updatedLists[sourceListIndex] = sourceList;
       updatedLists[destinationListIndex] = destinationList;

@@ -12,33 +12,6 @@ export default function List({ data }) {
 
   const token = getToken();
 
-  // useEffect(() => {
-  //   setCards(data.cardList);
-  // }, [data.cardList]);
-
-  // const fetchCards = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${AmbienteBackend()}/api/cards/list-cards?idType=${data.idType}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         params: {
-  //           idType: data.idType,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200 && response.data) {
-  //       setCards(response.data);
-  //     } else {
-  //       console.error("Invalid response:", response);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching cards:", error);
-  //   }
-  // };
-
   function handleAddCard() {
     const newCard = {
       content: "Novo Card (Faça edição para melhor personalização)",
@@ -58,7 +31,6 @@ export default function List({ data }) {
         }
       )
       .then((response) => {
-        
         if (response.status === 201) {
           setCards([...cards, response.data]);
         } else {
@@ -70,20 +42,6 @@ export default function List({ data }) {
       });
   }
 
-  // function handleDeleteCard(id) {
-  //   axios
-  //     .delete(`${AmbienteBackend()}/api/cards/${id}`, {
-  //       headers: {
-  //         Authorization: 'Bearer ' + token
-  //       }
-  //     })
-  //     .then((res) => {
-  //       setCards(data.filter((card) => card.id !== id));
-  //     })
-  //     .catch((err) => {
-  //       console.log("Deu erro: " + err);
-  //     });
-  // }
   return (
     <Container done={!data.creatable && true} creatable={data.creatable}>
       <header>

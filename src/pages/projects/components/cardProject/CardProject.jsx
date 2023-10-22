@@ -28,6 +28,8 @@ import { TodoPath } from "../../../../constants/Path";
 import axios from "axios";
 import { AmbienteBackend } from "../../../../hooks/Ambiente";
 import { toast } from "react-toastify";
+import { patch } from "../../../../services/Generected";
+import { ToastSuccess } from "../../../../helpers/Toast";
 
 function CardProject({
   idProject,
@@ -71,21 +73,12 @@ function CardProject({
   });
 
   const finalziarProject = async () => {
-    const response = await axios.patch(
-      AmbienteBackend() + "/projetos-aceitos/completo/" + idProjectAccepted
+    const response = await patch(
+      AmbienteBackend() + "/api/projetos-aceitos/completo/" + idProjectAccepted
     );
 
     if (response.status === 200) {
-      toast.success("Projeto finalizado com sucesso.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: false,
-        theme: "light",
-      });
+      ToastSuccess("Projeto finalizado com sucesso.");
     }
   };
 
@@ -243,14 +236,12 @@ function CardProject({
                 <h3>{moment(finishDate).format("DD/MM/YYYY")}</h3>
               </DivData>
             </div>
-              <BtnReset
-                className={clicked ? "btn-reset clicked" : "btn-reset"}
-                onClick={() => clickNavigate()}
-              >
-                <h2>Abrir</h2>
-              </BtnReset>
-
-             
+            <BtnReset
+              className={clicked ? "btn-reset clicked" : "btn-reset"}
+              onClick={() => clickNavigate()}
+            >
+              <h2>Abrir</h2>
+            </BtnReset>
           </DivFooterCard>
         </DivRight>
       </DivCard>

@@ -242,8 +242,7 @@ function CreateProject() {
         onReady={handleOnReady}
         customization={{
           visual: {
-            valuePropColor: 'grey'
-
+            valuePropColor: "grey",
           },
           texts: {
             valueProp: "security_safety",
@@ -402,7 +401,7 @@ function CreateProject() {
             </div>
 
             <div className="content-desc">
-              <label>{"Nome do Projeto"}</label>
+              <label style={{ fontSize: 14 }}>{"Nome do Projeto"}</label>
               <br />
               <InputText
                 onBlur={() => closeModal()}
@@ -414,7 +413,7 @@ function CreateProject() {
               <br />
 
               <br />
-              <label>{"Linguagens e Softwares"}</label>
+              <label style={{ fontSize: 14 }}>{"Linguagens e Softwares"}</label>
               <br />
               <div className="lang-program">
                 <InputText
@@ -462,7 +461,7 @@ function CreateProject() {
             </div>
 
             <div className="content-desc">
-              <label>{"Descrição"}</label>
+              <label style={{ fontSize: 14 }}>{"Descrição"}</label>
               <br />
 
               <TextArea
@@ -478,7 +477,9 @@ function CreateProject() {
                 {selectedOption === 1 ? (
                   <>
                     <div className="qnt-check">
-                      <label>{"Quatidade de Pessoas"} </label>
+                      <label style={{ fontSize: 14 }}>
+                        {"Quatidade de Pessoas"}{" "}
+                      </label>
                       <br />
                       <br />
                       <DivInput style={{ width: "100%", height: "58px" }}>
@@ -500,7 +501,9 @@ function CreateProject() {
                     </div>
 
                     <div className="qnt-check">
-                      <label>{"Meses Estimados"} </label>
+                      <label style={{ fontSize: 14 }}>
+                        {"Meses Estimados"}{" "}
+                      </label>
                       <br />
                       <br />
                       <DivInput style={{ width: "100%", height: "58px" }}>
@@ -531,7 +534,7 @@ function CreateProject() {
 
               <br />
 
-              <label>{"Valor Bruto"} </label>
+              <label style={{ fontSize: 14 }}>{"Valor Bruto"} </label>
               <br />
 
               <InputText

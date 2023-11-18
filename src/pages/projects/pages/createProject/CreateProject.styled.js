@@ -72,6 +72,7 @@ export const Aside = styled.aside`
   .content-opt {
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 
   .content-desc .lang-program {

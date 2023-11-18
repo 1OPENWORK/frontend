@@ -24,6 +24,7 @@ import {
   AsignedContractPath,
   IndexPath,
   DevPropostaPath,
+  InstallAppChat,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -62,6 +63,7 @@ import HomeCompany from "./pages/homeDev/HomeCompany";
 import PropostaTableDev from "./pages/devs/PropostasTableDev";
 import { getId } from "./hooks/Cookies";
 import { ToastContainer } from "react-toastify";
+import InstallChat from "./pages/installChat/InstallChat.jsx";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -121,6 +123,7 @@ function App() {
         <Route path={CreateProjectPath} element={<CreateProject />} />
         <Route path={SendContractPath} element={<SendContract />} />
         <Route path={AsignedContractPath} element={<AsignedContract />} />
+        <Route path={InstallAppChat} element={<InstallChat />} />
         <Route path={IndexPath} element={<Index />} />
       </Routes>
     </Router>

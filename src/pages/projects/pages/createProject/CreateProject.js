@@ -21,13 +21,14 @@ import { handleProeficiency } from "../../../../store/actions/Proeficiency";
 
 import axios from "axios";
 
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCompanyId, getToken } from "../../../../hooks/Cookies";
 import ModalStatus from "../../../../components/UI/modal/modal-status/ModalStatus";
 import { Ambiente, AmbienteBackend } from "../../../../hooks/Ambiente";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { ToastSuccess } from "../../../../helpers/Toast";
+import styled from "styled-components";
 
 function CreateProject() {
   const navigate = useNavigate();
@@ -135,7 +136,6 @@ function CreateProject() {
   const token = getToken();
 
   async function cadastrar() {
-
     const registerProject = {
       title: debouncedInputValues.nameProject,
       description: debouncedInputValues.describe,
@@ -240,6 +240,16 @@ function CreateProject() {
         locale="pt-BR"
         initialization={{ preferenceId: preferenceId, redirectMode: "modal" }}
         onReady={handleOnReady}
+        customization={{
+          visual: {
+            valuePropColor: 'grey'
+
+          },
+          texts: {
+            valueProp: "security_safety",
+            action: "pay",
+          },
+        }}
       />
     );
   };
@@ -270,10 +280,6 @@ function CreateProject() {
       prevOptions.filter((selectedOption) => selectedOption !== option)
     );
   };
-
-
-
- 
 
   //captura de informações(input) com debounced
 
@@ -358,8 +364,6 @@ function CreateProject() {
   return (
     <>
       <Container>
-       
-
         <Aside>
           <div className="container-align">
             <FilledButton
@@ -540,9 +544,6 @@ function CreateProject() {
               />
 
               <br />
-              <div style={{ width: 200 }}>
-                {renderCheckoutButton(preferenceId)}
-              </div>
             </div>
           </div>
         </Aside>
@@ -594,17 +595,30 @@ function CreateProject() {
             </CardHunter>
           </div>
 
-          <div className="content-desc">
-            <FilledButton
-              marginRight={""}
-              color={Colors.PRIMARY_COLOR}
-              width={477}
-              heigth={60}
-              alignSelf={"center"}
-              onClick={() => cadastrar()}
-            >
-              {preferenceId !== undefined ? "Fazer pagamento" : "Criar projeto"}
-            </FilledButton>
+          <div className="content-desc" style={{ marginBottom: 20 }}>
+            {preferenceId === null ? (
+              <FilledButton
+                marginRight={""}
+                color={Colors.PRIMARY_COLOR}
+                width={477}
+                heigth={60}
+                alignSelf={"center"}
+                onClick={() => cadastrar()}
+              >
+                {"Realizar pagamento"}
+              </FilledButton>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {renderCheckoutButton(preferenceId)}
+              </div>
+            )}
           </div>
         </Article>
 

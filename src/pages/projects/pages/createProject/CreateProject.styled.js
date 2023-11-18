@@ -18,6 +18,10 @@ export const Container = styled.div`
     padding: 0;
     border: 1px solid red;
   }
+
+  @media screen and (max-width: 1136px) {
+    flex-direction: column;
+  }
 `;
 
 export const Aside = styled.aside`
@@ -31,6 +35,7 @@ export const Aside = styled.aside`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: 0.5rem;
   }
 
   .content-desc h2,
@@ -145,6 +150,10 @@ export const Aside = styled.aside`
     font-weight: 500;
     letter-spacing: 0.1em;
   }
+
+  @media screen and (max-width: 1136px) {
+    width: 100%;
+  }
 `;
 
 export const Article = styled.article`
@@ -215,6 +224,10 @@ export const Article = styled.article`
   .header {
     height: 60px;
   }
+
+   @media screen and (max-width: 1136px) {
+    width: 100%;
+  }
 `;
 
 export const InputText = styled.input`
@@ -238,6 +251,8 @@ export const InputText = styled.input`
     letter-spacing: 0.1em;
     color: #20ac69;
   }
+
+ 
 `;
 
 export const TextArea = styled.textarea`

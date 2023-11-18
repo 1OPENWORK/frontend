@@ -12,6 +12,7 @@ const DashboardFinanceiraPath = "/dashboard";
 const FinanceiraPath = "/financeira";
 const ComunidadePath = "/comunidade";
 const PortfolioPath = "/portfolio";
+const InstallAppChat = "/install-chat";
 const TodoPath = "/gerenciador-tarefas/:id";
 const PortfolioSobreMim = "/portfolio/sobre-mim";
 const PortfolioExperiencia = "/portfolio/experiencias";
@@ -52,4 +53,5 @@ module.exports = {
   AsignedContractPath,
   HomeCompanyPath,
   DevPropostaPath,
+  InstallAppChat
 };

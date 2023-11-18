@@ -8,16 +8,30 @@ export const Container = styled.div`
   min-height: 100%;
   overflow: hidden;
   font-family: nunito;
+
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const Aside = styled.div`
   position: relative;
-  top: 128px;
+  top: 70px;
   width: 70%;
   margin-left: 40px;
   column-count: 2;
   column-gap: 40px;
   height: 70%;
+
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-top: 120px;
+    margin-left: 0;
+  }
 `;
 
 export const DivAside = styled.div`
@@ -29,6 +43,16 @@ export const Article = styled.div`
   top: 60px;
   width: 20%;
   height: 75%;
+
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    margin-top: 60px;
+  }
 `;
 
 export const Input = styled.input`
@@ -46,8 +70,8 @@ export const Input = styled.input`
 `;
 
 export const Card = styled.div`
-  width: 95%;
-  height: 180px;
+  width: 100%;
+  min-height: 230px;
   background-color: white;
   border-radius: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -70,6 +94,11 @@ export const ChatBot = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 24px;
   -webkit-font-smoothing: antialiased !important;
+
+  @media screen and (max-width: 1000px) {
+    width: 70%;
+    height: 300px;
+  }
 `;
 
 export const TitleCard = styled.h2`
@@ -127,7 +156,7 @@ export const GenericSolidButton = styled.button`
   padding: 12px 16px;
   font-size: 1.125rem;
   gap: 12px;
-  border: ${props =>
+  border: ${(props) =>
     props.inverted ? "0px solid #4D638D" : "0px solid #4D638D"};
   border-radius: 8px;
   font-family: "nunito";
@@ -138,13 +167,14 @@ export const GenericSolidButton = styled.button`
   }
 
   &:hover {
-    cursor: ${props => (props.disabled ? "text" : "pointer")};
+    cursor: ${(props) => (props.disabled ? "text" : "pointer")};
   }
 
   &:active {
-    background-color: ${props => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
-    color: ${props => (props.disabled ? "" : Colors.WHITE)};
-    border-color: ${props => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
+    background-color: ${(props) =>
+      props.disabled ? "" : Colors.PRIMARY_COLOR};
+    color: ${(props) => (props.disabled ? "" : Colors.WHITE)};
+    border-color: ${(props) => (props.disabled ? "" : Colors.PRIMARY_COLOR)};
   }
 
   @media screen and (max-width: 760px) {
@@ -152,9 +182,7 @@ export const GenericSolidButton = styled.button`
   }
 `;
 
-export const ChatbotDiv=styled.div`
-width:40px;
-height:40px;
-
-
-`
+export const ChatbotDiv = styled.div`
+  width: 40px;
+  height: 100px;
+`;

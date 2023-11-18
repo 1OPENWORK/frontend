@@ -27,6 +27,7 @@ import {
   AvaliacoesPath,
   ComunidadePath,
   DevsPath,
+  InstallAppChat,
   PortfolioPath,
 } from "../../constants/Path";
 import CardHelp from "../../components/UI/chatbot/Landbot";
@@ -63,11 +64,9 @@ const HomeCompany = () => {
   const goToDevs = () => {
     navigate(DevsPath);
   };
-  const goToComunidade = () => {
-    navigate(ComunidadePath);
+  const goToIntallOpenchat = () => {
+    navigate(InstallAppChat);
   };
-
-  const placeholder = "Digite o quer encontrar no site";
 
   return (
     <>
@@ -75,7 +74,6 @@ const HomeCompany = () => {
         <>
           <NavBar nav={1} />
           <Container>
-            <Input placeholder={placeholder}></Input>
             <Aside>
               <Card onClick={() => goToPortfolio()}>
                 <CardImg src={imgCard} />
@@ -115,13 +113,13 @@ const HomeCompany = () => {
                 </FlexCard>
               </Card>
 
-              <Card onClick={() => goToComunidade()}>
+              <Card onClick={() => goToIntallOpenchat()}>
                 <CardImg src={imgCard} />
                 <FlexCard>
-                  <TitleCard>{"Comunidade"}</TitleCard>
+                  <TitleCard>{"Aplicativo OpenChat"}</TitleCard>
                   <DescPara>
                     {
-                      "Veja, publique, comente e curta na nossa comunidade. O lugar ideial para troca de conhecimento entre os nossos usuários"
+                      "Esse aplicativo ajuda a você a se comunicar com os demais usuários da plataforma. Disponivél para Windows, Linux, MacOS"
                     }
                   </DescPara>
                 </FlexCard>

@@ -21,6 +21,7 @@ import {
   RegisterPath,
   ChatPath,
   HomeCompanyPath,
+  InstallAppChat,
 } from "../../constants/Path";
 import { useSelector } from "react-redux";
 import { selectedPerfil } from "../../store/reducers/PerfilSlice";
@@ -87,8 +88,8 @@ const NavBar = ({ nav }) => {
               {"Financeiro"}
             </Styled.TitleNavBar>
 
-            <Styled.TitleNavBar onClick={() => navigate(ChatPath)} size={24}>
-              {"Chat"}
+            <Styled.TitleNavBar onClick={() => navigate(InstallAppChat)} size={24}>
+              {"Instalar"}
             </Styled.TitleNavBar>
           </Styled.NavigateNavBar>
           <FilledButton

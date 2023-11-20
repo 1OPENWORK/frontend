@@ -1,4 +1,4 @@
-const developer = true;
+const developer = false;
 
 export const Ambiente = () => {
   if (developer) {

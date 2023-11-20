@@ -25,6 +25,8 @@ import {
   IndexPath,
   DevPropostaPath,
   InstallAppChat,
+  InfoJobPath,
+  InfoJobLinkPath,
 } from "./constants/Path";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIO from "socket.io-client";
@@ -64,6 +66,7 @@ import PropostaTableDev from "./pages/devs/PropostasTableDev";
 import { getId } from "./hooks/Cookies";
 import { ToastContainer } from "react-toastify";
 import InstallChat from "./pages/installChat/InstallChat.jsx";
+import InfoJob from "./pages/jobs/InfoJob/InfoJob.js";
 
 const socket = socketIO.connect(Ambiente());
 
@@ -102,6 +105,8 @@ function App() {
         <Route path={RegisterPath} element={<Register />} />
 
         <Route path={JobsPath} element={<Jobs />} />
+        <Route path={InfoJobPath} element={<InfoJob />} />
+        <Route path={InfoJobLinkPath} element={<InfoJob />} />
         <Route path={HomeAnalistaPath} element={<HomeAnalista />} />
         <Route path={HomeDevPath} element={<HomeDev />} />
         <Route path={DevPropostaPath} element={<PropostaTableDev />} />

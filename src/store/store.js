@@ -6,12 +6,14 @@ import AuthSlice from "./reducers/AuthSlice";
 import RegisterSlice from "./reducers/RegisterSlice";
 import WebSocketSlice from "./reducers/WebSocketSlice";
 import PerfilSlice from "./reducers/PerfilSlice";
+import JobInfoSlice from "./reducers/JobInfoSlice";
 
 const reducers = combineReducers({
   register: RegisterSlice,
   auth: AuthSlice,
   websocket: WebSocketSlice,
-  dadosPerfil: PerfilSlice
+  dadosPerfil: PerfilSlice,
+  infoJob: JobInfoSlice
 });
 
 const persistConfig = {

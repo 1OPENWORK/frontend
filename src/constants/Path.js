@@ -3,6 +3,8 @@ const AuthPath = "/entrar";
 const ChatPath = "/chat";
 const RegisterPath = "/cadastro";
 const JobsPath = "/jobs";
+const InfoJobPath = "/infoJob";
+const InfoJobLinkPath = "/infoJob/:id";
 const HomeAnalistaPath = "/home-analista";
 const HomeDevPath = "/home-dev";
 const HomeCompanyPath = "/home-empresa";
@@ -53,5 +55,7 @@ module.exports = {
   AsignedContractPath,
   HomeCompanyPath,
   DevPropostaPath,
-  InstallAppChat
+  InstallAppChat,
+  InfoJobPath,
+  InfoJobLinkPath
 };

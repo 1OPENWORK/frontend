@@ -263,7 +263,7 @@ const Formulario = () => {
           onClick={handleShow}
           marginTop={"20px"}
           marginRight={"0px"}
-          color={Colors.RED}
+          color={Colors.BLACK}
           width={190}
           heigth={60}
           semHouver={true}

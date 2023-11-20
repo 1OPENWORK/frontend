@@ -5,11 +5,21 @@ import { Container } from "../avaliacoes/Table.styled";
 import { MdStarBorder } from "react-icons/md";
 import { get } from "../../services/Generected";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import { useDispatch } from "react-redux";
+import { changeDadosJobInfo } from "../../store/reducers/JobInfoSlice";
+import { useNavigate } from "react-router-dom";
+import { InfoJobPath } from "../../constants/Path";
 
 const JobsTeste = () => {
   const URI = AmbienteBackend() + "/api/projetos";
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [devs, setDevs] = useState([]);
+
+  const handleInfoJobs = (dados) => {
+    dispatch(changeDadosJobInfo({ dados: dados }));
+    navigate(InfoJobPath);
+  };
 
   async function handleFetchJobs() {
     const response = await get(URI);
@@ -39,6 +49,8 @@ const JobsTeste = () => {
           <tbody>
             {devs.map((dados, index) => (
               <tr
+                onClick={() => handleInfoJobs(dados)}
+                style={{ cursor: "pointer" }}
                 key={`${dados.id}-${index}`}
                 data={dados}
                 className={index % 2 === 0 ? "gray-row" : "white-row"}
@@ -59,7 +71,11 @@ const JobsTeste = () => {
                   <p>{dados.title}</p>
                 </td>
                 <td>
-                  <p>{dados.description}</p>
+                  <p style={{}}>
+                    {dados.description.length > 50
+                      ? dados.description.slice(0, 50) + "..."
+                      : dados.description}
+                  </p>
                 </td>
                 <td className="date">{dados.timeExpected} dias</td>
                 <td className="date">{dados.maxDevelopers} devs</td>

@@ -8,6 +8,7 @@ import { get, post } from "../../../services/Generected";
 import { AmbienteBackend } from "../../../hooks/Ambiente";
 import { selectedPerfil } from "../../../store/reducers/PerfilSlice";
 import { JobsPath } from "../../../constants/Path";
+import { toast } from "react-toastify";
 
 const InfoJob = () => {
   const navigate = useNavigate();

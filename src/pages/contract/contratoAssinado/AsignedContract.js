@@ -23,7 +23,7 @@ import axiosInstance from "../../../services/Axios";
 
 const ModeloContrado = async () => {
   const response = await axiosInstance.get(
-    AmbienteBackend() + `/fileS3/download/${"contrato-prestacao 3.pdf"}`
+    AmbienteBackend() + `/api/fileS3/download/${"contrato-prestacao 3.pdf"}`
   );
 
   return response;
@@ -80,7 +80,7 @@ function AsignedContract() {
   function SendContrato() {
     const filename = "contrato-prestacao 3.pdf";
     const uri =
-      AmbienteBackend() + `/fileS3/download/${encodeURIComponent(filename)}`;
+      AmbienteBackend() + `/api/fileS3/download/${encodeURIComponent(filename)}`;
 
     axios
       .get(uri, { responseType: "blob" })

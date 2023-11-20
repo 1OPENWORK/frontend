@@ -59,7 +59,7 @@ const uploadImg = async (id, img, token) => {
   formData.append("file", img);
 
   const response = await axiosInstance.post(
-    `${URI}/fileS3/upload/${id}`,
+    `${URI}/api/fileS3/upload/${id}`,
     formData,
     {
       headers: {

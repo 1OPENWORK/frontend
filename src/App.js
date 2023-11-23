@@ -47,13 +47,7 @@ import Projects from "./pages/projects/Projects";
 import Index from "./pages/videoConference/Index";
 
 import { useDispatch } from "react-redux";
-import {
-  changeConversationRecentes,
-  changeFriends,
-  changeIdUser,
-  changeMessagesPendentes,
-  changeOn,
-} from "./store/reducers/WebSocketSlice";
+import { changeOn } from "./store/reducers/WebSocketSlice";
 import Todo from "./pages/todo-list/Todo.js";
 import Progress from "./pages/projects/pages/progress/Progress";
 import Canceled from "./pages/projects/pages/canceled/Canceled";

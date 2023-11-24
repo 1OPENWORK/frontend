@@ -8,6 +8,12 @@ import { AmbienteBackend } from "../../hooks/Ambiente";
 import { getCompanyId } from "../../hooks/Cookies";
 import styled from "styled-components";
 import Colors from "../../constants/Colors";
+import axiosInstance from "../../services/Axios";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { selectedPerfil } from "../../store/reducers/PerfilSlice";
+import { useNavigate } from "react-router-dom";
+import { ProgressPath } from "../../constants/Path";
 // --------------------------------------------------------
 // Devs INTERFACE
 // --------------------------------------------------------
@@ -26,7 +32,7 @@ const Button = styled.button`
   height: 60px;
   font-size: 20px;
   background-color: ${Colors.PRIMARY_COLOR};
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
 `;
 
@@ -35,56 +41,95 @@ const ButtonClose = styled.button`
   height: 60px;
   background-color: ${Colors.BLACK};
   font-size: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   margin-left: 20px;
-
 `;
-
-const ModalAccepty = ({ show, onHide, dados }) => {
-  return (
-    <Modal
-      show={show}
-      onHide={onHide}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Proposta do {dados.name}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <Button>Aceitar Proposta</Button>
-        <ButtonClose onClick={onHide}>Fechar</ButtonClose>
-      </Modal.Body>
-    </Modal>
-  );
-};
 
 const PropostaDesenvolvedores = () => {
   const idCompany = getCompanyId();
   const [modalShow, setModalShow] = useState(false);
-  const URI = AmbienteBackend() + `/api/propostas/empresa/${idCompany}`;
+  const [dadosProposta, setDadosProposta] = useState({});
+
+  const URI = AmbienteBackend();
+  const navigate = useNavigate();
+
+  const { dadosPerfil } = useSelector(selectedPerfil);
 
   const [devs, setDevs] = useState([]);
- 
 
   async function handleFetchDesenvolvedores() {
-    const response = await get(URI);
-    console.log(response);
+    const response = await get(URI + `/api/propostas/empresa/${idCompany}`);
     setDevs(response.data);
   }
+
+  const handleCloseModal = () => setModalShow(false);
 
   useEffect(() => {
     handleFetchDesenvolvedores();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const ModalAccepty = ({ show, onHide, dados, handleAccepty }) => {
+    return (
+      <Modal
+        show={show}
+        onHide={onHide}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Proposta do {dados.name}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button onClick={() => handleAccepty(dados.idProject)}>
+            Aceitar Proposta
+          </Button>
+          <ButtonClose onClick={handleCloseModal}>Fechar</ButtonClose>
+        </Modal.Body>
+      </Modal>
+    );
+  };
+
+  const handleAccpted = async idProject => {
+    try {
+      const response = await axiosInstance.post(
+        URI + "/api/projetos-aceitos/projetos-grandes",
+        { idBigProject: idProject, usersId: [parseInt(dadosPerfil.perfil.id)] }
+      );
+
+      if (response.status === 201) {
+        toast.success("Proposta aceita com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: false,
+          theme: "light",
+        });
+      }
+
+      setModalShow(false);
+
+      navigate(ProgressPath);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: PropostasTableDev.js:119 ~ handleAccpted ~ error:",
+        error
+      );
+    }
+  };
 
   return (
     <>
@@ -104,7 +149,10 @@ const PropostaDesenvolvedores = () => {
               devs.map((dados, index) => (
                 <tr
                   style={{ cursor: "pointer" }}
-                  onClick={() => setModalShow(true)}
+                  onClick={() => {
+                    setModalShow(true);
+                    setDadosProposta(dados);
+                  }}
                   key={dados.id}
                   className={index % 2 === 0 ? "gray-row" : "white-row"}
                 >
@@ -129,11 +177,6 @@ const PropostaDesenvolvedores = () => {
                   </td>
                   <td className="date">{dados.completedProjects} projetos</td>
                   <td className="date">R$ {dados.hourValue},00</td>
-                  <ModalAccepty
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    dados={dados}
-                  />
                 </tr>
               ))
             ) : (
@@ -145,6 +188,12 @@ const PropostaDesenvolvedores = () => {
             )}
           </tbody>
         </Table>
+        <ModalAccepty
+          show={modalShow}
+          onHide={handleCloseModal}
+          dados={dadosProposta}
+          handleAccepty={handleAccpted}
+        />
       </Container>
     </>
   );

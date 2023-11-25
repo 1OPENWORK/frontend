@@ -10,8 +10,6 @@ import styled from "styled-components";
 import Colors from "../../constants/Colors";
 import axiosInstance from "../../services/Axios";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { selectedPerfil } from "../../store/reducers/PerfilSlice";
 import { useNavigate } from "react-router-dom";
 import { ProgressPath } from "../../constants/Path";
 // --------------------------------------------------------
@@ -54,7 +52,6 @@ const PropostaDesenvolvedores = () => {
   const URI = AmbienteBackend();
   const navigate = useNavigate();
 
-  const { dadosPerfil } = useSelector(selectedPerfil);
 
   const [devs, setDevs] = useState([]);
 
@@ -104,7 +101,7 @@ const PropostaDesenvolvedores = () => {
     try {
       const response = await axiosInstance.post(
         URI + "/api/projetos-aceitos/projetos-grandes",
-        { idBigProject: idProject, usersId: [parseInt(dadosPerfil.perfil.id)] }
+        { idBigProject: idProject, usersId: [parseInt(dadosProposta.idUser)] }
       );
 
       if (response.status === 201) {

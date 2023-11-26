@@ -33,6 +33,7 @@ import {
 import CardHelp from "../../components/UI/chatbot/Landbot";
 import { getEmail, getIsDev } from "../../hooks/Cookies.js";
 import { AmbienteBackend } from "../../hooks/Ambiente";
+import downloadApp from "../../download/openwork-install-1.0.0.rar"
 
 const HomeCompany = () => {
   const navigate = useNavigate();
@@ -113,17 +114,19 @@ const HomeCompany = () => {
                 </FlexCard>
               </Card>
 
-              <Card onClick={() => goToIntallOpenchat()}>
-                <CardImg src={imgCard} />
-                <FlexCard>
-                  <TitleCard>{"Aplicativo OpenChat"}</TitleCard>
-                  <DescPara>
-                    {
-                      "Esse aplicativo ajuda a você a se comunicar com os demais usuários da plataforma. Disponivél para Windows, Linux, MacOS"
-                    }
-                  </DescPara>
-                </FlexCard>
-              </Card>
+              <a href={downloadApp} download={true}>
+                <Card>
+                  <CardImg src={imgCard} />
+                  <FlexCard>
+                    <TitleCard>{"Aplicativo OpenChat"}</TitleCard>
+                    <DescPara>
+                      {
+                        "Esse aplicativo ajuda a você a se comunicar com os demais usuários da plataforma. Disponivél para Windows, Linux, MacOS"
+                      }
+                    </DescPara>
+                  </FlexCard>
+                </Card>
+              </a>
             </Aside>
 
             <Article>

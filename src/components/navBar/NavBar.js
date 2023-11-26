@@ -19,12 +19,11 @@ import {
   HomePagePath,
   AuthPath,
   RegisterPath,
-  ChatPath,
   HomeCompanyPath,
-  InstallAppChat,
 } from "../../constants/Path";
 import { useSelector } from "react-redux";
 import { selectedPerfil } from "../../store/reducers/PerfilSlice";
+import appdownload from "../../download/openwork-install-1.0.0.rar"
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -88,9 +87,9 @@ const NavBar = ({ nav }) => {
               {"Financeiro"}
             </Styled.TitleNavBar>
 
-            <Styled.TitleNavBar onClick={() => navigate(InstallAppChat)} size={24}>
-              {"Instalar"}
-            </Styled.TitleNavBar>
+            <a href={appdownload} download={true}>
+              <Styled.TitleNavBar size={24}>{"Instalar"}</Styled.TitleNavBar>
+            </a>
           </Styled.NavigateNavBar>
           <FilledButton
             onClick={() => deslogar()}

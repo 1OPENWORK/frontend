@@ -15,6 +15,7 @@ const InfoJob = () => {
   const { infoJob } = useSelector(selectedInfoJob);
   const { dadosPerfil } = useSelector(selectedPerfil);
   const [dadosJob, setDadosJob] = useState({});
+  console.log("🚀 ~ file: InfoJob.js:18 ~ InfoJob ~ dadosJob:", dadosJob)
   const [tools, setTools] = useState([]);
   const { id } = useParams();
 
@@ -165,7 +166,7 @@ const InfoJob = () => {
             </Styled.Options.Container>
             <Styled.ContentValor>
               <Styled.Title>Valor do projeto:</Styled.Title>
-              <Styled.Valor>R$ 10.000,00</Styled.Valor>
+              <Styled.Valor>R$ {parseFloat(dados?.value).toLocaleString('pt-BR')}</Styled.Valor>
             </Styled.ContentValor>
             <Styled.ContentButton>
               <Styled.ButtonSend onClick={sendAcceptyProposta}>

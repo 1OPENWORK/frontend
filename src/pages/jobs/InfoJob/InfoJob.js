@@ -166,7 +166,7 @@ const InfoJob = () => {
             </Styled.Options.Container>
             <Styled.ContentValor>
               <Styled.Title>Valor do projeto:</Styled.Title>
-              <Styled.Valor>R$ {parseFloat(dados?.value).toLocaleString('pt-BR')}</Styled.Valor>
+              <Styled.Valor>R$ {parseFloat(dadosJob?.value).toLocaleString('pt-BR')}</Styled.Valor>
             </Styled.ContentValor>
             <Styled.ContentButton>
               <Styled.ButtonSend onClick={sendAcceptyProposta}>

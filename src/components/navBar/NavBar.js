@@ -23,7 +23,8 @@ import {
 } from "../../constants/Path";
 import { useSelector } from "react-redux";
 import { selectedPerfil } from "../../store/reducers/PerfilSlice";
-import appdownload from "../../download/openwork-install-1.0.0.rar"
+import appdownload from "../../download/openwork-install-1.0.0.rar";
+import { selectedLGPD } from "../../store/reducers/LgpdSlice";
 // -----------------------------------------------------
 
 // --------------------------------------------------------
@@ -45,6 +46,7 @@ const NavBar = ({ nav }) => {
   // --------------------------------------------------------
   const navigate = useNavigate();
   const { dadosPerfil } = useSelector(selectedPerfil);
+  const { dadosLgpd } = useSelector(selectedLGPD);
 
   const deslogar = () => {
     deleteToken();
@@ -121,6 +123,7 @@ const NavBar = ({ nav }) => {
               {"Entrar"}
             </FilledButton>
             <FilledButton
+              disabled={!dadosLgpd.accepty}
               onClick={() => navigate(RegisterPath)}
               color={Colors.SECONDARY_COLOR}
               width={190}

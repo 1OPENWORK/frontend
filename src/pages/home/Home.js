@@ -59,8 +59,6 @@ const Home = () => {
     navigate(AuthPath);
   };
 
-  const handleClose = () => setShow(false);
-
   const handleAccept = () => {
     dispatch(
       changeLGPD({
@@ -81,16 +79,6 @@ const Home = () => {
     if (!dadosLgpd.accepty) {
       setShow(true);
     }
-  }, [dadosLgpd]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!dadosLgpd.accepty) {
-        setShow(true);
-      }
-    }, 10000);
-
-    return () => clearInterval(interval);
   }, []);
 
   return (
